@@ -67,20 +67,20 @@ char* moveWords(const char* line, char letter) {
 	size_t tailLen = 0;
 
 	char* subStr = strtok(lCopy, DELIMETERS);
-        while (subStr != NULL) {
-                char lastLetter = subStr[strlen(subStr) - 1];
+	while (subStr != NULL) {
+		char lastLetter = subStr[strlen(subStr) - 1];
 		if (lastLetter == letter) {
 			memcpy(head + headLen, subStr, (strlen(subStr) + 1) * sizeof(char));
 			headLen += strlen(subStr) + 1;
 			head[headLen - 1] = ' ';
 		} else {
 			memcpy(tail + tailLen, subStr, (strlen(subStr) + 1) * sizeof(char));
-                	tailLen += strlen(subStr) + 1;
+			tailLen += strlen(subStr) + 1;
 			tail[tailLen - 1] = ' ';
 		}
 
 		subStr = strtok(NULL, DELIMETERS);
-        }
+	}
 
 	memcpy(head + headLen, tail, (strlen(tail) + 1) * sizeof(char));
 	headLen += strlen(tail);
