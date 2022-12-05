@@ -1,280 +1,3 @@
-mkdir Screensavers
-mv ./temp/Source.py ./Screensavers/wave.py
-ls Screensavers/
-rm -rf temp/
-ls
-python3 Screensavers/wave.py 
-touch Screensavers/matrix.py
-nano Screensavers/matrix.py 
-python3 Screensavers/matrix.py 
-python3 Screensavers/wave.py 
-python3 Screensavers/matrix.py 
-ls
-ls Screensavers/
-ls
-mkdir DZ2
-cd DZ2/
-touch main.c
-nano main.c 
-gcc -o main main.c && ./main
-gcc -o main main.c
-gcc -o main -lm main.c
-gcc -o main -lm main.c && ./main 
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-mac gcc
-man gcc
-cd
-python3 Screensavers/wave.py 
-python3 Screensavers/wave.py 
-python3 Screensavers/matrix.py 
-cd DZ2/
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-nano main.c
-gcc -o main -lm main.c && ./main
-nano main.c
-cd
-python3 Screensavers/wave.py
-python3 Screensavers/wave.py 
-python3 Screensavers/matrix.py 
-nano Screensavers/wave.py 
-cd DZ2/
-python3 ../Screensavers/wave.py 
-nano ../Screensavers/wave.py 
-python3 ../Screensavers/wave.py 
-nano ../Screensavers/matrix.py 
-python3 ../Screensavers/wave.py 
-python3 ../Screensavers/wave.py 
-nano ../Screensavers/wave.py 
-python3 ../Screensavers/wave.py 
-nano ../Screensavers/wave.py 
-python3 ../Screensavers/wave.py 
-nano ../Screensavers/wave.py 
-python3 ../Screensavers/matrix.py 
-nano main.c
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-nano main.c
-ls
-cd DZ2/
-ls
-cat main.c
-ls
-mkdir LABA2
-cd LABA
-cd LABA2
-ls
-touch main.c
-nano main.c 
-gcc -o main -lm main.c && ./main
-ls
-nano main.c
-nano main.c
-gcc -o main -lm main.c && ./main
-nano main.c
-gcc -o main -lm main.c && ./main
-nano main.c
-gcc -o main -lm main.c && ./main
-nano main.c
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-man valgris
-man valgrid
-man valgrind
-valgrind ./main 
-ls
-mv main.c main2.c
-ls
-cat main2.c 
-cp main2.c ./
-cp main2.c ./main1.c
-la
-ls
-rm main
-nano main1.c 
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-cat main1.c
-cd LABA2
-ls
-cat main2.c 
-cat main2.c 
-cat main2.c 
-cat main2.c 
-cat main2.c 
-cat main1.c 
-cat main2.c 
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main2 -lm main2.c && ./main2
-gcc -o main2 -lm main2.c && ./main2
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main2 -lm main2.c && ./main2
-gcc -o main2 -lm main2.c && ./main2
-gcc -o main2 -lm main2.c && ./main2
-gcc -o main2 -lm main2.c && ./main2
-gcc -o main2 -lm main2.c && ./main2
-ls
-python3 Screensavers/matrix.py 
-cd LABA2
-ls
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main2 -lm main2.c && ./main2
-python3 ../Screensavers/wave.py 
-cd ..
-cd Screensavers/
-ls
-nano circle.py
-cat wave.py 
-nano circle.py
-python3 circle.py 
-nano circle.py
-python3 circle.py 
-nano circle.py
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-nano circle.py
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-nano circle.py
-python3 circle.py 
-python3 circle.py 
-python3 circle.py 
-python3 circle.py rt
-python3 circle.py 
-python3 circle.py 
-nano circle.pdfgfwy
-python3 circle.py q
-nano circle.py
-python3 circle.py 
-mkdir test
-cd test/
-nano main.c
-gcc main.c && ./a.out
-nano main.c
-gcc main.c && ./a.out
-nano main.c
-gcc main.c && ./a.out
-gcc main.c -lm  && ./a.out
-nano main.c
-gcc main.c -lm  && ./a.out
-nano main.c
-gcc main.c -lm  && ./a.out
-nano main.c
-gcc main.c -lm  && ./a.out
-nano main.c
-gcc main.c -lm  && ./a.out
-nano main.c
-gcc main.c -lm  && ./a.out
-nano main.c
-gcc main.c -lm  && ./a.out
-nano main.c
-cd ..
-ls
-rm -rf test/
-cs Screensavers/
-cd Screensavers/
-ls
-cd ..
-cd LABA2
-gcc -o main1 -lm main1.c && ./main1
-cd LABA2
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-gcc -o main1 -lm main1.c && ./main1
-cd LABA2
-gcc -o main2 -lm main2.c && ./main2
-gcc -o main2 -lm main2.c && ./main2
-cat main1.c
-cd ..
-mkdir test
-cp LABA2/main1.c ./test/
-cd test/
-ls
-nano main1.c 
-nano test.c
-ls
-gcc test.c && ./a.out
-gcc test.c -lm && ./a.out
-nano test.c
-gcc test.c -lm && ./a.out
-nano test.c
-gcc test.c -lm && ./a.out
-nano test.c
-nano test.c
-gcc test.c -lm && ./a.out
-nano test.c
-gcc test.c -lm && ./a.out
-nano test.c
-gcc test.c -lm && ./a.out
-gcc test.c -lm && ./a.out
-nano test.c
-gcc test.c -lm && ./a.out
-nano test.c
-ls
-rm -rf test/
-mkdir DZ3
-cd DZ3
-nano main.c
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && valgrind ./main
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-nano main,c
-ls
-nano main.c
-rm -rf main.c
-nano main.c
 gcc -o main -lm main.c && ./main
 ls
 cd DZ3
@@ -498,3 +221,280 @@ ls
 ls -la
 ls .config/
 ls -la .config/
+ls
+cd LABA4
+ls
+nano main.c
+man strings
+man strings.h
+man string.h
+man string
+cat main.c
+rm main.c
+nano main.c
+man string
+man strings.h
+man string
+man string
+nano main.c
+man readline
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+man strtok
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+man string
+man memcpy
+man string
+man strcat
+man memcpy
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+gcc main.c -o main -lreadline && valgrind ./main
+nano main.c
+man realloc
+nano main.c
+man realloc
+gcc main.c -o main -lreadline && valgrind ./main
+ls
+mv main.c with_libs.c
+ls
+cat with_libs.c 
+ls
+rm main 
+ls
+gcc with_libs.c -o with_libs -lreadline && valgrind ./with_libs
+nano run_commands.sh
+ls
+cat run_commands.sh 
+gcc with_libs.c -o with_libs -lreadline && valgrind ./with_libs
+nano with_libs.c
+man strtok
+nano with_libs.c
+gcc with_libs.c -o with_libs -lreadline && valgrind ./with_libs
+nano with_libs.c
+gcc with_libs.c -o with_libs -lreadline && valgrind ./with_libs
+nano with_libs.c
+gcc with_libs.c -o with_libs -lreadline && valgrind ./with_libs
+nano with_libs.c
+nano with_libs.c
+gcc with_libs.c -o with_libs -lreadline && valgrind ./with_libs
+nano with_libs.c
+gcc with_libs.c -o with_libs -lreadline && valgrind ./with_libs
+gcc with_libs.c -o with_libs -lreadline && valgrind ./with_libs
+nano with_libs.c
+gcc with_libs.c -o with_libs -lreadline && valgrind ./with_libs
+nano with_libs.c
+gcc with_libs.c -o with_libs -lreadline && valgrind ./with_libs
+nano with_libs.c
+gcc with_libs.c -o with_libs -lreadline && valgrind ./with_libs
+ls
+nano my_readline.c
+ls
+mv my_readline.c my_strings.c
+ls
+mv run_commands.sh run_commands.txt
+ls
+cat run_commands.txt 
+cd ..
+ls
+cd LABA3
+ls
+cat arraylib.h
+cd ..
+cd LABA4
+ls
+nano my_strings.h
+nano my_strings.c
+nano my_strings.h
+nano my_strings.c
+ls
+cp with_libs.c without_libs.c
+ls
+nano without_libs.c 
+nano without_libs.c 
+nano my_strings.c
+nano without_libs.c 
+nano my_strings.c
+nano my_strings.h
+nano without_libs.c 
+nano my_strings.c
+nano without_libs.c 
+cat run_commands.txt 
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+nano my_strings.c
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+ls
+nano without_libs.c 
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+nano without_libs.c 
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+ls
+rm with_libs
+ls
+nano run_commands.txt 
+nano without_libs.c 
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+nano my_strings.c
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+nano my_strings.c
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+nano my_strings.c
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+nano without_libs.c 
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+nano without_libs.c 
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+nano with_libs.c 
+nano without_libs.c 
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+cat run_commands.txt 
+gcc with_libs.c -o exec -lreadline && valgrind ./exec
+cd ..
+git
+ls
+ls
+git init
+git remote add origin https://github.com/GregoryKogan/MEPhI-Laboratory-works.git
+git status
+git add .
+git commit -m "chore(git): initial commit"
+git config --global user.email "grisha.koganovskiy@gmail.com"
+git config --global user.name "GregoryKogan"
+git commit -m "chore(git): initial commit"
+git push -u origin main
+git push
+git push --set-upstream origin master
+git push --set-upstream origin master
+git push --set-upstream origin master
+git pull
+git push --set-upstream origin master
+git remote set-url origin  https://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@github.com/GregoryKogan/MEPhI-Laboratory-works.git
+git push --set-upstream origin master
+git status
+git add .
+git commit -m "chore(git): .gitconfig created"
+git push
+git status
+git pull
+ls
+cat README.md 
+nano README.md 
+git status 
+git add .
+git commit -m "feat(README): updated README"
+git push
+git status
+cd LABA4
+ls
+nano with_libs.c 
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+cd LABA4
+ls
+cat run_coommands.txt
+cat run_commands.txt
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+ls
+ls
+cd LABA4
+git status
+cd ..
+git status
+cd LABA4
+nano with_libs.c 
+cat run_commands.txt 
+gcc with_libs.c -o exec -lreadline && valgrind ./exec
+nano with_libs.c 
+gcc with_libs.c -o exec -lreadline && valgrind ./exec
+cat with_libs.c 
+nano without_libs.c 
+nano without_libs.c 
+nano without_libs.c 
+cat with_libs.c 
+cat run_commands.txt 
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+cat run_commands.txt 
+nano with_libs.c 
+cat run_commands.txt 
+cd LABA4
+ls
+cat run_commands.txt 
+ls
+gcc with_libs.c -o exec -lreadline && valgrind ./exec
+nano with_libs.c 
+gcc with_libs.c -o exec -lreadline && valgrind ./exec
+nano with_libs.c 
+nano with_libs.c 
+gcc with_libs.c -o exec -lreadline && valgrind ./exec
+nano with_libs.c 
+gcc with_libs.c -o exec -lreadline && valgrind ./exec
+cat without_libs.c 
+nano with_libs.c 
+nano with_libs.c 
+nano with_libs.c 
+nano with_libs.c 
+gcc with_libs.c -o exec -lreadline && valgrind ./exec
+nano without_libs.c 
+cat run_commands.txt 
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+nano my_strings.
+nano my_strings.c
+nano without_libs.c 
+nano my_strings.c
+cd LABA
+cd LABA4
+ls
+cat run_commands.txt 
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+ls
+nano my_strings.x
+nano my_strings.c
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec

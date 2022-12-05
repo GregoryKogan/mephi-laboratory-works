@@ -2,6 +2,7 @@
 #include <strings.h>
 #include <readline/readline.h>
 #include <stdlib.h>
+#include <time.h>
 #define DELIMETERS "\t "
 #define ERROR_CHAR ' '
 #define PROMPT "\x1b[31m❱\x1b[0m\x1b[32m❱\x1b[0m\x1b[34m❱\x1b[0m "
@@ -13,12 +14,18 @@ char* moveWords(const char* line, char letter);
 
 
 int main(){
-	printf("This program USES string.h, readline.h libs!\n");
+ 	printf("This program USES string.h, readline.h libs!\n");
+	clock_t start, end;
+	double cpu_time_used;
 	char* line = readline(PROMPT);
 	while (line != NULL) {
+		start = clock();
 		char* processed = process(line);
+		end = clock();
+		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("Input:   \x1b[32m\"%s\"\x1b[0m\n", line);
                 printf("Output:  \x1b[32m\"%s\"\x1b[0m\n", processed);
+		printf("\x1b[33mtook %f seconds\x1b[0m\n", cpu_time_used);
 		free(line);
 		if (strlen(processed)) free(processed);
 		line = readline(PROMPT);
