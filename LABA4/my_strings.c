@@ -84,7 +84,7 @@ char* myStrtok(char* inputStr, char* dels) {
 	if (end[0] == '\0')
 		str = NULL;
 	else {
-       		end[0] = '\0';
+    	end[0] = '\0';
 		str = end + 1;
 	}
 	if (start == end) return NULL;

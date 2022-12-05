@@ -23,7 +23,7 @@ int main(){
 		end = clock();
 		cpu_time_used = end - start;
 		printf("Input:   \x1b[32m\"%s\"\x1b[0m\n", line);
-                printf("Output:  \x1b[32m\"%s\"\x1b[0m\n", processed);
+        printf("Output:  \x1b[32m\"%s\"\x1b[0m\n", processed);
 		printf("\x1b[33mtook %lu microseconds\x1b[0m\n", cpu_time_used);
 		free(line);
 		if (strlen(processed)) free(processed);
