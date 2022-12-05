@@ -16,15 +16,14 @@ int main(){
 	printf("This program DOESN'T USE any libs!\n");
 	char* line = myReadline(PROMPT);
 	while (line != NULL) {
-		clock_t start, end;
-		double cpu_time_used;
+		clock_t start, end, cpu_time_used;
 		start = clock();
 		char* processed = process(line);
 		end = clock();
-		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+		cpu_time_used = end - start;
 		printf("Input:   \x1b[32m\"%s\"\x1b[0m\n", line);
                 printf("Output:  \x1b[32m\"%s\"\x1b[0m\n", processed);
-		printf("\x1b[33mtook %f seconds\x1b[0m\n", cpu_time_used);
+		printf("\x1b[33mtook %lu microseconds\x1b[0m\n", cpu_time_used);
 		free(line);
 		if (myStrlen(processed)) free(processed);
 		line = myReadline(PROMPT);
