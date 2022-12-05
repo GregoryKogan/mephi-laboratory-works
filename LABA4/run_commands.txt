@@ -1,0 +1,2 @@
+gcc with_libs.c -o exec -lreadline && valgrind ./exec
+gcc without_libs.c my_strings.c -o exec && valgrind ./exec
