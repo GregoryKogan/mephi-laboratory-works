@@ -1,0 +1,2 @@
+gcc sorter.c libs/generator.c libs/logger.c libs/arraylib.c libs/carlib.c libs/quicksort.c libs/cmpfunctions.c libs/shakersort.c libs/selectionsort.c -o bin && ./bin -a -s selection -f mileage input.csv output.csv
+gcc benchmark.c libs/generator.c libs/logger.c -o bench && ./bench -a -f owner -s quick 100000 10
