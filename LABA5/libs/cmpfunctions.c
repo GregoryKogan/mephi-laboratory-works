@@ -1,4 +1,5 @@
 #include <strings.h>
+#include <string.h>
 #include <stdbool.h>
 #include "carlib.h"
 #include "arraylib.h"

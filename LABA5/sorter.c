@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include <strings.h>
+#include <string.h>
 #include "libs/generator.h"
 #include "libs/logger.h"
 #include "libs/carlib.h"
