@@ -10,7 +10,6 @@ typedef struct Array {
 array initArray();
 void arrayMemoryFree(array* arr);
 void printArray(array* arr);
-void insert(array* arr, int index, car value);
 void removeByIndex(array* arr, int index);
 void append(array* arr, car value);
 
