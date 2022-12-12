@@ -38,29 +38,15 @@ void printArray(array* arr) {
     printf("]\n");
 }
 
-void insert(array* arr, int index, car value) {
-    int newSpace = 1;
-    if (index >= arr->length)
-        newSpace = index - arr->length + 1;
-
+void append(array* arr, car value) {
     if (arr->length == 0)
-        arr->data = calloc(newSpace, sizeof(car));
+        arr->data = calloc(1, sizeof(car));
     else
-        arr->data = realloc(arr->data, (arr->length + newSpace) * sizeof(car));
+        arr->data = realloc(arr->data, (arr->length + 1) * sizeof(car));
     if (!arr->data)
         logErrorAndExit("can not allocate memory", 2);
-
-    for (int i = 0; i < newSpace; ++i)
-        arr->data[arr->length + i] = createCar("", "", 0);
-
-    arr->length += newSpace;
-    for (int i = arr->length - 1; i > index; i--)
-        arr->data[i] = arr->data[i - 1];
-    arr->data[index] = value;
-}
-
-void append(array* arr, car value) {
-    insert(arr, arr->length, value);
+    arr->length++;
+    arr->data[arr->length - 1] = value;
 }
 
 void removeByIndex(array* arr, int index) {
