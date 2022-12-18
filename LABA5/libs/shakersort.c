@@ -45,17 +45,17 @@ void shakerSort(car* arr, size_t len, size_t elemSize, int (*cmpFunc)(const car*
 void shakerSortCars(array* cars, int ascendingOrder, char sortingField) {
     if (ascendingOrder == 1) {
         if (sortingField == 'a')
-            qsort(cars->data, cars->length, sizeof(car), (int (*)(const void*, const void*)) compareAscMileage);
+            shakerSort(cars->data, cars->length, sizeof(car), (int (*)(const car*, const car*)) compareAscMileage);
         else if (sortingField == 'm')
-            qsort(cars->data, cars->length, sizeof(car), (int (*)(const void*, const void*)) compareAscModel);
+            shakerSort(cars->data, cars->length, sizeof(car), (int (*)(const car*, const car*)) compareAscModel);
         else
-            qsort(cars->data, cars->length, sizeof(car), (int (*)(const void*, const void*)) compareAscOwner);
+            shakerSort(cars->data, cars->length, sizeof(car), (int (*)(const car*, const car*)) compareAscOwner);
     } else {
         if (sortingField == 'a')
-            qsort(cars->data, cars->length, sizeof(car), (int (*)(const void*, const void*)) compareDesMileage);
+            shakerSort(cars->data, cars->length, sizeof(car), (int (*)(const car*, const car*)) compareDesMileage);
         else if (sortingField == 'm')
-            qsort(cars->data, cars->length, sizeof(car), (int (*)(const void*, const void*)) compareDesModel);
+            shakerSort(cars->data, cars->length, sizeof(car), (int (*)(const car*, const car*)) compareDesModel);
         else
-            qsort(cars->data, cars->length, sizeof(car), (int (*)(const void*, const void*)) compareDesOwner);
+            shakerSort(cars->data, cars->length, sizeof(car), (int (*)(const car*, const car*)) compareDesOwner);
     }
 }

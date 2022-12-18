@@ -6,7 +6,7 @@
 
 
 typedef struct Array {
-    int length;
+    size_t length;
     car* data;
 } array;
 

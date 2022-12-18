@@ -19,6 +19,11 @@ clock_t runTests(
     char sortingField, 
     int numOfItems, 
     int numOfArrays) {
+    
+    if (sortingAlgo == 'q') printf("Algorithm: Quick\n");
+    else if (sortingAlgo == 'h') printf("Algorithm: Shaker\n");
+    else printf("Algorithm: Selection\n");
+    
     clock_t total_time = 0;
     for (int iter = 0; iter < numOfArrays; iter++) {
         array data = generateData((size_t)numOfItems);
