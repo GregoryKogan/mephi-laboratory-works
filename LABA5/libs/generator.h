@@ -2,7 +2,9 @@
 #define GENERATOR_H
 
 
-void generateData(char filename[], size_t itemCount);
+#include "arraylib.h"
+array generateData(size_t itemCount);
+void generateDataToFile(char filename[], size_t itemCount);
 
 
 #endif

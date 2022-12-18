@@ -2,6 +2,7 @@
 #define CARS_H
 
 
+#include <stdbool.h>
 typedef struct Car {
     char model[16 + 1];
     char* owner;

@@ -7,6 +7,10 @@
 #include <time.h>
 #include "libs/generator.h"
 #include "libs/logger.h"
+#include "libs/arraylib.h"
+#include "libs/quicksort.h"
+#include "libs/shakersort.h"
+#include "libs/selectionsort.h"
 
 
 clock_t runTests(
@@ -15,39 +19,29 @@ clock_t runTests(
     char sortingField, 
     int numOfItems, 
     int numOfArrays) {
-    clock_t total_time;
-    int status;
+    clock_t total_time = 0;
     for (int iter = 0; iter < numOfArrays; iter++) {
-        generateData("input.csv", (size_t)numOfItems);
-        status = system("gcc sorter.c libs/generator.c libs/logger.c libs/arraylib.c libs/carlib.c libs/quicksort.c libs/cmpfunctions.c libs/shakersort.c libs/selectionsort.c -o bin");
-        if (status != 0)
-            logErrorAndExit("compilation aborted", 1);
-
-        char runCommand[200]="./bin ";
-        if (ascendingOrder == 1) strcat(runCommand, "-a ");
-        else strcat(runCommand, "-d ");
-        if (sortingAlgo == 'q') strcat(runCommand, "-s quick ");
-        else if (sortingAlgo == 'h') strcat(runCommand, "-s shaker ");
-        else strcat(runCommand, "-s selection ");
-        if (sortingField == 'm') strcat(runCommand, "-f model ");
-        else if (sortingField == 'o') strcat(runCommand, "-f owner ");
-        else strcat(runCommand, "-f mileage ");
-        strcat(runCommand, "input.csv output.csv");
+        array data = generateData((size_t)numOfItems);
         
         clock_t start, end;
         start = clock();
-        status = system(runCommand);
+        if (sortingAlgo == 'q')
+             quickSortCars(&data, ascendingOrder, sortingField);
+        else if (sortingAlgo == 'h')
+            shakerSortCars(&data, ascendingOrder, sortingField);
+        else
+            selectionSortCars(&data, ascendingOrder, sortingField);
         end = clock();
 
-        if (status != 0)
-            logErrorAndExit("testing aborted", 2);
+        arrayMemoryFree(&data);
 
-        system("rm bin");
-        total_time += end - start;
-        printf("Iter %d, time: %lu microseconds\n", iter, (end - start));
+        clock_t microseconds = (end - start) / (CLOCKS_PER_SEC / 1000000);
+        total_time += microseconds;
+        printf("Iter %d, time: %lu microseconds\n", iter, microseconds);
     }
 
     clock_t result = total_time / numOfArrays;
+    printf("\x1b[32mAverage time: %lu microseconds\x1b[0m\n", result);
     return result;
 }
 
@@ -109,8 +103,7 @@ int main(int argc, char *argv[]) {
     if (numOfArrays == -1)
         logErrorAndExit("number of arrays is not specified", 4);
 
-    clock_t result = runTests(ascendingOrder, sortingAlgo, sortingField, numOfItems, numOfArrays);
-    printf("\x1b[32mAverage time: %lu microseconds\x1b[0m\n", result);
+    runTests(ascendingOrder, sortingAlgo, sortingField, numOfItems, numOfArrays);
 
     return 0;
 }
