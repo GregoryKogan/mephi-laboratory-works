@@ -1,1 +1,2 @@
 gcc main.c libs/stringlib.c libs/logger.c -o main && ./main
+

@@ -29,6 +29,7 @@ int main() {
         s = initString();
         status = scanString(s);
     }
+    freeString(&s);
     return 0;
 }
 

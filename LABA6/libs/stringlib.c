@@ -23,9 +23,9 @@ String* initString() {
 
 void append(String* s, char val) {
     node* newNodePtr = (node*)calloc(1, sizeof(node));
-    if (newNodePtr == NULL) 
+    if (newNodePtr == NULL)
         logErrorAndExit("Can't allocate memory", 1);
-    
+
     newNodePtr->symbol = val;
     newNodePtr->next = NULL;
 
@@ -71,8 +71,6 @@ void freeString(String** s) {
 
 
 int scanString(String* s) {
-    freeString(&s);
-    s = initString();
     char c = getchar();
     while (c != EOF && c != '\n') {
         append(s, c);
