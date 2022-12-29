@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#define PROMPT "\x1b[31m❱\x1b[0m\x1b[32m❱\x1b[0m\x1b[34m❱\x1b[0m "
 
 
 bool isDelimiter(char c);
@@ -16,6 +17,7 @@ void manageSpacing(String *s);
 int main() {
     String* s = initString();
     int status;
+    printf(PROMPT);
     status = scanString(s);
     while (status != EOF) {
         printf("Input:  ");
@@ -27,6 +29,7 @@ int main() {
 
         freeString(&s);
         s = initString();
+	printf(PROMPT);
         status = scanString(s);
     }
     freeString(&s);

@@ -1,194 +1,3 @@
-gcc -o main -lm main.c && ./main
-ls
-cd DZ3
-ls
-cat main
-cat main.c
-rm main.c
-ls
-nano main.c
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && valgrind ./main
-gcc -o main -lm main.c && valgrind ./main
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && valgrind ./main
-cmatrix
-nano main.c
-ls
-gcc -o main -lm main.c && valgrind ./main
-nano main.c
-ls
-cd DZ3
-ls
-gcc -o main -lm main.c && ./main
-nano main.c
-cd DZ3
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-gcc -o main -lm main.c && ./main
-nano main.c
-nano main.c
-ls
-mkdir LABA3
-cd LABA3
-ls
-nano main.c
-nano arraylib.c
-nano arraylib.h
-ls
-gcc -o main -lm main.c arraylib.c && ./main
-gcc -o main -lm main.c arraylib.c && valgrind ./main
-ls
-nano main.c
-nano main.c
-gcc -o main -lm main.c arraylib.c && valgrind ./main
-ls
-ls
-cd LABA3
-ls
-nano arraylib.c
-ls
-nano main.c
-ls
-cat arraylib.h
-cat main.c
-nano main.c
-ccc
-cc
-cc
-gcc
-g++
-gcc
-gcc
-nano main.c
-nano arraylib.c
-gcc -o main -lm main.c arraylib.c && ./main
-nano arraylib.c
-nano main.c
-nano arraylib.c
-gcc -o main -lm main.c arraylib.c && ./main
-gcc -o main -lm main.c arraylib.c && ./main
-nano main.c
-nano arraylib.c
-gcc -o main -lm main.c arraylib.c && ./main
-nano arraylib.c
-gcc -o main -lm main.c arraylib.c && ./main
-nano arraylib.c
-gcc -o main -lm main.c arraylib.c && ./main
-nano arraylib.c
-nano arraylib.c
-gcc -o main -lm main.c arraylib.c && ./main
-nano arraylib.c
-gcc -o main -lm main.c arraylib.c && ./main
-nano arraylib.c
-gcc -o main -lm main.c arraylib.c && ./main
-gcc -o main -lm main.c arraylib.c && ./main
-python3 Screensavers/wave.py
-ls
-cd LABA3
-ls
-gcc -o main -lm main.c arraylib.c && ./main
-gcc -o main -lm main.c arraylib.c && ./main
-gcc -o main -lm main.c arraylib.c && ./main
-gcc -o main -lm main.c arraylib.c && ./main
-gcc -o main -lm main.c arraylib.c && ./main
-ls
-clear
-clear
-mkdir LABA4
-ls
-cd LABA4
-nano main.c
-nano main.c
-ls
-cd LABA4
-ls
-nano main.c
-ls
-gcc main.c -o main -lreadline
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-nano main.c
-nano main.c
-nano main.c
-nano main.c
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-git
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-nano main.c
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano
-ls
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
-gcc main.c -o main -lreadline && ./main
-nano main.c
 gcc main.c -o main -lreadline && ./main
 nano main.c
 gcc main.c -o main -lreadline && ./main
@@ -498,3 +307,194 @@ ls
 nano my_strings.x
 nano my_strings.c
 gcc without_libs.c my_strings.c -o exec && valgrind ./exec
+exit
+ls
+cd LABA5
+cd
+ls
+git pull
+ls
+cd LABA6
+ls
+cat run_command.txt 
+nano run_command.txt 
+cat run_command.txt 
+gcc main.c libs/stringlib.c libs/logger.c -o main && ./main
+gcc main.c libs/stringlib.c libs/logger.c -o main && ./main
+git status
+git restore .
+git status
+cd
+git restore .
+git status
+git restore .
+git status
+git restore LABA5/bin
+rm LABA5/bin
+git status 
+cd LABA6
+cat run_command.txt 
+nano run_command.txt 
+cat run_command.txt 
+gcc main.c libs/stringlib.c libs/logger.c -o main && ./main
+gcc main.c libs/stringlib.c libs/logger.c -o main && valgrind ./main
+gcc main.c libs/stringlib.c libs/logger.c -o main && valgrind --leak-check=full ./main
+nano main.c
+gcc main.c libs/stringlib.c libs/logger.c -o main && valgrind --leak-check=full ./main
+nano libs/stringlib.c
+gcc main.c libs/stringlib.c libs/logger.c -o main && valgrind --leak-check=full ./main
+nano main.c
+gcc main.c libs/stringlib.c libs/logger.c -o main && valgrind --leak-check=full ./main
+nano main.c
+gcc main.c libs/stringlib.c libs/logger.c -o main && valgrind --leak-check=full ./main
+nano main.c
+gcc main.c libs/stringlib.c libs/logger.c -o main && valgrind --leak-check=full ./main
+git status
+git add .
+git commit -m "fix(memory): memory leaks fixed"
+git push
+git status
+cd
+ls -la
+cat .lesshst 
+cd .config/
+ls
+cd ..
+ls
+ls -la
+nano .bashrc
+bash
+zsh
+fish
+ls -la
+rm .bashrc 
+ды
+ls
+ls -la
+nano .profile
+exec bash
+exit
+lolcat CUM
+git clone https://github.com/stark/color-scripts
+ls
+cd color-scripts/
+ls
+cd color-scripts/
+ls
+./spectrum 
+cd ..
+ls
+cd test-color-support/
+ls
+cd
+colorscript
+ls
+rm -rf color-scripts/
+git clone https://gitlab.com/dwt1/shell-color-scripts.git
+cd shell-color-scripts/
+sudo make install
+ls
+colorscript.sh
+./colorscript.sh
+./colorscript.sh --random
+cd colorscripts/
+;s
+ls
+./guns 
+cd ..
+ls
+cat colorscript.sh
+ls
+rm LICENSE 
+rm Makefile 
+rm PKGBUILD 
+rm man.org 
+rm completions/
+rm README.md 
+rm colorscript.sh 
+ls
+rm colorscript.1
+rm -rf completions/
+ls
+ls colorscripts/
+cd colorscripts/
+./suckless
+cat suckless 
+rm suckless 
+ls
+./monster 
+cd ..
+ls
+nano random_colorscript.sh
+ls
+cat random_colorscript.sh 
+ls
+./random_colorscript.sh 
+sudo ./random_colorscript.sh 
+ls
+cat random_colorscript.sh 
+rm random_colorscript.sh 
+cd
+ls
+mv shell-color-scripts/colorscripts/ ./colorscripts
+ls
+rm shell-color-scripts/
+rm -rf shell-color-scripts/
+ls
+ls colorscripts/
+./colorscripts/xmonad 
+nano ./profile
+ls
+ls -la
+nano .profile
+nano .profile
+exec bash
+ls
+exit
+nano .profile 
+exec bash
+exec bash
+bash
+ls colorscripts/
+./colorscripts/00default.sh 
+~/colorscripts/colorbars 
+nano .profile 
+~/colorscripts/alpha
+./colorscripts/alpha
+nano .profile 
+./profile
+ls
+./.profile
+ls
+ls -la
+cat .profile 
+./.profile
+./.profile
+./.profile
+nano .profile 
+curl -sS https://starship.rs/install.sh | sh
+nano .profile
+ls colorscripts/
+./colorscripts/pacman 
+./.profile
+less .profile 
+cd LABA6
+cat run_command.txt 
+gcc main.c libs/stringlib.c libs/logger.c -o main && ./main
+nano main.c
+cd LABA6
+cat run_command.txt 
+cd LABA6
+cat run_command.txt 
+gcc main.c libs/stringlib.c libs/logger.c -o main && ./main
+cd LABA6
+cat run_command.txt 
+gcc main.c libs/stringlib.c libs/logger.c -o main && ./main
+python3 Screensavers/wave.py 
+ld
+ls
+ls colorscripts/
+./colorscripts/ghosts 
+./colorscripts/mouseface
+./colorscripts/crowns 
+less .profile 
