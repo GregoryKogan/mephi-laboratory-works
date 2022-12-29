@@ -42,7 +42,10 @@ void append(String* s, char val) {
 
 
 void print(String* s) {
-    if (s->head == NULL) return;
+    if (s->head == NULL) {
+	printf("\x1b[32m\"\"\x1b[0m \n");
+	return;
+    }
 
     printf("\x1b[32m\"\x1b[0m");
     node* curNode = s->head;
