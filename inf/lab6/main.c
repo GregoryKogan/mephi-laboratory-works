@@ -52,11 +52,17 @@ void switchCase(String *s) {
 
 
 void manageSpacing(String *s) {
-    while (isDelimiter(s->head->symbol)) {
+    if (s == NULL || s->head == NULL)
+	return;
+
+    while (s->head != NULL && isDelimiter(s->head->symbol)) {
         node* newHead = s->head->next;
         free(s->head);
         s->head = newHead;
     }
+
+   if (s->head == NULL)
+	return;
 
     node* curNode = s->head;
     while(curNode->next != NULL) {
