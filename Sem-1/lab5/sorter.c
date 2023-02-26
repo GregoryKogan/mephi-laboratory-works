@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <unistd.h>
 #include <strings.h>
 #include <string.h>
-#include "libs/generator.h"
 #include "libs/logger.h"
 #include "libs/carlib.h"
 #include "libs/arraylib.h"
@@ -107,9 +105,9 @@ int main(int argc, char *argv[]) {
 
     if (ascendingOrder == 0) 
         logErrorAndExit("sorting order is not specified", 4);
-    if (sortingAlgo == ' ') 
+    if (sortingAlgo == '_')
         logErrorAndExit("sorting algorithm is not specified", 4);
-    if (sortingField == 0) 
+    if (sortingField == '_')
         logErrorAndExit("sorting field is not specified", 4);
     if (inputFile == NULL)
         logErrorAndExit("input file is not specified", 4);
