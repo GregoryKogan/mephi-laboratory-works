@@ -70,6 +70,7 @@ char* matrix_to_string(matrix_t* self) {
     char* buff = (char*)malloc(sizeof(char) * 256);
     if (str == NULL || buff == NULL)
         log_error_and_exit("can't allocate memory", 3);
+	str[0] = '\0';
     size_t str_len = 0;
 
     snprintf(
@@ -99,7 +100,7 @@ char* matrix_to_string(matrix_t* self) {
     }
     free(buff);
 
-    str = realloc(str, sizeof(char) * strlen(str));
+    str = realloc(str, sizeof(char) * (strlen(str) + 1));
     if (str == NULL)
         log_error_and_exit("can't allocate memory", 3);
     return str;
