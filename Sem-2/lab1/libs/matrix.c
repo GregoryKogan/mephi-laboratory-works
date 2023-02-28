@@ -55,7 +55,7 @@ void matrix_set_value(matrix_t* self, size_t i, size_t j, const void* value) {
 }
 
 matrix_t* matrix_transpose(matrix_t* self) {
-    matrix_t* result = matrix_ctor(self->type, matrix_get_width(self), matrix_get_height(self));
+    matrix_t* result = matrix_ctor(type_copy(self->type), matrix_get_width(self), matrix_get_height(self));
     for (size_t j = 0; j < matrix_get_width(self); ++j) {
         for (size_t i = 0; i < matrix_get_height(self); ++i) {
             matrix_set_value(result, j, i, matrix_get_value(self, i, j));

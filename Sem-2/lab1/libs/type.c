@@ -37,3 +37,17 @@ void type_dtor(type_t* self) {
     free(self->one);
     free(self);
 }
+
+type_t* type_copy(type_t* original) {
+    return type_ctor(
+            original->name,
+            original->from_instance(original->zero),
+            original->from_instance(original->one),
+            original->from_instance,
+            original->free_memory,
+            original->add,
+            original->sub,
+            original->mul,
+            original->to_string
+    );
+}

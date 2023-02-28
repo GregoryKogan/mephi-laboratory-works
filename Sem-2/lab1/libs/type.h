@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "IO/logger.h"
 
-typedef struct {
+typedef struct Type_t{
     const char* name;
     void* zero;
     void* one;
@@ -32,5 +32,6 @@ type_t* type_ctor(
     char* (*to_string)(void*)
 );
 void type_dtor(type_t* self);
+type_t* type_copy(type_t*);
 
 #endif //LAB1_TYPE_H
