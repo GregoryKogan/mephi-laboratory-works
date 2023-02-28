@@ -14,7 +14,7 @@ type_t* type_ctor(
         void* (*mul)(void*, void*),
         char* (*to_string)(void*)
 ) {
-    type_t* type = (type_t*)malloc(sizeof(size_t));
+    type_t* type = (type_t*)malloc(sizeof(type_t));
     type->size = size;
     type->zero = zero;
     type->one = one;
@@ -26,7 +26,7 @@ type_t* type_ctor(
 }
 
 void type_dtor(type_t* self) {
-//    free(self->zero);
-//    free(self->one);
+    free(self->zero);
+    free(self->one);
     free(self);
 }
