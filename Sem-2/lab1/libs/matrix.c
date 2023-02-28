@@ -76,10 +76,10 @@ char* matrix_to_string(matrix_t* self) {
     snprintf(
         buff,
         256,
-        "<Matrix (type: %s) [%lu x %lu]>\n",
-        self->type->name,
+        "<Matrix [%lu x %lu]> (type: %s)\n",
         matrix_get_height(self),
-        matrix_get_width(self)
+        matrix_get_width(self),
+        self->type->name
     );
     strncat(str + str_len, buff, strlen(buff));
     str_len += strlen(buff);
