@@ -6,9 +6,11 @@
 
 
 type_t* type_ctor(
-        size_t size,
+        const char* name,
         void* zero,
         void* one,
+        void* (*from_instance)(const void*),
+        void (*free_memory)(void*),
         void* (*add)(void*, void*),
         void* (*sub)(void*, void*),
         void* (*mul)(void*, void*),
@@ -18,9 +20,11 @@ type_t* type_ctor(
     if (type == NULL)
         log_error_and_exit("can't allocate memory", 3);
 
-    type->size = size;
+    type->name = name;
     type->zero = zero;
     type->one = one;
+    type->from_instance = from_instance;
+    type->free_memory = free_memory;
     type->add = add;
     type->sub = sub;
     type->mul = mul;

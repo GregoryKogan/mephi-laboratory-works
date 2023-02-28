@@ -24,7 +24,7 @@ size_t matrix_get_width(matrix_t* self);
 size_t matrix_get_height(matrix_t* self);
 
 void* matrix_get_value(matrix_t* self, size_t, size_t);
-void matrix_set_value(matrix_t* self, size_t i, size_t j, void* value);
+void matrix_set_value(matrix_t* self, size_t i, size_t j, const void* value);
 
 char* matrix_to_string(matrix_t* self);
 void matrix_print(matrix_t* self);

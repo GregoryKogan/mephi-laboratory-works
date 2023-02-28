@@ -9,9 +9,11 @@
 #include "IO/logger.h"
 
 typedef struct {
-    size_t size;
+    const char* name;
     void* zero;
     void* one;
+    void* (*from_instance)(const void*);
+    void (*free_memory)(void*);
     void* (*add)(void*, void*);
     void* (*sub)(void*, void*);
     void* (*mul)(void*, void*);
@@ -19,9 +21,11 @@ typedef struct {
 } type_t;
 
 type_t* type_ctor(
-    size_t,
+    const char* name,
     void* zero,
     void* one,
+    void* (*from_instance)(const void*),
+    void (*free_memory)(void*),
     void* (*add)(void*, void*),
     void* (*sub)(void*, void*),
     void* (*mul)(void*, void*),

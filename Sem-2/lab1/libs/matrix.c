@@ -15,11 +15,15 @@ matrix_t* matrix_ctor(type_t* type, size_t height, size_t width) {
     if (matrix->data == NULL)
         log_error_and_exit("can't allocate memory", 3);
     for (size_t index = 0; index < height * width; ++index)
-            matrix->data[index] = type->zero;
+            matrix->data[index] = matrix->type->from_instance(matrix->type->zero);
     return matrix;
 }
 
 void matrix_dtor(matrix_t* self) {
+    for (size_t i = 0; i < self->width * self->height; ++i) {
+        if (self->data[i] != NULL)
+            self->type->free_memory(self->data[i]);
+    }
     type_dtor(self->type);
     free(self->data);
     free(self);
@@ -40,28 +44,29 @@ void* matrix_get_value(matrix_t* self, size_t i, size_t j) {
     return self->data[index];
 }
 
-void matrix_set_value(matrix_t* self, size_t i, size_t j, void* value) {
+void matrix_set_value(matrix_t* self, size_t i, size_t j, const void* value) {
     if (i >= self->height || j >= self->width)
         log_error_and_exit("matrix index out of range", 1);
-    if (sizeof(value) != self->type->size)
-        log_error_and_exit("incompatible type given", 2);
 
     size_t index = i * self->width + j;
-    self->data[index] = value;
+    if (self->data[index] != NULL)
+        self->type->free_memory(self->data[index]);
+    self->data[index] = self->type->from_instance(value);
 }
 
 char* matrix_to_string(matrix_t* self) {
-    char* str = (char*)malloc(sizeof(char) * 256);
-    if (str == NULL)
+    // multiplication by 3 because each element takes 3 chars on average: "8, "
+    char* str = (char*)malloc(sizeof(char) * self->width * self->height * 3 + 128);
+    char* buff = (char*)malloc(sizeof(char) * 256);
+    if (str == NULL || buff == NULL)
         log_error_and_exit("can't allocate memory", 3);
     str[0] = '\0';
     size_t str_len = 0;
-    char* buff = (char*)malloc(sizeof(char) * 256);
-    if (buff == NULL)
-        log_error_and_exit("can't allocate memory", 3);
-    snprintf(buff, 256, "<Matrix [%lu x %lu]>\n", self->height, self->width);
+
+    snprintf(buff, 256, "<Matrix (type: %s) [%lu x %lu]>\n", self->type->name, self->height, self->width);
     strncat(str + str_len, buff, strlen(buff));
     str_len += strlen(buff);
+
     for (size_t i = 0; i < self->height; ++i) {
         if (i == 0) strcat(str + str_len, "[");
         else strcat(str + str_len, " ");

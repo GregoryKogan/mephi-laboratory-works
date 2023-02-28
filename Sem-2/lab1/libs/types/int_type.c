@@ -20,6 +20,19 @@ void* int_get_one() {
     return (void*)one;
 }
 
+void* int_from_instance(const void* instance_ptr) {
+    int instance = *(int*)instance_ptr;
+    int* new_instance_ptr = (int*)malloc(sizeof(int));
+    if (new_instance_ptr == NULL)
+        log_error_and_exit("can't allocate memory", 3);
+    *new_instance_ptr = instance;
+    return (void*)new_instance_ptr;
+}
+
+void int_free_memory(void* instance_ptr) {
+    free(instance_ptr);
+}
+
 void* int_add(void* a_ptr, void* b_ptr) {
     int* a = (int*)a_ptr;
     int* b = (int*)b_ptr;
@@ -61,9 +74,11 @@ char* int_to_string(void* x_ptr) {
 
 type_t* int_type_ctor() {
     return type_ctor(
-            sizeof(int),
+            "int",
             int_get_zero(),
             int_get_one(),
+            &int_from_instance,
+            &int_free_memory,
             &int_add,
             &int_sub,
             &int_mul,
