@@ -6,10 +6,14 @@
 
 matrix_t* matrix_ctor(type_t* type, size_t height, size_t width) {
     matrix_t* matrix = (matrix_t *)malloc(sizeof(matrix_t));
+    if (matrix == NULL)
+        log_error_and_exit("can't allocate memory", 3);
     matrix->width = width;
     matrix->height = height;
     matrix->type = type;
     matrix->data = (void**)malloc(width * height * sizeof(void*));
+    if (matrix->data == NULL)
+        log_error_and_exit("can't allocate memory", 3);
     for (size_t index = 0; index < height * width; ++index)
             matrix->data[index] = type->zero;
     return matrix;
@@ -40,7 +44,7 @@ void matrix_set_value(matrix_t* self, size_t i, size_t j, void* value) {
     if (i >= self->height || j >= self->width)
         log_error_and_exit("matrix index out of range", 1);
     if (sizeof(value) != self->type->size)
-        log_error_and_exit("incompatible type given", 1);
+        log_error_and_exit("incompatible type given", 2);
 
     size_t index = i * self->width + j;
     self->data[index] = value;
@@ -48,9 +52,13 @@ void matrix_set_value(matrix_t* self, size_t i, size_t j, void* value) {
 
 char* matrix_to_string(matrix_t* self) {
     char* str = (char*)malloc(sizeof(char) * 256);
+    if (str == NULL)
+        log_error_and_exit("can't allocate memory", 3);
     str[0] = '\0';
     size_t str_len = 0;
     char* buff = (char*)malloc(sizeof(char) * 256);
+    if (buff == NULL)
+        log_error_and_exit("can't allocate memory", 3);
     snprintf(buff, 256, "<Matrix [%lu x %lu]>\n", self->height, self->width);
     strncat(str + str_len, buff, strlen(buff));
     str_len += strlen(buff);
@@ -83,6 +91,9 @@ char* matrix_to_string(matrix_t* self) {
     }
 
     free(buff);
+    str = realloc(str, sizeof(char) * strlen(str));
+    if (str == NULL)
+        log_error_and_exit("can't allocate memory", 3);
     return str;
 }
 

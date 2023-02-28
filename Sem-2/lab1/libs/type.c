@@ -15,6 +15,9 @@ type_t* type_ctor(
         char* (*to_string)(void*)
 ) {
     type_t* type = (type_t*)malloc(sizeof(type_t));
+    if (type == NULL)
+        log_error_and_exit("can't allocate memory", 3);
+
     type->size = size;
     type->zero = zero;
     type->one = one;

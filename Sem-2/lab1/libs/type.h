@@ -6,6 +6,7 @@
 #define LAB1_TYPE_H
 
 #include <stdlib.h>
+#include "IO/logger.h"
 
 typedef struct {
     size_t size;

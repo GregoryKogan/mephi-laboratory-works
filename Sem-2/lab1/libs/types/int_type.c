@@ -6,12 +6,16 @@
 
 void* int_get_zero() {
     int* zero = (int*)malloc(sizeof(int));
+    if (zero == NULL)
+        log_error_and_exit("can't allocate memory", 3);
     *zero = (int)0;
     return (void*)zero;
 }
 
 void* int_get_one() {
     int* one = (int*)malloc(sizeof(int));
+    if (one == NULL)
+        log_error_and_exit("can't allocate memory", 3);
     *one = (int)1;
     return (void*)one;
 }
@@ -19,7 +23,9 @@ void* int_get_one() {
 void* int_add(void* a_ptr, void* b_ptr) {
     int* a = (int*)a_ptr;
     int* b = (int*)b_ptr;
-    int* res = (int*) malloc(sizeof(int));
+    int* res = (int*)malloc(sizeof(int));
+    if (res == NULL)
+        log_error_and_exit("can't allocate memory", 3);
     *res = *a + *b;
     return (void*)res;
 }
@@ -27,7 +33,9 @@ void* int_add(void* a_ptr, void* b_ptr) {
 void* int_sub(void* a_ptr, void* b_ptr) {
     int* a = (int*)a_ptr;
     int* b = (int*)b_ptr;
-    int* res = (int*) malloc(sizeof(int));
+    int* res = (int*)malloc(sizeof(int));
+    if (res == NULL)
+        log_error_and_exit("can't allocate memory", 3);
     *res = *a - *b;
     return (void*)res;
 }
@@ -36,6 +44,8 @@ void* int_mul(void* a_ptr, void* b_ptr) {
     int* a = (int*)a_ptr;
     int* b = (int*)b_ptr;
     int* res = (int*)malloc(sizeof(int));
+    if (res == NULL)
+        log_error_and_exit("can't allocate memory", 3);
     *res = *a * *b;
     return (void*)res;
 }
@@ -43,6 +53,8 @@ void* int_mul(void* a_ptr, void* b_ptr) {
 char* int_to_string(void* x_ptr) {
     int x = *(int*)x_ptr;
     char* buff = (char*)malloc(sizeof(char) * 16);
+    if (buff == NULL)
+        log_error_and_exit("can't allocate memory", 3);
     snprintf(buff, 16, "%d", x);
     return buff;
 }
