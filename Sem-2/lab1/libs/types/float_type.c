@@ -74,14 +74,14 @@ char* float_to_string(void* x_ptr) {
 
 type_t* float_type_ctor() {
     return type_ctor(
-            "int",
+            "float",
             float_get_zero(),
             float_get_one(),
-            &float_from_instance,
-            &float_free_memory,
-            &float_add,
-            &float_sub,
-            &float_mul,
-            &float_to_string
+            float_from_instance,
+            float_free_memory,
+            float_add,
+            float_sub,
+            float_mul,
+            float_to_string
     );
 }

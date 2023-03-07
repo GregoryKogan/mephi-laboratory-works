@@ -77,11 +77,11 @@ type_t* int_type_ctor() {
             "int",
             int_get_zero(),
             int_get_one(),
-            &int_from_instance,
-            &int_free_memory,
-            &int_add,
-            &int_sub,
-            &int_mul,
-            &int_to_string
+            int_from_instance,
+            int_free_memory,
+            int_add,
+            int_sub,
+            int_mul,
+            int_to_string
     );
 }
