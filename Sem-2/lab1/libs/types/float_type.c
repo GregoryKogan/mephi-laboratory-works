@@ -33,34 +33,28 @@ void float_free_memory(void* instance_ptr) {
     free(instance_ptr);
 }
 
-void* float_add(void* a_ptr, void* b_ptr) {
+void float_add(void* res_ptr, void* a_ptr, void* b_ptr) {
+    float* res = (float*)res_ptr;
     float* a = (float*)a_ptr;
     float* b = (float*)b_ptr;
-    float* res = (float*)malloc(sizeof(float));
-    if (res == NULL)
-        log_error_and_exit("can't allocate memory", 3);
-    *res = *a + *b;
-    return (void*)res;
+    float res_val = *a + *b;
+    *res = res_val;
 }
 
-void* float_sub(void* a_ptr, void* b_ptr) {
+void float_sub(void* res_ptr, void* a_ptr, void* b_ptr) {
+    float* res = (float*)res_ptr;
     float* a = (float*)a_ptr;
     float* b = (float*)b_ptr;
-    float* res = (float*)malloc(sizeof(float));
-    if (res == NULL)
-        log_error_and_exit("can't allocate memory", 3);
-    *res = *a - *b;
-    return (void*)res;
+    float res_val = *a - *b;
+    *res = res_val;
 }
 
-void* float_mul(void* a_ptr, void* b_ptr) {
+void float_mul(void* res_ptr, void* a_ptr, void* b_ptr) {
+    float* res = (float*)res_ptr;
     float* a = (float*)a_ptr;
     float* b = (float*)b_ptr;
-    float* res = (float*)malloc(sizeof(float));
-    if (res == NULL)
-        log_error_and_exit("can't allocate memory", 3);
-    *res = *a * *b;
-    return (void*)res;
+    float res_val = *a * *b;
+    *res = res_val;
 }
 
 char* float_to_string(void* x_ptr) {

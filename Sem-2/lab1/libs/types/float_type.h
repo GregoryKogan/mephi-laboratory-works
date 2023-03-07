@@ -12,9 +12,9 @@ void* float_get_zero();
 void* float_get_one();
 void* float_from_instance(const void*);
 void float_free_memory(void*);
-void* float_add(void*, void*);
-void* float_sub(void*, void*);
-void* float_mul(void*, void*);
+void float_add(void*, void*, void*);
+void float_sub(void*, void*, void*);
+void float_mul(void*, void*, void*);
 char* float_to_string(void*);
 
 type_t* float_type_ctor();

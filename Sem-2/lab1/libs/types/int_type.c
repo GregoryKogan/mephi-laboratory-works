@@ -33,34 +33,28 @@ void int_free_memory(void* instance_ptr) {
     free(instance_ptr);
 }
 
-void* int_add(void* a_ptr, void* b_ptr) {
+void int_add(void* res_ptr, void* a_ptr, void* b_ptr) {
+    int* res = (int*)res_ptr;
     int* a = (int*)a_ptr;
     int* b = (int*)b_ptr;
-    int* res = (int*)malloc(sizeof(int));
-    if (res == NULL)
-        log_error_and_exit("can't allocate memory", 3);
-    *res = *a + *b;
-    return (void*)res;
+    int res_val = *a + *b;
+    *res = res_val;
 }
 
-void* int_sub(void* a_ptr, void* b_ptr) {
+void int_sub(void* res_ptr, void* a_ptr, void* b_ptr) {
+    int* res = (int*)res_ptr;
     int* a = (int*)a_ptr;
     int* b = (int*)b_ptr;
-    int* res = (int*)malloc(sizeof(int));
-    if (res == NULL)
-        log_error_and_exit("can't allocate memory", 3);
-    *res = *a - *b;
-    return (void*)res;
+    int res_val = *a - *b;
+    *res = res_val;
 }
 
-void* int_mul(void* a_ptr, void* b_ptr) {
+void int_mul(void* res_ptr, void* a_ptr, void* b_ptr) {
+    int* res = (int*)res_ptr;
     int* a = (int*)a_ptr;
     int* b = (int*)b_ptr;
-    int* res = (int*)malloc(sizeof(int));
-    if (res == NULL)
-        log_error_and_exit("can't allocate memory", 3);
-    *res = *a * *b;
-    return (void*)res;
+    int res_val = *a * *b;
+    *res = res_val;
 }
 
 char* int_to_string(void* x_ptr) {

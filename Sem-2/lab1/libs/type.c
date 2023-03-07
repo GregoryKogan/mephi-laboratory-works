@@ -11,9 +11,9 @@ type_t* type_ctor(
         void* one,
         void* (*from_instance)(const void*),
         void (*free_memory)(void*),
-        void* (*add)(void*, void*),
-        void* (*sub)(void*, void*),
-        void* (*mul)(void*, void*),
+        void (*add)(void*, void*, void*),
+        void (*sub)(void*, void*, void*),
+        void (*mul)(void*, void*, void*),
         char* (*to_string)(void*)
 ) {
     type_t* type = (type_t*)malloc(sizeof(type_t));
