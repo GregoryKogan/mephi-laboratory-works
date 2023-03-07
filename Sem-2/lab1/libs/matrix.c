@@ -80,7 +80,41 @@ matrix_t* matrix_add(matrix_t* a, matrix_t* b) {
             void* res_ptr = a->type->from_instance(a->type->zero);
             a->type->add(res_ptr, matrix_get_value(a, i, j), matrix_get_value(b, i, j));
             matrix_set_value(result, i, j, res_ptr);
-            free(res_ptr);
+            a->type->free_memory(res_ptr);
+        }
+    }
+
+    return result;
+}
+
+matrix_t* matrix_mul(matrix_t* a, matrix_t* b) {
+    if (strcmp(a->type->name, b->type->name) != 0)
+        log_error_and_exit("matrix types do not match", 4);
+    if (matrix_get_width(a) != matrix_get_height(b))
+        log_error_and_exit("matrix sizes do not match", 5);
+
+    matrix_t* result = matrix_ctor(
+            type_copy(a->type),
+            matrix_get_height(a),
+            matrix_get_width(b)
+    );
+
+    size_t iters = matrix_get_width(a);
+    for (size_t a_row = 0; a_row < matrix_get_height(a); ++a_row) {
+        for (size_t b_col = 0; b_col < matrix_get_width(b); ++b_col) {
+            void* res_ptr = a->type->from_instance(a->type->zero);
+            void* sum_buf = a->type->from_instance(a->type->zero);
+            for (size_t iter = 0; iter < iters; ++iter) {
+                a->type->mul(
+                    sum_buf,
+                    matrix_get_value(a, a_row, iter),
+                    matrix_get_value(b, iter, b_col)
+                );
+                a->type->add(res_ptr, res_ptr, sum_buf);
+            }
+            matrix_set_value(result, a_row, b_col, res_ptr);
+            a->type->free_memory(res_ptr);
+            a->type->free_memory(sum_buf);
         }
     }
 
