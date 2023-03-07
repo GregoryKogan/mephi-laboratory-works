@@ -27,6 +27,7 @@ void* matrix_get_value(matrix_t* self, size_t, size_t);
 void matrix_set_value(matrix_t* self, size_t i, size_t j, const void* value);
 
 matrix_t* matrix_transpose(matrix_t* self);
+matrix_t* matrix_add(matrix_t* a, matrix_t* b);
 
 char* matrix_to_string(matrix_t* self);
 void matrix_print(matrix_t* self);

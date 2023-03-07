@@ -63,6 +63,30 @@ matrix_t* matrix_transpose(matrix_t* self) {
     return result;
 }
 
+matrix_t* matrix_add(matrix_t* a, matrix_t* b) {
+    if (strcmp(a->type->name, b->type->name) != 0)
+        log_error_and_exit("matrix types do not match", 4);
+    if (matrix_get_height(a) != matrix_get_height(b) || matrix_get_width(a) != matrix_get_width(b))
+        log_error_and_exit("matrix sizes do not match", 5);
+
+    matrix_t* result = matrix_ctor(
+        type_copy(a->type),
+        matrix_get_height(a),
+        matrix_get_width(a)
+    );
+
+    for (size_t i = 0; i < matrix_get_height(a); ++i) {
+        for (size_t j = 0; j < matrix_get_width(a); ++j) {
+            void* res_ptr = a->type->from_instance(a->type->zero);
+            a->type->add(res_ptr, matrix_get_value(a, i, j), matrix_get_value(b, i, j));
+            matrix_set_value(result, i, j, res_ptr);
+            free(res_ptr);
+        }
+    }
+
+    return result;
+}
+
 char* matrix_to_string(matrix_t* self) {
     // multiplication by 3 because each element takes 3 chars on average: "8, "
     char* str = (char*)malloc(sizeof(char) * matrix_get_width(self) * matrix_get_height(self) * 3 + 128);
