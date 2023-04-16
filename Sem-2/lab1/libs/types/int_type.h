@@ -12,9 +12,9 @@ void* int_get_zero(error*);
 void* int_get_one(error*);
 void* int_from_instance(error*, const void*);
 void int_free_memory(void*);
-void int_add(void*, void*, void*);
-void int_sub(void*, void*, void*);
-void int_mul(void*, void*, void*);
+void int_add(void*, const void*, const void*);
+void int_sub(void*, const void*, const void*);
+void int_mul(void*, const void*, const void*);
 char* int_to_string(error*, void*);
 
 type_t* int_type_ctor(error*);

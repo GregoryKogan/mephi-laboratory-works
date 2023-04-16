@@ -14,9 +14,9 @@ typedef struct Type_t{
     void* one;
     void* (*from_instance)(error*, const void*);
     void (*free_memory)(void*);
-    void (*add)(void*, void*, void*);
-    void (*sub)(void*, void*, void*);
-    void (*mul)(void*, void*, void*);
+    void (*add)(void*, const void*, const void*);
+    void (*sub)(void*, const void*, const void*);
+    void (*mul)(void*, const void*, const void*);
     char* (*to_string)(error*, void*);
 } type_t;
 
@@ -27,9 +27,9 @@ type_t* type_ctor(
     void* one,
     void* (*from_instance)(error*, const void*),
     void (*free_memory)(void*),
-    void (*add)(void*, void*, void*),
-    void (*sub)(void*, void*, void*),
-    void (*mul)(void*, void*, void*),
+    void (*add)(void*, const void*, const void*),
+    void (*sub)(void*, const void*, const void*),
+    void (*mul)(void*, const void*, const void*),
     char* (*to_string)(error*, void*)
 );
 void type_dtor(type_t* self);

@@ -39,7 +39,7 @@ void int_free_memory(void* instance_ptr) {
     free(instance_ptr);
 }
 
-void int_add(void* res_ptr, void* a_ptr, void* b_ptr) {
+void int_add(void* res_ptr, const void* a_ptr, const void* b_ptr) {
     int* res = (int*)res_ptr;
     int* a = (int*)a_ptr;
     int* b = (int*)b_ptr;
@@ -47,7 +47,7 @@ void int_add(void* res_ptr, void* a_ptr, void* b_ptr) {
     *res = res_val;
 }
 
-void int_sub(void* res_ptr, void* a_ptr, void* b_ptr) {
+void int_sub(void* res_ptr, const void* a_ptr, const void* b_ptr) {
     int* res = (int*)res_ptr;
     int* a = (int*)a_ptr;
     int* b = (int*)b_ptr;
@@ -55,7 +55,7 @@ void int_sub(void* res_ptr, void* a_ptr, void* b_ptr) {
     *res = res_val;
 }
 
-void int_mul(void* res_ptr, void* a_ptr, void* b_ptr) {
+void int_mul(void* res_ptr, const void* a_ptr, const void* b_ptr) {
     int* res = (int*)res_ptr;
     int* a = (int*)a_ptr;
     int* b = (int*)b_ptr;

@@ -148,6 +148,37 @@ matrix_t* matrix_mul(error* err, matrix_t* a, matrix_t* b) {
     return result;
 }
 
+matrix_t* matrix_add_linear_combination(error* err, matrix_t* m, size_t row_index, const void** alphas) {
+    matrix_t* result = matrix_ctor(
+            err,
+            type_copy(err, m->type),
+            matrix_get_height(m),
+            matrix_get_width(m)
+    );
+
+    for (size_t i = 0; i < matrix_get_height(m); ++i) {
+        for (size_t j = 0; j < matrix_get_width(m); ++j) {
+            matrix_set_value(err, result, i, j, matrix_get_value(err, m, i, j));
+        }
+    }
+
+    for (size_t i = 0; i < matrix_get_height(result); ++i) {
+        if (i == row_index) continue;
+        for (size_t j = 0; j < matrix_get_width(result); ++j) {
+            size_t alpha_ind = i - (i > row_index);
+            const void* alpha = alphas[alpha_ind];
+            void* target_value = matrix_get_value(err, result, row_index, j);
+            void* additive_value = matrix_get_value(err, result, i, j);
+            void* res_ptr = result->type->from_instance(err, result->type->zero);
+            result->type->mul(res_ptr, alpha, additive_value);
+            result->type->add(res_ptr, target_value, res_ptr);
+            matrix_set_value(err, result, row_index, j, res_ptr);
+        }
+    }
+
+    return result;
+}
+
 char* matrix_to_string(error* err, matrix_t* self) {
     // multiplication by 3 because each element takes 3 chars on average: "8, "
     char* str = (char*)malloc(sizeof(char) * matrix_get_width(self) * matrix_get_height(self) * 3 + 128);

@@ -30,6 +30,7 @@ void matrix_set_value(error*, matrix_t* self, size_t i, size_t j, const void* va
 matrix_t* matrix_transpose(error*, matrix_t* self);
 matrix_t* matrix_add(error*, matrix_t* a, matrix_t* b);
 matrix_t* matrix_mul(error*, matrix_t* a, matrix_t* b);
+matrix_t* matrix_add_linear_combination(error*, matrix_t* m, size_t row_index, const void** alphas);
 
 char* matrix_to_string(error*, matrix_t* self);
 void matrix_print(error*, matrix_t* self);

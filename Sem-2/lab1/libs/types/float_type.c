@@ -39,7 +39,7 @@ void float_free_memory(void* instance_ptr) {
     free(instance_ptr);
 }
 
-void float_add(void* res_ptr, void* a_ptr, void* b_ptr) {
+void float_add(void* res_ptr, const void* a_ptr, const void* b_ptr) {
     float* res = (float*)res_ptr;
     float* a = (float*)a_ptr;
     float* b = (float*)b_ptr;
@@ -47,7 +47,7 @@ void float_add(void* res_ptr, void* a_ptr, void* b_ptr) {
     *res = res_val;
 }
 
-void float_sub(void* res_ptr, void* a_ptr, void* b_ptr) {
+void float_sub(void* res_ptr, const void* a_ptr, const void* b_ptr) {
     float* res = (float*)res_ptr;
     float* a = (float*)a_ptr;
     float* b = (float*)b_ptr;
@@ -55,7 +55,7 @@ void float_sub(void* res_ptr, void* a_ptr, void* b_ptr) {
     *res = res_val;
 }
 
-void float_mul(void* res_ptr, void* a_ptr, void* b_ptr) {
+void float_mul(void* res_ptr, const void* a_ptr, const void* b_ptr) {
     float* res = (float*)res_ptr;
     float* a = (float*)a_ptr;
     float* b = (float*)b_ptr;
