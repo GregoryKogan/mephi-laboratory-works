@@ -173,6 +173,7 @@ matrix_t* matrix_add_linear_combination(error* err, matrix_t* m, size_t row_inde
             result->type->mul(res_ptr, alpha, additive_value);
             result->type->add(res_ptr, target_value, res_ptr);
             matrix_set_value(err, result, row_index, j, res_ptr);
+            result->type->free_memory(res_ptr);
         }
     }
 
