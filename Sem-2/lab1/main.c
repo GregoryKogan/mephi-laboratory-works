@@ -10,7 +10,10 @@ int main() {
     if (err->raised) log_fatal_error(err);
 
     matrix_t* matrix_a = matrix_ctor(err, int_type, 3, 4);
-    if (err->raised) log_fatal_error(err);
+    if (err->raised) {
+        type_dtor(int_type);
+        log_fatal_error(err);
+    }
 
     if (matrix_a) matrix_print(err, matrix_a);
     if (err->raised) log_error(err);

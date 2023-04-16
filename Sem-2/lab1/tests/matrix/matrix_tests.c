@@ -33,18 +33,30 @@ bool constructor_initial_values_test(error* err) {
 bool constructor_edge_cases_test(error* err) {
     bool result = true;
 
-    matrix_t* m = matrix_ctor(err, int_type_ctor(err), 0, 0);
-    if (m != NULL) result = false;
-    matrix_dtor(m);
+    type_t* int_type;
+    matrix_t* m;
 
-    m = matrix_ctor(err, int_type_ctor(err), 3, 0);
-    if (m != NULL) result = false;
-    matrix_dtor(m);
+    int_type = int_type_ctor(err);
+    m = matrix_ctor(err, int_type, 0, 0);
+    if (m != NULL) {
+        result = false;
+        matrix_dtor(m);
+    } else type_dtor(int_type);
 
-    m = matrix_ctor(err, int_type_ctor(err), 0, 7);
-    if (m != NULL) result = false;
-    matrix_dtor(m);
+    int_type = int_type_ctor(err);
+    m = matrix_ctor(err, int_type, 3, 0);
+    if (m != NULL) {
+        result = false;
+        matrix_dtor(m);
+    } else type_dtor(int_type);
 
+    int_type = int_type_ctor(err);
+    m = matrix_ctor(err, int_type, 0, 7);
+    if (m != NULL) {
+        result = false;
+        matrix_dtor(m);
+    } else type_dtor(int_type);
+    
     return result;
 }
 
