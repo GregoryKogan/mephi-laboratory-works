@@ -21,5 +21,6 @@ int main(void){
         test_dtor(matrix_tests[i]);
     }
     free(matrix_tests);
+    error_dtor(err);
     return 0;
 }

@@ -16,5 +16,7 @@ int main() {
     if (err->raised) log_error(err);
 
     matrix_dtor(matrix_a);
+
+    error_dtor(err);
     return 0;
 }

@@ -12,8 +12,6 @@ error* error_ctor() {
 }
 
 void error_dtor(error* self) {
-    if (self->message != NULL)
-        free(self->message);
     free(self);
 }
 
