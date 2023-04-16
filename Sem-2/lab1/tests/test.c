@@ -5,10 +5,12 @@
 #include "test.h"
 
 
-test_t* test_ctor(const char* name, bool (*test_func) (void)) {
+test_t* test_ctor(error* err, const char* name, bool (*test_func) (error*)) {
     test_t* test = malloc(sizeof(test_t));
-    if (test == NULL)
-        log_error_and_exit("can't allocate memory", 3);
+    if (test == NULL){
+        error_raise(err, "can't allocate memory");
+        return NULL;
+    }
     test->name = name;
     test->test_func = test_func;
     return test;

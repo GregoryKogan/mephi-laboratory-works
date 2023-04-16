@@ -6,19 +6,22 @@
 
 
 type_t* type_ctor(
+        error* err,
         const char* name,
         void* zero,
         void* one,
-        void* (*from_instance)(const void*),
+        void* (*from_instance)(error*, const void*),
         void (*free_memory)(void*),
         void (*add)(void*, void*, void*),
         void (*sub)(void*, void*, void*),
         void (*mul)(void*, void*, void*),
-        char* (*to_string)(void*)
+        char* (*to_string)(error*, void*)
 ) {
     type_t* type = (type_t*)malloc(sizeof(type_t));
-    if (type == NULL)
-        log_error_and_exit("can't allocate memory", 3);
+    if (type == NULL) {
+        error_raise(err, "can't allocate memory");
+        return NULL;
+    }
 
     type->name = name;
     type->zero = zero;
@@ -38,11 +41,12 @@ void type_dtor(type_t* self) {
     free(self);
 }
 
-type_t* type_copy(type_t* original) {
+type_t* type_copy(error* err, type_t* original) {
     return type_ctor(
+            err,
             original->name,
-            original->from_instance(original->zero),
-            original->from_instance(original->one),
+            original->from_instance(err, original->zero),
+            original->from_instance(err, original->one),
             original->from_instance,
             original->free_memory,
             original->add,

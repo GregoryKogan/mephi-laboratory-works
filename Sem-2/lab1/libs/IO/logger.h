@@ -7,12 +7,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "../Errors/error.h"
 
-void log_error(char err[]);
-void log_error_and_exit(char err[], int status);
-void log_warning(char warning[]);
-void log_success(char success[]);
-void red_print(char str[]);
-void green_print(char str[]);
+void log_red(char str[]);
+void log_green(char str[]);
+void log_error(error* err);
+void log_fatal_error(error* err);
 
 #endif //LAB1_LOGGER_H

@@ -8,12 +8,14 @@
 
 
 int main(void){
+    error* err = error_ctor();
+
     size_t tests_num;
-    test_t** matrix_tests = get_matrix_tests(&tests_num);
+    test_t** matrix_tests = get_matrix_tests(err, &tests_num);
     for (size_t i = 0; i < tests_num; ++i) {
-        bool result = (matrix_tests[i])->test_func();
-        if (result) green_print("Passed - ");
-        else red_print("Error  - ");
+        bool result = (matrix_tests[i])->test_func(err);
+        if (result) log_green("Passed - ");
+        else log_red("Error  - ");
         printf("%s\n", (matrix_tests[i])->name);
 
         test_dtor(matrix_tests[i]);

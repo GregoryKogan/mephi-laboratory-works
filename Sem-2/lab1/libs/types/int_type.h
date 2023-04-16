@@ -8,15 +8,15 @@
 #include <stdio.h>
 #include "../type.h"
 
-void* int_get_zero();
-void* int_get_one();
-void* int_from_instance(const void*);
+void* int_get_zero(error*);
+void* int_get_one(error*);
+void* int_from_instance(error*, const void*);
 void int_free_memory(void*);
 void int_add(void*, void*, void*);
 void int_sub(void*, void*, void*);
 void int_mul(void*, void*, void*);
-char* int_to_string(void*);
+char* int_to_string(error*, void*);
 
-type_t* int_type_ctor();
+type_t* int_type_ctor(error*);
 
 #endif //LAB1_INT_TYPE_H
