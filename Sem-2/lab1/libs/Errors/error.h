@@ -15,7 +15,8 @@ typedef struct Error {
 } error;
 
 error* error_ctor(void);
-void error_dtor(error*);
-void error_raise(error*, char*);
+void error_dtor(error* self);
+void error_raise(error* self, char*);
+void error_clear(error* self);
 
 #endif //LAB1_ERROR_H

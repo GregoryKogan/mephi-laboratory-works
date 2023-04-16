@@ -19,3 +19,8 @@ void error_raise(error* self, char* msg) {
     self->message = msg;
     self->raised = true;
 }
+
+void error_clear(error* self) {
+    self->message = NULL;
+    self->raised = false;
+}
