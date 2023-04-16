@@ -12,5 +12,7 @@ void log_error(char err[]);
 void log_error_and_exit(char err[], int status);
 void log_warning(char warning[]);
 void log_success(char success[]);
+void red_print(char str[]);
+void green_print(char str[]);
 
 #endif //LAB1_LOGGER_H

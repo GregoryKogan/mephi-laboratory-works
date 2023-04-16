@@ -15,6 +15,11 @@ void log_error(char err[]){
 }
 
 
+void red_print(char str[]) {
+    printf(RED "%s" END, str);
+}
+
+
 void log_error_and_exit(char err[], int status){
     fprintf(stderr, RED "Error: %s" END "\n", err);
     exit(status);
@@ -28,4 +33,8 @@ void log_warning(char warning[]){
 
 void log_success(char success[]) {
     printf(GREEN "%s" END "\n", success);
+}
+
+void green_print(char str[]) {
+    printf(GREEN "%s" END, str);
 }

@@ -5,6 +5,8 @@
 #include "matrix.h"
 
 matrix_t* matrix_ctor(type_t* type, size_t height, size_t width) {
+    if (height == 0 || width == 0)
+        return NULL;
     matrix_t* matrix = (matrix_t *)malloc(sizeof(matrix_t));
     if (matrix == NULL)
         log_error_and_exit("can't allocate memory", 3);
@@ -20,6 +22,7 @@ matrix_t* matrix_ctor(type_t* type, size_t height, size_t width) {
 }
 
 void matrix_dtor(matrix_t* self) {
+    if (self == NULL) return;
     for (size_t i = 0; i < matrix_get_width(self) * matrix_get_height(self); ++i) {
         if (self->data[i] != NULL)
             self->type->free_memory(self->data[i]);
@@ -89,9 +92,11 @@ matrix_t* matrix_add(matrix_t* a, matrix_t* b) {
 
 matrix_t* matrix_mul(matrix_t* a, matrix_t* b) {
     if (strcmp(a->type->name, b->type->name) != 0)
-        log_error_and_exit("matrix types do not match", 4);
+        return NULL;
+//        log_error_and_exit("matrix types do not match", 4);
     if (matrix_get_width(a) != matrix_get_height(b))
-        log_error_and_exit("matrix sizes do not match", 5);
+        return NULL;
+//        log_error_and_exit("matrix sizes do not match", 5);
 
     matrix_t* result = matrix_ctor(
             type_copy(a->type),
