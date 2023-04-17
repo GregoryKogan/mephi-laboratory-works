@@ -48,5 +48,8 @@ int main() {
                 break;
         }
     }
+
+    error_dtor(err);
+
     return 0;
 }

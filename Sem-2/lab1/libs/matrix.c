@@ -84,9 +84,13 @@ void matrix_random_fill(error* err, matrix_t* self) {
     for (size_t i = 0; i < matrix_get_height(self); ++i) {
         for (size_t j = 0; j < matrix_get_width(self); ++j) {
             void* rnd = self->type->from_instance(err, self->type->zero);
-            if (err->raised) return;
+            if (err->raised) {
+                self->type->free_memory(rnd);
+                return;
+            }
             self->type->random(rnd);
             matrix_set_value(err, self, i, j, rnd);
+            self->type->free_memory(rnd);
             if (err->raised) return;
         }
     }
