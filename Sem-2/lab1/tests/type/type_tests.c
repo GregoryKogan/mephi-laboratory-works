@@ -12,6 +12,8 @@ bool addition_int_test(error* err) {
     int sum;
     int_type->add(&sum, &a, &b);
 
+    type_dtor(int_type);
+
     return (sum == 18);
 }
 
@@ -21,6 +23,8 @@ bool addition_float_test(error* err) {
     float a = 6, b = 12;
     float sum;
     float_type->add(&sum, &a, &b);
+
+    type_dtor(float_type);
 
     return (fabsf(sum - 18) < 0.001);
 }
@@ -32,6 +36,8 @@ bool subtraction_int_test(error* err) {
     int sub;
     int_type->sub(&sub, &a, &b);
 
+    type_dtor(int_type);
+
     return (sub == -6);
 }
 
@@ -41,6 +47,8 @@ bool subtraction_float_test(error* err) {
     float a = 6, b = 12;
     float sub;
     float_type->sub(&sub, &a, &b);
+
+    type_dtor(float_type);
 
     return (fabsf(sub - (-6)) < 0.001);
 }
@@ -52,6 +60,8 @@ bool multiplication_int_test(error* err) {
     int mul;
     int_type->mul(&mul, &a, &b);
 
+    type_dtor(int_type);
+
     return (mul == -18);
 }
 
@@ -61,6 +71,8 @@ bool multiplication_float_test(error* err) {
     float a = 6, b = -3;
     float mul;
     float_type->mul(&mul, &a, &b);
+
+    type_dtor(float_type);
 
     return (fabsf(mul - (-18)) < 0.001);
 }
