@@ -1,25 +1,52 @@
+#include <time.h>
 #include "libs/matrix.h"
-#include "libs/types/int_type.h"
 #include "libs/IO/logger.h"
-#include "libs/types/float_type.h"
+#include "libs/UI/menus.h"
 
 int main() {
+    srand((unsigned int)time(NULL));
+
     error* err = error_ctor();
 
-    matrix_t* m = matrix_ctor(err, int_type_ctor(err), 3, 4);
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            int x = (i + 1) * (j + 1) + 3;
-            matrix_set_value(err, m, i, j, &x);
+    int action = 0;
+    while (action != 1) {
+        if (err->raised) {
+            log_error(err);
+            error_clear(err);
+            go_back();
+        }
+        switch (action) {
+            case 0:
+                action = main_menu();
+                break;
+            case 2:
+                transpose_menu(err);
+                action = 0;
+                break;
+            case 3:
+                add_matrix_to_matrix_menu(err);
+                action = 0;
+                break;
+            case 4:
+                add_scalar_to_matrix_menu(err);
+                action = 0;
+                break;
+            case 5:
+                multiply_matrices_menu(err);
+                action = 0;
+                break;
+            case 6:
+                multiply_matrix_by_scalar_menu(err);
+                action = 0;
+                break;
+            case 7:
+                linear_combination_of_rows_menu(err);
+                action = 0;
+                break;
+            default:
+                log_red("invalid action!\n");
+                break;
         }
     }
-
-    matrix_t* t = matrix_transpose(err, m);
-
-    matrix_print(err, m);
-    matrix_print(err, t);
-
-    matrix_dtor(m);
-    matrix_dtor(t);
     return 0;
 }

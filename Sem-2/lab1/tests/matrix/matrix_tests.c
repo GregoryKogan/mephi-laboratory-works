@@ -3,6 +3,7 @@
 //
 
 #include "matrix_tests.h"
+#include "../../libs/IO/logger.h"
 
 
 bool constructor_dimensions_test(error* err) {
@@ -58,6 +59,20 @@ bool constructor_edge_cases_test(error* err) {
     } else type_dtor(int_type);
     
     return result;
+}
+
+bool fill_test(error* err) {
+    matrix_t* m = matrix_ctor(err, int_type_ctor(err), 3, 4);
+    int x = 7;
+    matrix_fill(err, m, &x);
+
+    if (m == NULL) return false;
+
+    for (size_t i = 0; i < 12; ++i) {
+        if (*((int *) matrix_get_value(err, m, i / 4, i % 4)) != x)
+            return false;
+    }
+    return true;
 }
 
 bool transpose_test(error* err) {
@@ -329,7 +344,7 @@ bool linear_combination_test(error* err) {
 }
 
 test_t** get_matrix_tests(error* err, size_t* tests_num) {
-    *tests_num = 13;
+    *tests_num = 14;
     test_t** tests = malloc(sizeof(test_t) * (*tests_num));
     if (tests == NULL) {
         error_raise(err, "can't allocate memory");
@@ -339,16 +354,17 @@ test_t** get_matrix_tests(error* err, size_t* tests_num) {
     tests[0] = test_ctor(err, "matrix constructor dimensions", constructor_dimensions_test);
     tests[1] = test_ctor(err, "matrix constructor initial values", constructor_initial_values_test);
     tests[2] = test_ctor(err, "matrix constructor edge cases", constructor_edge_cases_test);
-    tests[3] = test_ctor(err, "matrix transpose", transpose_test);
-    tests[4] = test_ctor(err, "matrix addition", addition_test);
-    tests[5] = test_ctor(err, "matrix addition size conflict", addition_size_conflict_test);
-    tests[6] = test_ctor(err, "matrix addition type conflict", addition_type_conflict_test);
-    tests[7] = test_ctor(err, "matrix addition of scalar", addition_of_scalar_test);
-    tests[8] = test_ctor(err, "matrix multiplication", multiplication_test);
-    tests[9] = test_ctor(err, "matrix multiplication size conflict", multiplication_size_conflict_test);
-    tests[10] = test_ctor(err, "matrix multiplication type conflict", multiplication_type_conflict_test);
-    tests[11] = test_ctor(err, "matrix multiplication by scalar", multiplication_by_scalar_test);
-    tests[12] = test_ctor(err, "matrix linear combination", linear_combination_test);
+    tests[3] = test_ctor(err, "matrix fill", fill_test);
+    tests[4] = test_ctor(err, "matrix transpose", transpose_test);
+    tests[5] = test_ctor(err, "matrix addition", addition_test);
+    tests[6] = test_ctor(err, "matrix addition size conflict", addition_size_conflict_test);
+    tests[7] = test_ctor(err, "matrix addition type conflict", addition_type_conflict_test);
+    tests[8] = test_ctor(err, "matrix addition of scalar", addition_of_scalar_test);
+    tests[9] = test_ctor(err, "matrix multiplication", multiplication_test);
+    tests[10] = test_ctor(err, "matrix multiplication size conflict", multiplication_size_conflict_test);
+    tests[11] = test_ctor(err, "matrix multiplication type conflict", multiplication_type_conflict_test);
+    tests[12] = test_ctor(err, "matrix multiplication by scalar", multiplication_by_scalar_test);
+    tests[13] = test_ctor(err, "matrix linear combination", linear_combination_test);
 
     return tests;
 }

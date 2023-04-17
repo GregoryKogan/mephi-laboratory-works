@@ -20,6 +20,8 @@ int main(void){
         else test = matrix_tests[i - type_tests_num];
 
         bool result = test->test_func(err);
+        if (err->raised) error_clear(err);
+        printf("[%2zu] ", (i + 1));
         if (result) log_green("Passed - ");
         else log_red("Failed - ");
         printf("%s\n", test->name);

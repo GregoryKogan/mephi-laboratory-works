@@ -18,10 +18,10 @@ void log_green(char str[]) {
 }
 
 void log_error(error* err) {
-    fprintf(stderr, "Error: " RED "%s" END "\n", err->message);
+    printf(RED "Error: %s" END "\n", err->message);
 }
 
 void log_fatal_error(error* err) {
-    fprintf(stderr, "Error: " RED "%s" END "\n", err->message);
+    printf(RED "Error: %s" END "\n", err->message);
     exit(1);
 }

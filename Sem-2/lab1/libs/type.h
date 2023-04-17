@@ -17,6 +17,7 @@ typedef struct Type_t{
     void (*add)(void*, const void*, const void*);
     void (*sub)(void*, const void*, const void*);
     void (*mul)(void*, const void*, const void*);
+    void (*random)(void*);
     char* (*to_string)(error*, void*);
 } type_t;
 
@@ -30,6 +31,7 @@ type_t* type_ctor(
     void (*add)(void*, const void*, const void*),
     void (*sub)(void*, const void*, const void*),
     void (*mul)(void*, const void*, const void*),
+    void (*random)(void*),
     char* (*to_string)(error*, void*)
 );
 void type_dtor(type_t* self);

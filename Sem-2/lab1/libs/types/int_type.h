@@ -15,6 +15,7 @@ void int_free_memory(void*);
 void int_add(void*, const void*, const void*);
 void int_sub(void*, const void*, const void*);
 void int_mul(void*, const void*, const void*);
+void int_random(void*);
 char* int_to_string(error*, void*);
 
 type_t* int_type_ctor(error*);

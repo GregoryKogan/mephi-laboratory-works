@@ -63,6 +63,12 @@ void float_mul(void* res_ptr, const void* a_ptr, const void* b_ptr) {
     *res = res_val;
 }
 
+void float_random(void* val_ptr) {
+    float r = (float)rand() / (float)(RAND_MAX / 200) - 100;
+    float* val = (float *)val_ptr;
+    *val = r;
+}
+
 char* float_to_string(error* err, void* x_ptr) {
     float x = *(float*)x_ptr;
     char* buff = (char*)malloc(sizeof(char) * 16);
@@ -70,7 +76,7 @@ char* float_to_string(error* err, void* x_ptr) {
         error_raise(err, "can't allocate memory");
         return NULL;
     }
-    snprintf(buff, 16, "%.2f", x);
+    snprintf(buff, 16, "%7.2f", x);
     return buff;
 }
 
@@ -85,6 +91,7 @@ type_t* float_type_ctor(error* err) {
             float_add,
             float_sub,
             float_mul,
+            float_random,
             float_to_string
     );
 }

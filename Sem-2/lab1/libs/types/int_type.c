@@ -63,6 +63,12 @@ void int_mul(void* res_ptr, const void* a_ptr, const void* b_ptr) {
     *res = res_val;
 }
 
+void int_random(void* val_ptr) {
+    int r = rand() % 201 - 100;
+    int* val = (int*)val_ptr;
+    *val = r;
+}
+
 char* int_to_string(error* err, void* x_ptr) {
     int x = *(int*)x_ptr;
     char* buff = (char*)malloc(sizeof(char) * 16);
@@ -70,7 +76,7 @@ char* int_to_string(error* err, void* x_ptr) {
         error_raise(err, "can't allocate memory");
         return NULL;
     }
-    snprintf(buff, 16, "%d", x);
+    snprintf(buff, 16, "%5d", x);
     return buff;
 }
 
@@ -85,6 +91,7 @@ type_t* int_type_ctor(error* err) {
             int_add,
             int_sub,
             int_mul,
+            int_random,
             int_to_string
     );
 }

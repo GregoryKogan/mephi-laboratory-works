@@ -15,6 +15,7 @@ void float_free_memory(void*);
 void float_add(void*, const void*, const void*);
 void float_sub(void*, const void*, const void*);
 void float_mul(void*, const void*, const void*);
+void float_random(void*);
 char* float_to_string(error*, void*);
 
 type_t* float_type_ctor(error*);

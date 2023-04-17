@@ -15,6 +15,7 @@ type_t* type_ctor(
         void (*add)(void*, const void*, const void*),
         void (*sub)(void*, const void*, const void*),
         void (*mul)(void*, const void*, const void*),
+        void (*random)(void*),
         char* (*to_string)(error*, void*)
 ) {
     type_t* type = (type_t*)malloc(sizeof(type_t));
@@ -31,6 +32,7 @@ type_t* type_ctor(
     type->add = add;
     type->sub = sub;
     type->mul = mul;
+    type->random = random;
     type->to_string = to_string;
     return type;
 }
@@ -52,6 +54,7 @@ type_t* type_copy(error* err, type_t* original) {
             original->add,
             original->sub,
             original->mul,
+            original->random,
             original->to_string
     );
 }

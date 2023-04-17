@@ -71,6 +71,27 @@ void matrix_set_value(error* err, matrix_t* self, size_t i, size_t j, const void
     self->data[index] = self->type->from_instance(err, value);
 }
 
+void matrix_fill(error* err, matrix_t* self, const void* value) {
+    for (size_t i = 0; i < matrix_get_height(self); ++i) {
+        for (size_t j = 0; j < matrix_get_width(self); ++j) {
+            matrix_set_value(err, self, i, j, value);
+            if (err->raised) return;
+        }
+    }
+}
+
+void matrix_random_fill(error* err, matrix_t* self) {
+    for (size_t i = 0; i < matrix_get_height(self); ++i) {
+        for (size_t j = 0; j < matrix_get_width(self); ++j) {
+            void* rnd = self->type->from_instance(err, self->type->zero);
+            if (err->raised) return;
+            self->type->random(rnd);
+            matrix_set_value(err, self, i, j, rnd);
+            if (err->raised) return;
+        }
+    }
+}
+
 matrix_t* matrix_copy(error* err, matrix_t* m) {
     matrix_t* result = matrix_ctor(
             err,
