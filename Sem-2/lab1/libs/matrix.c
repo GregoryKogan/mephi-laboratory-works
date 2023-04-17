@@ -71,6 +71,23 @@ void matrix_set_value(error* err, matrix_t* self, size_t i, size_t j, const void
     self->data[index] = self->type->from_instance(err, value);
 }
 
+matrix_t* matrix_copy(error* err, matrix_t* m) {
+    matrix_t* result = matrix_ctor(
+            err,
+            type_copy(err, m->type),
+            matrix_get_height(m),
+            matrix_get_width(m)
+    );
+
+    for (size_t i = 0; i < matrix_get_height(m); ++i) {
+        for (size_t j = 0; j < matrix_get_width(m); ++j) {
+            matrix_set_value(err, result, i, j, matrix_get_value(err, m, i, j));
+        }
+    }
+
+    return result;
+}
+
 matrix_t* matrix_transpose(error* err, matrix_t* self) {
     matrix_t* result = matrix_ctor(err, type_copy(err, self->type), matrix_get_width(self), matrix_get_height(self));
     for (size_t j_ind = 0; j_ind < matrix_get_width(self); ++j_ind) {
@@ -148,19 +165,22 @@ matrix_t* matrix_mul(error* err, matrix_t* a, matrix_t* b) {
     return result;
 }
 
-matrix_t* matrix_add_linear_combination(error* err, matrix_t* m, size_t row_index, const void** alphas) {
-    matrix_t* result = matrix_ctor(
-            err,
-            type_copy(err, m->type),
-            matrix_get_height(m),
-            matrix_get_width(m)
-    );
-
-    for (size_t i = 0; i < matrix_get_height(m); ++i) {
-        for (size_t j = 0; j < matrix_get_width(m); ++j) {
-            matrix_set_value(err, result, i, j, matrix_get_value(err, m, i, j));
+matrix_t* matrix_mul_scalar(error* err, matrix_t* m, void* alpha) {
+    matrix_t* result = matrix_copy(err, m);
+    for (size_t i = 0; i < matrix_get_height(result); ++i) {
+        for (size_t j = 0; j < matrix_get_width(result); ++j) {
+            void* res_ptr = result->type->from_instance(err, result->type->zero);
+            void* original_value = matrix_get_value(err, result, i, j);
+            result->type->mul(res_ptr, alpha, original_value);
+            matrix_set_value(err, result, i, j, res_ptr);
+            result->type->free_memory(res_ptr);
         }
     }
+    return result;
+}
+
+matrix_t* matrix_add_linear_combination(error* err, matrix_t* m, size_t row_index, const void** alphas) {
+    matrix_t* result = matrix_copy(err, m);
 
     for (size_t i = 0; i < matrix_get_height(result); ++i) {
         if (i == row_index) continue;

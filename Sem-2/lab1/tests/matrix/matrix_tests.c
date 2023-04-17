@@ -123,6 +123,39 @@ bool multiplication_type_conflict_test(error* err) {
     return result;
 }
 
+bool multiplication_by_scalar_test(error* err) {
+    matrix_t* m = matrix_ctor(err, float_type_ctor(err), 3, 4);
+    for (size_t i = 0; i < matrix_get_height(m); ++i) {
+        for (size_t j = 0; j < matrix_get_width(m); ++j) {
+            float x = (float)(i + 1) * (float)(j + 1);
+            matrix_set_value(err, m, i, j, &x);
+        }
+    }
+
+    float alpha = 3;
+    matrix_t* res_m = matrix_mul_scalar(err, m, &alpha);
+
+    bool result = true;
+    if (m == NULL || res_m == NULL)
+        result = false;
+
+    float target[12] = {
+            3, 6, 9, 12,
+            6, 12, 18, 24,
+            9, 18, 27, 36
+    };
+    if (result) {
+        for (size_t i = 0; i < 12; ++i) {
+            if (fabsf(*((float *)matrix_get_value(err, res_m, i / 4, i % 4)) - target[i]) > 0.001)
+                result = false;
+        }
+    }
+
+    matrix_dtor(res_m);
+    matrix_dtor(m);
+    return result;
+}
+
 bool linear_combination_test(error* err) {
     type_t* m_type = float_type_ctor(err);
     matrix_t* m = matrix_ctor(err, m_type, 3, 4);
@@ -163,7 +196,7 @@ bool linear_combination_test(error* err) {
 }
 
 test_t** get_matrix_tests(error* err, size_t* tests_num) {
-    *tests_num = 7;
+    *tests_num = 8;
     test_t** tests = malloc(sizeof(test_t) * (*tests_num));
     if (tests == NULL) {
         error_raise(err, "can't allocate memory");
@@ -176,7 +209,8 @@ test_t** get_matrix_tests(error* err, size_t* tests_num) {
     tests[3] = test_ctor(err, "matrix multiplication", multiplication_test);
     tests[4] = test_ctor(err, "matrix multiplication size conflict", multiplication_size_conflict_test);
     tests[5] = test_ctor(err, "matrix multiplication type conflict", multiplication_type_conflict_test);
-    tests[6] = test_ctor(err, "matrix linear combination", linear_combination_test);
+    tests[6] = test_ctor(err, "matrix multiplication by scalar", multiplication_by_scalar_test);
+    tests[7] = test_ctor(err, "matrix linear combination", linear_combination_test);
 
     return tests;
 }

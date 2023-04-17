@@ -6,7 +6,6 @@
 int main() {
     error* err = error_ctor();
 
-//    type_t* m_type = int_type_ctor(err);
     type_t* m_type = float_type_ctor(err);
     if (err->raised) log_fatal_error(err);
 
@@ -18,7 +17,6 @@ int main() {
 
     for (size_t i = 0; i < matrix_get_height(m); ++i) {
         for (size_t j = 0; j < matrix_get_width(m); ++j) {
-//            int x = (int)(i + 1) * (int)(j + 1);
             float x = (float)(i + 1) * (float)(j + 1);
             matrix_set_value(err, m, i, j, &x);
         }
@@ -27,12 +25,8 @@ int main() {
     if (m) matrix_print(err, m);
     if (err->raised) log_error(err);
 
-    float** alphas = malloc(sizeof(float*) * 2);
-    float a1 = 2, a2 = 7;
-    alphas[0] = &a1;
-    alphas[1] = &a2;
-    matrix_t* result = matrix_add_linear_combination(err, m, 1, (const void **) alphas);
-    free(alphas);
+    float alpha = 3;
+    matrix_t* result = matrix_mul_scalar(err, m, &alpha);
     if (err->raised) log_error(err);
     if (result) matrix_print(err, result);
 
