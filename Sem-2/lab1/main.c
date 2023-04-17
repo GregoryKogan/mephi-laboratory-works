@@ -6,25 +6,20 @@
 int main() {
     error* err = error_ctor();
 
-    matrix_t* matrix_a = matrix_ctor(err, int_type_ctor(err), 3, 4);
-    matrix_t* matrix_b = matrix_ctor(err, int_type_ctor(err), 3, 4);
+    matrix_t* m = matrix_ctor(err, int_type_ctor(err), 3, 4);
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 4; ++j) {
-            int a_val = (i + 1) * (j + 1) + 3;
-            int b_val = i + j - 2;
-            matrix_set_value(err, matrix_a, i, j, &a_val);
-            matrix_set_value(err, matrix_b, i, j, &b_val);
+            int x = (i + 1) * (j + 1) + 3;
+            matrix_set_value(err, m, i, j, &x);
         }
     }
 
-    matrix_t* sum = matrix_add(err, matrix_a, matrix_b);
+    matrix_t* t = matrix_transpose(err, m);
 
-    matrix_print(err, matrix_a);
-    matrix_print(err, matrix_b);
-    matrix_print(err, sum);
+    matrix_print(err, m);
+    matrix_print(err, t);
 
-    matrix_dtor(matrix_a);
-    matrix_dtor(matrix_b);
-    matrix_dtor(sum);
+    matrix_dtor(m);
+    matrix_dtor(t);
     return 0;
 }
