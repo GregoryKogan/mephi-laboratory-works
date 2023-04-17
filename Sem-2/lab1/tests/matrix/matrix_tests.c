@@ -60,6 +60,70 @@ bool constructor_edge_cases_test(error* err) {
     return result;
 }
 
+bool addition_test(error* err) {
+    matrix_t* matrix_a = matrix_ctor(err, int_type_ctor(err), 3, 4);
+    matrix_t* matrix_b = matrix_ctor(err, int_type_ctor(err), 3, 4);
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            int a_val = (i + 1) * (j + 1) + 3;
+            int b_val = i + j - 2;
+            matrix_set_value(err, matrix_a, i, j, &a_val);
+            matrix_set_value(err, matrix_b, i, j, &b_val);
+        }
+    }
+
+    bool result = true;
+    matrix_t* sum = matrix_add(err, matrix_a, matrix_b);
+    if (matrix_get_width(sum) != 4 || matrix_get_height(sum) != 3)
+        result = false;
+
+    int target[12] = {
+            2, 4, 6, 8,
+            4, 7, 10, 13,
+            6, 10, 14, 18
+    };
+    if (result) {
+        for (size_t i = 0; i < 12; ++i) {
+            if (*((int *) matrix_get_value(err, sum, i / 4, i % 4)) != target[i])
+                result = false;
+        }
+    }
+
+    matrix_dtor(sum);
+    matrix_dtor(matrix_a);
+    matrix_dtor(matrix_b);
+
+    return result;
+}
+
+bool addition_size_conflict_test(error* err) {
+    matrix_t* matrix_a = matrix_ctor(err, float_type_ctor(err), 3, 6);
+    matrix_t* matrix_b = matrix_ctor(err, int_type_ctor(err), 4, 3);
+    bool result = true;
+    matrix_t* sum = matrix_add(err, matrix_a, matrix_b);
+
+    if (sum != NULL) result = false;
+
+    matrix_dtor(sum);
+    matrix_dtor(matrix_a);
+    matrix_dtor(matrix_b);
+    return result;
+}
+
+bool addition_type_conflict_test(error* err) {
+    matrix_t* matrix_a = matrix_ctor(err, float_type_ctor(err), 3, 4);
+    matrix_t* matrix_b = matrix_ctor(err, int_type_ctor(err), 3, 4);
+    bool result = true;
+    matrix_t* sum = matrix_add(err, matrix_a, matrix_b);
+
+    if (sum != NULL) result = false;
+
+    matrix_dtor(sum);
+    matrix_dtor(matrix_a);
+    matrix_dtor(matrix_b);
+    return result;
+}
+
 bool addition_of_scalar_test(error* err) {
     matrix_t* m = matrix_ctor(err, float_type_ctor(err), 3, 4);
     for (size_t i = 0; i < matrix_get_height(m); ++i) {
@@ -229,7 +293,7 @@ bool linear_combination_test(error* err) {
 }
 
 test_t** get_matrix_tests(error* err, size_t* tests_num) {
-    *tests_num = 8;
+    *tests_num = 12;
     test_t** tests = malloc(sizeof(test_t) * (*tests_num));
     if (tests == NULL) {
         error_raise(err, "can't allocate memory");
@@ -239,12 +303,15 @@ test_t** get_matrix_tests(error* err, size_t* tests_num) {
     tests[0] = test_ctor(err, "matrix constructor dimensions", constructor_dimensions_test);
     tests[1] = test_ctor(err, "matrix constructor initial values", constructor_initial_values_test);
     tests[2] = test_ctor(err, "matrix constructor edge cases", constructor_edge_cases_test);
-    tests[3] = test_ctor(err, "matrix addition of scalar", addition_of_scalar_test);
-    tests[4] = test_ctor(err, "matrix multiplication", multiplication_test);
-    tests[5] = test_ctor(err, "matrix multiplication size conflict", multiplication_size_conflict_test);
-    tests[6] = test_ctor(err, "matrix multiplication type conflict", multiplication_type_conflict_test);
-    tests[7] = test_ctor(err, "matrix multiplication by scalar", multiplication_by_scalar_test);
-    tests[8] = test_ctor(err, "matrix linear combination", linear_combination_test);
+    tests[3] = test_ctor(err, "matrix addition", addition_test);
+    tests[4] = test_ctor(err, "matrix addition size conflict", addition_size_conflict_test);
+    tests[5] = test_ctor(err, "matrix addition type conflict", addition_type_conflict_test);
+    tests[6] = test_ctor(err, "matrix addition of scalar", addition_of_scalar_test);
+    tests[7] = test_ctor(err, "matrix multiplication", multiplication_test);
+    tests[8] = test_ctor(err, "matrix multiplication size conflict", multiplication_size_conflict_test);
+    tests[9] = test_ctor(err, "matrix multiplication type conflict", multiplication_type_conflict_test);
+    tests[10] = test_ctor(err, "matrix multiplication by scalar", multiplication_by_scalar_test);
+    tests[11] = test_ctor(err, "matrix linear combination", linear_combination_test);
 
     return tests;
 }
