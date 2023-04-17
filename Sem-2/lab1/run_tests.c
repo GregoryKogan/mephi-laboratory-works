@@ -15,7 +15,7 @@ int main(void){
     for (size_t i = 0; i < tests_num; ++i) {
         bool result = (matrix_tests[i])->test_func(err);
         if (result) log_green("Passed - ");
-        else log_red("Error  - ");
+        else log_red("Failed - ");
         printf("%s\n", (matrix_tests[i])->name);
 
         test_dtor(matrix_tests[i]);

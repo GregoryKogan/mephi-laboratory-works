@@ -6,6 +6,7 @@
 #define LAB1_MATRIX_TESTS_H
 
 #include <stdlib.h>
+#include <math.h>
 #include "../test.h"
 #include "../../libs/matrix.h"
 #include "../../libs/types/int_type.h"

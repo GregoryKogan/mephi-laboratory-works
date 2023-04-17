@@ -181,8 +181,7 @@ matrix_t* matrix_add_linear_combination(error* err, matrix_t* m, size_t row_inde
 }
 
 char* matrix_to_string(error* err, matrix_t* self) {
-    // multiplication by 3 because each element takes 3 chars on average: "8, "
-    char* str = (char*)malloc(sizeof(char) * matrix_get_width(self) * matrix_get_height(self) * 3 + 128);
+    char* str = (char*)malloc(sizeof(char) * matrix_get_width(self) * matrix_get_height(self) * 10 + 128);
     char* buff = (char*)malloc(sizeof(char) * 256);
     if (str == NULL || buff == NULL) {
         error_raise(err, "can't allocate memory");

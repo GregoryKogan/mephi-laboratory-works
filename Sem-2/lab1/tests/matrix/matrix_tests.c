@@ -123,8 +123,47 @@ bool multiplication_type_conflict_test(error* err) {
     return result;
 }
 
+bool linear_combination_test(error* err) {
+    type_t* m_type = float_type_ctor(err);
+    matrix_t* m = matrix_ctor(err, m_type, 3, 4);
+
+    for (size_t i = 0; i < matrix_get_height(m); ++i) {
+        for (size_t j = 0; j < matrix_get_width(m); ++j) {
+            float x = (float)(i + 1) * (float)(j + 1);
+            matrix_set_value(err, m, i, j, &x);
+        }
+    }
+
+    float** alphas = malloc(sizeof(float*) * 2);
+    float a1 = 2, a2 = 7;
+    alphas[0] = &a1;
+    alphas[1] = &a2;
+    matrix_t* result_m = matrix_add_linear_combination(err, m, 1, (const void **) alphas);
+    free(alphas);
+
+    bool result = true;
+    if (result_m == NULL)
+            result = false;
+
+    float target[12] = {
+            1, 2, 3, 4,
+            25, 50, 75, 100,
+            3, 6, 9, 12
+    };
+    if (result) {
+        for (size_t i = 0; i < 12; ++i) {
+            if (fabsf(*((float *)matrix_get_value(err, result_m, i / 4, i % 4)) - target[i]) > 0.001)
+                result = false;
+        }
+    }
+
+    matrix_dtor(m);
+    matrix_dtor(result_m);
+    return result;
+}
+
 test_t** get_matrix_tests(error* err, size_t* tests_num) {
-    *tests_num = 6;
+    *tests_num = 7;
     test_t** tests = malloc(sizeof(test_t) * (*tests_num));
     if (tests == NULL) {
         error_raise(err, "can't allocate memory");
@@ -137,6 +176,7 @@ test_t** get_matrix_tests(error* err, size_t* tests_num) {
     tests[3] = test_ctor(err, "matrix multiplication", multiplication_test);
     tests[4] = test_ctor(err, "matrix multiplication size conflict", multiplication_size_conflict_test);
     tests[5] = test_ctor(err, "matrix multiplication type conflict", multiplication_type_conflict_test);
+    tests[6] = test_ctor(err, "matrix linear combination", linear_combination_test);
 
     return tests;
 }
