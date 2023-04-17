@@ -25,8 +25,8 @@ int main() {
     if (m) matrix_print(err, m);
     if (err->raised) log_error(err);
 
-    float alpha = 3;
-    matrix_t* result = matrix_mul_scalar(err, m, &alpha);
+    float alpha = -3;
+    matrix_t* result = matrix_add_scalar(err, m, &alpha);
     if (err->raised) log_error(err);
     if (result) matrix_print(err, result);
 

@@ -126,6 +126,20 @@ matrix_t* matrix_add(error* err, matrix_t* a, matrix_t* b) {
     return result;
 }
 
+matrix_t* matrix_add_scalar(error* err, matrix_t* m, void* alpha) {
+    matrix_t* result = matrix_copy(err, m);
+    for (size_t i = 0; i < matrix_get_height(result); ++i) {
+        for (size_t j = 0; j < matrix_get_width(result); ++j) {
+            void* res_ptr = result->type->from_instance(err, result->type->zero);
+            void* original_value = matrix_get_value(err, result, i, j);
+            result->type->add(res_ptr, alpha, original_value);
+            matrix_set_value(err, result, i, j, res_ptr);
+            result->type->free_memory(res_ptr);
+        }
+    }
+    return result;
+}
+
 matrix_t* matrix_mul(error* err, matrix_t* a, matrix_t* b) {
     if (strcmp(a->type->name, b->type->name) != 0) {
         error_raise(err, "matrix types do not match");

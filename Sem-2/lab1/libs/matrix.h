@@ -31,6 +31,7 @@ matrix_t* matrix_copy(error*, matrix_t* m);
 
 matrix_t* matrix_transpose(error*, matrix_t* self);
 matrix_t* matrix_add(error*, matrix_t* a, matrix_t* b);
+matrix_t* matrix_add_scalar(error*, matrix_t* m, void* alpha);
 matrix_t* matrix_mul(error*, matrix_t* a, matrix_t* b);
 matrix_t* matrix_mul_scalar(error*, matrix_t* m, void* alpha);
 matrix_t* matrix_add_linear_combination(error*, matrix_t* m, size_t row_index, const void** alphas);
