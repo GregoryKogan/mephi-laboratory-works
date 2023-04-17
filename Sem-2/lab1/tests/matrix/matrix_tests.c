@@ -72,6 +72,8 @@ bool fill_test(error* err) {
         if (*((int *) matrix_get_value(err, m, i / 4, i % 4)) != x)
             return false;
     }
+
+    matrix_dtor(m);
     return true;
 }
 

@@ -38,8 +38,9 @@ type_t* type_ctor(
 }
 
 void type_dtor(type_t* self) {
-    free(self->zero);
-    free(self->one);
+    if (self == NULL) return;
+    if (self->zero != NULL) free(self->zero);
+    if (self->one != NULL) free(self->one);
     free(self);
 }
 
