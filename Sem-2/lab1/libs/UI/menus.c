@@ -19,7 +19,9 @@ int main_menu(void) {
     printf("7 - linear combination or rows\n");
     int action;
     printf(">>> ");
-    scanf("%d", &action);
+    int status = scanf("%d", &action);
+    fflush(stdin);
+    if (!status) return -1;
     return action;
 }
 
@@ -38,6 +40,7 @@ int select_type_menu() {
     while (1) {
         printf(">>> ");
         scanf("%d", &action);
+        fflush(stdin);
         if (action == 1 || action == 2)
             return action;
         else
@@ -55,6 +58,7 @@ int select_fill_menu(void) {
     while (1) {
         printf(">>> ");
         scanf("%d", &method);
+        fflush(stdin);
         if (method >= 1 && method <= 4)
             return method;
         else
@@ -67,6 +71,7 @@ void* type_scan(error* err, type_t* t) {
     if (strcmp(t->name, "int") == 0) {
         int value;
         status = scanf("%d", &value);
+        fflush(stdin);
         if (status != 1) {
             error_raise(err, "invalid value");
             return NULL;
@@ -75,6 +80,7 @@ void* type_scan(error* err, type_t* t) {
     } else if (strcmp(t->name, "float") == 0) {
         float value;
         status = scanf("%f", &value);
+        fflush(stdin);
         if (status != 1) {
             error_raise(err, "invalid value");
             return NULL;

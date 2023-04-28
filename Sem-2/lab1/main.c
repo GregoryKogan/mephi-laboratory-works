@@ -45,6 +45,7 @@ int main() {
                 break;
             default:
                 log_red("invalid action!\n");
+                action = 0;
                 break;
         }
     }
