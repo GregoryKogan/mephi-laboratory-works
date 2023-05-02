@@ -3,4 +3,4 @@ project(lab2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(lab2 main.cpp)
+add_executable(lab2 main.cpp "data_structures/DynamicArray.cpp" "data_structures/DynamicArray.h" exceptions/Exception.cpp exceptions/Exception.h)
