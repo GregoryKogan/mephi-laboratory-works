@@ -6,6 +6,7 @@
 #define LAB2_EXCEPTION_H
 
 #include <string>
+#include <cstring>
 
 namespace kogan {
     enum ExceptionType {
