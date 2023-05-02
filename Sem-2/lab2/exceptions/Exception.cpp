@@ -7,7 +7,7 @@
 
 namespace kogan {
     Exception::Exception() {
-        exception_type = ExceptionType::unknown;
+        exception_type = ExceptionType::Unknown;
         message = "unknown exception";
     }
 
@@ -18,14 +18,14 @@ namespace kogan {
 
     std::string Exception::exception_type_to_string(ExceptionType exc_t) {
         switch (exc_t) {
-            case unknown:
-                return "UnknownException";
-            case value:
-                return "ValueException";
-            case allocation:
-                return "AllocationException";
+            case Unknown:
+                return "Unknown";
+            case IndexOutOfRange:
+                return "IndexOutOfRange";
+            case InvalidSize:
+                return "InvalidSize";
             default:
-                return "InvalidException";
+                return "Invalid";
         }
     }
 

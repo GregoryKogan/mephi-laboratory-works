@@ -6,13 +6,12 @@
 #define LAB2_EXCEPTION_H
 
 #include <string>
-#include <iostream>
 
 namespace kogan {
     enum ExceptionType {
-        unknown,
-        value,
-        allocation
+        Unknown,
+        IndexOutOfRange,
+        InvalidSize,
     };
 
     class Exception : public std::exception {
