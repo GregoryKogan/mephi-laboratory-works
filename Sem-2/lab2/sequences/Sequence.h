@@ -1,3 +1,6 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "google-explicit-constructor"
+#pragma ide diagnostic ignored "misc-unconventional-assign-operator"
 //
 // Created by Gregory Kogan on 03.05.2023.
 //
@@ -26,8 +29,41 @@ namespace kogan {
         virtual void insert(T item, int index) = 0;
         virtual Sequence<T>* concat(Sequence<T>* sequence) = 0;
 
+        class SequenceGetSetProxy {
+            int index;
+            Sequence<T>* sequence;
+
+        public:
+            SequenceGetSetProxy(Sequence<T>* seq, int ind);
+            operator T() const;
+            void operator= (T item);
+        };
+
+        SequenceGetSetProxy operator[] (int index);
+
         std::string to_string();
     };
+
+    template<class T>
+    void Sequence<T>::SequenceGetSetProxy::operator=(T item) {
+        sequence->set(index, item);
+    }
+
+    template<class T>
+    Sequence<T>::SequenceGetSetProxy::operator T() const {
+        return sequence->get(index);
+    }
+
+    template<class T>
+    Sequence<T>::SequenceGetSetProxy::SequenceGetSetProxy(Sequence<T> *seq, int ind) {
+        sequence = seq;
+        index = ind;
+    }
+
+    template<class T>
+    typename Sequence<T>::SequenceGetSetProxy Sequence<T>::operator[](int index) {
+        return SequenceGetSetProxy(this, index);
+    }
 
     template<class T>
     Sequence<T>::~Sequence() = default;
@@ -47,3 +83,5 @@ namespace kogan {
 } // kogan
 
 #endif //LAB2_SEQUENCE_H
+
+#pragma clang diagnostic pop
