@@ -15,8 +15,12 @@ void logic() {
     arr_seq.set(3, 999);
     auto arr_seq2 = arr_seq.get_subsequence(2, 5);
 
+    kogan::ArraySequence<int> arr_seq3(arr_seq);
+    arr_seq3.append(13);
+
     std::cout << arr_seq.to_string() << std::endl;
     std::cout << arr_seq2->to_string() << std::endl;
+    std::cout << arr_seq3.to_string() << std::endl;
 
     delete arr_seq2;
     delete [] values;

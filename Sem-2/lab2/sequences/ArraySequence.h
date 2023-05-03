@@ -46,7 +46,7 @@ namespace kogan {
 
     template<class T>
     ArraySequence<T>::ArraySequence(const ArraySequence<T> &arraySequence) {
-        array = new DynamicArray<T>(arraySequence.array);
+        array = new DynamicArray<T>(*arraySequence.array);
     }
 
     template<class T>
