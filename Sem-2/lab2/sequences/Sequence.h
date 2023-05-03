@@ -26,11 +26,23 @@ namespace kogan {
         virtual void insert(T item, int index) = 0;
         virtual Sequence<T>* concat(Sequence<T>* sequence) = 0;
 
-        virtual std::string to_string() = 0;
+        std::string to_string();
     };
 
     template<class T>
     Sequence<T>::~Sequence() = default;
+
+    template<class T>
+    std::string Sequence<T>::to_string() {
+        if (get_length() == 0)
+            return "[]";
+
+        std::string str = "[" + std::to_string(get_first());
+        for (int i = 1; i < get_length(); ++i)
+            str += ", " + std::to_string(get(i));
+        str += "]";
+        return str;
+    }
 
 } // kogan
 

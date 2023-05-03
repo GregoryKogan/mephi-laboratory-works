@@ -31,8 +31,6 @@ namespace kogan {
         void prepend(T item);
         void insert(T item, int index);
         Sequence<T>* concat(Sequence<T>* sequence);
-
-        std::string to_string();
     };
 
     template<class T>
@@ -140,18 +138,6 @@ namespace kogan {
         for (int i = 0; i < sequence->get_length(); ++i)
             concatenation->append(sequence->get(i));
         return concatenation;
-    }
-
-    template<class T>
-    std::string ArraySequence<T>::to_string() {
-        if (get_length() == 0)
-            return "[]";
-
-        std::string str = "[" + std::to_string(get_first());
-        for (int i = 1; i < get_length(); ++i)
-            str += ", " + std::to_string(get(i));
-        str += "]";
-        return str;
     }
 
 } // kogan
