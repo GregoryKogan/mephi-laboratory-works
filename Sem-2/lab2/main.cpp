@@ -18,6 +18,7 @@ void logic() {
     std::cout << arr_seq.to_string() << std::endl;
     std::cout << arr_seq2->to_string() << std::endl;
 
+    delete arr_seq2;
     delete [] values;
 }
 

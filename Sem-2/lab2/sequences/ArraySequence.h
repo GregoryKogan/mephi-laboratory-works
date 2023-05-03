@@ -89,7 +89,7 @@ namespace kogan {
                     "start_index must be less than or equal to end_index (" + std::to_string(start_index) + " > " + std::to_string(end_index) + ")"
             );
 
-        auto* sub_seq = new ArraySequence<T>();
+        auto sub_seq = new ArraySequence<T>;
         for (int i = start_index; i <= end_index; ++i)
             sub_seq->append(get(i));
         return sub_seq;

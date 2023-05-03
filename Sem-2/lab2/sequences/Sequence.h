@@ -12,6 +12,8 @@ namespace kogan {
     template <class T> class Sequence {
 
     public:
+        virtual ~Sequence() = 0;
+
         virtual T get_first() = 0;
         virtual T get_last() = 0;
         virtual T get(int index) = 0;
@@ -25,6 +27,9 @@ namespace kogan {
 
         virtual std::string to_string() = 0;
     };
+
+    template<class T>
+    Sequence<T>::~Sequence() = default;
 
 } // kogan
 
