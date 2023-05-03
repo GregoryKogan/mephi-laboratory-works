@@ -1,6 +1,5 @@
 #include <iostream>
-#include "data_structures/DynamicArray.h"
-#include "data_structures/LinkedList.h"
+#include "sequences/ArraySequence.h"
 
 
 void logic() {
@@ -8,24 +7,16 @@ void logic() {
     for (int i = 0; i < 10; ++i)
         values[i] = i + 1;
 
-    kogan::LinkedList<int> ll(values, 10);
-    kogan::LinkedList<int> ll2 = ll.get_sublist(0, 9);
+    kogan::ArraySequence<int> arr_seq(values, 10);
 
-    ll2.insert(42, 5);
+    arr_seq.insert(42, 7);
+    arr_seq.prepend(12);
+    arr_seq.append(89);
+    arr_seq.set(3, 999);
+    auto arr_seq2 = arr_seq.get_subsequence(2, 5);
 
-    for (int i = 0; i < ll.get_length(); ++i)
-        std::cout << ll.get(i) << " ";
-    std::cout << std::endl;
-
-    for (int i = 0; i < ll2.get_length(); ++i)
-        std::cout << ll2.get(i) << " ";
-    std::cout << std::endl;
-
-    kogan::LinkedList<int> ll3 = ll2.concat(ll);
-
-    for (int i = 0; i < ll3.get_length(); ++i)
-        std::cout << ll3.get(i) << " ";
-    std::cout << std::endl;
+    std::cout << arr_seq.to_string() << std::endl;
+    std::cout << arr_seq2->to_string() << std::endl;
 
     delete [] values;
 }

@@ -5,8 +5,6 @@
 #ifndef LAB2_LINKEDLIST_H
 #define LAB2_LINKEDLIST_H
 
-#include <cstdlib>
-#include <iostream>
 #include "../exceptions/Exception.h"
 
 namespace kogan {
