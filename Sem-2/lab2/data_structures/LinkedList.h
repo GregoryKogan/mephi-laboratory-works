@@ -29,9 +29,12 @@ namespace kogan {
         node* get_node(int index);
 
     public:
+
         LinkedList(T* items, size_t count);
         LinkedList();
         LinkedList(const LinkedList<T> &linkedList);
+
+        ~LinkedList();
 
         T get_first();
         T get_last();
@@ -112,6 +115,18 @@ namespace kogan {
             cur_node = new_node;
             root->tail = cur_node;
         }
+    }
+
+    template<class T>
+    LinkedList<T>::~LinkedList() {
+        node* cur_node = root->head;
+        node* next = NULL;
+        while (cur_node != NULL) {
+            next = cur_node->next;
+            delete cur_node;
+            cur_node = next;
+        }
+        delete root;
     }
 
     template<class T>
