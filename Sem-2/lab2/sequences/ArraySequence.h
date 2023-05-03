@@ -30,6 +30,7 @@ namespace kogan {
         void append(T item);
         void prepend(T item);
         void insert(T item, int index);
+        Sequence<T>* concat(Sequence<T>* sequence);
 
         std::string to_string();
     };
@@ -131,6 +132,14 @@ namespace kogan {
                 set(i, get(i - 1));
             set(index, item);
         }
+    }
+
+    template<class T>
+    Sequence<T> *ArraySequence<T>::concat(Sequence<T> *sequence) {
+        auto concatenation = new ArraySequence<T>(*this);
+        for (int i = 0; i < sequence->get_length(); ++i)
+            concatenation->append(sequence->get(i));
+        return concatenation;
     }
 
     template<class T>
