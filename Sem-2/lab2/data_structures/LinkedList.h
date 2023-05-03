@@ -40,6 +40,7 @@ namespace kogan {
         LinkedList<T> get_sublist(int start_index, int end_index);
         size_t get_length();
 
+        void set(int index, T item);
         void append(T item);
         void prepend(T item);
         void insert(T item, int index);
@@ -222,6 +223,17 @@ namespace kogan {
     template<class T>
     size_t LinkedList<T>::get_length() {
         return length;
+    }
+
+    template<class T>
+    void LinkedList<T>::set(int index, T item) {
+        if (index < 0 || index >= length)
+            throw Exception(
+                    ExceptionType::IndexOutOfRange,
+                    "Index " + std::to_string(index) + " is out of range: [0, " + std::to_string(length) + ")"
+            );
+
+        get_node(index)->value = item;
     }
 
     template<class T>

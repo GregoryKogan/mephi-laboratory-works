@@ -23,7 +23,7 @@ namespace kogan {
         T get(int index) const;
         [[nodiscard]] size_t get_length() const;
 
-        void set(int index, T value);
+        void set(int index, T item);
         void resize(int new_size);
     };
 
@@ -73,13 +73,13 @@ namespace kogan {
     }
 
     template<class T>
-    void DynamicArray<T>::set(int index, T value) {
+    void DynamicArray<T>::set(int index, T item) {
         if (index < 0 || index >= length)
             throw Exception(
                     ExceptionType::IndexOutOfRange,
                     "Index " + std::to_string(index) + " is out of range: [0, " + std::to_string(length) + ")"
             );
-        data[index] = value;
+        data[index] = item;
     }
 
     template<class T>

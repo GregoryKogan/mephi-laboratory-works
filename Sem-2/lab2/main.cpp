@@ -1,5 +1,6 @@
 #include <iostream>
 #include "sequences/ArraySequence.h"
+#include "sequences/LinkedListSequence.h"
 
 
 void logic() {
@@ -7,7 +8,8 @@ void logic() {
     for (int i = 0; i < 10; ++i)
         values[i] = i + 1;
 
-    kogan::ArraySequence<int> arr_seq(values, 10);
+//    kogan::ArraySequence<int> arr_seq(values, 10);
+    kogan::LinkedListSequence<int> arr_seq(values, 10);
 
     arr_seq.insert(42, 7);
     arr_seq.prepend(12);
