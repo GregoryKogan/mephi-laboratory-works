@@ -8,6 +8,7 @@
 #include "../exceptions/Exception.h"
 
 namespace kogan {
+
     template <class T> class DynamicArray {
         size_t length;
         T* data;
@@ -98,6 +99,7 @@ namespace kogan {
         data = new_data;
         length = new_size;
     }
+
 } // kogan
 
 #endif //LAB2_DYNAMICARRAY_H

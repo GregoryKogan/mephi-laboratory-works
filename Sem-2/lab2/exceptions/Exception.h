@@ -13,6 +13,8 @@ namespace kogan {
         Unknown,
         IndexOutOfRange,
         InvalidSize,
+        EmptyContainer,
+        InvalidArgument,
     };
 
     class Exception : public std::exception {

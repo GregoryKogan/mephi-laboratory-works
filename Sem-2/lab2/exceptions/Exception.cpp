@@ -24,6 +24,10 @@ namespace kogan {
                 return "IndexOutOfRange";
             case InvalidSize:
                 return "InvalidSize";
+            case EmptyContainer:
+                return "EmptyContainer";
+            case InvalidArgument:
+                return "InvalidArgument";
             default:
                 return "Invalid";
         }
