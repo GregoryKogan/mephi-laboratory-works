@@ -5,7 +5,9 @@
 #ifndef LAB2_DYNAMICARRAY_H
 #define LAB2_DYNAMICARRAY_H
 
-#include "../exceptions/Exception.h"
+#include "../exceptions/IndexOutOfRangeException/IndexOutOfRangeException.h"
+#include "../exceptions/EmptyContainerException/EmptyContainerException.h"
+#include "../exceptions/InvalidArgumentException/InvalidArgumentException.h"
 
 namespace kogan {
 
@@ -60,10 +62,7 @@ namespace kogan {
     template<class T>
     T DynamicArray<T>::get(int index) const {
         if (index < 0 || index >= length)
-            throw Exception(
-                    ExceptionType::IndexOutOfRange,
-                    "Index " + std::to_string(index) + " is out of range: [0, " + std::to_string(length) + ")"
-            );
+            throw IndexOutOfRangeException(index, 0, length - 1);
         return data[index];
     }
 
@@ -75,20 +74,14 @@ namespace kogan {
     template<class T>
     void DynamicArray<T>::set(int index, T item) {
         if (index < 0 || index >= length)
-            throw Exception(
-                    ExceptionType::IndexOutOfRange,
-                    "Index " + std::to_string(index) + " is out of range: [0, " + std::to_string(length) + ")"
-            );
+            throw IndexOutOfRangeException(index, 0, length - 1);
         data[index] = item;
     }
 
     template<class T>
     void DynamicArray<T>::resize(int new_size) {
         if (new_size < 0)
-            throw Exception(
-                    ExceptionType::InvalidSize,
-                    "Size " + std::to_string(new_size) + " is invalid. Size could not be less than 0"
-            );
+            throw InvalidArgumentException("new_size");
 
         T* new_data = new T[new_size];
         for (size_t i = 0; i < length && i < new_size; ++i) {

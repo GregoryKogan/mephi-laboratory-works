@@ -4,11 +4,11 @@
 
 
 void logic() {
-    kogan::ArraySequence<int> list;
+    kogan::LinkedListSequence<int> list;
     for (int i = 0; i < 10; ++i)
         list.append(i + 1);
 
-    list[2] = 45;
+    list[0] = 45;
 
     std::cout << list.to_string() << std::endl;
     std::cout << list[2] << std::endl;
@@ -21,5 +21,6 @@ int main() {
     } catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
     }
+
     return 0;
 }

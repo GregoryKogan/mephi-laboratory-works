@@ -5,7 +5,9 @@
 #ifndef LAB2_LINKEDLIST_H
 #define LAB2_LINKEDLIST_H
 
-#include "../exceptions/Exception.h"
+#include "../exceptions/IndexOutOfRangeException/IndexOutOfRangeException.h"
+#include "../exceptions/EmptyContainerException/EmptyContainerException.h"
+#include "../exceptions/InvalidArgumentException/InvalidArgumentException.h"
 
 namespace kogan {
 
@@ -131,10 +133,7 @@ namespace kogan {
     template<class T>
     typename LinkedList<T>::node *LinkedList<T>::get_node(int index) {
         if (index < 0 || index >= length)
-            throw Exception(
-                    ExceptionType::IndexOutOfRange,
-                    "Index " + std::to_string(index) + " is out of range: [0, " + std::to_string(length) + ")"
-            );
+            throw IndexOutOfRangeException(index, 0, length - 1);
 
         if (index == 0)
             return root->head;
@@ -165,24 +164,21 @@ namespace kogan {
     template<class T>
     T LinkedList<T>::get_first() {
         if (length == 0)
-            throw Exception(ExceptionType::EmptyContainer, "Can't get first element of empty list");
+            throw EmptyContainerException();
         return root->head->value;
     }
 
     template<class T>
     T LinkedList<T>::get_last() {
         if (length == 0)
-            throw Exception(ExceptionType::EmptyContainer, "Can't get last element of empty list");
+            throw EmptyContainerException();
         return root->tail->value;
     }
 
     template<class T>
     T LinkedList<T>::get(int index) {
         if (index < 0 || index >= length)
-            throw Exception(
-                    ExceptionType::IndexOutOfRange,
-                    "Index " + std::to_string(index) + " is out of range: [0, " + std::to_string(length) + ")"
-            );
+            throw IndexOutOfRangeException(index, 0, length - 1);
 
         return get_node(index)->value;
     }
@@ -190,22 +186,13 @@ namespace kogan {
     template<class T>
     LinkedList<T> LinkedList<T>::get_sublist(int start_index, int end_index) {
         if (start_index < 0 || start_index >= length)
-            throw Exception(
-                    ExceptionType::IndexOutOfRange,
-                    "start_index " + std::to_string(start_index) + " is out of range: [0, " + std::to_string(length) + ")"
-            );
+            throw IndexOutOfRangeException(start_index, 0, length - 1);
 
         if (end_index < 0 || end_index >= length)
-            throw Exception(
-                    ExceptionType::IndexOutOfRange,
-                    "end_index " + std::to_string(end_index) + " is out of range: [0, " + std::to_string(length) + ")"
-            );
+            throw IndexOutOfRangeException(end_index, 0, length - 1);
 
         if (end_index < start_index)
-            throw Exception(
-                    ExceptionType::InvalidArgument,
-                    "start_index must be less than or equal to end_index (" + std::to_string(start_index) + " > " + std::to_string(end_index) + ")"
-            );
+            throw InvalidArgumentException("end_index");
 
         LinkedList<T> sublist;
         int cur_index = start_index;
@@ -228,10 +215,7 @@ namespace kogan {
     template<class T>
     void LinkedList<T>::set(int index, T item) {
         if (index < 0 || index >= length)
-            throw Exception(
-                    ExceptionType::IndexOutOfRange,
-                    "Index " + std::to_string(index) + " is out of range: [0, " + std::to_string(length) + ")"
-            );
+            throw IndexOutOfRangeException(index, 0, length - 1);
 
         get_node(index)->value = item;
     }
@@ -276,10 +260,7 @@ namespace kogan {
     template<class T>
     void LinkedList<T>::insert(T item, int index) {
         if (index < 0 || index > length)
-            throw Exception(
-                    ExceptionType::IndexOutOfRange,
-                    "Index " + std::to_string(index) + " is out of range: [0, " + std::to_string(length) + "]"
-            );
+            throw IndexOutOfRangeException(index, 0, length);
 
         if (index == 0)
             prepend(item);

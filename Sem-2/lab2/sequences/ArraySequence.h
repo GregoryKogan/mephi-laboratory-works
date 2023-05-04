@@ -71,22 +71,13 @@ namespace kogan {
     template<class T>
     Sequence<T>* ArraySequence<T>::get_subsequence(int start_index, int end_index) {
         if (start_index < 0 || start_index >= get_length())
-            throw Exception(
-                    ExceptionType::IndexOutOfRange,
-                    "start_index " + std::to_string(start_index) + " is out of range: [0, " + std::to_string(get_length()) + ")"
-            );
+            throw IndexOutOfRangeException(start_index, 0, get_length() - 1);
 
         if (end_index < 0 || end_index >= get_length())
-            throw Exception(
-                    ExceptionType::IndexOutOfRange,
-                    "end_index " + std::to_string(end_index) + " is out of range: [0, " + std::to_string(get_length()) + ")"
-            );
+            throw IndexOutOfRangeException(end_index, 0, get_length() - 1);
 
         if (end_index < start_index)
-            throw Exception(
-                    ExceptionType::InvalidArgument,
-                    "start_index must be less than or equal to end_index (" + std::to_string(start_index) + " > " + std::to_string(end_index) + ")"
-            );
+            throw InvalidArgumentException("end_index");
 
         auto sub_seq = new ArraySequence<T>;
         for (int i = start_index; i <= end_index; ++i)
