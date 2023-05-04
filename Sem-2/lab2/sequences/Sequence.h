@@ -45,8 +45,9 @@ namespace kogan {
     };
 
     template<class T>
-    void Sequence<T>::SequenceGetSetProxy::operator=(T item) {
-        sequence->set(index, item);
+    Sequence<T>::SequenceGetSetProxy::SequenceGetSetProxy(Sequence<T> *seq, int ind) {
+        sequence = seq;
+        index = ind;
     }
 
     template<class T>
@@ -55,9 +56,8 @@ namespace kogan {
     }
 
     template<class T>
-    Sequence<T>::SequenceGetSetProxy::SequenceGetSetProxy(Sequence<T> *seq, int ind) {
-        sequence = seq;
-        index = ind;
+    void Sequence<T>::SequenceGetSetProxy::operator=(T item) {
+        sequence->set(index, item);
     }
 
     template<class T>
