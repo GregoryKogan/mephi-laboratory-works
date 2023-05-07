@@ -23,7 +23,7 @@ void interaction_loop(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSeq
                     selected_action = SELECT_ACTION;
                     break;
                 case APPEND:
-                    std::cout << "APPEND" << std::endl;
+                    append_menu(array_seq, linked_list_seq);
                     selected_action = SELECT_ACTION;
                     break;
                 case PREPEND:
