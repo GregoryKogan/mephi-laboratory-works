@@ -144,3 +144,18 @@ void append_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence
 
     seq->append(value);
 }
+
+void prepend_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
+    std::cout << "Prepend value" << std::endl;
+    kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
+
+    std::cout << "value: ";
+    int value; std::cin >> value;
+    if (!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        throw kogan::InvalidArgumentException("value");
+    }
+
+    seq->prepend(value);
+}
