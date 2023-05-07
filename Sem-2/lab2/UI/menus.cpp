@@ -5,6 +5,14 @@
 #include "menus.h"
 
 
+void panic_if_invalid_input(std::string argument_name) {
+    if (!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        throw kogan::InvalidArgumentException(std::move(argument_name));
+    }
+}
+
 action select_action_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
     std::cout << "ArraySequence:      " << *array_seq << std::endl;
     std::cout << "LinkedListSequence: " << *linked_list_seq << std::endl;
@@ -23,12 +31,7 @@ action select_action_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedLis
     int user_input;
     std::cout << ">>> ";
     std::cin >> user_input;
-
-    if (!std::cin.good()) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        user_input = 0;
-    }
+    panic_if_invalid_input("action");
 
     switch (user_input) {
         case 1:
@@ -62,12 +65,7 @@ kogan::Sequence<int>* select_sequence_menu(kogan::ArraySequence<int>* array_seq,
     int user_input;
     std::cout << ">>> ";
     std::cin >> user_input;
-
-    if (!std::cin.good()) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        user_input = 0;
-    }
+    panic_if_invalid_input("sequence");
 
     switch (user_input) {
         case 1:
@@ -85,11 +83,9 @@ void input_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<
 
     std::cout << "Sequence length: ";
     int seq_length; std::cin >> seq_length;
-    if (!std::cin.good() || seq_length < 0) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    panic_if_invalid_input("length");
+    if (seq_length < 0)
         throw kogan::InvalidArgumentException("length");
-    }
 
     if (seq_length == 0) return;
 
@@ -97,12 +93,7 @@ void input_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<
     seq->clear();
     for (int i = 0; i < seq_length; ++i) {
         int val; std::cin >> val;
-        if (!std::cin.good()) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            throw kogan::InvalidArgumentException("sequence value");
-        }
-
+        panic_if_invalid_input("sequence value");
         seq->append(val);
     }
 }
@@ -113,19 +104,11 @@ void set_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<in
 
     std::cout << "index: ";
     int index; std::cin >> index;
-    if (!std::cin.good()) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        throw kogan::InvalidArgumentException("index");
-    }
+    panic_if_invalid_input("index");
 
     std::cout << "value: ";
     int value; std::cin >> value;
-    if (!std::cin.good()) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        throw kogan::InvalidArgumentException("value");
-    }
+    panic_if_invalid_input("value");
 
     (*seq)[index] = value;
 }
@@ -136,11 +119,7 @@ void append_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence
 
     std::cout << "value: ";
     int value; std::cin >> value;
-    if (!std::cin.good()) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        throw kogan::InvalidArgumentException("value");
-    }
+    panic_if_invalid_input("value");
 
     seq->append(value);
 }
@@ -151,11 +130,7 @@ void prepend_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequenc
 
     std::cout << "value: ";
     int value; std::cin >> value;
-    if (!std::cin.good()) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        throw kogan::InvalidArgumentException("value");
-    }
+    panic_if_invalid_input("value");
 
     seq->prepend(value);
 }
