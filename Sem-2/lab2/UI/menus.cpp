@@ -134,3 +134,18 @@ void prepend_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequenc
 
     seq->prepend(value);
 }
+
+void insert_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
+    std::cout << "Insert value" << std::endl;
+    kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
+
+    std::cout << "index: ";
+    int index; std::cin >> index;
+    panic_if_invalid_input("index");
+
+    std::cout << "value: ";
+    int value; std::cin >> value;
+    panic_if_invalid_input("value");
+
+    seq->insert(index, value);
+}
