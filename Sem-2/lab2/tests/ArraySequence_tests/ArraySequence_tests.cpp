@@ -385,6 +385,22 @@ TEST(concat_empty_head, array_sequence_suite) {
     delete cone2;
 }
 
+TEST(clear, array_sequence_suite) {
+    kogan::ArraySequence<int> seq;
+    for (int i = 0; i < 10; ++i)
+        seq.append(i + 1);
+
+    seq.clear();
+    ASSERT(seq.get_length() == 0);
+}
+
+TEST(clear_empty, array_sequence_suite) {
+    kogan::ArraySequence<int> seq;
+
+    seq.clear();
+    ASSERT(seq.get_length() == 0);
+}
+
 
 kogan::TestSuite get_array_sequence_suite() {
     return array_sequence_suite;

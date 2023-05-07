@@ -1,26 +1,69 @@
 #include <iostream>
 #include "sequences/ArraySequence.h"
 #include "sequences/LinkedListSequence.h"
+#include "UI/menus.h"
+#include "IO/colored_logs.h"
 
 
-void logic() {
-    kogan::LinkedListSequence<int> list;
-    for (int i = 0; i < 10; ++i)
-        list.append(i + 1);
+void interaction_loop(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
+    action selected_action = SELECT_ACTION;
 
-    list[0] = 45;
-
-    std::cout << list.to_string() << std::endl;
-    std::cout << list[2] << std::endl;
+    while (selected_action != EXIT) {
+        try {
+            switch (selected_action) {
+                case SELECT_ACTION:
+                    selected_action = select_action_menu(array_seq, linked_list_seq);
+                    break;
+                case INPUT:
+                    input_menu(array_seq, linked_list_seq);
+                    selected_action = SELECT_ACTION;
+                    break;
+                case SET:
+                    std::cout << "SET" << std::endl;
+                    selected_action = SELECT_ACTION;
+                    break;
+                case APPEND:
+                    std::cout << "APPEND" << std::endl;
+                    selected_action = SELECT_ACTION;
+                    break;
+                case PREPEND:
+                    std::cout << "PREPEND" << std::endl;
+                    selected_action = SELECT_ACTION;
+                    break;
+                case INSERT:
+                    std::cout << "INSERT" << std::endl;
+                    selected_action = SELECT_ACTION;
+                    break;
+                case CONCATENATE:
+                    std::cout << "CONCATENATE" << std::endl;
+                    selected_action = SELECT_ACTION;
+                    break;
+                case SUBSEQUENCE:
+                    std::cout << "SUBSEQUENCE" << std::endl;
+                    selected_action = SELECT_ACTION;
+                    break;
+                case LENGTH:
+                    std::cout << "LENGTH" << std::endl;
+                    selected_action = SELECT_ACTION;
+                    break;
+                default:
+                    selected_action = SELECT_ACTION;
+                    break;
+            }
+        } catch (std::exception& e) {
+            log_red(e.what());
+            std::cout << std::endl;
+            selected_action = SELECT_ACTION;
+        }
+    }
 }
 
 
 int main() {
-    try {
-        logic();
-    } catch (std::exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
+    kogan::ArraySequence<int> array_seq;
+    kogan::LinkedListSequence<int> linked_list_seq;
+
+    interaction_loop(&array_seq, &linked_list_seq);
 
     return 0;
 }

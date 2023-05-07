@@ -385,6 +385,21 @@ TEST(concat_empty_head, linked_list_sequence_suite) {
     delete cone2;
 }
 
+TEST(clear, linked_list_sequence_suite) {
+    kogan::LinkedListSequence<int> seq;
+    for (int i = 0; i < 10; ++i)
+        seq.append(i + 1);
+
+    seq.clear();
+    ASSERT(seq.get_length() == 0);
+}
+
+TEST(clear_empty, linked_list_sequence_suite) {
+    kogan::LinkedListSequence<int> seq;
+
+    seq.clear();
+    ASSERT(seq.get_length() == 0);
+}
 
 kogan::TestSuite get_linked_list_sequence_suite() {
     return linked_list_sequence_suite;

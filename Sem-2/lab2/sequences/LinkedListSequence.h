@@ -20,17 +20,18 @@ namespace kogan {
 
         ~LinkedListSequence();
 
-        T get_first();
-        T get_last();
-        T get(int index);
-        Sequence<T>* get_subsequence(int start_index, int end_index);
-        size_t get_length();
+        T get_first() const;
+        T get_last() const;
+        T get(int index) const;
+        Sequence<T>* get_subsequence(int start_index, int end_index) const;
+        [[nodiscard]] size_t get_length() const;
 
         void set(int index, T item);
         void append(T item);
         void prepend(T item);
         void insert(int index, T item);
         Sequence<T>* concat(Sequence<T>* sequence);
+        void clear();
     };
 
     template<class T>
@@ -54,22 +55,22 @@ namespace kogan {
     }
 
     template<class T>
-    T LinkedListSequence<T>::get_first() {
+    T LinkedListSequence<T>::get_first() const {
         return list->get_first();
     }
 
     template<class T>
-    T LinkedListSequence<T>::get_last() {
+    T LinkedListSequence<T>::get_last() const {
         return list->get_last();
     }
 
     template<class T>
-    T LinkedListSequence<T>::get(int index) {
+    T LinkedListSequence<T>::get(int index) const {
         return list->get(index);
     }
 
     template<class T>
-    Sequence<T> *LinkedListSequence<T>::get_subsequence(int start_index, int end_index) {
+    Sequence<T> *LinkedListSequence<T>::get_subsequence(int start_index, int end_index) const {
         LinkedList<T> sub_list = list->get_sublist(start_index, end_index);
 
         auto sub_seq = new LinkedListSequence<T>;
@@ -79,7 +80,7 @@ namespace kogan {
     }
 
     template<class T>
-    size_t LinkedListSequence<T>::get_length() {
+    size_t LinkedListSequence<T>::get_length() const {
         return list->get_length();
     }
 
@@ -109,6 +110,11 @@ namespace kogan {
         for (int i = 0; i < sequence->get_length(); ++i)
             concatenation->append(sequence->get(i));
         return concatenation;
+    }
+
+    template<class T>
+    void LinkedListSequence<T>::clear() {
+        list->clear();
     }
 
 } // kogan

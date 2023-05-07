@@ -20,17 +20,18 @@ namespace kogan {
 
         ~ArraySequence();
 
-        T get_first();
-        T get_last();
-        T get(int index);
-        Sequence<T>* get_subsequence(int start_index, int end_index);
-        size_t get_length();
+        T get_first() const;
+        T get_last() const;
+        T get(int index) const;
+        Sequence<T>* get_subsequence(int start_index, int end_index) const;
+        [[nodiscard]] size_t get_length() const;
 
         void set(int index, T item);
         void append(T item);
         void prepend(T item);
         void insert(int index, T item);
         Sequence<T>* concat(Sequence<T>* sequence);
+        void clear();
     };
 
     template<class T>
@@ -54,22 +55,22 @@ namespace kogan {
     }
 
     template<class T>
-    T ArraySequence<T>::get_first() {
+    T ArraySequence<T>::get_first() const {
         return get(0);
     }
 
     template<class T>
-    T ArraySequence<T>::get_last() {
+    T ArraySequence<T>::get_last() const {
         return get(get_length() - 1);
     }
 
     template<class T>
-    T ArraySequence<T>::get(int index) {
+    T ArraySequence<T>::get(int index) const {
         return array->get(index);
     }
 
     template<class T>
-    Sequence<T>* ArraySequence<T>::get_subsequence(int start_index, int end_index) {
+    Sequence<T>* ArraySequence<T>::get_subsequence(int start_index, int end_index) const {
         if (start_index < 0 || start_index >= get_length())
             throw IndexOutOfRangeException(start_index, 0, get_length() - 1);
 
@@ -86,7 +87,7 @@ namespace kogan {
     }
 
     template<class T>
-    size_t ArraySequence<T>::get_length() {
+    size_t ArraySequence<T>::get_length() const {
         return array->get_length();
     }
 
@@ -132,6 +133,11 @@ namespace kogan {
         for (int i = 0; i < sequence->get_length(); ++i)
             concatenation->append(sequence->get(i));
         return concatenation;
+    }
+
+    template<class T>
+    void ArraySequence<T>::clear() {
+        array->resize(0);
     }
 
 } // kogan

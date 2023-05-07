@@ -48,6 +48,8 @@ namespace kogan {
         void insert(T item, int index);
 
         LinkedList<T> concat(LinkedList<T> list);
+
+        void clear();
     };
 
     template<class T>
@@ -294,6 +296,21 @@ namespace kogan {
             cur_node = cur_node->next;
         }
         return concatenation;
+    }
+
+    template<class T>
+    void LinkedList<T>::clear() {
+        node* cur_node = root->head;
+        node* next = NULL;
+        while (cur_node != NULL) {
+            next = cur_node->next;
+            delete cur_node;
+            cur_node = next;
+        }
+
+        root->head = NULL;
+        root->tail = NULL;
+        length = 0;
     }
 
 } // kogan

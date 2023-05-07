@@ -17,17 +17,18 @@ namespace kogan {
     public:
         virtual ~Sequence() = 0;
 
-        virtual T get_first() = 0;
-        virtual T get_last() = 0;
-        virtual T get(int index) = 0;
-        virtual Sequence<T>* get_subsequence(int start_index, int end_index) = 0;
-        virtual size_t get_length() = 0;
+        virtual T get_first() const = 0;
+        virtual T get_last() const = 0;
+        virtual T get(int index) const = 0;
+        virtual Sequence<T>* get_subsequence(int start_index, int end_index) const = 0;
+        [[nodiscard]] virtual size_t get_length() const = 0;
 
         virtual void set(int index, T item) = 0;
         virtual void append(T item) = 0;
         virtual void prepend(T item) = 0;
         virtual void insert(int index, T item) = 0;
         virtual Sequence<T>* concat(Sequence<T>* sequence) = 0;
+        virtual void clear() = 0;
 
         class SequenceGetSetProxy {
             int index;
@@ -39,9 +40,14 @@ namespace kogan {
             void operator= (T item);
         };
 
-        SequenceGetSetProxy operator[] (int index);
+        SequenceGetSetProxy operator[](int index);
 
-        std::string to_string();
+        friend std::ostream& operator<<(std::ostream& os, const Sequence<T>& seq) {
+            os << seq.to_string();
+            return os;
+        }
+
+        [[nodiscard]] std::string to_string() const;
     };
 
     template<class T>
@@ -69,7 +75,7 @@ namespace kogan {
     Sequence<T>::~Sequence() = default;
 
     template<class T>
-    std::string Sequence<T>::to_string() {
+    std::string Sequence<T>::to_string() const {
         if (get_length() == 0)
             return "[]";
 
