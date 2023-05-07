@@ -30,5 +30,6 @@ void append_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence
 void prepend_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq);
 void insert_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq);
 void concatenate_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq);
+void subsequence_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq);
 
 #endif //SEQUENCE_LIB_MENUS_H

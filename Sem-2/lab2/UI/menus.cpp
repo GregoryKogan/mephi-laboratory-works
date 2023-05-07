@@ -195,3 +195,20 @@ void concatenate_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSeq
     std::cout << "Concatenation: " << std::endl << *concatenation << std::endl << std::endl;
     delete concatenation;
 }
+
+void subsequence_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
+    std::cout << "Insert value" << std::endl;
+    kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
+
+    std::cout << "start index: ";
+    int start_index; std::cin >> start_index;
+    panic_if_invalid_input("start index");
+
+    std::cout << "end index: ";
+    int end_index; std::cin >> end_index;
+    panic_if_invalid_input("end index");
+
+    kogan::Sequence<int>* sub_seq = seq->get_subsequence(start_index, end_index);
+    std::cout << "Subsequence: " << std::endl << *sub_seq << std::endl << std::endl;
+    delete sub_seq;
+}
