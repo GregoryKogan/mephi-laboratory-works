@@ -212,3 +212,11 @@ void subsequence_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSeq
     std::cout << "Subsequence: " << std::endl << *sub_seq << std::endl << std::endl;
     delete sub_seq;
 }
+
+void length_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
+    std::cout << "Insert value" << std::endl;
+    kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
+
+    std::cout << "Length: " << seq->get_length() << std::endl << std::endl;
+}
+

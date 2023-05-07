@@ -43,7 +43,7 @@ void interaction_loop(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSeq
                     selected_action = SELECT_ACTION;
                     break;
                 case LENGTH:
-                    std::cout << "LENGTH" << std::endl;
+                    length_menu(array_seq, linked_list_seq);
                     selected_action = SELECT_ACTION;
                     break;
                 default:
