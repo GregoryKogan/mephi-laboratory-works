@@ -29,7 +29,7 @@ namespace kogan {
         void set(int index, T item);
         void append(T item);
         void prepend(T item);
-        void insert(T item, int index);
+        void insert(int index, T item);
         Sequence<T>* concat(Sequence<T>* sequence);
     };
 
@@ -110,7 +110,10 @@ namespace kogan {
     }
 
     template<class T>
-    void ArraySequence<T>::insert(T item, int index) {
+    void ArraySequence<T>::insert(int index, T item) {
+        if (index < 0 || index > get_length())
+            throw IndexOutOfRangeException(index, 0, get_length());
+
         if (index == 0)
             prepend(item);
         else if (index == get_length())

@@ -26,7 +26,7 @@ namespace kogan {
         virtual void set(int index, T item) = 0;
         virtual void append(T item) = 0;
         virtual void prepend(T item) = 0;
-        virtual void insert(T item, int index) = 0;
+        virtual void insert(int index, T item) = 0;
         virtual Sequence<T>* concat(Sequence<T>* sequence) = 0;
 
         class SequenceGetSetProxy {

@@ -29,7 +29,7 @@ namespace kogan {
         void set(int index, T item);
         void append(T item);
         void prepend(T item);
-        void insert(T item, int index);
+        void insert(int index, T item);
         Sequence<T>* concat(Sequence<T>* sequence);
     };
 
@@ -99,7 +99,7 @@ namespace kogan {
     }
 
     template<class T>
-    void LinkedListSequence<T>::insert(T item, int index) {
+    void LinkedListSequence<T>::insert(int index, T item) {
         list->insert(item, index);
     }
 

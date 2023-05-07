@@ -6,6 +6,7 @@
 #define SEQUENCE_LIB_ARRAYSEQUENCE_TESTS_H
 
 #include "../TestSuite.h"
+#include "../../sequences/ArraySequence.h"
 
 kogan::TestSuite get_array_sequence_suite();
 

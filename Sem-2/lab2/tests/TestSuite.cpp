@@ -26,10 +26,15 @@ namespace kogan {
                 all_tests_passed = false;
         }
 
-        if (all_tests_passed)
-            log_green("All tests passed!\n\n");
-        else
-            log_red("Some tests failed\n\n");
+        if (all_tests_passed) {
+            log_green("All tests in ");
+            log_blue(name);
+            log_green(" suite passed!\n\n");
+        } else {
+            log_red("Some tests in ");
+            log_blue(name);
+            log_red(" suite failed\n\n");
+        }
 
         return all_tests_passed;
     }
