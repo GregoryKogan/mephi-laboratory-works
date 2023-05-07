@@ -9,6 +9,7 @@
 #include <iostream>
 #include "../sequences/ArraySequence.h"
 #include "../sequences/LinkedListSequence.h"
+#include "../IO/colored_logs.h"
 
 enum action {
     EXIT,

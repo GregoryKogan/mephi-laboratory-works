@@ -15,9 +15,9 @@ void panic_if_invalid_input(std::string argument_name) {
 
 action select_action_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
     std::cout << "ArraySequence:      " << *array_seq << std::endl;
-    std::cout << "LinkedListSequence: " << *linked_list_seq << std::endl;
+    std::cout << "LinkedListSequence: " << *linked_list_seq << std::endl << std::endl;
 
-    std::cout << "Select action: " << std::endl;
+    log_blue("Select action: "); std::cout << std::endl;
     std::cout << "1 - exit program" << std::endl;
     std::cout << "2 - input" << std::endl;
     std::cout << "3 - set" << std::endl;
@@ -62,7 +62,7 @@ kogan::Sequence<int>* select_sequence_menu(
         kogan::LinkedListSequence<int>* linked_list_seq,
         int* selected_type = nullptr
 ) {
-    std::cout << "Select sequence: " << std::endl;
+    log_blue("Select sequence: "); std::cout << std::endl;
     std::cout << "1 - ArraySequence" << std::endl;
     std::cout << "2 - LinkedListSequence" << std::endl;
 
@@ -88,7 +88,7 @@ kogan::Sequence<int>* select_sequence_menu(
 }
 
 void input_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
-    std::cout << "Input sequence" << std::endl;
+    log_blue("Input sequence"); std::cout << std::endl;
     kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
 
     std::cout << "Sequence length: ";
@@ -109,7 +109,7 @@ void input_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<
 }
 
 void set_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
-    std::cout << "Set sequence's value" << std::endl;
+    log_blue("Set sequence's value"); std::cout << std::endl;
     kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
 
     std::cout << "index: ";
@@ -124,7 +124,7 @@ void set_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<in
 }
 
 void append_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
-    std::cout << "Append value" << std::endl;
+    log_blue("Append value"); std::cout << std::endl;
     kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
 
     std::cout << "value: ";
@@ -135,7 +135,7 @@ void append_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence
 }
 
 void prepend_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
-    std::cout << "Prepend value" << std::endl;
+    log_blue("Prepend value"); std::cout << std::endl;
     kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
 
     std::cout << "value: ";
@@ -146,7 +146,7 @@ void prepend_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequenc
 }
 
 void insert_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
-    std::cout << "Insert value" << std::endl;
+    log_blue("Insert value"); std::cout << std::endl;
     kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
 
     std::cout << "index: ";
@@ -161,7 +161,7 @@ void insert_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence
 }
 
 void concatenate_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
-    std::cout << "Concatenate sequences" << std::endl;
+    log_blue("Concatenate sequences"); std::cout << std::endl;
     int selected_type;
     kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq, &selected_type);
 
@@ -197,7 +197,7 @@ void concatenate_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSeq
 }
 
 void subsequence_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
-    std::cout << "Insert value" << std::endl;
+    log_blue("Get subsequence"); std::cout << std::endl;
     kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
 
     std::cout << "start index: ";
@@ -214,7 +214,7 @@ void subsequence_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSeq
 }
 
 void length_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
-    std::cout << "Insert value" << std::endl;
+    log_blue("Get length"); std::cout << std::endl;
     kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
 
     std::cout << "Length: " << seq->get_length() << std::endl << std::endl;
