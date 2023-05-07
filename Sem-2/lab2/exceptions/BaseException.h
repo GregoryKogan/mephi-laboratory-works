@@ -14,7 +14,7 @@ namespace kogan {
 
     protected:
         char* message;
-        const size_t MESSAGE_MAX_LENGTH = 128;
+        const size_t MESSAGE_MAX_LENGTH = 1024;
 
         virtual void build_message() const = 0;
 
