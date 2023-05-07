@@ -106,3 +106,26 @@ void input_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<
         seq->append(val);
     }
 }
+
+void set_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
+    std::cout << "Set sequence's value" << std::endl;
+    kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
+
+    std::cout << "index: ";
+    int index; std::cin >> index;
+    if (!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        throw kogan::InvalidArgumentException("index");
+    }
+
+    std::cout << "value: ";
+    int value; std::cin >> value;
+    if (!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        throw kogan::InvalidArgumentException("value");
+    }
+
+    (*seq)[index] = value;
+}

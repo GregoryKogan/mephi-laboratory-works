@@ -13,10 +13,17 @@ namespace kogan {
     }
 
     void IndexOutOfRangeException::build_message() const {
-        snprintf(
-                message, MESSAGE_MAX_LENGTH,
-                "(IndexOutOfRange): index %d is out of range [%d, %d]", index, range_min, range_max
-        );
+        if (range_max < range_min) {
+            snprintf(
+                    message, MESSAGE_MAX_LENGTH,
+                    "(IndexOutOfRange): index %d is out of empty range", index
+            );
+        } else {
+            snprintf(
+                    message, MESSAGE_MAX_LENGTH,
+                    "(IndexOutOfRange): index %d is out of range [%d, %d]", index, range_min, range_max
+            );
+        }
     }
 
 } // kogan
