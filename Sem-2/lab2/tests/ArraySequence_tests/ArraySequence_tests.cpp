@@ -385,6 +385,7 @@ TEST(concat_empty_head, array_sequence_suite) {
     delete cone2;
 }
 
+
 kogan::TestSuite get_array_sequence_suite() {
     return array_sequence_suite;
 }

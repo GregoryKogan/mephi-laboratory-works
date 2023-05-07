@@ -22,9 +22,9 @@ namespace kogan {
     };
 
     #define TEST(name, suite) \
-    void name(); \
-    size_t tmp_##name = suite.add_test(kogan::Test(#name, name)); \
-    void name()
+    void suite##_##name(); \
+    size_t tmp_##suite##_##name = suite.add_test(kogan::Test(#name, suite##_##name)); \
+    void suite##_##name()
 
     #define ASSERT(expression) \
     if (!(expression)) throw kogan::AssertionFailedException(#expression, __FILE__, __LINE__)

@@ -247,6 +247,7 @@ namespace kogan {
         length++;
 
         if (length == 1) {
+            new_node->next = NULL;
             root->head = new_node;
             root->tail = new_node;
             return;

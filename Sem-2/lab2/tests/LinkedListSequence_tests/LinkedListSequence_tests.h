@@ -6,6 +6,7 @@
 #define SEQUENCE_LIB_LINKEDLISTSEQUENCE_TESTS_H
 
 #include "../TestSuite.h"
+#include "../../sequences/LinkedListSequence.h"
 
 kogan::TestSuite get_linked_list_sequence_suite();
 
