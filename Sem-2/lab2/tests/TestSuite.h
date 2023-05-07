@@ -5,6 +5,7 @@
 #ifndef SEQUENCE_LIB_TESTSUITE_H
 #define SEQUENCE_LIB_TESTSUITE_H
 
+#include <vector>
 #include "Test.h"
 #include "../exceptions/AssertionFailedException/AssertionFailedException.h"
 
