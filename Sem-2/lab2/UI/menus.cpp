@@ -57,20 +57,30 @@ action select_action_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedLis
     }
 }
 
-kogan::Sequence<int>* select_sequence_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
+kogan::Sequence<int>* select_sequence_menu(
+        kogan::ArraySequence<int>* array_seq,
+        kogan::LinkedListSequence<int>* linked_list_seq,
+        int* selected_type = nullptr
+) {
     std::cout << "Select sequence: " << std::endl;
     std::cout << "1 - ArraySequence" << std::endl;
     std::cout << "2 - LinkedListSequence" << std::endl;
 
-    int user_input;
     std::cout << ">>> ";
-    std::cin >> user_input;
+    int user_input; std::cin >> user_input;
     panic_if_invalid_input("sequence");
+
+    const int ARRAY = 1;
+    const int LIST = 2;
 
     switch (user_input) {
         case 1:
+            if (selected_type != nullptr)
+                *selected_type = ARRAY;
             return array_seq;
         case 2:
+            if (selected_type != nullptr)
+                *selected_type = LIST;
             return linked_list_seq;
         default:
             throw kogan::InvalidArgumentException("sequence");
@@ -148,4 +158,40 @@ void insert_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence
     panic_if_invalid_input("value");
 
     seq->insert(index, value);
+}
+
+void concatenate_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
+    std::cout << "Concatenate sequences" << std::endl;
+    int selected_type;
+    kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq, &selected_type);
+
+    std::cout << "Second sequence's length: ";
+    int seq_length; std::cin >> seq_length;
+    panic_if_invalid_input("length");
+    if (seq_length < 0)
+        throw kogan::InvalidArgumentException("length");
+
+    kogan::ArraySequence<int> second_arr_seq;
+    kogan::LinkedListSequence<int> second_list_seq;
+
+    kogan::Sequence<int>* second_seq_ptr;
+    const int ARRAY = 1;
+    if (selected_type == ARRAY)
+        second_seq_ptr = &second_arr_seq;
+    else
+        second_seq_ptr = &second_list_seq;
+
+    if (seq_length > 0) {
+        std::cout << "Input second sequence values: " << std::endl;
+        for (int i = 0; i < seq_length; ++i) {
+            int val; std::cin >> val;
+            panic_if_invalid_input("sequence value");
+            second_seq_ptr->append(val);
+        }
+    }
+
+    kogan::Sequence<int>* concatenation = seq->concat(second_seq_ptr);
+
+    std::cout << "Concatenation: " << std::endl << *concatenation << std::endl << std::endl;
+    delete concatenation;
 }

@@ -35,7 +35,7 @@ void interaction_loop(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSeq
                     selected_action = SELECT_ACTION;
                     break;
                 case CONCATENATE:
-                    std::cout << "CONCATENATE" << std::endl;
+                    concatenate_menu(array_seq, linked_list_seq);
                     selected_action = SELECT_ACTION;
                     break;
                 case SUBSEQUENCE:
