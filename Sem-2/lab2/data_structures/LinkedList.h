@@ -50,6 +50,7 @@ namespace kogan {
         LinkedList<T> concat(LinkedList<T> list);
 
         void clear();
+        void remove(int index);
     };
 
     template<class T>
@@ -311,6 +312,39 @@ namespace kogan {
         root->head = NULL;
         root->tail = NULL;
         length = 0;
+    }
+
+    template<class T>
+    void LinkedList<T>::remove(int index) {
+        if (index < 0 || index >= length)
+            throw IndexOutOfRangeException(index, 0, length - 1);
+
+        if (length == 1) {
+            delete root->head;
+            root->head = NULL;
+            root->tail = NULL;
+            length = 0;
+            return;
+        }
+
+        if (index == 0) {
+            node *new_head = root->head->next;
+            new_head->previous = NULL;
+            delete root->head;
+            root->head = new_head;
+        } else if (index == length - 1) {
+            node* new_tail = root->tail->previous;
+            new_tail->next = NULL;
+            delete root->tail;
+            root->tail = new_tail;
+        } else {
+            node* mid_node = get_node(index);
+            mid_node->previous->next = mid_node->next;
+            mid_node->next->previous = mid_node->previous;
+            delete mid_node;
+        }
+
+        length--;
     }
 
 } // kogan

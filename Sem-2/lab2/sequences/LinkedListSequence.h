@@ -32,6 +32,7 @@ namespace kogan {
         void insert(int index, T item);
         Sequence<T>* concat(Sequence<T>* sequence);
         void clear();
+        void remove(int index);
     };
 
     template<class T>
@@ -115,6 +116,11 @@ namespace kogan {
     template<class T>
     void LinkedListSequence<T>::clear() {
         list->clear();
+    }
+
+    template<class T>
+    void LinkedListSequence<T>::remove(int index) {
+        list->remove(index);
     }
 
 } // kogan

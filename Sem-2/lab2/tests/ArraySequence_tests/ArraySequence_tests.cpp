@@ -401,6 +401,89 @@ TEST(clear_empty, array_sequence_suite) {
     ASSERT(seq.get_length() == 0);
 }
 
+TEST(remove, array_sequence_suite) {
+    kogan::ArraySequence<int> seq;
+    for (int i = 0; i < 10; ++i)
+        seq.append(i + 1);
+
+    seq.remove(5);
+    ASSERT(seq.get_length() == 9);
+    ASSERT(seq[0] == 1);
+    ASSERT(seq[4] == 5);
+    ASSERT(seq[5] == 7);
+    ASSERT(seq[8] == 10);
+}
+
+TEST(remove_first, array_sequence_suite) {
+    kogan::ArraySequence<int> seq;
+    for (int i = 0; i < 10; ++i)
+        seq.append(i + 1);
+
+    seq.remove(0);
+    ASSERT(seq.get_length() == 9);
+    ASSERT(seq[0] == 2);
+    ASSERT(seq[8] == 10);
+}
+
+TEST(remove_last, array_sequence_suite) {
+    kogan::ArraySequence<int> seq;
+    for (int i = 0; i < 10; ++i)
+        seq.append(i + 1);
+
+    seq.remove(9);
+    ASSERT(seq.get_length() == 9);
+    ASSERT(seq[0] == 1);
+    ASSERT(seq[8] == 9);
+}
+
+TEST(remove_single_item, array_sequence_suite) {
+    kogan::ArraySequence<int> seq;
+    seq.append(42);
+
+    seq.remove(0);
+    ASSERT(seq.get_length() == 0);
+}
+
+TEST(remove_big_index_IndexOutOfRangeException, array_sequence_suite) {
+    kogan::ArraySequence<int> seq;
+    for (int i = 0; i < 10; ++i)
+        seq.append(i + 1);
+
+    bool indexOutOfRangeExceptionThrown = false;
+    try {
+        seq.remove(10);
+    } catch (kogan::IndexOutOfRangeException& e) {
+        indexOutOfRangeExceptionThrown = true;
+    }
+    ASSERT(indexOutOfRangeExceptionThrown);
+}
+
+TEST(remove_negative_index_IndexOutOfRangeException, array_sequence_suite) {
+    kogan::ArraySequence<int> seq;
+    for (int i = 0; i < 10; ++i)
+        seq.append(i + 1);
+
+    bool indexOutOfRangeExceptionThrown = false;
+    try {
+        seq.remove(-1);
+    } catch (kogan::IndexOutOfRangeException& e) {
+        indexOutOfRangeExceptionThrown = true;
+    }
+    ASSERT(indexOutOfRangeExceptionThrown);
+}
+
+TEST(remove_empty_IndexOutOfRangeException, array_sequence_suite) {
+    kogan::ArraySequence<int> seq;
+
+    bool indexOutOfRangeExceptionThrown = false;
+    try {
+        seq.remove(0);
+    } catch (kogan::IndexOutOfRangeException& e) {
+        indexOutOfRangeExceptionThrown = true;
+    }
+    ASSERT(indexOutOfRangeExceptionThrown);
+}
+
 
 kogan::TestSuite get_array_sequence_suite() {
     return array_sequence_suite;

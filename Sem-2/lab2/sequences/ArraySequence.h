@@ -32,6 +32,7 @@ namespace kogan {
         void insert(int index, T item);
         Sequence<T>* concat(Sequence<T>* sequence);
         void clear();
+        void remove(int index);
     };
 
     template<class T>
@@ -138,6 +139,16 @@ namespace kogan {
     template<class T>
     void ArraySequence<T>::clear() {
         array->resize(0);
+    }
+
+    template<class T>
+    void ArraySequence<T>::remove(int index) {
+        if (index < 0 || index >= get_length())
+            throw IndexOutOfRangeException(index, 0, get_length() - 1);
+
+        for (int i = index; i < get_length() - 1; ++i)
+            set(i, get(i + 1));
+        array->resize(get_length() - 1);
     }
 
 } // kogan

@@ -219,4 +219,3 @@ void length_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence
 
     std::cout << "Length: " << seq->get_length() << std::endl << std::endl;
 }
-
