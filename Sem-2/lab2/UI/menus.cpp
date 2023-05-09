@@ -26,7 +26,9 @@ action select_action_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedLis
     std::cout << "6 - insert" << std::endl;
     std::cout << "7 - concatenate" << std::endl;
     std::cout << "8 - get subsequence" << std::endl;
-    std::cout << "9 - get length" << std::endl;
+    std::cout << "9 - remove" << std::endl;
+    std::cout << "10 - clear" << std::endl;
+    std::cout << "11 - get length" << std::endl;
 
     int user_input;
     std::cout << ">>> ";
@@ -51,6 +53,10 @@ action select_action_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedLis
         case 8:
             return SUBSEQUENCE;
         case 9:
+            return REMOVE;
+        case 10:
+            return CLEAR;
+        case 11:
             return LENGTH;
         default:
             throw kogan::InvalidArgumentException("action");
@@ -211,6 +217,24 @@ void subsequence_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSeq
     kogan::Sequence<int>* sub_seq = seq->get_subsequence(start_index, end_index);
     std::cout << "Subsequence: " << std::endl << *sub_seq << std::endl << std::endl;
     delete sub_seq;
+}
+
+void remove_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
+    log_blue("Remove value"); std::cout << std::endl;
+    kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
+
+    std::cout << "index: ";
+    int index; std::cin >> index;
+    panic_if_invalid_input("index");
+
+    seq->remove(index);
+}
+
+void clear_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {
+    log_blue("Clear sequence"); std::cout << std::endl;
+    kogan::Sequence<int>* seq = select_sequence_menu(array_seq, linked_list_seq);
+
+    seq->clear();
 }
 
 void length_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {

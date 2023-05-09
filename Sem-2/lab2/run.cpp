@@ -42,6 +42,14 @@ void interaction_loop(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSeq
                     subsequence_menu(array_seq, linked_list_seq);
                     selected_action = SELECT_ACTION;
                     break;
+                case REMOVE:
+                    remove_menu(array_seq, linked_list_seq);
+                    selected_action = SELECT_ACTION;
+                    break;
+                case CLEAR:
+                    clear_menu(array_seq, linked_list_seq);
+                    selected_action = SELECT_ACTION;
+                    break;
                 case LENGTH:
                     length_menu(array_seq, linked_list_seq);
                     selected_action = SELECT_ACTION;
