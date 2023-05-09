@@ -1218,6 +1218,30 @@
 			"value" : "SequneceLib_DIR-NOTFOUND"
 		},
 		{
+			"name" : "TEST-LIB_INCLUDE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a file."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/Users/gregorykogan/Desktop/MEPhI-Laboratory-works/libraries/test_lib/include"
+		},
+		{
+			"name" : "TEST-LIB_LIBRARY",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/Users/gregorykogan/Desktop/MEPhI-Laboratory-works/libraries/test_lib/lib/libtest_lib.a"
+		},
+		{
 			"name" : "lab3_BINARY_DIR",
 			"properties" : 
 			[

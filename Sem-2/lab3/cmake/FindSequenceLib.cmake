@@ -1,5 +1,5 @@
 set(FIND_SEQUENCE-LIB_PATHS
-        ../../../libraries/sequence_lib)
+        ${PROJECT_SOURCE_DIR}/../../../libraries/sequence_lib)
 
 find_path(SEQUENCE-LIB_INCLUDE_DIR sequence_lib.h
         PATH_SUFFIXES include

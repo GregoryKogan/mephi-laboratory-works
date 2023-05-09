@@ -234,6 +234,12 @@ SequeceLib_DIR:PATH=SequeceLib_DIR-NOTFOUND
 //The directory containing a CMake configuration file for SequneceLib.
 SequneceLib_DIR:PATH=SequneceLib_DIR-NOTFOUND
 
+//Path to a file.
+TEST-LIB_INCLUDE_DIR:PATH=/Users/gregorykogan/Desktop/MEPhI-Laboratory-works/libraries/test_lib/include
+
+//Path to a library.
+TEST-LIB_LIBRARY:FILEPATH=/Users/gregorykogan/Desktop/MEPhI-Laboratory-works/libraries/test_lib/lib/libtest_lib.a
+
 //Value Computed by CMake
 lab3_BINARY_DIR:STATIC=/Users/gregorykogan/Desktop/MEPhI-Laboratory-works/Sem-2/lab3/cmake-build-debug
 

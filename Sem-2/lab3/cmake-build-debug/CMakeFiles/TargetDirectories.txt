@@ -1,3 +1,4 @@
-/Users/gregorykogan/Desktop/MEPhI-Laboratory-works/Sem-2/lab3/cmake-build-debug/CMakeFiles/lab3.dir
+/Users/gregorykogan/Desktop/MEPhI-Laboratory-works/Sem-2/lab3/cmake-build-debug/CMakeFiles/lab3_run.dir
+/Users/gregorykogan/Desktop/MEPhI-Laboratory-works/Sem-2/lab3/cmake-build-debug/CMakeFiles/lab3_test.dir
 /Users/gregorykogan/Desktop/MEPhI-Laboratory-works/Sem-2/lab3/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/gregorykogan/Desktop/MEPhI-Laboratory-works/Sem-2/lab3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
