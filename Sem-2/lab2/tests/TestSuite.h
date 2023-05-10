@@ -27,7 +27,7 @@ namespace kogan {
     void suite##_##name()
 
     #define ASSERT(expression) \
-    if (!(expression)) throw kogan::AssertionFailedException(#expression, __FILE__, __LINE__)
+    if (!(expression)) throw kogan::AssertionFailedException(#expression, __FILE__,  __FUNCTION__, __LINE__)
 
 } // kogan
 
