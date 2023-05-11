@@ -2,14 +2,14 @@
 // Created by Gregory Kogan on 07.05.2023.
 //
 
-#ifndef SEQUENCE_LIB_MENUS_H
-#define SEQUENCE_LIB_MENUS_H
+#ifndef SEQUENCE_LIB_MENUS_HPP
+#define SEQUENCE_LIB_MENUS_HPP
 
 #include <limits>
 #include <iostream>
-#include "../sequences/ArraySequence.h"
-#include "../sequences/LinkedListSequence.h"
-#include "../IO/colored_logs.h"
+#include "../sequences/ArraySequence.hpp"
+#include "../sequences/LinkedListSequence.hpp"
+#include "../IO/colored_logs.hpp"
 
 enum action {
     EXIT,
@@ -38,4 +38,4 @@ void remove_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence
 void clear_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq);
 void length_menu(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq);
 
-#endif //SEQUENCE_LIB_MENUS_H
+#endif //SEQUENCE_LIB_MENUS_HPP

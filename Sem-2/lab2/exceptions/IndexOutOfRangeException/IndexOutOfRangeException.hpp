@@ -5,7 +5,7 @@
 #ifndef LAB2_INDEXOUTOFRANGEEXCEPTION_H
 #define LAB2_INDEXOUTOFRANGEEXCEPTION_H
 
-#include "../BaseException.h"
+#include "../BaseException.hpp"
 
 namespace kogan {
 

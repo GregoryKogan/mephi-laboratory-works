@@ -2,7 +2,7 @@
 // Created by Gregory Kogan on 07.05.2023.
 //
 
-#include "ArraySequence_tests.h"
+#include "ArraySequence_tests.hpp"
 
 
 kogan::TestSuite array_sequence_suite("ArraySequence");

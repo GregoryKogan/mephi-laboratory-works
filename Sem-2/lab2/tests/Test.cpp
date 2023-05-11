@@ -2,7 +2,7 @@
 // Created by Gregory Kogan on 06.05.2023.
 //
 
-#include "Test.h"
+#include "Test.hpp"
 
 
 namespace kogan {

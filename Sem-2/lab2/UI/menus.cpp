@@ -2,7 +2,7 @@
 // Created by Gregory Kogan on 07.05.2023.
 //
 
-#include "menus.h"
+#include "menus.hpp"
 
 
 void panic_if_invalid_input(std::string argument_name) {

@@ -2,7 +2,7 @@
 // Created by Gregory Kogan on 10.05.2023.
 //
 
-#include "test_lib.h"
+#include "test_lib.hpp"
 
 
 kogan::TestSuite test_lib_suite("TestLib");

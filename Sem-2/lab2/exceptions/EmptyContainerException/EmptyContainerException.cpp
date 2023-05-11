@@ -2,7 +2,7 @@
 // Created by Gregory Kogan on 04.05.2023.
 //
 
-#include "EmptyContainerException.h"
+#include "EmptyContainerException.hpp"
 
 namespace kogan {
 

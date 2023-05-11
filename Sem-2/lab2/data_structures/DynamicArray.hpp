@@ -5,9 +5,9 @@
 #ifndef LAB2_DYNAMICARRAY_H
 #define LAB2_DYNAMICARRAY_H
 
-#include "../exceptions/IndexOutOfRangeException/IndexOutOfRangeException.h"
-#include "../exceptions/EmptyContainerException/EmptyContainerException.h"
-#include "../exceptions/InvalidArgumentException/InvalidArgumentException.h"
+#include "../exceptions/IndexOutOfRangeException/IndexOutOfRangeException.hpp"
+#include "../exceptions/EmptyContainerException/EmptyContainerException.hpp"
+#include "../exceptions/InvalidArgumentException/InvalidArgumentException.hpp"
 
 namespace kogan {
 

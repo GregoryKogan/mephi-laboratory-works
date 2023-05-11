@@ -5,8 +5,8 @@
 #ifndef LAB2_LINKEDLISTSEQUENCE_H
 #define LAB2_LINKEDLISTSEQUENCE_H
 
-#include "Sequence.h"
-#include "../data_structures/LinkedList.h"
+#include "Sequence.hpp"
+#include "../data_structures/LinkedList.hpp"
 
 namespace kogan {
 

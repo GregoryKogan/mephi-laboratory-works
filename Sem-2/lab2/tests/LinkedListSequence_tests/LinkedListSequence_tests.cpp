@@ -2,7 +2,7 @@
 // Created by Gregory Kogan on 07.05.2023.
 //
 
-#include "LinkedListSequence_tests.h"
+#include "LinkedListSequence_tests.hpp"
 
 
 kogan::TestSuite linked_list_sequence_suite("LinkedListSequence");

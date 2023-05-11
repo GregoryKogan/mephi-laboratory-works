@@ -1,8 +1,8 @@
 #include <iostream>
-#include "sequences/ArraySequence.h"
-#include "sequences/LinkedListSequence.h"
-#include "UI/menus.h"
-#include "IO/colored_logs.h"
+#include "sequences/ArraySequence.hpp"
+#include "sequences/LinkedListSequence.hpp"
+#include "UI/menus.hpp"
+#include "IO/colored_logs.hpp"
 
 
 void interaction_loop(kogan::ArraySequence<int>* array_seq, kogan::LinkedListSequence<int>* linked_list_seq) {

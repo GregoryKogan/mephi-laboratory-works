@@ -5,8 +5,8 @@
 #ifndef LAB2_ARRAYSEQUENCE_H
 #define LAB2_ARRAYSEQUENCE_H
 
-#include "Sequence.h"
-#include "../data_structures/DynamicArray.h"
+#include "Sequence.hpp"
+#include "../data_structures/DynamicArray.hpp"
 
 namespace kogan {
 

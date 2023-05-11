@@ -2,7 +2,7 @@
 // Created by Gregory Kogan on 10.05.2023.
 //
 
-#include "sequence_lib.h"
+#include "sequence_lib.hpp"
 
 
 void sequence_lib_is_working() {

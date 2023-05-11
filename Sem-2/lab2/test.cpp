@@ -1,5 +1,5 @@
-#include "tests/ArraySequence_tests/ArraySequence_tests.h"
-#include "tests/LinkedListSequence_tests/LinkedListSequence_tests.h"
+#include "tests/ArraySequence_tests/ArraySequence_tests.hpp"
+#include "tests/LinkedListSequence_tests/LinkedListSequence_tests.hpp"
 
 
 int main() {

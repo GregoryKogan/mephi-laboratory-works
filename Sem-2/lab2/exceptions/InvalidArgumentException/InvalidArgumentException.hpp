@@ -5,7 +5,7 @@
 #ifndef LAB2_INVALIDARGUMENTEXCEPTION_H
 #define LAB2_INVALIDARGUMENTEXCEPTION_H
 
-#include "../BaseException.h"
+#include "../BaseException.hpp"
 
 namespace kogan {
 
