@@ -5,9 +5,17 @@
 
 
 int main() {
-    get_dynamic_array_suite().run();
-    get_linked_list_suite().run();
-    get_array_sequence_suite().run();
-    get_linked_list_sequence_suite().run();
+    bool all_suites_passed = true;
+
+    if (!get_dynamic_array_suite().run()) all_suites_passed = false;
+    if (!get_linked_list_suite().run()) all_suites_passed = false;
+    if (!get_array_sequence_suite().run()) all_suites_passed = false;
+    if (!get_linked_list_sequence_suite().run()) all_suites_passed = false;
+
+    if (all_suites_passed)
+        log_green("All tests passed!\n");
+    else
+        log_red("Some tests failed\n");
+
     return 0;
 }
