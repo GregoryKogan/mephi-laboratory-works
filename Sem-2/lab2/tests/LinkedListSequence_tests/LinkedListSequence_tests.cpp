@@ -353,11 +353,8 @@ TEST(concat, linked_list_sequence_suite) {
 
 TEST(concat_empty_tail, linked_list_sequence_suite) {
     kogan::LinkedListSequence<int> seq1;
-    kogan::LinkedListSequence<int> seq2;
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 10; ++i)
         seq1.append(i + 1);
-        seq2.append(i + 11);
-    }
 
     kogan::LinkedListSequence<int> seq_empty;
     kogan::Sequence<int>* con1e = seq1.concat(&seq_empty);
@@ -369,12 +366,9 @@ TEST(concat_empty_tail, linked_list_sequence_suite) {
 }
 
 TEST(concat_empty_head, linked_list_sequence_suite) {
-    kogan::LinkedListSequence<int> seq1;
     kogan::LinkedListSequence<int> seq2;
-    for (int i = 0; i < 10; ++i) {
-        seq1.append(i + 1);
+    for (int i = 0; i < 10; ++i)
         seq2.append(i + 11);
-    }
 
     kogan::LinkedListSequence<int> seq_empty;
     kogan::Sequence<int>* cone2 = seq_empty.concat(&seq2);

@@ -45,7 +45,7 @@ namespace kogan {
         void set(int index, T item);
         void append(T item);
         void prepend(T item);
-        void insert(T item, int index);
+        void insert(int index, T item);
 
         LinkedList<T> concat(LinkedList<T> list);
 
@@ -262,7 +262,7 @@ namespace kogan {
     }
 
     template<class T>
-    void LinkedList<T>::insert(T item, int index) {
+    void LinkedList<T>::insert(int index, T item) {
         if (index < 0 || index > length)
             throw IndexOutOfRangeException(index, 0, length);
 

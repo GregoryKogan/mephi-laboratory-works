@@ -102,7 +102,7 @@ namespace kogan {
 
     template<class T>
     void LinkedListSequence<T>::insert(int index, T item) {
-        list->insert(item, index);
+        list->insert(index, item);
     }
 
     template<class T>
