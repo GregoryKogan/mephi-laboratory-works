@@ -5,7 +5,7 @@
 #ifndef LAB2_EMPTYCONTAINEREXCEPTION_H
 #define LAB2_EMPTYCONTAINEREXCEPTION_H
 
-#include "../BaseException.h"
+#include "../BaseException.hpp"
 
 namespace kogan {
 

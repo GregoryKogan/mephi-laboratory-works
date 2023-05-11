@@ -2,12 +2,12 @@
 // Created by Gregory Kogan on 06.05.2023.
 //
 
-#ifndef SEQUENCE_LIB_TESTSUITE_H
-#define SEQUENCE_LIB_TESTSUITE_H
+#ifndef SEQUENCE_LIB_TESTSUITE_HPP
+#define SEQUENCE_LIB_TESTSUITE_HPP
 
 #include <vector>
-#include "Test.h"
-#include "../exceptions/AssertionFailedException/AssertionFailedException.h"
+#include "Test.hpp"
+#include "../exceptions/AssertionFailedException/AssertionFailedException.hpp"
 
 namespace kogan {
 
@@ -27,8 +27,8 @@ namespace kogan {
     void suite##_##name()
 
     #define ASSERT(expression) \
-    if (!(expression)) throw kogan::AssertionFailedException(#expression, __FILE__, __LINE__)
+    if (!(expression)) throw kogan::AssertionFailedException(#expression, __FILE__,  __FUNCTION__, __LINE__)
 
 } // kogan
 
-#endif //SEQUENCE_LIB_TESTSUITE_H
+#endif //SEQUENCE_LIB_TESTSUITE_HPP

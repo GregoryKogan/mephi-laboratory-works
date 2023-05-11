@@ -5,9 +5,9 @@
 #ifndef LAB2_LINKEDLIST_H
 #define LAB2_LINKEDLIST_H
 
-#include "../exceptions/IndexOutOfRangeException/IndexOutOfRangeException.h"
-#include "../exceptions/EmptyContainerException/EmptyContainerException.h"
-#include "../exceptions/InvalidArgumentException/InvalidArgumentException.h"
+#include "../exceptions/IndexOutOfRangeException/IndexOutOfRangeException.hpp"
+#include "../exceptions/EmptyContainerException/EmptyContainerException.hpp"
+#include "../exceptions/InvalidArgumentException/InvalidArgumentException.hpp"
 
 namespace kogan {
 
@@ -45,7 +45,7 @@ namespace kogan {
         void set(int index, T item);
         void append(T item);
         void prepend(T item);
-        void insert(T item, int index);
+        void insert(int index, T item);
 
         LinkedList<T> concat(LinkedList<T> list);
 
@@ -262,7 +262,7 @@ namespace kogan {
     }
 
     template<class T>
-    void LinkedList<T>::insert(T item, int index) {
+    void LinkedList<T>::insert(int index, T item) {
         if (index < 0 || index > length)
             throw IndexOutOfRangeException(index, 0, length);
 
