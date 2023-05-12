@@ -15,8 +15,6 @@ namespace kogan {
     template <class T> class Sequence {
 
     public:
-        virtual ~Sequence() = 0;
-
         virtual T get_first() const = 0;
         virtual T get_last() const = 0;
         virtual T get(int index) const = 0;
@@ -71,9 +69,6 @@ namespace kogan {
     typename Sequence<T>::SequenceGetSetProxy Sequence<T>::operator[](int index) {
         return SequenceGetSetProxy(this, index);
     }
-
-    template<class T>
-    Sequence<T>::~Sequence() = default;
 
     template<class T>
     std::string Sequence<T>::to_string() const {
