@@ -16,17 +16,19 @@ namespace kogan {
         return tests.size();
     }
 
-    bool TestSuite::run() {
+    int TestSuite::get_tests_count() {
+        return (int)tests.size();
+    }
+
+    int TestSuite::run() {
         log_blue(name);
         std::cout << " test suite is running" << std::endl;
 
-        bool all_tests_passed = true;
-        for (const auto& test : tests) {
-            if (!test.run())
-                all_tests_passed = false;
-        }
+        int tests_passed_counter = 0;
+        for (const auto& test : tests)
+            tests_passed_counter += test.run();
 
-        if (all_tests_passed) {
+        if (tests_passed_counter == get_tests_count()) {
             log_green("All tests in ");
             log_blue(name);
             log_green(" suite passed!\n\n");
@@ -36,7 +38,7 @@ namespace kogan {
             log_red(" suite failed\n\n");
         }
 
-        return all_tests_passed;
+        return tests_passed_counter;
     }
 
 } // kogan
