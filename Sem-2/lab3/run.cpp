@@ -1,4 +1,4 @@
-#include "sequence_lib.h"
+#include "sequence_lib.hpp"
 
 
 int main() {
