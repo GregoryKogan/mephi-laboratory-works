@@ -26,6 +26,8 @@ namespace kogan {
             void swap(Queue<T>& other);
             void push(const T& item);
             T pop();
+
+            Queue<T>* concat(const Queue<T>& other) const;
     };
 
     template<class T>
@@ -88,6 +90,14 @@ namespace kogan {
         T value = list->get_first();
         list->remove(0);
         return value;
+    }
+
+    template<class T>
+    Queue<T> *Queue<T>::concat(const Queue<T> &other) const {
+        auto* result = new Queue<T>(this);
+        for (int i = 0; i < other.size(); ++i)
+            result->push(other.list->get(i));
+        return result;
     }
 
 } // kogan

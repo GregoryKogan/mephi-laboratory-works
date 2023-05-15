@@ -150,6 +150,46 @@ TEST(pop_EmptyContainerException, queue_test_suite) {
     ASSERT(emptyContainerExceptionThrown);
 }
 
+TEST(concat, queue_test_suite) {
+    kogan::Queue<int> q1;
+    kogan::Queue<int> q2;
+
+    q1.push(1);
+    q1.push(2);
+    q1.push(3);
+
+    q2.push(4);
+    q2.push(5);
+
+    auto q3 = q1.concat(q2);
+
+    ASSERT(q1.size() == 3);
+    ASSERT(q2.size() == 2);
+
+    ASSERT(q3->size() == 5);
+    ASSERT(q3->pop() == 1);
+    ASSERT(q3->pop() == 2);
+    ASSERT(q3->pop() == 3);
+    ASSERT(q3->pop() == 4);
+    ASSERT(q3->pop() == 5);
+    ASSERT(q3->empty());
+    delete q3;
+
+    auto q4 = q2.concat(q1);
+
+    ASSERT(q1.size() == 3);
+    ASSERT(q2.size() == 2);
+
+    ASSERT(q4->size() == 5);
+    ASSERT(q4->pop() == 4);
+    ASSERT(q4->pop() == 5);
+    ASSERT(q4->pop() == 1);
+    ASSERT(q4->pop() == 2);
+    ASSERT(q4->pop() == 3);
+    ASSERT(q4->empty());
+    delete q4;
+}
+
 
 kogan::TestSuite get_queue_test_suite() {
     return queue_test_suite;
