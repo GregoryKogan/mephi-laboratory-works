@@ -18,7 +18,8 @@ namespace kogan {
     public:
         explicit TestSuite(std::string name);
         size_t add_test(const Test& test);
-        bool run();
+        int get_tests_count();
+        int run();
     };
 
     #define TEST(name, suite) \

@@ -16,5 +16,8 @@ TEST(test_lib, test_lib_suite) {
 void test_lib_is_working() {
     std::cout << "Test lib is working!" << std::endl;
 
-    test_lib_suite.run();
+    std::vector<kogan::TestSuite> suites = { test_lib_suite };
+
+    kogan::Tester tester(suites);
+    tester.test();
 }
