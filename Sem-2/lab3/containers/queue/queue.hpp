@@ -28,6 +28,7 @@ namespace kogan {
             T pop();
 
             Queue<T>* concat(const Queue<T>& other) const;
+            Sequence<T>* get_subsequence(int start_index, int end_index) const;
     };
 
     template<class T>
@@ -98,6 +99,11 @@ namespace kogan {
         for (int i = 0; i < other.size(); ++i)
             result->push(other.list->get(i));
         return result;
+    }
+
+    template<class T>
+    Sequence<T> *Queue<T>::get_subsequence(int start_index, int end_index) const {
+        return list->get_subsequence(start_index, end_index);
     }
 
 } // kogan

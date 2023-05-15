@@ -190,6 +190,33 @@ TEST(concat, queue_test_suite) {
     delete q4;
 }
 
+TEST(get_subsequence, queue_test_suite) {
+    kogan::Queue<int> q;
+
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    q.push(4);
+    q.push(5);
+
+    kogan::Sequence<int>* sq = q.get_subsequence(0, 4);
+    ASSERT(sq->get_length() == 5);
+    ASSERT(sq->get(0) == 1);
+    ASSERT(sq->get(4) == 5);
+    delete sq;
+
+    sq = q.get_subsequence(1, 3);
+    ASSERT(sq->get_length() == 3);
+    ASSERT(sq->get(0) == 2);
+    ASSERT(sq->get(1) == 3);
+    ASSERT(sq->get(2) == 4);
+    delete sq;
+
+    sq = q.get_subsequence(2, 2);
+    ASSERT(sq->get_length() == 1);
+    ASSERT(sq->get(0) == 3);
+    delete sq;
+}
 
 kogan::TestSuite get_queue_test_suite() {
     return queue_test_suite;
