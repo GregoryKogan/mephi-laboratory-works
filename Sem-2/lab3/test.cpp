@@ -1,7 +1,13 @@
-#include "test_lib.hpp"
+#include "tests/queue/queue_tests.hpp"
 
 
 int main() {
-    test_lib_is_working();
+    std::vector<kogan::TestSuite> suites = {
+            get_queue_test_suite(),
+    };
+
+    kogan::Tester tester(suites);
+    tester.test();
+
     return 0;
 }

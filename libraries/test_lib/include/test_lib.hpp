@@ -5,7 +5,7 @@
 #ifndef SEQUENCE_LIB_TEST_LIB_HPP
 #define SEQUENCE_LIB_TEST_LIB_HPP
 
-#include "tests/TestSuite.hpp"
+#include "tests/Tester.hpp"
 
 void test_lib_is_working();
 
