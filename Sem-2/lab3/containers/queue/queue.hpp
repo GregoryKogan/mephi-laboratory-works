@@ -6,81 +6,56 @@
 #define LAB3_QUEUE_HPP
 
 #include "sequence_lib.hpp"
+#include "../base_container.hpp"
 
 
 namespace kogan {
 
-    template <class T> class Queue {
-        LinkedListSequence<T>* list;
+    template <class T> class Queue: public BaseContainer<T> {
+        using BaseContainer<T>::sequence;
 
         public:
+            using BaseContainer<T>::empty;
+
             Queue();
             Queue(T* items, int count);
-            explicit Queue(const Sequence<T>* sequence);
+            explicit Queue(const Sequence<T>* other_seq);
             explicit Queue(const Queue<T>* queue);
 
-            ~Queue();
-
-            [[nodiscard]] bool empty() const;
-            [[nodiscard]] size_t size() const;
-            void swap(Queue<T>& other);
             void push(const T& item);
             T pop();
 
             Queue<T>* concat(const Queue<T>& other) const;
-            Sequence<T>* get_subsequence(int start_index, int end_index) const;
     };
 
     template<class T>
     Queue<T>::Queue() {
-        list = new LinkedListSequence<T>();
+        sequence = new LinkedListSequence<T>();
     }
 
     template<class T>
     Queue<T>::Queue(T *items, int count) {
-        list = new LinkedListSequence<T>(items, count);
+        sequence = new LinkedListSequence<T>(items, count);
     }
 
     template<class T>
-    Queue<T>::Queue(const Sequence<T> *sequence) {
-        T* items = new T[sequence->get_length()];
-        for (int i = 0; i < sequence->get_length(); ++i)
-            items[i] = sequence->get(i);
-        list = new LinkedListSequence<T>(items, sequence->get_length());
+    Queue<T>::Queue(const Sequence<T> *other_seq) {
+        T* items = new T[other_seq->get_length()];
+        for (int i = 0; i < other_seq->get_length(); ++i)
+            items[i] = other_seq->get(i);
+        sequence = new LinkedListSequence<T>(items, other_seq->get_length());
     }
 
     template<class T>
     Queue<T>::Queue(const Queue<T> *queue) {
-        list = new LinkedListSequence<T>();
+        sequence = new LinkedListSequence<T>();
         for (int i = 0; i < queue->size(); ++i)
-            list->append(queue->list->get(i));
-    }
-
-    template<class T>
-    Queue<T>::~Queue() {
-        delete list;
-    }
-
-    template<class T>
-    bool Queue<T>::empty() const {
-        return list->get_length() == 0;
-    }
-
-    template<class T>
-    size_t Queue<T>::size() const {
-        return list->get_length();
-    }
-
-    template<class T>
-    void Queue<T>::swap(Queue<T> &other) {
-        auto tmp = list;
-        list = other.list;
-        other.list = tmp;
+            sequence->append(queue->sequence->get(i));
     }
 
     template<class T>
     void Queue<T>::push(const T &item) {
-        list->append(item);
+        sequence->append(item);
     }
 
     template<class T>
@@ -88,8 +63,8 @@ namespace kogan {
         if (empty())
             throw kogan::EmptyContainerException();
 
-        T value = list->get_first();
-        list->remove(0);
+        T value = sequence->get_first();
+        sequence->remove(0);
         return value;
     }
 
@@ -97,13 +72,8 @@ namespace kogan {
     Queue<T> *Queue<T>::concat(const Queue<T> &other) const {
         auto* result = new Queue<T>(this);
         for (int i = 0; i < other.size(); ++i)
-            result->push(other.list->get(i));
+            result->push(other.sequence->get(i));
         return result;
-    }
-
-    template<class T>
-    Sequence<T> *Queue<T>::get_subsequence(int start_index, int end_index) const {
-        return list->get_subsequence(start_index, end_index);
     }
 
 } // kogan
