@@ -110,6 +110,41 @@ TEST(range_based_for_loop_assignment, base_container_test_suite) {
     ASSERT(d.pop_back() == 109);
 }
 
+TEST(map, base_container_test_suite) {
+    int values[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    kogan::Deque<int> d(values, 10);
+
+    kogan::Sequence<int>* squares = d.map([](int x) { return x * x; });
+    ASSERT(squares->get_length() == 10);
+    ASSERT(squares->get(0) == 1);
+    ASSERT(squares->get(1) == 4);
+    ASSERT(squares->get(2) == 9);
+    ASSERT(squares->get(3) == 16);
+    ASSERT(squares->get(9) == 100);
+    delete squares;
+
+    kogan::Sequence<int>* identity = d.map([](int x) { return x; });
+    ASSERT(identity->get_length() == 10);
+    ASSERT(identity->get(0) == 1);
+    ASSERT(identity->get(1) == 2);
+    ASSERT(identity->get(9) == 10);
+    delete identity;
+
+    kogan::Sequence<int>* negatives = d.map([](int x) { return -x; });
+    ASSERT(negatives->get_length() == 10);
+    ASSERT(negatives->get(0) == -1);
+    ASSERT(negatives->get(1) == -2);
+    ASSERT(negatives->get(9) == -10);
+    delete negatives;
+
+    kogan::Sequence<int>* zeros = d.map([](int x) { return 0; });
+    ASSERT(zeros->get_length() == 10);
+    ASSERT(zeros->get(0) == 0);
+    ASSERT(zeros->get(1) == 0);
+    ASSERT(zeros->get(9) == 0);
+    delete zeros;
+}
+
 TEST(reduce, base_container_test_suite) {
     int values[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     kogan::Deque<int> d(values, 10);

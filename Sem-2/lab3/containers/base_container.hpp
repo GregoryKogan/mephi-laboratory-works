@@ -7,6 +7,7 @@
 
 #include <sequences/Sequence.hpp>
 #include <exceptions/EmptyContainerException/EmptyContainerException.hpp>
+#include <sequences/LinkedListSequence.hpp>
 #include "i_enumerable.hpp"
 
 namespace kogan {
@@ -21,6 +22,7 @@ namespace kogan {
         void swap(BaseContainer<T>& other);
         Sequence<T>* get_subsequence(int start_index, int end_index) const;
 
+        Sequence<T>* map(T (*func)(T)) const;
         T reduce(T (*func)(T, T), T initial_value) const;
     };
 
@@ -47,13 +49,22 @@ namespace kogan {
     }
 
     template<class T>
+    Sequence<T> *BaseContainer<T>::map(T (*func)(T)) const {
+        auto result = new LinkedListSequence<T>;
+        for (auto x: *this)
+            result->append(func(x));
+        return result;
+    }
+
+    template<class T>
     T BaseContainer<T>::reduce(T (*func)(T, T), T initial_value) const {
         if (empty())
             throw EmptyContainerException();
 
         T result = initial_value;
-        for (int i = 0; i < sequence->get_length(); ++i)
-            result = func(result, sequence->get(i));
+        for (auto x: *this)
+            result = func(result, x);
+
         return result;
     }
 
