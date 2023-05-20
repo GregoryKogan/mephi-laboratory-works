@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
-add_executable(lab3_run run.cpp containers/queue/queue.hpp containers/stack/stack.hpp containers/deque/deque.hpp containers/base_container.hpp)
-add_executable(lab3_test test.cpp containers/queue/queue.hpp tests/queue/queue_tests.cpp tests/queue/queue_tests.hpp containers/stack/stack.hpp tests/stack/stack_tests.cpp tests/stack/stack_tests.hpp containers/deque/deque.hpp tests/deque/deque_tests.cpp tests/deque/deque_tests.hpp containers/base_container.hpp)
+add_executable(lab3_run run.cpp containers/queue/queue.hpp containers/stack/stack.hpp containers/deque/deque.hpp containers/base_container.hpp persons/person.cpp persons/person.hpp)
+add_executable(lab3_test test.cpp containers/queue/queue.hpp tests/queue/queue_tests.cpp tests/queue/queue_tests.hpp containers/stack/stack.hpp tests/stack/stack_tests.cpp tests/stack/stack_tests.hpp containers/deque/deque.hpp tests/deque/deque_tests.cpp tests/deque/deque_tests.hpp containers/base_container.hpp persons/person.cpp persons/person.hpp tests/person/person_tests.cpp tests/person/person_tests.hpp)
 
 include(FindPkgConfig)
 find_package(SequenceLib REQUIRED)
