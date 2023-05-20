@@ -1,6 +1,3 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "google-explicit-constructor"
-#pragma ide diagnostic ignored "misc-unconventional-assign-operator"
 //
 // Created by Gregory Kogan on 03.05.2023.
 //
@@ -31,46 +28,15 @@ namespace kogan {
         virtual void clear() = 0;
         virtual void remove(int index) = 0;
 
-        class SequenceGetSetProxy {
-            int index;
-            Sequence<T>* sequence;
+        virtual T& operator[](int index) = 0;
 
-        public:
-            SequenceGetSetProxy(Sequence<T>* seq, int ind);
-            operator T() const;
-            void operator= (T item);
-        };
-
-        SequenceGetSetProxy operator[](int index);
+        [[nodiscard]] std::string to_string() const;
 
         friend std::ostream& operator<<(std::ostream& os, const Sequence<T>& seq) {
             os << seq.to_string();
             return os;
         }
-
-        [[nodiscard]] std::string to_string() const;
     };
-
-    template<class T>
-    Sequence<T>::SequenceGetSetProxy::SequenceGetSetProxy(Sequence<T> *seq, int ind) {
-        sequence = seq;
-        index = ind;
-    }
-
-    template<class T>
-    Sequence<T>::SequenceGetSetProxy::operator T() const {
-        return sequence->get(index);
-    }
-
-    template<class T>
-    void Sequence<T>::SequenceGetSetProxy::operator=(T item) {
-        sequence->set(index, item);
-    }
-
-    template<class T>
-    typename Sequence<T>::SequenceGetSetProxy Sequence<T>::operator[](int index) {
-        return SequenceGetSetProxy(this, index);
-    }
 
     template<class T>
     Sequence<T>::~Sequence() = default;
@@ -90,5 +56,3 @@ namespace kogan {
 } // kogan
 
 #endif //LAB2_SEQUENCE_H
-
-#pragma clang diagnostic pop

@@ -29,7 +29,6 @@ namespace kogan {
         node* get_node(int index);
 
     public:
-
         LinkedList(T* items, size_t count);
         LinkedList();
         LinkedList(const LinkedList<T> &linkedList);
@@ -51,6 +50,8 @@ namespace kogan {
 
         void clear();
         void remove(int index);
+
+        T& operator[](int index);
     };
 
     template<class T>
@@ -345,6 +346,14 @@ namespace kogan {
         }
 
         length--;
+    }
+
+    template<class T>
+    T &LinkedList<T>::operator[](int index) {
+        if (index < 0 || index >= length)
+            throw IndexOutOfRangeException(index, 0, length - 1);
+
+        return get_node(index)->value;
     }
 
 } // kogan
