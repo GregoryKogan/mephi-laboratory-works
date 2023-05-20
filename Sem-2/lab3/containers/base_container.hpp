@@ -25,6 +25,13 @@ namespace kogan {
         Sequence<T>* map(T (*func)(T)) const;
         Sequence<T>* where(bool (*func)(T)) const;
         T reduce(T (*func)(T, T), T initial_value) const;
+
+        std::string to_string() const;
+
+        friend std::ostream& operator<<(std::ostream& os, const BaseContainer<T>& container) {
+            os << container.to_string();
+            return os;
+        }
     };
 
     template<class T>
@@ -78,6 +85,18 @@ namespace kogan {
         return result;
     }
 
+    template<class T>
+    std::string BaseContainer<T>::to_string() const {
+        if (empty())
+            return "[]";
+
+        std::string result = "[";
+        for (auto x: *this)
+            result += std::to_string(x) + ", ";
+        result += "\b\b]";
+
+        return result;
+    }
 
 } // kogan
 
