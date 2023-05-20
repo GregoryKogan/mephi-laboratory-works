@@ -161,6 +161,7 @@ TEST(concat, deque_test_suite) {
     ASSERT(d3->pop_front() == 4);
     ASSERT(d3->pop_front() == 5);
     ASSERT(d3->pop_front() == 6);
+    delete d3;
 }
 
 

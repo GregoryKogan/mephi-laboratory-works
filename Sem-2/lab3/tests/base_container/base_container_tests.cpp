@@ -166,6 +166,7 @@ TEST(where, base_container_test_suite) {
     ASSERT(all->get(0) == 1);
     ASSERT(all->get(1) == 2);
     ASSERT(all->get(9) == 10);
+    delete all;
 
     kogan::Sequence<int>* none = d.where([](int x) { return false; });
     ASSERT(none->get_length() == 0);
