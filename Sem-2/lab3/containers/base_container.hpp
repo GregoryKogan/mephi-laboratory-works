@@ -26,7 +26,7 @@ namespace kogan {
         Sequence<T>* where(bool (*func)(T)) const;
         T reduce(T (*func)(T, T), T initial_value) const;
 
-        std::string to_string() const;
+        [[nodiscard]] std::string to_string() const;
 
         friend std::ostream& operator<<(std::ostream& os, const BaseContainer<T>& container) {
             os << container.to_string();
