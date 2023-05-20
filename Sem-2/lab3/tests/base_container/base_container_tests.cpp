@@ -110,6 +110,57 @@ TEST(range_based_for_loop_assignment, base_container_test_suite) {
     ASSERT(d.pop_back() == 109);
 }
 
+TEST(reduce, base_container_test_suite) {
+    int values[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    kogan::Deque<int> d(values, 10);
+
+    int sum = d.reduce([](int a, int b) { return a + b; }, 0);
+    ASSERT(sum == 55);
+
+    int product = d.reduce([](int a, int b) { return a * b; }, 1);
+    ASSERT(product == 3628800);
+
+    int max = d.reduce([](int a, int b) { return a > b ? a : b; }, INT_MIN);
+    ASSERT(max == 10);
+
+    int min = d.reduce([](int a, int b) { return a < b ? a : b;}, INT_MAX);
+    ASSERT(min == 1);
+
+    int count = d.reduce([](int a, int b) { return a + 1; }, 0);
+    ASSERT(count == 10);
+
+    int sum_of_squares = d.reduce([](int a, int b) { return a + b * b; }, 0);
+    ASSERT(sum_of_squares == 385);
+
+    int sum_of_cubes = d.reduce([](int a, int b) { return a + b * b * b; }, 0);
+    ASSERT(sum_of_cubes == 3025);
+}
+
+TEST(reduce_single_item, base_container_test_suite) {
+    kogan::Deque<int> d;
+    d.push_back(42);
+
+    int sum = d.reduce([](int a, int b) { return a + b; }, 0);
+    ASSERT(sum == 42);
+
+    int product = d.reduce([](int a, int b) { return a * b; }, 1);
+    ASSERT(product == 42);
+
+    int max = d.reduce([](int a, int b) { return a > b ? a : b; }, INT_MIN);
+    ASSERT(max == 42);
+
+    int min = d.reduce([](int a, int b) { return a < b ? a : b;}, INT_MAX);
+    ASSERT(min == 42);
+
+    int count = d.reduce([](int a, int b) { return a + 1; }, 0);
+    ASSERT(count == 1);
+
+    int sum_of_squares = d.reduce([](int a, int b) { return a + b * b; }, 0);
+    ASSERT(sum_of_squares == 1764);
+
+    int sum_of_cubes = d.reduce([](int a, int b) { return a + b * b * b; }, 0);
+    ASSERT(sum_of_cubes == 74088);
+}
 
 kogan::TestSuite get_base_container_test_suite() {
     return base_container_test_suite;

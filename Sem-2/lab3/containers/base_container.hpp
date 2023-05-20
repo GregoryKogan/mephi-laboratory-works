@@ -6,6 +6,7 @@
 #define LAB3_BASE_CONTAINER_HPP
 
 #include <sequences/Sequence.hpp>
+#include <exceptions/EmptyContainerException/EmptyContainerException.hpp>
 #include "i_enumerable.hpp"
 
 namespace kogan {
@@ -19,6 +20,8 @@ namespace kogan {
         [[nodiscard]] size_t size() const;
         void swap(BaseContainer<T>& other);
         Sequence<T>* get_subsequence(int start_index, int end_index) const;
+
+        T reduce(T (*func)(T, T), T initial_value) const;
     };
 
     template<class T>
@@ -42,6 +45,18 @@ namespace kogan {
     Sequence<T> *BaseContainer<T>::get_subsequence(int start_index, int end_index) const {
         return sequence->get_subsequence(start_index, end_index);
     }
+
+    template<class T>
+    T BaseContainer<T>::reduce(T (*func)(T, T), T initial_value) const {
+        if (empty())
+            throw EmptyContainerException();
+
+        T result = initial_value;
+        for (int i = 0; i < sequence->get_length(); ++i)
+            result = func(result, sequence->get(i));
+        return result;
+    }
+
 
 } // kogan
 
