@@ -6,24 +6,20 @@
 #define LAB3_BASE_CONTAINER_HPP
 
 #include <sequences/Sequence.hpp>
+#include "i_enumerable.hpp"
 
 namespace kogan {
 
-    template <class T> class BaseContainer {
+    template <class T> class BaseContainer: public IEnumerable<T> {
     protected:
-        Sequence<T>* sequence;
+        using IEnumerable<T>::sequence;
+
     public:
-        ~BaseContainer();
         [[nodiscard]] bool empty() const;
         [[nodiscard]] size_t size() const;
         void swap(BaseContainer<T>& other);
         Sequence<T>* get_subsequence(int start_index, int end_index) const;
     };
-
-    template<class T>
-    BaseContainer<T>::~BaseContainer() {
-        delete sequence;
-    }
 
     template<class T>
     bool BaseContainer<T>::empty() const {

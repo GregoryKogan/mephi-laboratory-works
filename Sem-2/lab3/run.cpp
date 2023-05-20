@@ -1,15 +1,18 @@
-#include "sequence_lib.hpp"
+#include "containers/deque/deque.hpp"
 
 
 int main() {
-    kogan::LinkedListSequence<int> list;
-    list.append(1);
-    list.append(2);
-    list.append(3);
-    list.append(4);
-    list.append(5);
+    int values[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    kogan::Deque<int> d(values, 10);
 
-    std::cout << list << std::endl;
+    for (auto x: d) {
+        std::cout << x << std::endl;
+        x = 33;
+    }
+
+    for (auto x: d) {
+        std::cout << x << std::endl;
+    }
 
     return 0;
 }
