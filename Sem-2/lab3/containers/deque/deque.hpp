@@ -88,8 +88,8 @@ namespace kogan {
     template<class T>
     Deque<T> *Deque<T>::concat(const Deque<T> &other) const {
         auto* result = new Deque<T>(this);
-        for (int i = 0; i < other.size(); ++i)
-            result->push_back(other.sequence->get(i));
+        for (auto x: other)
+            result->push_back(x);
         return result;
     }
 

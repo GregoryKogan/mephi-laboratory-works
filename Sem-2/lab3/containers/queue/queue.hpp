@@ -71,8 +71,8 @@ namespace kogan {
     template<class T>
     Queue<T> *Queue<T>::concat(const Queue<T> &other) const {
         auto* result = new Queue<T>(this);
-        for (int i = 0; i < other.size(); ++i)
-            result->push(other.sequence->get(i));
+        for (auto x: other)
+            result->push(x);
         return result;
     }
 

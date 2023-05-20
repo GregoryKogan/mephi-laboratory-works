@@ -71,8 +71,8 @@ namespace kogan {
     template<class T>
     Stack<T> *Stack<T>::concat(const Stack<T> &other) const {
         auto* result = new Stack<T>(this);
-        for (int i = 0; i < other.size(); ++i)
-            result->sequence->append(other.sequence->get(i));
+        for (auto x: other)
+            result->sequence->append(x);
         return result;
     }
 
