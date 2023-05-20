@@ -5,6 +5,7 @@
 #ifndef LAB3_MENUS_HPP
 #define LAB3_MENUS_HPP
 
+#include <limits>
 #include <IO/colored_logs.hpp>
 #include "../containers/queue/queue.hpp"
 #include "../containers/stack/stack.hpp"
