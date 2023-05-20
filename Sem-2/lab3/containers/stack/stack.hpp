@@ -45,6 +45,7 @@ namespace kogan {
         for (int i = 0; i < other_seq->get_length(); ++i)
             items[i] = other_seq->get(i);
         sequence = new LinkedListSequence<T>(items, other_seq->get_length());
+        delete [] items;
     }
 
     template<class T>
@@ -73,7 +74,7 @@ namespace kogan {
     T Stack<T>::front() const {
         if (empty())
             throw kogan::EmptyContainerException();
-        
+
         return sequence->get_first();;
     }
 
