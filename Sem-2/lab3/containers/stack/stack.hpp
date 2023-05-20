@@ -24,6 +24,7 @@ namespace kogan {
 
         void push(const T& item);
         T pop();
+        T front() const;
 
         Stack<T>* concat(const Stack<T>& other) const;
     };
@@ -66,6 +67,14 @@ namespace kogan {
         T value = sequence->get_first();
         sequence->remove(0);
         return value;
+    }
+
+    template<class T>
+    T Stack<T>::front() const {
+        if (empty())
+            throw kogan::EmptyContainerException();
+        
+        return sequence->get_first();;
     }
 
     template<class T>

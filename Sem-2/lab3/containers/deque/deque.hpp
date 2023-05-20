@@ -26,6 +26,8 @@ namespace kogan {
         void push_back(const T& item);
         T pop_front();
         T pop_back();
+        T front() const;
+        T back() const;
 
         Deque<T>* concat(const Deque<T>& other) const;
     };
@@ -83,6 +85,22 @@ namespace kogan {
         T value = sequence->get_last();
         sequence->remove(sequence->get_length() - 1);
         return value;
+    }
+
+    template<class T>
+    T Deque<T>::front() const {
+        if (empty())
+            throw kogan::EmptyContainerException();
+
+        return sequence->get_first();
+    }
+
+    template<class T>
+    T Deque<T>::back() const {
+        if (empty())
+            throw kogan::EmptyContainerException();
+
+        return sequence->get_last();
     }
 
     template<class T>

@@ -14,18 +14,19 @@ namespace kogan {
     template <class T> class Queue: public BaseContainer<T> {
         using BaseContainer<T>::sequence;
 
-        public:
-            using BaseContainer<T>::empty;
+    public:
+        using BaseContainer<T>::empty;
 
-            Queue();
-            Queue(T* items, int count);
-            explicit Queue(const Sequence<T>* other_seq);
-            explicit Queue(const Queue<T>* queue);
+        Queue();
+        Queue(T* items, int count);
+        explicit Queue(const Sequence<T>* other_seq);
+        explicit Queue(const Queue<T>* queue);
 
-            void push(const T& item);
-            T pop();
+        void push(const T& item);
+        T pop();
+        T front() const;
 
-            Queue<T>* concat(const Queue<T>& other) const;
+        Queue<T>* concat(const Queue<T>& other) const;
     };
 
     template<class T>
@@ -66,6 +67,14 @@ namespace kogan {
         T value = sequence->get_first();
         sequence->remove(0);
         return value;
+    }
+
+    template<class T>
+    T Queue<T>::front() const {
+        if (empty())
+            throw kogan::EmptyContainerException();
+
+        return sequence->get_first();;
     }
 
     template<class T>
