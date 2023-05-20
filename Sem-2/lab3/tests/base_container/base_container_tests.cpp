@@ -145,6 +145,39 @@ TEST(map, base_container_test_suite) {
     delete zeros;
 }
 
+TEST(where, base_container_test_suite) {
+    int values[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    kogan::Deque<int> d(values, 10);
+
+    kogan::Sequence<int>* evens = d.where([](int x) { return x % 2 == 0; });
+    ASSERT(evens->get_length() == 5);
+    ASSERT(evens->get(0) == 2);
+    ASSERT(evens->get(1) == 4);
+    ASSERT(evens->get(4) == 10);
+    delete evens;
+
+    kogan::Sequence<int>* odds = d.where([](int x) { return x % 2 == 1; });
+    ASSERT(odds->get_length() == 5);
+    ASSERT(odds->get(0) == 1);
+    ASSERT(odds->get(1) == 3);
+    ASSERT(odds->get(4) == 9);
+    delete odds;
+
+    kogan::Sequence<int>* all = d.where([](int x) { return true; });
+    ASSERT(all->get_length() == 10);
+    ASSERT(all->get(0) == 1);
+    ASSERT(all->get(1) == 2);
+    ASSERT(all->get(9) == 10);
+
+    kogan::Sequence<int>* none = d.where([](int x) { return false; });
+    ASSERT(none->get_length() == 0);
+    delete none;
+
+    kogan::Sequence<int>* empty = kogan::Deque<int>().where([](int x) { return true; });
+    ASSERT(empty->get_length() == 0);
+    delete empty;
+}
+
 TEST(reduce, base_container_test_suite) {
     int values[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     kogan::Deque<int> d(values, 10);

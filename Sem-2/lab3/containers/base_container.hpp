@@ -23,6 +23,7 @@ namespace kogan {
         Sequence<T>* get_subsequence(int start_index, int end_index) const;
 
         Sequence<T>* map(T (*func)(T)) const;
+        Sequence<T>* where(bool (*func)(T)) const;
         T reduce(T (*func)(T, T), T initial_value) const;
     };
 
@@ -53,6 +54,15 @@ namespace kogan {
         auto result = new LinkedListSequence<T>;
         for (auto x: *this)
             result->append(func(x));
+        return result;
+    }
+
+    template<class T>
+    Sequence<T> *BaseContainer<T>::where(bool (*func)(T)) const {
+        auto result = new LinkedListSequence<T>;
+        for (auto x: *this)
+            if (func(x))
+                result->append(x);
         return result;
     }
 
