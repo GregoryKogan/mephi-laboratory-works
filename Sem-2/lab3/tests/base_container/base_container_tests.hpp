@@ -5,6 +5,7 @@
 #ifndef LAB3_BASE_CONTAINER_TESTS_HPP
 #define LAB3_BASE_CONTAINER_TESTS_HPP
 
+#include <limits>
 #include "test_lib.hpp"
 #include "../../containers/base_container.hpp"
 #include "../../containers/deque/deque.hpp"

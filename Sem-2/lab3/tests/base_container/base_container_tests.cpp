@@ -186,10 +186,10 @@ TEST(reduce, base_container_test_suite) {
     int product = d.reduce([](int a, int b) { return a * b; }, 1);
     ASSERT(product == 3628800);
 
-    int max = d.reduce([](int a, int b) { return a > b ? a : b; }, INT_MIN);
+    int max = d.reduce([](int a, int b) { return a > b ? a : b; }, std::numeric_limits<int>::min());
     ASSERT(max == 10);
 
-    int min = d.reduce([](int a, int b) { return a < b ? a : b;}, INT_MAX);
+    int min = d.reduce([](int a, int b) { return a < b ? a : b;}, std::numeric_limits<int>::max());
     ASSERT(min == 1);
 
     int count = d.reduce([](int a, int b) { return a + 1; }, 0);
@@ -212,10 +212,10 @@ TEST(reduce_single_item, base_container_test_suite) {
     int product = d.reduce([](int a, int b) { return a * b; }, 1);
     ASSERT(product == 42);
 
-    int max = d.reduce([](int a, int b) { return a > b ? a : b; }, INT_MIN);
+    int max = d.reduce([](int a, int b) { return a > b ? a : b; }, std::numeric_limits<int>::min());
     ASSERT(max == 42);
 
-    int min = d.reduce([](int a, int b) { return a < b ? a : b;}, INT_MAX);
+    int min = d.reduce([](int a, int b) { return a < b ? a : b;}, std::numeric_limits<int>::max());
     ASSERT(min == 42);
 
     int count = d.reduce([](int a, int b) { return a + 1; }, 0);
