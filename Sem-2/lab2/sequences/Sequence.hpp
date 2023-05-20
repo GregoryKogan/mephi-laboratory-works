@@ -1,6 +1,3 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "google-explicit-constructor"
-#pragma ide diagnostic ignored "misc-unconventional-assign-operator"
 //
 // Created by Gregory Kogan on 03.05.2023.
 //
@@ -59,5 +56,3 @@ namespace kogan {
 } // kogan
 
 #endif //LAB2_SEQUENCE_H
-
-#pragma clang diagnostic pop
