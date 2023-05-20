@@ -27,8 +27,9 @@ namespace kogan {
 
         void set(int index, T item);
         void resize(int new_size);
-    };
 
+        T& operator[](int index);
+    };
 
     template<class T>
     DynamicArray<T>::DynamicArray(T* items, size_t count) {
@@ -91,6 +92,14 @@ namespace kogan {
         delete [] data;
         data = new_data;
         length = new_size;
+    }
+
+    template<class T>
+    T &DynamicArray<T>::operator[](int index) {
+        if (index < 0 || index >= length)
+            throw IndexOutOfRangeException(index, 0, length - 1);
+
+        return data[index];
     }
 
 } // kogan

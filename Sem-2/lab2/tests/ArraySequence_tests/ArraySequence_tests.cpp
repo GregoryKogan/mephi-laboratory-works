@@ -484,6 +484,21 @@ TEST(remove_empty_IndexOutOfRangeException, array_sequence_suite) {
     ASSERT(indexOutOfRangeExceptionThrown);
 }
 
+TEST(operator_square_brackets, array_sequence_suite) {
+    kogan::ArraySequence<int> seq;
+    for (int i = 0; i < 10; ++i)
+        seq.append(i + 1);
+
+    ASSERT(seq[0] == 1);
+    ASSERT(seq[9] == 10);
+
+    seq[0] = 42;
+    ASSERT(seq[0] == 42);
+
+    seq[9] = 42;
+    ASSERT(seq[9] == 42);
+}
+
 
 kogan::TestSuite get_array_sequence_suite() {
     return array_sequence_suite;

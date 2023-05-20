@@ -478,6 +478,21 @@ TEST(remove_empty_IndexOutOfRangeException, linked_list_sequence_suite) {
     ASSERT(indexOutOfRangeExceptionThrown);
 }
 
+TEST(operator_square_brackets, linked_list_sequence_suite) {
+    kogan::LinkedListSequence<int> seq;
+    for (int i = 0; i < 10; ++i)
+        seq.append(i + 1);
+
+    ASSERT(seq[0] == 1);
+    ASSERT(seq[9] == 10);
+
+    seq[0] = 42;
+    ASSERT(seq[0] == 42);
+
+    seq[9] = 42;
+    ASSERT(seq[9] == 42);
+}
+
 
 kogan::TestSuite get_linked_list_sequence_suite() {
     return linked_list_sequence_suite;

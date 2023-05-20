@@ -18,21 +18,23 @@ namespace kogan {
         ArraySequence();
         ArraySequence(const ArraySequence<T> &arraySequence);
 
-        ~ArraySequence();
+        ~ArraySequence() override;
 
-        T get_first() const;
-        T get_last() const;
-        T get(int index) const;
-        Sequence<T>* get_subsequence(int start_index, int end_index) const;
-        [[nodiscard]] size_t get_length() const;
+        T get_first() const override;
+        T get_last() const override;
+        T get(int index) const override;
+        Sequence<T>* get_subsequence(int start_index, int end_index) const override;
+        [[nodiscard]] size_t get_length() const override;
 
-        void set(int index, T item);
-        void append(T item);
-        void prepend(T item);
-        void insert(int index, T item);
-        Sequence<T>* concat(Sequence<T>* sequence);
-        void clear();
-        void remove(int index);
+        void set(int index, T item) override;
+        void append(T item) override;
+        void prepend(T item) override;
+        void insert(int index, T item) override;
+        Sequence<T>* concat(Sequence<T>* sequence) override;
+        void clear() override;
+        void remove(int index) override;
+
+        T& operator[](int index) override;
     };
 
     template<class T>
@@ -149,6 +151,11 @@ namespace kogan {
         for (int i = index; i < get_length() - 1; ++i)
             set(i, get(i + 1));
         array->resize(get_length() - 1);
+    }
+
+    template<class T>
+    T &ArraySequence<T>::operator[](int index) {
+        return array->operator[](index);
     }
 
 } // kogan
