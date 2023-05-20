@@ -100,10 +100,8 @@ TEST(range_based_for_loop_assignment, base_container_test_suite) {
     kogan::Deque<int> d(values, 10);
 
     int counter = 100;
-    for (auto x: d) {
-        x = counter;
-        counter++;
-    }
+    for (auto& x: d)
+        x = counter++;
 
     ASSERT(d.pop_front() == 100);
     ASSERT(d.pop_front() == 101);

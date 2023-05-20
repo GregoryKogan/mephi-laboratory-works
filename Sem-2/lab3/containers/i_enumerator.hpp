@@ -18,12 +18,12 @@ namespace kogan {
         IEnumerator(Sequence<T>* sequence, int index);
 
         bool move_next();
-        typename Sequence<T>::SequenceGetSetProxy current() const;
+        T& current() const;
         void reset();
 
         IEnumerator<T> operator++();
         bool operator!=(const IEnumerator& other) const;
-        typename Sequence<T>::SequenceGetSetProxy operator*() const;
+        T& operator*() const;
     };
 
     template<class T>
@@ -41,8 +41,8 @@ namespace kogan {
     }
 
     template<class T>
-    typename Sequence<T>::SequenceGetSetProxy IEnumerator<T>::current() const {
-        return (*sequence)[index];
+    T& IEnumerator<T>::current() const {
+        return sequence->operator[](index);
     }
 
     template<class T>
@@ -62,7 +62,7 @@ namespace kogan {
     }
 
     template<class T>
-    typename Sequence<T>::SequenceGetSetProxy IEnumerator<T>::operator*() const {
+    T& IEnumerator<T>::operator*() const {
         return current();
     }
 
