@@ -19,6 +19,7 @@ namespace kogan {
 
     public:
         NaryTree(T root_value, int max_children);
+        explicit NaryTree(T root_value);
 
         ~NaryTree();
 
@@ -33,6 +34,9 @@ namespace kogan {
 
         NaryTree<T>& operator[](int index);
     };
+
+    template<class T>
+    NaryTree<T>::NaryTree(T root_value): NaryTree(root_value, std::numeric_limits<int>::max()) {} // NOLINT(cppcoreguidelines-pro-type-member-init)
 
     template<class T>
     NaryTree<T>::NaryTree(T root_value, int max_children): max_children(max_children) {

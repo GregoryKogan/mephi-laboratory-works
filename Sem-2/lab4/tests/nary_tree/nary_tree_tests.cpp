@@ -16,6 +16,14 @@ TEST(constructor, nary_tree_test_suite) {
     ASSERT(tree.max_children_count() == 2);
 }
 
+TEST(constructor_without_max_children, nary_tree_test_suite) {
+    kogan::NaryTree<int> tree(42);
+    ASSERT(tree.size() == 1);
+    ASSERT(tree.get_data() == 42);
+    ASSERT(tree.children_count() == 0);
+    ASSERT(tree.max_children_count() > 1e9);
+}
+
 TEST(add_child, nary_tree_test_suite) {
     kogan::NaryTree<int> tree(42, 2);
     tree.add_child(1);
