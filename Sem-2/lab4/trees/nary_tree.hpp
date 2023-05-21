@@ -48,6 +48,9 @@ namespace kogan {
         Sequence<T>* traverse() const;
         Sequence<T>* traverse(TraverseType traverse_type) const;
 
+        std::string to_string() const;
+        std::string to_string(TraverseType traverse_type) const;
+
         NaryTree<T>& operator[](int index);
     };
 
@@ -203,6 +206,22 @@ namespace kogan {
         }
         result->append(get_data());
 
+        return result;
+    }
+
+    template<class T>
+    std::string NaryTree<T>::to_string() const {
+        Sequence<T>* path = traverse();
+        std::string result = path->to_string();
+        delete path;
+        return result;
+    }
+
+    template<class T>
+    std::string NaryTree<T>::to_string(NaryTree::TraverseType traverse_type) const {
+        Sequence<T>* path = traverse(traverse_type);
+        std::string result = path->to_string();
+        delete path;
         return result;
     }
 

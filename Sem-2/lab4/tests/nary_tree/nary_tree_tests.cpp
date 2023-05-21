@@ -177,6 +177,29 @@ TEST(traverse_RIGHT_LEFT_ROOT, nary_tree_test_suite) {
     delete path_right_left_root;
 }
 
+TEST(to_string, nary_tree_test_suite) {
+    kogan::NaryTree<char> tree('F', 2);
+    tree.add_child('B');
+    tree.add_child('G');
+    tree[0].add_child('A');
+    tree[0].add_child('D');
+    tree[0][1].add_child('C');
+    tree[0][1].add_child('E');
+    tree[1].add_child('I');
+    tree[1][0].add_child('H');
+
+    ASSERT(tree.to_string() ==
+        "[F, B, A, D, C, E, G, I, H]");
+    ASSERT(tree.to_string(kogan::NaryTree<char>::TraverseType::ROOT_LEFT_RIGHT) ==
+        "[F, B, A, D, C, E, G, I, H]");
+    ASSERT(tree.to_string(kogan::NaryTree<char>::TraverseType::ROOT_RIGHT_LEFT) ==
+        "[F, G, I, H, B, D, E, C, A]");
+    ASSERT(tree.to_string(kogan::NaryTree<char>::TraverseType::LEFT_RIGHT_ROOT) ==
+        "[A, C, E, D, B, H, I, G, F]");
+    ASSERT(tree.to_string(kogan::NaryTree<char>::TraverseType::RIGHT_LEFT_ROOT) ==
+        "[H, I, G, E, C, D, A, B, F]");
+}
+
 kogan::TestSuite get_nary_tree_test_suite() {
     return nary_tree_test_suite;
 }
