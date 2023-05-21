@@ -59,6 +59,12 @@ TEST(operator_square_brackets, nary_tree_test_suite) {
     ASSERT(tree[0][0][0][1].get_data() == 6);
 }
 
+TEST(set_data, nary_tree_test_suite) {
+    kogan::NaryTree<int> tree(42, 2);
+    tree.set_data(1);
+    ASSERT(tree.get_data() == 1);
+}
+
 kogan::TestSuite get_nary_tree_test_suite() {
     return nary_tree_test_suite;
 }

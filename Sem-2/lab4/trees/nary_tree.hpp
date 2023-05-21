@@ -26,6 +26,7 @@ namespace kogan {
         [[nodiscard]] size_t children_count() const;
         [[nodiscard]] size_t max_children_count() const;
         T get_data() const;
+        void set_data(T new_data);
 
         void add_child(T child);
         NaryTree<T>* get_child(int index) const;
@@ -70,6 +71,11 @@ namespace kogan {
     template<class T>
     T NaryTree<T>::get_data() const {
         return data;
+    }
+
+    template<class T>
+    void NaryTree<T>::set_data(T new_data) {
+        data = new_data;
     }
 
     template<class T>
