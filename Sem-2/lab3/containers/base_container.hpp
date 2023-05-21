@@ -8,6 +8,7 @@
 #include <sequences/Sequence.hpp>
 #include <exceptions/EmptyContainerException/EmptyContainerException.hpp>
 #include <sequences/LinkedListSequence.hpp>
+#include <sstream>
 #include "i_enumerable.hpp"
 
 namespace kogan {
@@ -90,12 +91,11 @@ namespace kogan {
         if (empty())
             return "[]";
 
-        std::string result = "[";
+        std::ostringstream oss;
+        oss << "[";
         for (auto x: *this)
-            result += std::to_string(x) + ", ";
-        result += "\b\b]";
-
-        return result;
+            oss << x << ", ";
+        return oss.str() + "\b\b]";
     }
 
 } // kogan

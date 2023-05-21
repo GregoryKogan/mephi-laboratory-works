@@ -6,6 +6,7 @@
 #define LAB2_SEQUENCE_H
 
 #include <string>
+#include <sstream>
 
 namespace kogan {
 
@@ -46,11 +47,13 @@ namespace kogan {
         if (get_length() == 0)
             return "[]";
 
-        std::string str = "[" + std::to_string(get_first());
+        std::ostringstream oss;
+        oss << "[" << get_first();
         for (int i = 1; i < get_length(); ++i)
-            str += ", " + std::to_string(get(i));
-        str += "]";
-        return str;
+            oss << ", " << get(i);
+        oss << "]";
+
+        return oss.str();
     }
 
 } // kogan
