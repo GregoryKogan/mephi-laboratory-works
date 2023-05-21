@@ -7,7 +7,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 
 add_executable(lab4_run run.cpp trees/nary_tree.hpp)
-add_executable(lab4_test test.cpp trees/nary_tree.hpp)
+add_executable(lab4_test test.cpp trees/nary_tree.hpp tests/nary_tree/nary_tree_tests.cpp tests/nary_tree/nary_tree_tests.hpp)
 
 
 include(FindPkgConfig)
