@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 
-add_executable(lab4_run run.cpp)
-add_executable(lab4_test test.cpp)
+add_executable(lab4_run run.cpp trees/nary_tree.hpp)
+add_executable(lab4_test test.cpp trees/nary_tree.hpp)
 
 
 include(FindPkgConfig)
@@ -21,3 +21,8 @@ find_package(TestLib REQUIRED)
 include_directories(${TEST-LIB_INCLUDE_DIR})
 target_link_libraries(lab4_run ${TEST-LIB_LIBRARY})
 target_link_libraries(lab4_test ${TEST-LIB_LIBRARY})
+
+find_package(ContainerLib REQUIRED)
+include_directories(${CONTAINER-LIB_INCLUDE_DIR})
+target_link_libraries(lab4_run ${CONTAINER-LIB_LIBRARY})
+target_link_libraries(lab4_test ${CONTAINER-LIB_LIBRARY})
