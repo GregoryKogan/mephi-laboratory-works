@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.25)
+project(lab4)
+
+set(CMAKE_CXX_STANDARD 17)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+
+
+add_executable(lab4_run run.cpp)
+add_executable(lab4_test test.cpp)
+
+
+include(FindPkgConfig)
+
+find_package(SequenceLib REQUIRED)
+include_directories(${SEQUENCE-LIB_INCLUDE_DIR})
+target_link_libraries(lab4_run ${SEQUENCE-LIB_LIBRARY})
+target_link_libraries(lab4_test ${SEQUENCE-LIB_LIBRARY})
+
+find_package(TestLib REQUIRED)
+include_directories(${TEST-LIB_INCLUDE_DIR})
+target_link_libraries(lab4_run ${TEST-LIB_LIBRARY})
+target_link_libraries(lab4_test ${TEST-LIB_LIBRARY})
