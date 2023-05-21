@@ -73,6 +73,110 @@ TEST(set_data, nary_tree_test_suite) {
     ASSERT(tree.get_data() == 1);
 }
 
+TEST(traverse, nary_tree_test_suite) {
+    kogan::NaryTree<char> tree('F', 2);
+    tree.add_child('B');
+    tree.add_child('G');
+    tree[0].add_child('A');
+    tree[0].add_child('D');
+    tree[0][1].add_child('C');
+    tree[0][1].add_child('E');
+    tree[1].add_child('I');
+    tree[1][0].add_child('H');
+
+    kogan::Sequence<char>* default_path = tree.traverse();
+    char default_target[10] = "FBADCEGIH";
+
+    ASSERT(default_path->get_length() == 9);
+    for (int i = 0; i < 9; ++i)
+        ASSERT(default_path->get(i) == default_target[i]);
+    delete default_path;
+}
+
+TEST(traverse_ROOT_LEFT_RIGHT, nary_tree_test_suite) {
+    kogan::NaryTree<char> tree('F', 2);
+    tree.add_child('B');
+    tree.add_child('G');
+    tree[0].add_child('A');
+    tree[0].add_child('D');
+    tree[0][1].add_child('C');
+    tree[0][1].add_child('E');
+    tree[1].add_child('I');
+    tree[1][0].add_child('H');
+
+    kogan::Sequence<char>* path_root_left_right =
+            tree.traverse(kogan::NaryTree<char>::TraverseType::ROOT_LEFT_RIGHT);
+    char root_left_right_target[10] = "FBADCEGIH";
+
+    ASSERT(path_root_left_right->get_length() == 9);
+    for (int i = 0; i < 9; ++i)
+        ASSERT(path_root_left_right->get(i) == root_left_right_target[i]);
+    delete path_root_left_right;
+}
+
+TEST(traverse_ROOT_RIGHT_LEFT, nary_tree_test_suite) {
+    kogan::NaryTree<char> tree('F', 2);
+    tree.add_child('B');
+    tree.add_child('G');
+    tree[0].add_child('A');
+    tree[0].add_child('D');
+    tree[0][1].add_child('C');
+    tree[0][1].add_child('E');
+    tree[1].add_child('I');
+    tree[1][0].add_child('H');
+
+    kogan::Sequence<char>* path_root_right_left =
+            tree.traverse(kogan::NaryTree<char>::TraverseType::ROOT_RIGHT_LEFT);
+    char root_right_left_target[10] = "FGIHBDECA";
+
+    ASSERT(path_root_right_left->get_length() == 9);
+    for (int i = 0; i < 9; ++i)
+        ASSERT(path_root_right_left->get(i) == root_right_left_target[i]);
+    delete path_root_right_left;
+}
+
+TEST(traverse_LEFT_RIGHT_ROOT, nary_tree_test_suite) {
+    kogan::NaryTree<char> tree('F', 2);
+    tree.add_child('B');
+    tree.add_child('G');
+    tree[0].add_child('A');
+    tree[0].add_child('D');
+    tree[0][1].add_child('C');
+    tree[0][1].add_child('E');
+    tree[1].add_child('I');
+    tree[1][0].add_child('H');
+
+    kogan::Sequence<char>* path_left_right_root =
+            tree.traverse(kogan::NaryTree<char>::TraverseType::LEFT_RIGHT_ROOT);
+    char left_right_root_target[10] = "ACEDBHIGF";
+
+    ASSERT(path_left_right_root->get_length() == 9);
+    for (int i = 0; i < 9; ++i)
+        ASSERT(path_left_right_root->get(i) == left_right_root_target[i]);
+    delete path_left_right_root;
+}
+
+TEST(traverse_RIGHT_LEFT_ROOT, nary_tree_test_suite) {
+    kogan::NaryTree<char> tree('F', 2);
+    tree.add_child('B');
+    tree.add_child('G');
+    tree[0].add_child('A');
+    tree[0].add_child('D');
+    tree[0][1].add_child('C');
+    tree[0][1].add_child('E');
+    tree[1].add_child('I');
+    tree[1][0].add_child('H');
+
+    kogan::Sequence<char>* path_right_left_root =
+            tree.traverse(kogan::NaryTree<char>::TraverseType::RIGHT_LEFT_ROOT);
+    char right_left_root_target[10] = "HIGECDABF";
+
+    ASSERT(path_right_left_root->get_length() == 9);
+    for (int i = 0; i < 9; ++i)
+        ASSERT(path_right_left_root->get(i) == right_left_root_target[i]);
+    delete path_right_left_root;
+}
+
 kogan::TestSuite get_nary_tree_test_suite() {
     return nary_tree_test_suite;
 }
