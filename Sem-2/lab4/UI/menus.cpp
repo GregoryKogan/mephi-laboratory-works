@@ -152,6 +152,6 @@ void panic_if_invalid_input(const std::string& argument_name) {
     if (!std::cin.good()) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        throw kogan::InvalidArgumentException(std::move(argument_name));
+        throw kogan::InvalidArgumentException(argument_name);
     }
 }
