@@ -11,42 +11,64 @@
 namespace kogan {
 
     template <class T> class NaryTreeSerializer {
-        static NaryTree<T>* deserialize_as_child(const std::string& serialized_tree, int max_children_data);
-        static T read_until_open_bracket(const std::string& str);
-        static std::string parse_content(const std::string& str);
-        static Sequence<std::string>* parse_serialized_children(const std::string& serialized_children);
-        static void append_parsed_children(
-                NaryTree<T>* tree,
-                const Sequence<std::string>* parsed_children,
-                int max_children_data
-        );
+        NaryTree<T>* tree;
+        std::string serialized_tree;
+
+        int max_children_data = std::numeric_limits<int>::max();
+
+        NaryTree<T>* deserialize();
+        NaryTree<T>* deserialize_child(const std::string& serialized_child);
+        T read_until_open_bracket(const std::string& str);
+        std::string parse_content(const std::string& str);
+        Sequence<std::string>* parse_serialized_children(const std::string& serialized_children);
+        void append_parsed_children(NaryTree<T>* subtree, const Sequence<std::string>* parsed_children);
 
     public:
-        static NaryTree<T>* deserialize(const std::string& serialized_tree);
+        explicit NaryTreeSerializer(const std::string& serialized_tree);
+
+        ~NaryTreeSerializer();
+
+        [[nodiscard]] const NaryTree<T>* get_tree() const;
     };
 
     template<class T>
-    NaryTree<T> *NaryTreeSerializer<T>::deserialize(const std::string& serialized_tree) {
+    NaryTreeSerializer<T>::NaryTreeSerializer(const std::string& serialized_tree) {
+        this->serialized_tree = serialized_tree;
+        deserialize();
+    }
+
+    template<class T>
+    NaryTreeSerializer<T>::~NaryTreeSerializer() {
+        delete tree;
+    }
+
+    template<class T>
+    const NaryTree<T> *NaryTreeSerializer<T>::get_tree() const {
+        return tree;
+    }
+
+    template<class T>
+    NaryTree<T> *NaryTreeSerializer<T>::deserialize() {
         std::istringstream iss(serialized_tree);
-        int max_children_data; iss >> max_children_data;
+        iss >> max_children_data;
         if (max_children_data < 1)
             throw InvalidArgumentException("max_children");
 
         std::string remaining_string;
         getline(iss, remaining_string);
-        return deserialize_as_child(remaining_string, max_children_data);
+        this->tree = deserialize_child(remaining_string);
     }
 
     template<class T>
-    NaryTree<T> *NaryTreeSerializer<T>::deserialize_as_child(const std::string &serialized_tree, int max_children_data) {
-        T root_value = read_until_open_bracket(serialized_tree);
+    NaryTree<T> *NaryTreeSerializer<T>::deserialize_child(const std::string &serialized_child) {
+        T root_value = read_until_open_bracket(serialized_child);
         auto* result = new NaryTree<T>(root_value, max_children_data);
 
         Sequence<std::string>* parsed_children = parse_serialized_children(
-                parse_content(serialized_tree)
+                parse_content(serialized_child)
         );
 
-        append_parsed_children(result, parsed_children, max_children_data);
+        append_parsed_children(result, parsed_children);
 
         delete parsed_children;
         return result;
@@ -109,15 +131,15 @@ namespace kogan {
     }
 
     template<class T>
-    void NaryTreeSerializer<T>::append_parsed_children(NaryTree<T> *tree, const Sequence<std::string> *parsed_children, int max_children_data) {
+    void NaryTreeSerializer<T>::append_parsed_children(NaryTree<T> *subtree, const Sequence<std::string> *parsed_children) {
         if (parsed_children->get_length() > max_children_data)
             throw IndexOutOfRangeException(
                     (int)parsed_children->get_length(), 0, max_children_data
             );
 
         for (int i = 0; i < parsed_children->get_length(); ++i) {
-            NaryTree<T>* child_tree = deserialize_as_child(parsed_children->get(i), max_children_data);
-            tree->add_child(child_tree);
+            NaryTree<T>* child_tree = deserialize_child(parsed_children->get(i));
+            subtree->add_child(child_tree);
             delete child_tree;
         }
     }
