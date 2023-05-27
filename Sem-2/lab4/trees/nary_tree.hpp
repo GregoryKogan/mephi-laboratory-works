@@ -22,8 +22,6 @@ namespace kogan {
         Sequence<T>* traverse_left_right_root() const;
         Sequence<T>* traverse_right_left_root() const;
 
-        [[nodiscard]] std::string serialize_as_child() const;
-
     public:
         enum TraverseType {
             ROOT_LEFT_RIGHT,
@@ -55,7 +53,6 @@ namespace kogan {
 
         [[nodiscard]] std::string to_string() const;
         [[nodiscard]] std::string to_string(TraverseType traverse_type) const;
-        [[nodiscard]] std::string serialize() const;
 
         NaryTree<T>* map(T (*func)(T)) const;
 
@@ -264,27 +261,6 @@ namespace kogan {
         std::string result = path->to_string();
         delete path;
         return result;
-    }
-
-    template<class T>
-    std::string NaryTree<T>::serialize() const {
-        std::ostringstream oss;
-        oss << max_children << " ";
-        oss << serialize_as_child();
-        return oss.str();
-    }
-
-    template<class T>
-    std::string NaryTree<T>::serialize_as_child() const {
-        std::ostringstream oss;
-        oss << get_data();
-
-        oss << "(";
-        for (int i = 0; i < children_count(); ++i)
-            oss << get_child(i)->serialize_as_child();
-        oss << ")";
-
-        return oss.str();
     }
 
     template<class T>

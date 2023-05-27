@@ -16,7 +16,10 @@ namespace kogan {
 
         int max_children_data = std::numeric_limits<int>::max();
 
-        NaryTree<T>* deserialize();
+        void serialize();
+        [[nodiscard]] std::string serialize_child(const NaryTree<T>* child);
+
+        void deserialize();
         NaryTree<T>* deserialize_child(const std::string& serialized_child);
         T read_until_open_bracket(const std::string& str);
         std::string parse_content(const std::string& str);
@@ -24,12 +27,20 @@ namespace kogan {
         void append_parsed_children(NaryTree<T>* subtree, const Sequence<std::string>* parsed_children);
 
     public:
+        explicit NaryTreeSerializer(const NaryTree<T>& tree);
         explicit NaryTreeSerializer(const std::string& serialized_tree);
 
         ~NaryTreeSerializer();
 
         [[nodiscard]] const NaryTree<T>* get_tree() const;
+        [[nodiscard]] std::string get_serialized_tree() const;
     };
+
+    template<class T>
+    NaryTreeSerializer<T>::NaryTreeSerializer(const NaryTree<T> &tree) {
+        this->tree = new NaryTree<T>(tree);
+        serialize();
+    }
 
     template<class T>
     NaryTreeSerializer<T>::NaryTreeSerializer(const std::string& serialized_tree) {
@@ -48,7 +59,33 @@ namespace kogan {
     }
 
     template<class T>
-    NaryTree<T> *NaryTreeSerializer<T>::deserialize() {
+    std::string NaryTreeSerializer<T>::get_serialized_tree() const {
+        return serialized_tree;
+    }
+
+    template<class T>
+    void NaryTreeSerializer<T>::serialize() {
+        std::ostringstream oss;
+        oss << tree->max_children_count() << " ";
+        oss << serialize_child(tree);
+        serialized_tree = oss.str();
+    }
+
+    template<class T>
+    std::string NaryTreeSerializer<T>::serialize_child(const NaryTree<T>* child) {
+        std::ostringstream oss;
+        oss << child->get_data();
+
+        oss << "(";
+        for (int i = 0; i < child->children_count(); ++i)
+            oss << serialize_child(child->get_child(i));
+        oss << ")";
+
+        return oss.str();
+    }
+
+    template<class T>
+    void NaryTreeSerializer<T>::deserialize() {
         std::istringstream iss(serialized_tree);
         iss >> max_children_data;
         if (max_children_data < 1)
