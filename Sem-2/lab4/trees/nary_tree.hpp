@@ -58,6 +58,8 @@ namespace kogan {
         NaryTree<T>* map(T (*func)(T)) const;
         NaryTree<T>* where(bool (*func)(T)) const;
 
+        int count(T value) const;
+
         NaryTree<T>& operator[](int index);
     };
 
@@ -312,6 +314,15 @@ namespace kogan {
             }
         }
 
+        return result;
+    }
+
+    template<class T>
+    int NaryTree<T>::count(T value) const {
+        Sequence<T>* path = traverse();
+        int result = 0;
+        for (int i = 0; i < path->get_length(); ++i)
+            result += (path->get(i) == value);
         return result;
     }
 

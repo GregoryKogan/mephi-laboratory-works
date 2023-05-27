@@ -328,6 +328,14 @@ TEST(where, nary_tree_test_suite) {
     delete filtered_tree;
 }
 
+TEST(count, nary_tree_test_suite) {
+    kogan::NaryTreeSerializer<int> deserializer("2 1(2(3()4(5()6()))7(3(9())))");
+
+    ASSERT(deserializer.get_tree()->count(3) == 2);
+    ASSERT(deserializer.get_tree()->count(7) == 1);
+    ASSERT(deserializer.get_tree()->count(42) == 0);
+}
+
 kogan::TestSuite get_nary_tree_test_suite() {
     return nary_tree_test_suite;
 }
