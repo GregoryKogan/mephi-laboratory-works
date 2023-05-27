@@ -5,8 +5,8 @@
 #ifndef LAB4_NARY_TREE_SERIALIZER_HPP
 #define LAB4_NARY_TREE_SERIALIZER_HPP
 
-#include "../../trees/nary_tree.hpp"
 
+#include "../nary_tree.hpp"
 
 namespace kogan {
 

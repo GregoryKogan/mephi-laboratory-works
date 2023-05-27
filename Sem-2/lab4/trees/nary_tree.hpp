@@ -62,6 +62,7 @@ namespace kogan {
         bool contains(const NaryTree<T>& subtree) const;
 
         NaryTree<T>& operator[](int index);
+
         friend bool operator!=(const NaryTree<T> &l, const NaryTree<T> &r) {
             if (l.get_data() != r.get_data())
                 return true;
@@ -76,6 +77,7 @@ namespace kogan {
 
             return false;
         }
+
         friend bool operator==(const NaryTree<T> &l, const NaryTree<T> &r) {
             if (l.get_data() != r.get_data())
                 return false;
@@ -89,6 +91,11 @@ namespace kogan {
                     return false;
 
             return true;
+        }
+
+        friend std::ostream& operator<<(std::ostream& os, const NaryTree<T>& tree) {
+            os << tree.to_string();
+            return os;
         }
     };
 
