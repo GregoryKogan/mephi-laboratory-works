@@ -318,6 +318,16 @@ TEST(map, nary_tree_test_suite) {
     delete mapped_tree;
 }
 
+TEST(where, nary_tree_test_suite) {
+    kogan::NaryTreeSerializer<int> deserializer("2 1(2(3()4(5()6()))7(8(9())))");
+
+    kogan::NaryTree<int>* filtered_tree = deserializer.get_tree()->where([](int x) { return x < 6; });
+
+    kogan::NaryTreeSerializer<int> serializer(*filtered_tree);
+    ASSERT(serializer.get_serialized_tree() == "2 1(2(3()4(5())))");
+    delete filtered_tree;
+}
+
 kogan::TestSuite get_nary_tree_test_suite() {
     return nary_tree_test_suite;
 }

@@ -47,6 +47,7 @@ namespace kogan {
         void add_child(T child);
         void add_child(NaryTree<T>* child);
         NaryTree<T>* get_child(int index) const;
+        void remove_child(int index);
 
         Sequence<T>* traverse() const;
         Sequence<T>* traverse(TraverseType traverse_type) const;
@@ -55,6 +56,7 @@ namespace kogan {
         [[nodiscard]] std::string to_string(TraverseType traverse_type) const;
 
         NaryTree<T>* map(T (*func)(T)) const;
+        NaryTree<T>* where(bool (*func)(T)) const;
 
         NaryTree<T>& operator[](int index);
     };
@@ -150,6 +152,12 @@ namespace kogan {
     template<class T>
     NaryTree<T>* NaryTree<T>::get_child(int index) const {
         return children->get(index);
+    }
+
+    template<class T>
+    void NaryTree<T>::remove_child(int index) {
+        delete children->get(index);
+        children->remove(index);
     }
 
     template<class T>
@@ -276,6 +284,32 @@ namespace kogan {
 
             for (int i = 0; i < current->children_count(); ++i)
                 stack.push(current->get_child(i));
+        }
+
+        return result;
+    }
+
+    template<class T>
+    NaryTree<T> *NaryTree<T>::where(bool (*func)(T)) const {
+        if (!func(get_data()))
+            return nullptr;
+
+        auto* result = new NaryTree<T>(*this);
+
+        Stack<NaryTree<T>*> stack;
+        stack.push(result);
+
+        while (!stack.empty()) {
+            NaryTree<T>* current = stack.pop();
+
+            for (int i = 0; i < current->children_count(); ++i) {
+                if (!func(current->get_child(i)->get_data())) {
+                    current->remove_child(i);
+                    --i;
+                    continue;
+                }
+                stack.push(current->get_child(i));
+            }
         }
 
         return result;
