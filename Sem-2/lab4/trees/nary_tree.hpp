@@ -59,8 +59,37 @@ namespace kogan {
         NaryTree<T>* where(bool (*func)(T)) const;
 
         int count(T value) const;
+        bool contains(const NaryTree<T>& subtree) const;
 
         NaryTree<T>& operator[](int index);
+        friend bool operator!=(const NaryTree<T> &l, const NaryTree<T> &r) {
+            if (l.get_data() != r.get_data())
+                return true;
+            if (l.max_children_count() != r.max_children_count())
+                return true;
+            if (l.children_count() != r.children_count())
+                return true;
+
+            for (int i = 0; i < l.children_count(); ++i)
+                if (*l.get_child(i) != *r.get_child(i))
+                    return true;
+
+            return false;
+        }
+        friend bool operator==(const NaryTree<T> &l, const NaryTree<T> &r) {
+            if (l.get_data() != r.get_data())
+                return false;
+            if (l.max_children_count() != r.max_children_count())
+                return false;
+            if (l.children_count() != r.children_count())
+                return false;
+
+            for (int i = 0; i < l.children_count(); ++i)
+                if (*l.get_child(i) != *r.get_child(i))
+                    return false;
+
+            return true;
+        }
     };
 
     template<class T>
@@ -324,6 +353,18 @@ namespace kogan {
         for (int i = 0; i < path->get_length(); ++i)
             result += (path->get(i) == value);
         return result;
+    }
+
+    template<class T>
+    bool NaryTree<T>::contains(const NaryTree<T> &subtree) const {
+        if (subtree == *this)
+            return true;
+
+        for (int i = 0; i < children_count(); ++i)
+            if (get_child(i)->contains(subtree))
+                return true;
+
+        return false;
     }
 
     template<class T>

@@ -336,6 +336,20 @@ TEST(count, nary_tree_test_suite) {
     ASSERT(deserializer.get_tree()->count(42) == 0);
 }
 
+TEST(contains, nary_tree_test_suite) {
+    kogan::NaryTreeSerializer<int> superset("2 1(2(3()4(5()6()))7(3(9())))");
+    kogan::NaryTreeSerializer<int> subset_1("2 7(3(9()))");
+    kogan::NaryTreeSerializer<int> subset_2("2 4(5()6())");
+    kogan::NaryTreeSerializer<int> not_subset_1("2 4(7()6())");
+    kogan::NaryTreeSerializer<int> not_subset_2("2 4()");
+
+    ASSERT(superset.get_tree()->contains(*superset.get_tree()));
+    ASSERT(superset.get_tree()->contains(*subset_1.get_tree()));
+    ASSERT(superset.get_tree()->contains(*subset_2.get_tree()));
+    ASSERT(!superset.get_tree()->contains(*not_subset_1.get_tree()));
+    ASSERT(!superset.get_tree()->contains(*not_subset_2.get_tree()));
+}
+
 kogan::TestSuite get_nary_tree_test_suite() {
     return nary_tree_test_suite;
 }
