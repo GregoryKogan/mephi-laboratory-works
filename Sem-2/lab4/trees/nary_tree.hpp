@@ -65,6 +65,8 @@ namespace kogan {
         [[nodiscard]] std::string serialize() const;
         static NaryTree<T>* deserialize(const std::string& serialized_tree);
 
+        NaryTree<T>* map(T (*func)(T)) const;
+
         NaryTree<T>& operator[](int index);
     };
 
@@ -369,6 +371,24 @@ namespace kogan {
             tree->children->append(
                     deserialize_as_child(parsed_children->get(i), max_children_data)
             );
+    }
+
+    template<class T>
+    NaryTree<T> *NaryTree<T>::map(T (*func)(T)) const {
+        auto* result = new NaryTree<T>(*this);
+
+        Stack<NaryTree<T>*> stack;
+        stack.push(result);
+
+        while (!stack.empty()) {
+            NaryTree<T>* current = stack.pop();
+            current->set_data(func(current->get_data()));
+
+            for (int i = 0; i < current->children_count(); ++i)
+                stack.push(current->get_child(i));
+        }
+
+        return result;
     }
 
     template<class T>

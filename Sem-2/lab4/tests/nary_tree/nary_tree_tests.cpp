@@ -24,6 +24,13 @@ TEST(constructor_without_max_children, nary_tree_test_suite) {
     ASSERT(tree.max_children_count() > 1e9);
 }
 
+TEST(constructor_copy, nary_tree_test_suite) {
+    kogan::NaryTree<char>* init_tree = kogan::NaryTree<char>::deserialize("2 F(B(A()D(C()E()))G(I(H())))");
+    kogan::NaryTree<char> tree(*init_tree);
+
+    ASSERT(tree.serialize() == init_tree->serialize());
+}
+
 TEST(height, nary_tree_test_suite) {
     kogan::NaryTree<char> tree('F', 2);
     tree.add_child('B');
@@ -258,7 +265,6 @@ TEST(deserialize_strings, nary_tree_test_suite) {
     kogan::NaryTree<std::string>* tree = kogan::NaryTree<std::string>::deserialize("42 ABC()");
 
     ASSERT(tree->serialize() == "42 ABC()");
-
     delete tree;
 }
 
@@ -269,6 +275,8 @@ TEST(deserialize_invalid, nary_tree_test_suite) {
         ASSERT(false);
     } catch (kogan::InvalidArgumentException& e) {
         ASSERT(true);
+    } catch (...) {
+        ASSERT(false);
     }
 
     try {
@@ -277,6 +285,8 @@ TEST(deserialize_invalid, nary_tree_test_suite) {
         ASSERT(false);
     } catch (kogan::InvalidArgumentException& e) {
         ASSERT(true);
+    } catch (...) {
+        ASSERT(false);
     }
 
     try {
@@ -285,6 +295,8 @@ TEST(deserialize_invalid, nary_tree_test_suite) {
         ASSERT(false);
     } catch (kogan::InvalidArgumentException& e) {
         ASSERT(true);
+    } catch (...) {
+        ASSERT(false);
     }
 
     try {
@@ -293,7 +305,18 @@ TEST(deserialize_invalid, nary_tree_test_suite) {
         ASSERT(false);
     } catch (kogan::InvalidArgumentException& e) {
         ASSERT(true);
+    } catch (...) {
+        ASSERT(false);
     }
+}
+
+TEST(map, nary_tree_test_suite) {
+    kogan::NaryTree<int>* tree = kogan::NaryTree<int>::deserialize("2 1(2(3()4(5()6()))7(8(9())))");
+    kogan::NaryTree<int>* mapped_tree = tree->map([](int x) { return x * 2; });
+
+    ASSERT(mapped_tree->serialize() == "2 2(4(6()8(10()12()))14(16(18())))");
+    delete tree;
+    delete mapped_tree;
 }
 
 kogan::TestSuite get_nary_tree_test_suite() {
