@@ -56,6 +56,7 @@ namespace kogan {
         void set_data(T new_data);
 
         void add_child(T child);
+        void add_child(NaryTree<T>* child);
         NaryTree<T>* get_child(int index) const;
 
         Sequence<T>* traverse() const;
@@ -146,9 +147,17 @@ namespace kogan {
     template<class T>
     void NaryTree<T>::add_child(T child) {
         if (children->get_length() == max_children)
-            throw kogan::IndexOutOfRangeException(max_children + 1, 0, max_children);
+            throw IndexOutOfRangeException(max_children + 1, 0, max_children);
 
         children->append(new NaryTree<T>(child, max_children));
+    }
+
+    template<class T>
+    void NaryTree<T>::add_child(NaryTree<T> *child) {
+        if (children->get_length() == max_children)
+            throw IndexOutOfRangeException(max_children + 1, 0, max_children);
+
+        children->append(new NaryTree<T>(*child));
     }
 
     template<class T>
@@ -378,10 +387,11 @@ namespace kogan {
                     (int)parsed_children->get_length(), 0, max_children_data
             );
 
-        for (int i = 0; i < parsed_children->get_length(); ++i)
-            tree->children->append(
-                    deserialize_as_child(parsed_children->get(i), max_children_data)
-            );
+        for (int i = 0; i < parsed_children->get_length(); ++i) {
+            NaryTree<T>* child_tree = deserialize_as_child(parsed_children->get(i), max_children_data);
+            tree->add_child(child_tree);
+            delete child_tree;
+        }
     }
 
     template<class T>
