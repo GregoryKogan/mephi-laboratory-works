@@ -7,6 +7,7 @@
 
 #include "test_lib.hpp"
 #include "../../trees/nary_tree.hpp"
+#include "../../trees/serializers/nary_tree_serializer.hpp"
 
 kogan::TestSuite get_nary_tree_test_suite();
 
