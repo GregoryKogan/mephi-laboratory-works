@@ -24,6 +24,26 @@ TEST(constructor_without_max_children, nary_tree_test_suite) {
     ASSERT(tree.max_children_count() > 1e9);
 }
 
+TEST(height, nary_tree_test_suite) {
+    kogan::NaryTree<char> tree('F', 2);
+    tree.add_child('B');
+    tree.add_child('G');
+    tree[0].add_child('A');
+    tree[0].add_child('D');
+    tree[0][1].add_child('C');
+    tree[0][1].add_child('E');
+    tree[1].add_child('I');
+    tree[1][0].add_child('H');
+
+    ASSERT(tree.height() == 4);
+}
+
+TEST(height_single_element, nary_tree_test_suite) {
+    kogan::NaryTree<char> tree('F', 2);
+
+    ASSERT(tree.height() == 1);
+}
+
 TEST(add_child, nary_tree_test_suite) {
     kogan::NaryTree<int> tree(42, 2);
     tree.add_child(1);
@@ -198,6 +218,82 @@ TEST(to_string, nary_tree_test_suite) {
         "[A, C, E, D, B, H, I, G, F]");
     ASSERT(tree.to_string(kogan::NaryTree<char>::TraverseType::RIGHT_LEFT_ROOT) ==
         "[H, I, G, E, C, D, A, B, F]");
+}
+
+TEST(serialize, nary_tree_test_suite) {
+    kogan::NaryTree<char> tree('F', 2);
+    tree.add_child('B');
+    tree.add_child('G');
+    tree[0].add_child('A');
+    tree[0].add_child('D');
+    tree[0][1].add_child('C');
+    tree[0][1].add_child('E');
+    tree[1].add_child('I');
+    tree[1][0].add_child('H');
+
+    ASSERT(tree.serialize() == "2 F(B(A()D(C()E()))G(I(H())))");
+}
+
+TEST(serialize_single_element, nary_tree_test_suite) {
+    kogan::NaryTree<int> tree(42, 42);
+
+    ASSERT(tree.serialize() == "42 42()");
+}
+
+TEST(deserialize, nary_tree_test_suite) {
+    kogan::NaryTree<char>* tree = kogan::NaryTree<char>::deserialize("2 F(B(A()D(C()E()))G(I(H())))");
+
+    ASSERT(tree->serialize() == "2 F(B(A()D(C()E()))G(I(H())))");
+    delete tree;
+}
+
+TEST(deserialize_single_element, nary_tree_test_suite) {
+    kogan::NaryTree<int>* tree = kogan::NaryTree<int>::deserialize("42 42()");
+
+    ASSERT(tree->serialize() == "42 42()");
+    delete tree;
+}
+
+TEST(deserialize_strings, nary_tree_test_suite) {
+    kogan::NaryTree<std::string>* tree = kogan::NaryTree<std::string>::deserialize("42 ABC()");
+
+    ASSERT(tree->serialize() == "42 ABC()");
+
+    delete tree;
+}
+
+TEST(deserialize_invalid, nary_tree_test_suite) {
+    try {
+        kogan::NaryTree<char>* tree = kogan::NaryTree<char>::deserialize("42 A(((()");
+        delete tree;
+        ASSERT(false);
+    } catch (kogan::InvalidArgumentException& e) {
+        ASSERT(true);
+    }
+
+    try {
+        kogan::NaryTree<int>* tree = kogan::NaryTree<int>::deserialize("42 A()");
+        delete tree;
+        ASSERT(false);
+    } catch (kogan::InvalidArgumentException& e) {
+        ASSERT(true);
+    }
+
+    try {
+        kogan::NaryTree<int>* tree = kogan::NaryTree<int>::deserialize("2 F(B(A(), D(C()E(, )))G(I(H())))");
+        delete tree;
+        ASSERT(false);
+    } catch (kogan::InvalidArgumentException& e) {
+        ASSERT(true);
+    }
+
+    try {
+        kogan::NaryTree<int>* tree = kogan::NaryTree<int>::deserialize("jkdnkfjng");
+        delete tree;
+        ASSERT(false);
+    } catch (kogan::InvalidArgumentException& e) {
+        ASSERT(true);
+    }
 }
 
 kogan::TestSuite get_nary_tree_test_suite() {
