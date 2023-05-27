@@ -44,6 +44,7 @@ namespace kogan {
     public:
         NaryTree(T root_value, int max_children);
         explicit NaryTree(T root_value);
+        NaryTree(const NaryTree<T>& tree);
 
         ~NaryTree();
 
@@ -80,6 +81,16 @@ namespace kogan {
 
         children = new LinkedListSequence<NaryTree<T>*>;
         data = root_value;
+    }
+
+    template<class T>
+    NaryTree<T>::NaryTree(const NaryTree<T> &tree) {
+        children = new LinkedListSequence<NaryTree<T>*>;
+        max_children = tree.max_children;
+        data = tree.data;
+
+        for (int i = 0; i < tree.children_count(); ++i)
+            children->append(new NaryTree<T>(*tree.get_child(i)));
     }
 
     template<class T>
