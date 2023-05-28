@@ -361,6 +361,7 @@ namespace kogan {
         int result = 0;
         for (int i = 0; i < path->get_length(); ++i)
             result += (path->get(i) == value);
+        delete path;
         return result;
     }
 
