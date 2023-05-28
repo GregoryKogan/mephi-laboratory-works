@@ -266,6 +266,7 @@ namespace kogan {
             Sequence<T> *child_traverse = get_child(i)->traverse_left_right_root();
             Sequence<T>* concatenation = result->concat(child_traverse);
             delete result;
+            delete child_traverse;
             result = concatenation;
         }
         result->append(get_data());
