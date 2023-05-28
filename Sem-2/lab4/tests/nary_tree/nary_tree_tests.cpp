@@ -270,6 +270,12 @@ TEST(deserialize_strings, nary_tree_test_suite) {
     ASSERT(serializer.get_serialized_tree() == "42 ABC()");
 }
 
+TEST(deserialize_strings_with_numbers, nary_tree_test_suite) {
+    kogan::NaryTreeSerializer<std::string> deserializer("42 12ABC()");
+    kogan::NaryTreeSerializer<std::string> serializer(*deserializer.get_tree());
+    ASSERT(serializer.get_serialized_tree() == "42 12ABC()");
+}
+
 TEST(deserialize_invalid, nary_tree_test_suite) {
     try {
         kogan::NaryTreeSerializer<int> serializer("42 A(((()");

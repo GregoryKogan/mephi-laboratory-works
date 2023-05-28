@@ -88,6 +88,8 @@ namespace kogan {
     void NaryTreeSerializer<T>::deserialize() {
         std::istringstream iss(serialized_tree);
         iss >> max_children_data;
+        if (!iss.good())
+            throw InvalidArgumentException("serialized_tree");
         if (max_children_data < 1)
             throw InvalidArgumentException("max_children");
 
