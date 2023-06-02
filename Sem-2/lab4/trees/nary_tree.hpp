@@ -184,6 +184,9 @@ namespace kogan {
         if (children->get_length() == max_children)
             throw IndexOutOfRangeException(max_children + 1, 0, max_children);
 
+        if (child->max_children != max_children)
+            throw InvalidArgumentException("child");
+        
         children->append(new NaryTree<T>(*child));
     }
 
