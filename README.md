@@ -1,4 +1,4 @@
-# MEPhI-laboratory-works
+# mephi-laboratory-works
 
 Когановский Григорий Б22-534
 
