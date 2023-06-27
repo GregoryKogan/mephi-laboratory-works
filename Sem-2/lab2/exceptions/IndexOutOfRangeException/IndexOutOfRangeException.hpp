@@ -9,17 +9,17 @@
 
 namespace kogan {
 
-    class IndexOutOfRangeException: public BaseException {
-        int index;
-        int range_min;
-        int range_max;
+class IndexOutOfRangeException : public BaseException {
+  int index;
+  int range_min;
+  int range_max;
 
-        void build_message() const override;
+  void build_message() const override;
 
-    public:
-        IndexOutOfRangeException(int index, int range_min, int range_max);
-    };
+public:
+  IndexOutOfRangeException(int index, int range_min, int range_max);
+};
 
-} // kogan
+} // namespace kogan
 
-#endif //LAB2_INDEXOUTOFRANGEEXCEPTION_H
+#endif // LAB2_INDEXOUTOFRANGEEXCEPTION_H

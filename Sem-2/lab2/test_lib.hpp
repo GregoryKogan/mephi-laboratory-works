@@ -9,4 +9,4 @@
 
 void test_lib_is_working();
 
-#endif //SEQUENCE_LIB_TEST_LIB_HPP
+#endif // SEQUENCE_LIB_TEST_LIB_HPP

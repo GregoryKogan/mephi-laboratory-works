@@ -4,18 +4,17 @@
 
 #include "sequence_lib.hpp"
 
-
 void sequence_lib_is_working() {
-    std::cout << "Sequence lib is working!" << std::endl;
+  std::cout << "Sequence lib is working!" << std::endl;
 
-    kogan::ArraySequence<int> arraySequence;
-    kogan::LinkedListSequence<int> linkedListSequence;
+  kogan::ArraySequence<int> arraySequence;
+  kogan::LinkedListSequence<int> linkedListSequence;
 
-    for (int i = 0; i < 10; ++i) {
-        arraySequence.append(i);
-        linkedListSequence.prepend(i);
-    }
+  for (int i = 0; i < 10; ++i) {
+    arraySequence.append(i);
+    linkedListSequence.prepend(i);
+  }
 
-    std::cout << "ArraySequence: " << arraySequence << std::endl;
-    std::cout << "LinkedListSequence: " << linkedListSequence << std::endl;
+  std::cout << "ArraySequence: " << arraySequence << std::endl;
+  std::cout << "LinkedListSequence: " << linkedListSequence << std::endl;
 }

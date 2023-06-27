@@ -5,20 +5,21 @@
 #ifndef SEQUENCE_LIB_TESTER_HPP
 #define SEQUENCE_LIB_TESTER_HPP
 
-#include <vector>
 #include "TestSuite.hpp"
+#include <vector>
 
 namespace kogan {
 
-    class Tester {
-        std::vector<kogan::TestSuite> test_suites;
-        int total;
-        int passed;
-    public:
-        explicit Tester(std::vector<kogan::TestSuite>& suites);
-        void test();
-    };
+class Tester {
+  std::vector<kogan::TestSuite> test_suites;
+  int total;
+  int passed;
 
-} // kogan
+public:
+  explicit Tester(std::vector<kogan::TestSuite> &suites);
+  void test();
+};
 
-#endif //SEQUENCE_LIB_TESTER_HPP
+} // namespace kogan
+
+#endif // SEQUENCE_LIB_TESTER_HPP

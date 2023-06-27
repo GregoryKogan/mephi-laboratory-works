@@ -8,8 +8,8 @@
 #include <cstdio>
 #include <string>
 
-void log_red(const std::string& str);
-void log_green(const std::string& str);
-void log_blue(const std::string& str);
+void log_red(const std::string &str);
+void log_green(const std::string &str);
+void log_blue(const std::string &str);
 
-#endif //SEQUENCE_LIB_COLORED_LOGS_HPP
+#endif // SEQUENCE_LIB_COLORED_LOGS_HPP

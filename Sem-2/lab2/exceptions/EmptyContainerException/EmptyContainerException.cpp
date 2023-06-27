@@ -6,11 +6,9 @@
 
 namespace kogan {
 
-    void EmptyContainerException::build_message() const {
-        snprintf(
-                message, MESSAGE_MAX_LENGTH,
-                "(EmptyContainer): can't get item from empty container"
-        );
-    }
+void EmptyContainerException::build_message() const {
+  snprintf(message, MESSAGE_MAX_LENGTH,
+           "(EmptyContainer): can't get item from empty container");
+}
 
-} // kogan
+} // namespace kogan

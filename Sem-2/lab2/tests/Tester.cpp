@@ -6,24 +6,24 @@
 
 namespace kogan {
 
-    Tester::Tester(std::vector<kogan::TestSuite> &suites) {
-        total = 0;
-        passed = 0;
-        for (const kogan::TestSuite& suite: suites)
-            test_suites.push_back(suite);
-    }
+Tester::Tester(std::vector<kogan::TestSuite> &suites) {
+  total = 0;
+  passed = 0;
+  for (const kogan::TestSuite &suite : suites)
+    test_suites.push_back(suite);
+}
 
-    void Tester::test() {
-        for (kogan::TestSuite suite: test_suites) {
-            total += suite.get_tests_count();
-            passed += suite.run();
-        }
+void Tester::test() {
+  for (kogan::TestSuite suite : test_suites) {
+    total += suite.get_tests_count();
+    passed += suite.run();
+  }
 
-        std::cout << "TOTAL: " << total << ", PASSED: " << passed << std::endl;
-        if (passed == total)
-            log_green("All tests passed!\n");
-        else
-            log_red("Some tests failed\n");
-    }
+  std::cout << "TOTAL: " << total << ", PASSED: " << passed << std::endl;
+  if (passed == total)
+    log_green("All tests passed!\n");
+  else
+    log_red("Some tests failed\n");
+}
 
-} // kogan
+} // namespace kogan

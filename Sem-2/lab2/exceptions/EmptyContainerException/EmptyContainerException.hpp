@@ -9,11 +9,10 @@
 
 namespace kogan {
 
-    class EmptyContainerException: public BaseException {
+class EmptyContainerException : public BaseException {
+  void build_message() const override;
+};
 
-        void build_message() const override;
-    };
+} // namespace kogan
 
-} // kogan
-
-#endif //LAB2_EMPTYCONTAINEREXCEPTION_H
+#endif // LAB2_EMPTYCONTAINEREXCEPTION_H

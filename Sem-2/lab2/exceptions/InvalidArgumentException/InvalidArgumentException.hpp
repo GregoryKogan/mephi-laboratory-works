@@ -9,15 +9,15 @@
 
 namespace kogan {
 
-    class InvalidArgumentException: public BaseException {
-        std::string argument_name;
+class InvalidArgumentException : public BaseException {
+  std::string argument_name;
 
-        void build_message() const override;
+  void build_message() const override;
 
-    public:
-        explicit InvalidArgumentException(std::string argument_name);
-    };
+public:
+  explicit InvalidArgumentException(std::string argument_name);
+};
 
-} // kogan
+} // namespace kogan
 
-#endif //LAB2_INVALIDARGUMENTEXCEPTION_H
+#endif // LAB2_INVALIDARGUMENTEXCEPTION_H

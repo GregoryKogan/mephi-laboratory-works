@@ -5,21 +5,21 @@
 #ifndef SEQUENCE_LIB_TEST_HPP
 #define SEQUENCE_LIB_TEST_HPP
 
-#include <string>
-#include <iostream>
 #include "../IO/colored_logs.hpp"
+#include <iostream>
+#include <string>
 
 namespace kogan {
 
-    class Test {
-        std::string name;
-        void (*testFunction)();
+class Test {
+  std::string name;
+  void (*testFunction)();
 
-    public:
-        Test(std::string  name, void (*testFunction)());
-        [[nodiscard]] bool run() const;
-    };
+public:
+  Test(std::string name, void (*testFunction)());
+  [[nodiscard]] bool run() const;
+};
 
-} // kogan
+} // namespace kogan
 
-#endif //SEQUENCE_LIB_TEST_HPP
+#endif // SEQUENCE_LIB_TEST_HPP

@@ -5,9 +5,9 @@
 #ifndef SEQUENCE_LIB_LINKEDLISTSEQUENCE_TESTS_HPP
 #define SEQUENCE_LIB_LINKEDLISTSEQUENCE_TESTS_HPP
 
-#include "../TestSuite.hpp"
 #include "../../sequences/LinkedListSequence.hpp"
+#include "../TestSuite.hpp"
 
 kogan::TestSuite get_linked_list_sequence_suite();
 
-#endif //SEQUENCE_LIB_LINKEDLISTSEQUENCE_TESTS_HPP
+#endif // SEQUENCE_LIB_LINKEDLISTSEQUENCE_TESTS_HPP

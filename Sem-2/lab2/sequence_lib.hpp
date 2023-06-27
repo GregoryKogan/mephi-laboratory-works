@@ -5,10 +5,10 @@
 #ifndef SEQUENCE_LIB_SEQUENCE_LIB_HPP
 #define SEQUENCE_LIB_SEQUENCE_LIB_HPP
 
-#include <iostream>
 #include "sequences/ArraySequence.hpp"
 #include "sequences/LinkedListSequence.hpp"
+#include <iostream>
 
 void sequence_lib_is_working();
 
-#endif //SEQUENCE_LIB_SEQUENCE_LIB_HPP
+#endif // SEQUENCE_LIB_SEQUENCE_LIB_HPP
