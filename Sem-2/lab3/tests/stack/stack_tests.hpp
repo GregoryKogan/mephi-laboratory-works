@@ -5,9 +5,9 @@
 #ifndef LAB3_STACK_TESTS_HPP
 #define LAB3_STACK_TESTS_HPP
 
-#include "test_lib.hpp"
 #include "../../containers/stack/stack.hpp"
+#include "test_lib.hpp"
 
 kogan::TestSuite get_stack_test_suite();
 
-#endif //LAB3_STACK_TESTS_HPP
+#endif // LAB3_STACK_TESTS_HPP

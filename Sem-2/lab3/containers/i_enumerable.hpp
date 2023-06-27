@@ -5,37 +5,32 @@
 #ifndef LAB3_I_ENUMERABLE_HPP
 #define LAB3_I_ENUMERABLE_HPP
 
-#include <sequences/Sequence.hpp>
 #include "i_enumerator.hpp"
+#include <sequences/Sequence.hpp>
 
 namespace kogan {
 
-    template <class T> class IEnumerable {
-    protected:
-        Sequence<T>* sequence;
+template <class T> class IEnumerable {
+protected:
+  Sequence<T> *sequence;
 
-    public:
-        ~IEnumerable();
+public:
+  ~IEnumerable();
 
-        IEnumerator<T> begin() const;
-        IEnumerator<T> end() const;
-    };
+  IEnumerator<T> begin() const;
+  IEnumerator<T> end() const;
+};
 
-    template<class T>
-    IEnumerable<T>::~IEnumerable() {
-        delete sequence;
-    }
+template <class T> IEnumerable<T>::~IEnumerable() { delete sequence; }
 
-    template<class T>
-    IEnumerator<T> IEnumerable<T>::begin() const {
-        return IEnumerator<T>(sequence, 0);
-    }
+template <class T> IEnumerator<T> IEnumerable<T>::begin() const {
+  return IEnumerator<T>(sequence, 0);
+}
 
-    template<class T>
-    IEnumerator<T> IEnumerable<T>::end() const {
-        return IEnumerator<T>(sequence, sequence->get_length());
-    }
+template <class T> IEnumerator<T> IEnumerable<T>::end() const {
+  return IEnumerator<T>(sequence, sequence->get_length());
+}
 
-} // kogan
+} // namespace kogan
 
-#endif //LAB3_I_ENUMERABLE_HPP
+#endif // LAB3_I_ENUMERABLE_HPP

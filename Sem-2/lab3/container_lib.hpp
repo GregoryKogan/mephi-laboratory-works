@@ -9,4 +9,4 @@
 
 void containers_lib_is_working();
 
-#endif //LAB3_CONTAINER_LIB_HPP
+#endif // LAB3_CONTAINER_LIB_HPP

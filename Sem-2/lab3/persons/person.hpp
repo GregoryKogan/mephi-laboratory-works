@@ -9,26 +9,28 @@
 
 namespace kogan {
 
-    struct PersonID {
-        int number;
-        int series;
-    };
+struct PersonID {
+  int number;
+  int series;
+};
 
-    class Person {
-        struct PersonID id{};
-        std::string first_name;
-        std::string middle_name;
-        std::string last_name;
-    public:
-        Person(struct PersonID id, std::string first_name, std::string middle_name, std::string last_name);
+class Person {
+  struct PersonID id {};
+  std::string first_name;
+  std::string middle_name;
+  std::string last_name;
 
-        [[nodiscard]] PersonID get_id() const;
+public:
+  Person(struct PersonID id, std::string first_name, std::string middle_name,
+         std::string last_name);
 
-        [[nodiscard]] std::string get_first_name() const;
-        [[nodiscard]] std::string get_middle_name() const;
-        [[nodiscard]] std::string get_last_name() const;
-    };
+  [[nodiscard]] PersonID get_id() const;
 
-} // kogan
+  [[nodiscard]] std::string get_first_name() const;
+  [[nodiscard]] std::string get_middle_name() const;
+  [[nodiscard]] std::string get_last_name() const;
+};
 
-#endif //LAB3_PERSON_HPP
+} // namespace kogan
+
+#endif // LAB3_PERSON_HPP
