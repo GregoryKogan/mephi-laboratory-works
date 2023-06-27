@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #define PROMPT "\x1b[31m❱\x1b[0m\x1b[32m❱\x1b[0m\x1b[34m❱\x1b[0m "
 
-
 bool isDelimiter(char c);
 bool isLetter(char c);
 bool isCapital(char c);
@@ -13,107 +12,95 @@ char toLower(char c);
 void switchCase(String *s);
 void manageSpacing(String *s);
 
-
 int main() {
-    String* s = initString();
-    int status;
+  String *s = initString();
+  int status;
+  printf(PROMPT);
+  status = scanString(s);
+  while (status != EOF) {
+    printf("Input:  ");
+    print(s);
+    switchCase(s);
+    manageSpacing(s);
+    printf("Output: ");
+    print(s);
+
+    freeString(&s);
+    s = initString();
     printf(PROMPT);
     status = scanString(s);
-    while (status != EOF) {
-        printf("Input:  ");
-        print(s);
-        switchCase(s);
-        manageSpacing(s);
-        printf("Output: ");
-        print(s);
-
-        freeString(&s);
-        s = initString();
-	printf(PROMPT);
-        status = scanString(s);
-    }
-    freeString(&s);
-    return 0;
+  }
+  freeString(&s);
+  return 0;
 }
-
 
 void switchCase(String *s) {
-    node* curNode = s->head;
-    while(curNode != NULL) {
-        if (isLetter(curNode->symbol)) {
-            if (isCapital(curNode->symbol))
-                curNode->symbol = toLower(curNode->symbol);
-            else
-                curNode->symbol = toCapital(curNode->symbol);
-        }
-        curNode = curNode->next;
+  node *curNode = s->head;
+  while (curNode != NULL) {
+    if (isLetter(curNode->symbol)) {
+      if (isCapital(curNode->symbol))
+        curNode->symbol = toLower(curNode->symbol);
+      else
+        curNode->symbol = toCapital(curNode->symbol);
     }
+    curNode = curNode->next;
+  }
 }
-
 
 void manageSpacing(String *s) {
-    if (s == NULL || s->head == NULL)
-	return;
+  if (s == NULL || s->head == NULL)
+    return;
 
-    while (s->head != NULL && isDelimiter(s->head->symbol)) {
-        node* newHead = s->head->next;
-        free(s->head);
-        s->head = newHead;
+  while (s->head != NULL && isDelimiter(s->head->symbol)) {
+    node *newHead = s->head->next;
+    free(s->head);
+    s->head = newHead;
+  }
+
+  if (s->head == NULL)
+    return;
+
+  node *curNode = s->head;
+  while (curNode->next != NULL) {
+    if (!isDelimiter(curNode->symbol)) {
+      curNode = curNode->next;
+      continue;
     }
 
-   if (s->head == NULL)
-	return;
-
-    node* curNode = s->head;
-    while(curNode->next != NULL) {
-        if (!isDelimiter(curNode->symbol)) {
-            curNode = curNode->next;
-            continue;
-        }
-
-        if (isDelimiter(curNode->next->symbol)) {
-            node* nextNode = curNode->next->next;
-            free(curNode->next);
-            curNode->next = nextNode;
-        } else {
-            curNode = curNode->next;
-        }
+    if (isDelimiter(curNode->next->symbol)) {
+      node *nextNode = curNode->next->next;
+      free(curNode->next);
+      curNode->next = nextNode;
+    } else {
+      curNode = curNode->next;
     }
+  }
 
-    curNode = s->head;
-    while(curNode->next != NULL) {
-        if (isDelimiter(curNode->next->symbol) && curNode->next->next == NULL) {
-            free(curNode->next);
-            curNode->next = NULL;
-        } else {
-            curNode = curNode->next;
-        }
+  curNode = s->head;
+  while (curNode->next != NULL) {
+    if (isDelimiter(curNode->next->symbol) && curNode->next->next == NULL) {
+      free(curNode->next);
+      curNode->next = NULL;
+    } else {
+      curNode = curNode->next;
     }
+  }
 }
 
-
-bool isDelimiter(char c) {
-    return c == ' ' || c == '\t';
-}
-
+bool isDelimiter(char c) { return c == ' ' || c == '\t'; }
 
 bool isLetter(char c) {
-    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 }
 
-
-bool isCapital(char c) {
-    return c >= 'A' && c <= 'Z';
-}
-
+bool isCapital(char c) { return c >= 'A' && c <= 'Z'; }
 
 char toCapital(char c) {
-    int offset = c - 'a';
-    return 'A' + offset;
+  int offset = c - 'a';
+  return 'A' + offset;
 }
 
-
 char toLower(char c) {
-    int offset = c - 'A';
-    return 'a' + offset;
+  int offset = c - 'A';
+  return 'a' + offset;
 }

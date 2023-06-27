@@ -1,17 +1,15 @@
 #ifndef CARS_H
 #define CARS_H
 
-
 #include <stdbool.h>
 typedef struct Car {
-    char model[16 + 1];
-    char* owner;
-    float mileage;
-    bool verified;
+  char model[16 + 1];
+  char *owner;
+  float mileage;
+  bool verified;
 } car;
-car createCar(char model[], const char* owner, float mileage);
+car createCar(char model[], const char *owner, float mileage);
 void carMemoryFree(car c);
 void printCar(car c);
-
 
 #endif
