@@ -4,23 +4,21 @@
 
 #include "error.h"
 
-error* error_ctor() {
-    error* e = malloc(sizeof(error));
-    e->raised = false;
-    e->message = NULL;
-    return e;
+error *error_ctor() {
+  error *e = malloc(sizeof(error));
+  e->raised = false;
+  e->message = NULL;
+  return e;
 }
 
-void error_dtor(error* self) {
-    free(self);
+void error_dtor(error *self) { free(self); }
+
+void error_raise(error *self, char *msg) {
+  self->message = msg;
+  self->raised = true;
 }
 
-void error_raise(error* self, char* msg) {
-    self->message = msg;
-    self->raised = true;
-}
-
-void error_clear(error* self) {
-    self->message = NULL;
-    self->raised = false;
+void error_clear(error *self) {
+  self->message = NULL;
+  self->raised = false;
 }

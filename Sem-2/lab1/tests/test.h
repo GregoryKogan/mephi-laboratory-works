@@ -5,16 +5,15 @@
 #ifndef LAB1_TEST_H
 #define LAB1_TEST_H
 
+#include "../libs/Errors/error.h"
 #include <stdbool.h>
 #include <stdlib.h>
-#include "../libs/Errors/error.h"
-
 
 typedef struct {
-    const char* name;
-    bool (*test_func) (error*);
+  const char *name;
+  bool (*test_func)(error *);
 } test_t;
-test_t* test_ctor(error*, const char* name, bool (*test_func) (error*));
-void test_dtor(test_t* self);
+test_t *test_ctor(error *, const char *name, bool (*test_func)(error *));
+void test_dtor(test_t *self);
 
-#endif //LAB1_TEST_H
+#endif // LAB1_TEST_H
