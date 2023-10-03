@@ -1,7 +1,7 @@
-#include "tests/sample_suite.hpp"
+#include "tests/UniquePtr_tests/UniquePtr_tests.hpp"
 
 int main() {
-    std::vector<kogan::TestSuite> suites = {get_sample_test_suite()};
+    std::vector<kogan::TestSuite> suites = {get_unique_ptr_test_suite()};
 
     kogan::Tester tester(suites);
     tester.test();
