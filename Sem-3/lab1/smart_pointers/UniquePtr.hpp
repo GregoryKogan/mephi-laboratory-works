@@ -1,6 +1,8 @@
 #ifndef LAB1_UNIQUE_PTR_HPP
 #define LAB1_UNIQUE_PTR_HPP
 
+#include <utility>
+
 namespace kogan {
 
 template <class T>
@@ -11,8 +13,7 @@ class UniquePtr {
     UniquePtr(UniquePtr&& other) noexcept : ptr_(other.release()) {}  // move constructor
 
     UniquePtr& operator=(UniquePtr&& other) noexcept {  // move assignment
-        if (this != &other)
-            reset(other.release());
+        if (this != &other) reset(other.release());
         return *this;
     }
 
@@ -35,6 +36,11 @@ class UniquePtr {
    private:
     T* ptr_;
 };
+
+template <class T, class... Args>
+UniquePtr<T> make_unique(Args&&... args) {  // creates new object and returns unique pointer to it
+    return UniquePtr<T>(new T(std::forward<Args>(args)...));
+}
 
 template <class T>
 inline T* UniquePtr<T>::release() noexcept {

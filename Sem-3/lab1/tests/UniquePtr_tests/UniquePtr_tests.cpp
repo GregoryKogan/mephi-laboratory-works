@@ -44,6 +44,28 @@ TEST(copy_assignment, unique_ptr_test_suite) {
     // ptr2 = ptr1; // should not compile
 }
 
+TEST(destructor, unique_ptr_test_suite) {
+    TestObject* obj = new TestObject(42);
+    { kogan::UniquePtr<TestObject> ptr(obj); }
+    ASSERT(obj->value != 42);  // should be some garbage from memory
+}
+
+TEST(make_unique, unique_ptr_test_suite) {
+    kogan::UniquePtr<TestObject> ptr = kogan::make_unique<TestObject>(42);
+    ASSERT(ptr.get()->value == 42);
+}
+
+TEST(make_unique_with_custom_constructor, unique_ptr_test_suite) {
+    kogan::UniquePtr<std::string> ptr = kogan::make_unique<std::string>("Hello World!");
+    ASSERT(ptr->compare("Hello World!") == 0);
+}
+
+TEST(make_unique_with_multiple_arguments, unique_ptr_test_suite) {
+    std::vector<int> expected = {1, 2, 3};
+    kogan::UniquePtr<std::vector<int>> ptr = kogan::make_unique<std::vector<int>>(expected.begin(), expected.end());
+    ASSERT(*ptr == expected);
+}
+
 TEST(release, unique_ptr_test_suite) {
     TestObject* obj = new TestObject(42);
     kogan::UniquePtr<TestObject> ptr(obj);
@@ -78,6 +100,4 @@ TEST(operator_star, unique_ptr_test_suite) {
     ASSERT((*ptr).value == 42);
 }
 
-kogan::TestSuite get_unique_ptr_test_suite() {
-    return unique_ptr_test_suite;
-}
+kogan::TestSuite get_unique_ptr_test_suite() { return unique_ptr_test_suite; }
