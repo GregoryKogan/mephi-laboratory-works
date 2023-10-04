@@ -72,6 +72,33 @@ TEST(move_assignment, shared_ptr_test_suite) {
     ASSERT(*ptr2 == 42);
 }
 
+TEST(make_shared, shared_ptr_test_suite) {
+    int expected = 42;
+
+    kogan::SharedPtr<int> ptr = kogan::make_shared<int>(expected);
+
+    ASSERT(*ptr == expected);
+    ASSERT(ptr.use_count() == 1);
+}
+
+TEST(make_shared_with_custom_constructor, shared_ptr_test_suite) {
+    std::string expected = "Hello, world!";
+
+    kogan::SharedPtr<std::string> ptr = kogan::make_shared<std::string>(expected);
+
+    ASSERT(*ptr == expected);
+    ASSERT(ptr.use_count() == 1);
+}
+
+TEST(make_shared_with_multiple_arguments, shared_ptr_test_suite) {
+    std::vector<int> expected = {1, 2, 3};
+
+    kogan::SharedPtr<std::vector<int>> ptr = kogan::make_shared<std::vector<int>>(expected.begin(), expected.end());
+
+    ASSERT(*ptr == expected);
+    ASSERT(ptr.use_count() == 1);
+}
+
 TEST(bool_operator, shared_ptr_test_suite) {
     kogan::SharedPtr<int> ptr1(new int(42));
     kogan::SharedPtr<int> ptr2;

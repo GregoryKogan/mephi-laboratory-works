@@ -1,6 +1,8 @@
 #ifndef LAB1_SHARED_PTR_HPP
 #define LAB1_SHARED_PTR_HPP
 
+#include <utility>
+
 namespace kogan {
 
 template <class T>
@@ -54,6 +56,11 @@ class SharedPtr {
         return *reference_counter_;
     }  // get reference counter
 };
+
+template <class T, class... Args>
+SharedPtr<T> make_shared(Args&&... args) {  // creates new object and returns shared pointer to it
+    return SharedPtr<T>(new T(std::forward<Args>(args)...));
+}
 
 template <class T>
 inline void SharedPtr<T>::decrease_counter() {
