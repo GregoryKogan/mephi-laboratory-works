@@ -30,7 +30,7 @@ class UniquePtr {
     void reset(T* ptr = nullptr) noexcept;    // delete old and set new pointer
     explicit operator bool() const noexcept;  // check if pointer is not null
     T* get() const noexcept;                  // get pointer
-    T* operator->() const noexcept;           // get pointer
+    T* operator->() const noexcept;           // get pointer and use operator ->
     T& operator*() const noexcept;            // get reference
 
    private:
