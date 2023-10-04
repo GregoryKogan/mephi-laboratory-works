@@ -9,13 +9,17 @@ add_executable(
     lab1_run
     run.cpp
     smart_pointers/UniquePtr.hpp
+    smart_pointers/SharedPtr.hpp
 )
 add_executable(
     lab1_test
     test.cpp
     smart_pointers/UniquePtr.hpp
+    smart_pointers/SharedPtr.hpp
     tests/UniquePtr_tests/UniquePtr_tests.hpp
     tests/UniquePtr_tests/UniquePtr_tests.cpp
+    tests/SharedPtr_tests/SharedPtr_tests.hpp
+    tests/SharedPtr_tests/SharedPtr_tests.cpp
 )
 
 include(FindPkgConfig)
