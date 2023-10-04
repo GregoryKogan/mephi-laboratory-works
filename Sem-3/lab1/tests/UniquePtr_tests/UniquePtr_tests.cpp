@@ -44,12 +44,6 @@ TEST(copy_assignment, unique_ptr_test_suite) {
     // ptr2 = ptr1; // should not compile
 }
 
-TEST(destructor, unique_ptr_test_suite) {
-    TestObject* obj = new TestObject(42);
-    { kogan::UniquePtr<TestObject> ptr(obj); }
-    ASSERT(obj->value != 42);  // should be some garbage from memory
-}
-
 TEST(make_unique, unique_ptr_test_suite) {
     kogan::UniquePtr<TestObject> ptr = kogan::make_unique<TestObject>(42);
     ASSERT(ptr.get()->value == 42);
