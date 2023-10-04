@@ -12,7 +12,7 @@ class SharedPtr {
     void decrease_counter();  // decrease counter and delete pointer if counter is zero
 
    public:
-    SharedPtr() noexcept : ptr_(nullptr), reference_counter_(new unsigned int(0)) {}  // default constructor
+    SharedPtr() noexcept : ptr_(nullptr), reference_counter_(nullptr) {}  // default constructor
     explicit SharedPtr(T* ptr) noexcept
         : ptr_(ptr), reference_counter_(new unsigned int(1)) {}  // constructor from pointer
     SharedPtr(const SharedPtr& other) noexcept : ptr_(other.ptr_), reference_counter_(other.reference_counter_) {
