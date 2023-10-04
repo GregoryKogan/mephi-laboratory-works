@@ -7,6 +7,9 @@ namespace kogan {
 
 template <class T>
 class UniquePtr {
+   private:
+    T* ptr_;
+
    public:
     UniquePtr() noexcept : ptr_(nullptr) {}                           // default constructor
     explicit UniquePtr(T* ptr) noexcept : ptr_(ptr) {}                // constructor from pointer
@@ -32,9 +35,6 @@ class UniquePtr {
     T* get() const noexcept;                  // get pointer
     T* operator->() const noexcept;           // get pointer and use operator ->
     T& operator*() const noexcept;            // get reference
-
-   private:
-    T* ptr_;
 };
 
 template <class T, class... Args>
