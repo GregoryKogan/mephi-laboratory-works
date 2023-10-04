@@ -11,23 +11,11 @@ class UniquePtr {
     T* ptr_;
 
    public:
-    UniquePtr() noexcept : ptr_(nullptr) {}                           // default constructor
-    explicit UniquePtr(T* ptr) noexcept : ptr_(ptr) {}                // constructor from pointer
-    UniquePtr(UniquePtr&& other) noexcept : ptr_(other.release()) {}  // move constructor
+    UniquePtr() noexcept;                   // default constructor
+    explicit UniquePtr(T* ptr) noexcept;    // constructor from pointer
+    UniquePtr(UniquePtr&& other) noexcept;  // move constructor
 
-    UniquePtr& operator=(UniquePtr&& other) noexcept {  // move assignment
-        if (this != &other) reset(other.release());
-        return *this;
-    }
-
-    UniquePtr(const UniquePtr&) = delete;             // copy constructor is deleted
-    UniquePtr& operator=(const UniquePtr&) = delete;  // copy assignment is deleted
-
-    ~UniquePtr() {
-        if (ptr_ != nullptr) {
-            delete ptr_;
-        }
-    }
+    ~UniquePtr();
 
     T* release() noexcept;                    // release ownership
     void reset(T* ptr = nullptr) noexcept;    // delete old and set new pointer
@@ -35,11 +23,35 @@ class UniquePtr {
     T* get() const noexcept;                  // get pointer
     T* operator->() const noexcept;           // get pointer and use operator ->
     T& operator*() const noexcept;            // get reference
+
+    UniquePtr(const UniquePtr&) = delete;             // copy constructor is deleted
+    UniquePtr& operator=(const UniquePtr&) = delete;  // copy assignment is deleted
+
+    UniquePtr& operator=(UniquePtr&& other) noexcept {  // move assignment
+        if (this != &other) reset(other.release());
+        return *this;
+    }
 };
 
 template <class T, class... Args>
 UniquePtr<T> make_unique(Args&&... args) {  // creates new object and returns unique pointer to it
     return UniquePtr<T>(new T(std::forward<Args>(args)...));
+}
+
+template <class T>
+inline UniquePtr<T>::UniquePtr() noexcept : ptr_(nullptr) {}
+
+template <class T>
+inline UniquePtr<T>::UniquePtr(T* ptr) noexcept : ptr_(ptr) {}
+
+template <class T>
+inline UniquePtr<T>::UniquePtr(UniquePtr&& other) noexcept : ptr_(other.release()) {}
+
+template <class T>
+inline UniquePtr<T>::~UniquePtr() {
+    if (ptr_ != nullptr) {
+        delete ptr_;
+    }
 }
 
 template <class T>
