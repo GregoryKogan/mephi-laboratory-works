@@ -3,11 +3,10 @@
 kogan::TestSuite array_sequence_test_suite("SmartPtrArraySequence");
 
 TEST(array_constructor, array_sequence_test_suite) {
-    int *values = new int[10];
+    kogan::SharedPtr<int[]> values = kogan::make_shared<int[]>(10);
     for (int i = 0; i < 10; ++i) values[i] = i + 1;
 
     kogan::SmartPtrArraySequence<int> seq(values, 10);
-    delete[] values;
 
     ASSERT(seq.get_length() == 10);
     ASSERT(seq[0] == 1);
@@ -22,12 +21,11 @@ TEST(empty_constructor, array_sequence_test_suite) {
 }
 
 TEST(sequence_constructor, array_sequence_test_suite) {
-    int *values = new int[10];
+    kogan::SharedPtr<int[]> values = kogan::make_shared<int[]>(10);
     for (int i = 0; i < 10; ++i) values[i] = i + 1;
 
     kogan::SmartPtrArraySequence<int> init_seq(values, 10);
     kogan::SmartPtrArraySequence<int> seq(init_seq);
-    delete[] values;
 
     ASSERT(seq.get_length() == init_seq.get_length());
     ASSERT(seq.get_length() == 10);

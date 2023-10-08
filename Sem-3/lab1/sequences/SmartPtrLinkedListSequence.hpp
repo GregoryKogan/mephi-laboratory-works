@@ -11,7 +11,7 @@ class SmartPtrLinkedListSequence : public SmartPtrSequence<T> {
     UniquePtr<LinkedList<T>> list;
 
    public:
-    SmartPtrLinkedListSequence(T *items, int count);
+    SmartPtrLinkedListSequence(SharedPtr<T[]> items, int count);
     SmartPtrLinkedListSequence();
     SmartPtrLinkedListSequence(const SmartPtrLinkedListSequence<T> &linkedListSequence);
 
@@ -33,8 +33,8 @@ class SmartPtrLinkedListSequence : public SmartPtrSequence<T> {
 };
 
 template <class T>
-SmartPtrLinkedListSequence<T>::SmartPtrLinkedListSequence(T *items, int count) {
-    list = make_unique<LinkedList<T>>(items, count);
+inline SmartPtrLinkedListSequence<T>::SmartPtrLinkedListSequence(SharedPtr<T[]> items, int count) {
+    list = make_unique<LinkedList<T>>(items.get(), count);
 }
 
 template <class T>

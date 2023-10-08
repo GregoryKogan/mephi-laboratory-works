@@ -3,11 +3,10 @@
 kogan::TestSuite smart_ptr_linked_list_sequence_test_suite("SmartPtrLinkedListSequence");
 
 TEST(array_constructor, smart_ptr_linked_list_sequence_test_suite) {
-    int *values = new int[10];
+    kogan::SharedPtr<int[]> values = kogan::make_shared<int[]>(10);
     for (int i = 0; i < 10; ++i) values[i] = i + 1;
 
     kogan::SmartPtrLinkedListSequence<int> seq(values, 10);
-    delete[] values;
 
     ASSERT(seq.get_length() == 10);
     ASSERT(seq[0] == 1);
@@ -22,12 +21,11 @@ TEST(empty_constructor, smart_ptr_linked_list_sequence_test_suite) {
 }
 
 TEST(sequence_constructor, smart_ptr_linked_list_sequence_test_suite) {
-    int *values = new int[10];
+    kogan::SharedPtr<int[]> values = kogan::make_shared<int[]>(10);
     for (int i = 0; i < 10; ++i) values[i] = i + 1;
 
     kogan::SmartPtrLinkedListSequence<int> init_seq(values, 10);
     kogan::SmartPtrLinkedListSequence<int> seq(init_seq);
-    delete[] values;
 
     ASSERT(seq.get_length() == init_seq.get_length());
     ASSERT(seq.get_length() == 10);

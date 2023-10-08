@@ -11,7 +11,7 @@ class SmartPtrArraySequence : public SmartPtrSequence<T> {
     UniquePtr<DynamicArray<T>> array;
 
    public:
-    SmartPtrArraySequence(T *items, int count);
+    SmartPtrArraySequence(SharedPtr<T[]> items, int count);
     SmartPtrArraySequence();
     SmartPtrArraySequence(const SmartPtrArraySequence<T> &arraySequence);
 
@@ -33,8 +33,8 @@ class SmartPtrArraySequence : public SmartPtrSequence<T> {
 };
 
 template <class T>
-SmartPtrArraySequence<T>::SmartPtrArraySequence(T *items, int count) {
-    array = make_unique<DynamicArray<T>>(items, count);
+inline SmartPtrArraySequence<T>::SmartPtrArraySequence(SharedPtr<T[]> items, int count) {
+    array = make_unique<DynamicArray<T>>(items.get(), count);
 }
 
 template <class T>
