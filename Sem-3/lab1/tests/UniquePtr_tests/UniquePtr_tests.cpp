@@ -165,6 +165,18 @@ TEST(operator_bool_array, unique_ptr_test_suite) {
     ASSERT(ptr2);
 }
 
+TEST(get, unique_ptr_test_suite) {
+    TestObject* obj = new TestObject(42);
+    kogan::UniquePtr<TestObject> ptr(obj);
+    ASSERT(ptr.get() == obj);
+}
+
+TEST(get_array, unique_ptr_test_suite) {
+    TestObject* obj = new TestObject[3]{1, 2, 3};
+    kogan::UniquePtr<TestObject[]> ptr(obj);
+    ASSERT(ptr.get() == obj);
+}
+
 TEST(operator_arrow, unique_ptr_test_suite) {
     kogan::UniquePtr<TestObject> ptr(new TestObject(42));
     ASSERT(ptr->value == 42);
