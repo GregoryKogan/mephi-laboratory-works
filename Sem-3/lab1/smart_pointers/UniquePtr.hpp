@@ -75,7 +75,7 @@ typename std::enable_if<!std::is_array<T>::value, kogan::UniquePtr<T>>::type mak
 
 template <class T>
 typename std::enable_if<std::is_array<T>::value, kogan::UniquePtr<T>>::type make_unique(
-    size_t size) {  // make_unique for array types
+    std::size_t size) {  // make_unique for array types
     return kogan::UniquePtr<T>(new typename std::remove_extent<T>::type[size]());
 }
 
