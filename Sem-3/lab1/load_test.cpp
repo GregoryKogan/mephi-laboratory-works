@@ -1,6 +1,8 @@
 #include <chrono>
 #include <iostream>
 #include <utility>
+#include <memory>
+#include <cmath>
 
 #include "smart_pointers/SharedPtr.hpp"
 #include "smart_pointers/UniquePtr.hpp"
