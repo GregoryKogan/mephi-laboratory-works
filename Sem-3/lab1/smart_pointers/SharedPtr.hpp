@@ -11,7 +11,7 @@ class SharedPtr {
     T* ptr_;
     unsigned int* reference_counter_;
 
-    void decrease_counter();  // decrease counter and delete pointer if counter is zero
+    void decrement_counter_and_delete_ptr_if_zero();
 
    public:
     SharedPtr() noexcept;                        // default constructor
@@ -29,7 +29,7 @@ class SharedPtr {
 
     SharedPtr& operator=(const SharedPtr& other) noexcept {  // copy assignment
         if (this != &other) {
-            decrease_counter();
+            decrement_counter_and_delete_ptr_if_zero();
             ptr_ = other.ptr_;
             reference_counter_ = other.reference_counter_;
             if (ptr_ != nullptr) ++(*reference_counter_);
@@ -39,7 +39,7 @@ class SharedPtr {
 
     SharedPtr& operator=(SharedPtr&& other) noexcept {  // move assignment
         if (this != &other) {
-            decrease_counter();
+            decrement_counter_and_delete_ptr_if_zero();
             ptr_ = other.ptr_;
             reference_counter_ = other.reference_counter_;
             other.ptr_ = nullptr;
@@ -55,7 +55,7 @@ class SharedPtr<T[]> {  // specialization for arrays
     T* ptr_;
     unsigned int* reference_counter_;
 
-    void decrease_counter();  // decrease counter and delete pointer if counter is zero
+    void decrement_counter_and_delete_ptr_if_zero();
 
    public:
     SharedPtr() noexcept;                        // default constructor
@@ -74,7 +74,7 @@ class SharedPtr<T[]> {  // specialization for arrays
 
     SharedPtr& operator=(const SharedPtr& other) noexcept {  // copy assignment
         if (this != &other) {
-            decrease_counter();
+            decrement_counter_and_delete_ptr_if_zero();
             ptr_ = other.ptr_;
             reference_counter_ = other.reference_counter_;
             if (ptr_ != nullptr) ++(*reference_counter_);
@@ -84,7 +84,7 @@ class SharedPtr<T[]> {  // specialization for arrays
 
     SharedPtr& operator=(SharedPtr&& other) noexcept {  // move assignment
         if (this != &other) {
-            decrease_counter();
+            decrement_counter_and_delete_ptr_if_zero();
             ptr_ = other.ptr_;
             reference_counter_ = other.reference_counter_;
             other.ptr_ = nullptr;
@@ -112,7 +112,7 @@ typename std::enable_if<std::is_array<T>::value, SharedPtr<T>>::type make_shared
 }
 
 template <class T>
-inline void SharedPtr<T>::decrease_counter() {
+inline void SharedPtr<T>::decrement_counter_and_delete_ptr_if_zero() {
     if (reference_counter_ == nullptr) return;
     --(*reference_counter_);
     if (*reference_counter_ == 0) {
@@ -124,7 +124,7 @@ inline void SharedPtr<T>::decrease_counter() {
 }
 
 template <class T>
-inline void SharedPtr<T[]>::decrease_counter() {
+inline void SharedPtr<T[]>::decrement_counter_and_delete_ptr_if_zero() {
     if (reference_counter_ == nullptr) return;
     --(*reference_counter_);
     if (*reference_counter_ == 0) {
@@ -178,13 +178,13 @@ inline SharedPtr<T[]>::SharedPtr(SharedPtr&& other) noexcept
 
 template <class T>
 inline SharedPtr<T>::~SharedPtr() {
-    decrease_counter();
+    decrement_counter_and_delete_ptr_if_zero();
     if (reference_counter_ != nullptr && *reference_counter_ == 0) delete reference_counter_;
 }
 
 template <class T>
 inline SharedPtr<T[]>::~SharedPtr() {
-    decrease_counter();
+    decrement_counter_and_delete_ptr_if_zero();
     if (reference_counter_ != nullptr && *reference_counter_ == 0) delete reference_counter_;
 }
 
