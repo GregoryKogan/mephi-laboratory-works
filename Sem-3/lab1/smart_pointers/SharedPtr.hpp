@@ -100,15 +100,15 @@ class SharedPtr<T[]> {  // specialization for arrays
  * forward arguments to another function. */
 
 template <class T, class... Args>
-typename std::enable_if<!std::is_array<T>::value, kogan::SharedPtr<T>>::type make_shared(
+typename std::enable_if<!std::is_array<T>::value, SharedPtr<T>>::type make_shared(
     Args&&... args) {  // make_shared for non-array types
-    return kogan::SharedPtr<T>(new T(std::forward<Args>(args)...));
+    return SharedPtr<T>(new T(std::forward<Args>(args)...));
 }
 
 template <class T>
-typename std::enable_if<std::is_array<T>::value, kogan::SharedPtr<T>>::type make_shared(
+typename std::enable_if<std::is_array<T>::value, SharedPtr<T>>::type make_shared(
     std::size_t size) {  // make_shared for array types
-    return kogan::SharedPtr<T>(new typename std::remove_extent<T>::type[size]());
+    return SharedPtr<T>(new typename std::remove_extent<T>::type[size]());
 }
 
 template <class T>

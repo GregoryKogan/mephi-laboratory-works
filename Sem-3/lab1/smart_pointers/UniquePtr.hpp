@@ -68,15 +68,15 @@ class UniquePtr<T[]> {  // specialization for arrays
  * forward arguments to another function. */
 
 template <class T, class... Args>
-typename std::enable_if<!std::is_array<T>::value, kogan::UniquePtr<T>>::type make_unique(
+typename std::enable_if<!std::is_array<T>::value, UniquePtr<T>>::type make_unique(
     Args&&... args) {  // make_unique for non-array types
-    return kogan::UniquePtr<T>(new T(std::forward<Args>(args)...));
+    return UniquePtr<T>(new T(std::forward<Args>(args)...));
 }
 
 template <class T>
-typename std::enable_if<std::is_array<T>::value, kogan::UniquePtr<T>>::type make_unique(
+typename std::enable_if<std::is_array<T>::value, UniquePtr<T>>::type make_unique(
     std::size_t size) {  // make_unique for array types
-    return kogan::UniquePtr<T>(new typename std::remove_extent<T>::type[size]());
+    return UniquePtr<T>(new typename std::remove_extent<T>::type[size]());
 }
 
 template <class T>
