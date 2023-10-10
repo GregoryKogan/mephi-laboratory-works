@@ -116,8 +116,10 @@ inline void SharedPtr<T>::decrease_counter() {
     if (reference_counter_ == nullptr) return;
     --(*reference_counter_);
     if (*reference_counter_ == 0) {
-        if (ptr_ != nullptr) delete ptr_;
-        delete reference_counter_;
+        if (ptr_ != nullptr) {
+            delete ptr_;
+            ptr_ = nullptr;
+        }
     }
 }
 
@@ -126,8 +128,10 @@ inline void SharedPtr<T[]>::decrease_counter() {
     if (reference_counter_ == nullptr) return;
     --(*reference_counter_);
     if (*reference_counter_ == 0) {
-        if (ptr_ != nullptr) delete[] ptr_;
-        delete reference_counter_;
+        if (ptr_ != nullptr) {
+            delete[] ptr_;
+            ptr_ = nullptr;
+        }
     }
 }
 
@@ -175,11 +179,13 @@ inline SharedPtr<T[]>::SharedPtr(SharedPtr&& other) noexcept
 template <class T>
 inline SharedPtr<T>::~SharedPtr() {
     decrease_counter();
+    if (reference_counter_ != nullptr && *reference_counter_ == 0) delete reference_counter_;
 }
 
 template <class T>
 inline SharedPtr<T[]>::~SharedPtr() {
     decrease_counter();
+    if (reference_counter_ != nullptr && *reference_counter_ == 0) delete reference_counter_;
 }
 
 template <class T>
