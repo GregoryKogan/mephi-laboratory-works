@@ -6,6 +6,13 @@
 libraries_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 cd "$libraries_path"
 
+# exception_lib
+rm -rf exception_lib/lib; mkdir exception_lib/lib
+cd exception_lib/source
+cmake . && make
+mv libexception_lib.a ../lib
+cd "$libraries_path"
+
 # test_lib
 rm -rf test_lib/lib; mkdir test_lib/lib
 cd test_lib/source
