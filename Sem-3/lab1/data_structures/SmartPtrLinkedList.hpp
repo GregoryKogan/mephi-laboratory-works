@@ -23,7 +23,8 @@ class SmartPtrLinkedList {
     SharedPtr<Root> root_;
     std::size_t length_;
 
-    SharedPtr<Node> get_node(int index) const;
+    void init_();
+    SharedPtr<Node> get_node_(int index) const;
 
    public:
     SmartPtrLinkedList();
@@ -49,7 +50,15 @@ class SmartPtrLinkedList {
 };
 
 template <class T>
-inline SharedPtr<typename SmartPtrLinkedList<T>::Node> SmartPtrLinkedList<T>::get_node(int index) const {
+inline void SmartPtrLinkedList<T>::init_() {
+    root_ = make_shared<Root>();
+    root_->head = nullptr;
+    root_->tail = nullptr;
+    length_ = 0;
+}
+
+template <class T>
+inline SharedPtr<typename SmartPtrLinkedList<T>::Node> SmartPtrLinkedList<T>::get_node_(int index) const {
     if (index < 0 || index >= length_) throw IndexOutOfRangeException(index, 0, length_ - 1);
 
     if (index < length_ / 2) {  // search from head
@@ -65,77 +74,27 @@ inline SharedPtr<typename SmartPtrLinkedList<T>::Node> SmartPtrLinkedList<T>::ge
 
 template <class T>
 inline SmartPtrLinkedList<T>::SmartPtrLinkedList() {
-    root_ = make_shared<Root>();
-    root_->head = nullptr;
-    root_->tail = nullptr;
-    length_ = 0;
+    init_();
 }
 
 template <class T>
 inline SmartPtrLinkedList<T>::SmartPtrLinkedList(SharedPtr<T[]> data, int length) {
     if (length < 0) throw InvalidArgumentException("length must be positive");
 
-    length_ = length;
-    root_ = make_shared<Root>();
-
-    if (length_ == 0) {
-        root_->head = nullptr;
-        root_->tail = nullptr;
-        return;
-    }
-
-    auto cur_node = make_shared<Node>();
-    cur_node->data = data[0];
-    cur_node->prev = nullptr;
-    cur_node->next = nullptr;
-    root_->head = cur_node;
-    root_->tail = cur_node;
-
-    for (std::size_t i = 1; i < length_; ++i) {
-        auto new_node = make_shared<Node>();
-        new_node->data = data[i];
-        new_node->prev = cur_node;
-        new_node->next = nullptr;
-        cur_node->next = new_node;
-        cur_node = new_node;
-        root_->tail = cur_node;
-    }
+    init_();
+    for (std::size_t i = 0; i < length; ++i) append(data[i]);
 }
 
 template <class T>
 inline SmartPtrLinkedList<T>::SmartPtrLinkedList(const SmartPtrLinkedList<T>& other) {
-    length_ = other.length_;
-    root_ = make_shared<Root>();
-
-    if (length_ == 0) {
-        root_->head = nullptr;
-        root_->tail = nullptr;
-        return;
-    }
-
-    auto cur_node = make_shared<Node>();
-    auto cur_other_node = other.root_->head;
-    cur_node->data = cur_other_node->data;
-    cur_node->prev = nullptr;
-    root_->head = cur_node;
-    root_->tail = cur_node;
-
-    while (cur_other_node->next != nullptr) {
-        cur_other_node = cur_other_node->next;
-        auto new_node = make_shared<Node>();
-        new_node->data = cur_other_node->data;
-        new_node->prev = cur_node;
-        new_node->next = nullptr;
-        cur_node->next = new_node;
-        cur_node = new_node;
-        root_->tail = cur_node;
-    }
+    init_();
+    for (std::size_t i = 0; i < other.length_; ++i) append(other.get(i));
 }
 
 template <class T>
 inline T SmartPtrLinkedList<T>::get(int index) const {
     if (index < 0 || index >= length_) throw IndexOutOfRangeException(index, 0, length_ - 1);
-    return get_node(index)->data;
+    return get_node_(index)->data;
 }
 
 template <class T>
@@ -158,7 +117,7 @@ inline std::size_t SmartPtrLinkedList<T>::get_length() const noexcept {
 template <class T>
 inline void SmartPtrLinkedList<T>::set(int index, T value) {
     if (index < 0 || index >= length_) throw IndexOutOfRangeException(index, 0, length_ - 1);
-    get_node(index)->data = value;
+    get_node_(index)->data = value;
 }
 
 template <class T>
@@ -206,7 +165,7 @@ inline void SmartPtrLinkedList<T>::insert(int index, T value) {
         return;
     }
 
-    auto cur_node = get_node(index);
+    auto cur_node = get_node_(index);
     auto new_node = make_shared<Node>();
     new_node->data = value;
     new_node->prev = cur_node->prev;
@@ -233,7 +192,7 @@ inline void SmartPtrLinkedList<T>::remove(int index) {
         return;
     }
 
-    auto cur_node = get_node(index);
+    auto cur_node = get_node_(index);
     cur_node->prev->next = cur_node->next;
     cur_node->next->prev = cur_node->prev;
     --length_;
@@ -253,21 +212,21 @@ inline SmartPtrLinkedList<T> SmartPtrLinkedList<T>::get_sublist(int start_index,
     if (start_index > end_index) throw InvalidArgumentException("start_index must be less than or equal to end_index");
 
     auto new_list = SmartPtrLinkedList<T>();
-    for (std::size_t i = start_index; i <= end_index; ++i) new_list.append(get_node(i)->data);
+    for (std::size_t i = start_index; i <= end_index; ++i) new_list.append(get_node_(i)->data);
     return new_list;
 }
 
 template <class T>
 inline SmartPtrLinkedList<T> SmartPtrLinkedList<T>::concat(const SmartPtrLinkedList<T>& other) const {
     auto new_list = SmartPtrLinkedList<T>(*this);
-    for (std::size_t i = 0; i < other.length_; ++i) new_list.append(other.get_node(i)->data);
+    for (std::size_t i = 0; i < other.length_; ++i) new_list.append(other.get_node_(i)->data);
     return new_list;
 }
 
 template <class T>
 inline T& SmartPtrLinkedList<T>::operator[](int index) {
     if (index < 0 || index >= length_) throw IndexOutOfRangeException(index, 0, length_ - 1);
-    return get_node(index)->data;
+    return get_node_(index)->data;
 }
 
 }  // namespace kogan
