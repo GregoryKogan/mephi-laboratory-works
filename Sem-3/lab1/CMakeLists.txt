@@ -10,17 +10,17 @@ add_executable(
     test.cpp
     smart_pointers/UniquePtr.hpp
     smart_pointers/SharedPtr.hpp
-    sequences/SmartPtrSequence.hpp
-    sequences/SmartPtrArraySequence.hpp
-    sequences/SmartPtrLinkedListSequence.hpp
+    # sequences/SmartPtrSequence.hpp
+    # sequences/SmartPtrArraySequence.hpp
+    # sequences/SmartPtrLinkedListSequence.hpp
     tests/UniquePtr_tests/UniquePtr_tests.hpp
     tests/UniquePtr_tests/UniquePtr_tests.cpp
     tests/SharedPtr_tests/SharedPtr_tests.hpp
     tests/SharedPtr_tests/SharedPtr_tests.cpp
-    tests/SmartPtrArraySequence_tests/SmartPtrArraySequence_tests.hpp
-    tests/SmartPtrArraySequence_tests/SmartPtrArraySequence_tests.cpp
-    tests/SmartPtrLinkedListSequence_tests/SmartPtrLinkedListSequence_tests.hpp
-    tests/SmartPtrLinkedListSequence_tests/SmartPtrLinkedListSequence_tests.cpp
+    # tests/SmartPtrArraySequence_tests/SmartPtrArraySequence_tests.hpp
+    # tests/SmartPtrArraySequence_tests/SmartPtrArraySequence_tests.cpp
+    # tests/SmartPtrLinkedListSequence_tests/SmartPtrLinkedListSequence_tests.hpp
+    # tests/SmartPtrLinkedListSequence_tests/SmartPtrLinkedListSequence_tests.cpp
 )
 
 add_executable(
@@ -35,7 +35,3 @@ include(FindPkgConfig)
 find_package(TestLib REQUIRED)
 include_directories(${TEST-LIB_INCLUDE_DIR})
 target_link_libraries(test ${TEST-LIB_LIBRARY})
-
-find_package(SequenceLib REQUIRED)
-include_directories(${SEQUENCE-LIB_INCLUDE_DIR})
-target_link_libraries(test ${SEQUENCE-LIB_LIBRARY})
