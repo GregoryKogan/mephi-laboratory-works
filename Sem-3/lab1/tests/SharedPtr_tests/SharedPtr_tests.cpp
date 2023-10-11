@@ -118,6 +118,174 @@ TEST(move_assignment_array, shared_ptr_test_suite) {
     ASSERT(ptr1.use_count() == 0);
 }
 
+TEST(assignment_from_pointer, shared_ptr_test_suite) {
+    kogan::SharedPtr<int> ptr1(new int(42));
+    kogan::SharedPtr<int> ptr2(ptr1);
+    ASSERT(ptr1.get() == ptr2.get());
+    ASSERT(ptr1.use_count() == 2);
+    ASSERT(ptr2.use_count() == 2);
+    ASSERT(*ptr1 == 42);
+    ASSERT(*ptr2 == 42);
+
+    ptr2 = new int(43);
+    ASSERT(ptr1.use_count() == 1);
+    ASSERT(ptr2.use_count() == 1);
+    ASSERT(*ptr1 == 42);
+    ASSERT(*ptr2 == 43);
+}
+
+TEST(assignment_from_pointer_array, shared_ptr_test_suite) {
+    kogan::SharedPtr<int[]> ptr1(new int[3]{1, 2, 3});
+    kogan::SharedPtr<int[]> ptr2(ptr1);
+    ASSERT(ptr1.get() == ptr2.get());
+    ASSERT(ptr1.use_count() == 2);
+    ASSERT(ptr2.use_count() == 2);
+    ASSERT(ptr1[0] == 1);
+    ASSERT(ptr1[1] == 2);
+    ASSERT(ptr1[2] == 3);
+    ASSERT(ptr2[0] == 1);
+    ASSERT(ptr2[1] == 2);
+    ASSERT(ptr2[2] == 3);
+
+    ptr2 = new int[3]{4, 5, 6};
+    ASSERT(ptr1.use_count() == 1);
+    ASSERT(ptr2.use_count() == 1);
+    ASSERT(ptr1[0] == 1);
+    ASSERT(ptr1[1] == 2);
+    ASSERT(ptr1[2] == 3);
+    ASSERT(ptr2[0] == 4);
+    ASSERT(ptr2[1] == 5);
+    ASSERT(ptr2[2] == 6);
+}
+
+TEST(assignment_from_nullptr, shared_ptr_test_suite) {
+    kogan::SharedPtr<int> ptr1(new int(42));
+    kogan::SharedPtr<int> ptr2(ptr1);
+    ASSERT(ptr1.get() == ptr2.get());
+    ASSERT(ptr1.use_count() == 2);
+    ASSERT(ptr2.use_count() == 2);
+    ASSERT(*ptr1 == 42);
+    ASSERT(*ptr2 == 42);
+
+    ptr2 = nullptr;
+    ASSERT(ptr1.use_count() == 1);
+    ASSERT(ptr2.use_count() == 0);
+    ASSERT(*ptr1 == 42);
+    ASSERT(ptr2.get() == nullptr);
+    ASSERT(!ptr2);
+    ASSERT(ptr1);
+}
+
+TEST(assignment_from_nullptr_array, shared_ptr_test_suite) {
+    kogan::SharedPtr<int[]> ptr1(new int[3]{1, 2, 3});
+    kogan::SharedPtr<int[]> ptr2(ptr1);
+    ASSERT(ptr1.get() == ptr2.get());
+    ASSERT(ptr1.use_count() == 2);
+    ASSERT(ptr2.use_count() == 2);
+    ASSERT(ptr1[0] == 1);
+    ASSERT(ptr1[1] == 2);
+    ASSERT(ptr1[2] == 3);
+    ASSERT(ptr2[0] == 1);
+    ASSERT(ptr2[1] == 2);
+    ASSERT(ptr2[2] == 3);
+
+    ptr2 = nullptr;
+    ASSERT(ptr1.use_count() == 1);
+    ASSERT(ptr2.use_count() == 0);
+    ASSERT(ptr1[0] == 1);
+    ASSERT(ptr1[1] == 2);
+    ASSERT(ptr1[2] == 3);
+    ASSERT(ptr2.get() == nullptr);
+    ASSERT(!ptr2);
+    ASSERT(ptr1);
+}
+
+TEST(equality_operator, shared_ptr_test_suite) {
+    kogan::SharedPtr<TestObject> ptr1(new TestObject(42));
+    kogan::SharedPtr<TestObject> ptr2(ptr1);
+    kogan::SharedPtr<TestObject> ptr3(new TestObject(42));
+    ASSERT(ptr1 == ptr2);
+    ASSERT(ptr1 != ptr3);
+    ASSERT(ptr2 != ptr3);
+    ASSERT(ptr1 == ptr1);
+    ASSERT(ptr2 == ptr2);
+    ASSERT(ptr3 == ptr3);
+
+    kogan::SharedPtr<TestObject> ptr4;
+    kogan::SharedPtr<TestObject> ptr5;
+    ASSERT(ptr4 == ptr5);
+    ASSERT(ptr4 == nullptr);
+    ASSERT(nullptr == ptr4);
+    ASSERT(ptr5 == nullptr);
+    ASSERT(nullptr == ptr5);
+    ASSERT(ptr4 == ptr4);
+    ASSERT(ptr5 == ptr5);
+    ASSERT(ptr4 != ptr1);
+    ASSERT(ptr5 != ptr1);
+    ASSERT(ptr1 != ptr4);
+    ASSERT(ptr1 != ptr5);
+
+    kogan::SharedPtr<TestObject> ptr6(new TestObject(42));
+    ASSERT(ptr6 != ptr1);
+    ASSERT(ptr1 != ptr6);
+    ASSERT(ptr6 != ptr4);
+    ASSERT(ptr4 != ptr6);
+    ASSERT(ptr6 != nullptr);
+    ASSERT(nullptr != ptr6);
+
+    ptr6 = nullptr;
+    ASSERT(ptr6 == nullptr);
+    ASSERT(nullptr == ptr6);
+    ASSERT(ptr6 == ptr6);
+    ASSERT(ptr6 != ptr1);
+    ASSERT(ptr1 != ptr6);
+    ASSERT(ptr6 == ptr4);
+    ASSERT(ptr4 == ptr6);
+}
+
+TEST(equality_operator_array, shared_ptr_test_suite) {
+    kogan::SharedPtr<TestObject[]> ptr1(new TestObject[3]{1, 2, 3});
+    kogan::SharedPtr<TestObject[]> ptr2(ptr1);
+    kogan::SharedPtr<TestObject[]> ptr3(new TestObject[3]{1, 2, 3});
+    ASSERT(ptr1 == ptr2);
+    ASSERT(ptr1 != ptr3);
+    ASSERT(ptr2 != ptr3);
+    ASSERT(ptr1 == ptr1);
+    ASSERT(ptr2 == ptr2);
+    ASSERT(ptr3 == ptr3);
+
+    kogan::SharedPtr<TestObject[]> ptr4;
+    kogan::SharedPtr<TestObject[]> ptr5;
+    ASSERT(ptr4 == ptr5);
+    ASSERT(ptr4 == nullptr);
+    ASSERT(nullptr == ptr4);
+    ASSERT(ptr5 == nullptr);
+    ASSERT(nullptr == ptr5);
+    ASSERT(ptr4 == ptr4);
+    ASSERT(ptr5 == ptr5);
+    ASSERT(ptr4 != ptr1);
+    ASSERT(ptr5 != ptr1);
+    ASSERT(ptr1 != ptr4);
+    ASSERT(ptr1 != ptr5);
+
+    kogan::SharedPtr<TestObject[]> ptr6(new TestObject[3]{1, 2, 3});
+    ASSERT(ptr6 != ptr1);
+    ASSERT(ptr1 != ptr6);
+    ASSERT(ptr6 != ptr4);
+    ASSERT(ptr4 != ptr6);
+    ASSERT(ptr6 != nullptr);
+    ASSERT(nullptr != ptr6);
+
+    ptr6 = nullptr;
+    ASSERT(ptr6 == nullptr);
+    ASSERT(nullptr == ptr6);
+    ASSERT(ptr6 == ptr6);
+    ASSERT(ptr6 != ptr1);
+    ASSERT(ptr1 != ptr6);
+    ASSERT(ptr6 == ptr4);
+    ASSERT(ptr4 == ptr6);
+}
+
 TEST(make_shared, shared_ptr_test_suite) {
     kogan::SharedPtr<TestObject> ptr = kogan::make_shared<TestObject>(42);
     ASSERT(ptr.get()->value == 42);

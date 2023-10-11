@@ -47,6 +47,23 @@ class SharedPtr {
         }
         return *this;
     }
+
+    SharedPtr& operator=(T* ptr) noexcept {  // assignment from pointer
+        decrement_counter_and_delete_ptr_if_zero();
+        ptr_ = ptr;
+        if (ptr_ == nullptr)
+            reference_counter_ = nullptr;
+        else
+            reference_counter_ = new unsigned int(1);
+        return *this;
+    }
+
+    friend bool operator==(const SharedPtr& lhs, const SharedPtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
+    friend bool operator!=(const SharedPtr& lhs, const SharedPtr& rhs) noexcept { return !(lhs == rhs); }
+    friend bool operator==(const SharedPtr& lhs, std::nullptr_t) noexcept { return lhs.ptr_ == nullptr; }
+    friend bool operator==(std::nullptr_t, const SharedPtr& rhs) noexcept { return rhs.ptr_ == nullptr; }
+    friend bool operator!=(const SharedPtr& lhs, std::nullptr_t) noexcept { return !(lhs == nullptr); }
+    friend bool operator!=(std::nullptr_t, const SharedPtr& rhs) noexcept { return !(nullptr == rhs); }
 };
 
 template <class T>
@@ -92,6 +109,23 @@ class SharedPtr<T[]> {  // specialization for arrays
         }
         return *this;
     }
+
+    SharedPtr& operator=(T* ptr) noexcept {  // assignment from pointer
+        decrement_counter_and_delete_ptr_if_zero();
+        ptr_ = ptr;
+        if (ptr_ == nullptr)
+            reference_counter_ = nullptr;
+        else
+            reference_counter_ = new unsigned int(1);
+        return *this;
+    }
+
+    friend bool operator==(const SharedPtr& lhs, const SharedPtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
+    friend bool operator!=(const SharedPtr& lhs, const SharedPtr& rhs) noexcept { return !(lhs == rhs); }
+    friend bool operator==(const SharedPtr& lhs, std::nullptr_t) noexcept { return lhs.ptr_ == nullptr; }
+    friend bool operator==(std::nullptr_t, const SharedPtr& rhs) noexcept { return rhs.ptr_ == nullptr; }
+    friend bool operator!=(const SharedPtr& lhs, std::nullptr_t) noexcept { return !(lhs == nullptr); }
+    friend bool operator!=(std::nullptr_t, const SharedPtr& rhs) noexcept { return !(nullptr == rhs); }
 };
 
 /* std::enable_if is a type trait used to enable or disable function templates based on the properties of their template
