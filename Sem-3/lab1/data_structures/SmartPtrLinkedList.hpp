@@ -23,13 +23,12 @@ class SmartPtrLinkedList {
     SharedPtr<Root> root_;
     std::size_t length_;
 
-    void init_();
-    SharedPtr<Node> get_node_(int index) const;
-
    public:
     SmartPtrLinkedList();
     SmartPtrLinkedList(SharedPtr<T[]> data, int length);
     SmartPtrLinkedList(const SmartPtrLinkedList<T>& other);
+
+    ~SmartPtrLinkedList();
 
     T get(int index) const;
     T get_first() const;
@@ -47,30 +46,20 @@ class SmartPtrLinkedList {
     SmartPtrLinkedList<T> concat(const SmartPtrLinkedList<T>& other) const;
 
     T& operator[](int index);
-};
 
-template <class T>
-inline void SmartPtrLinkedList<T>::init_() {
-    root_ = make_shared<Root>();
-    root_->head = nullptr;
-    root_->tail = nullptr;
-    length_ = 0;
-}
-
-template <class T>
-inline SharedPtr<typename SmartPtrLinkedList<T>::Node> SmartPtrLinkedList<T>::get_node_(int index) const {
-    if (index < 0 || index >= length_) throw IndexOutOfRangeException(index, 0, length_ - 1);
-
-    if (index < length_ / 2) {  // search from head
-        auto cur_node = root_->head;
-        for (std::size_t i = 0; i < index; ++i) cur_node = cur_node->next;
-        return cur_node;
-    } else {  // search from tail
-        auto cur_node = root_->tail;
-        for (std::size_t i = length_ - 1; i > index; --i) cur_node = cur_node->prev;
-        return cur_node;
+    SmartPtrLinkedList& operator=(const SmartPtrLinkedList& other) noexcept {
+        if (this != &other) {
+            clear();
+            init_();
+            for (std::size_t i = 0; i < other.length_; ++i) append(other.get(i));
+        }
+        return *this;
     }
-}
+
+   private:
+    void init_();
+    SharedPtr<Node> get_node_(int index) const;
+};
 
 template <class T>
 inline SmartPtrLinkedList<T>::SmartPtrLinkedList() {
@@ -89,6 +78,11 @@ template <class T>
 inline SmartPtrLinkedList<T>::SmartPtrLinkedList(const SmartPtrLinkedList<T>& other) {
     init_();
     for (std::size_t i = 0; i < other.length_; ++i) append(other.get(i));
+}
+
+template <class T>
+inline SmartPtrLinkedList<T>::~SmartPtrLinkedList() {
+    clear();
 }
 
 template <class T>
@@ -200,6 +194,13 @@ inline void SmartPtrLinkedList<T>::remove(int index) {
 
 template <class T>
 inline void SmartPtrLinkedList<T>::clear() noexcept {
+    auto next = root_->head;
+    while (next) {
+        auto current = next;
+        next = next->next;
+        current->prev = nullptr;
+        current->next = nullptr;
+    }
     root_->head = nullptr;
     root_->tail = nullptr;
     length_ = 0;
@@ -227,6 +228,29 @@ template <class T>
 inline T& SmartPtrLinkedList<T>::operator[](int index) {
     if (index < 0 || index >= length_) throw IndexOutOfRangeException(index, 0, length_ - 1);
     return get_node_(index)->data;
+}
+
+template <class T>
+inline void SmartPtrLinkedList<T>::init_() {
+    root_ = make_shared<Root>();
+    root_->head = nullptr;
+    root_->tail = nullptr;
+    length_ = 0;
+}
+
+template <class T>
+inline SharedPtr<typename SmartPtrLinkedList<T>::Node> SmartPtrLinkedList<T>::get_node_(int index) const {
+    if (index < 0 || index >= length_) throw IndexOutOfRangeException(index, 0, length_ - 1);
+
+    if (index < length_ / 2) {  // search from head
+        auto cur_node = root_->head;
+        for (std::size_t i = 0; i < index; ++i) cur_node = cur_node->next;
+        return cur_node;
+    } else {  // search from tail
+        auto cur_node = root_->tail;
+        for (std::size_t i = length_ - 1; i > index; --i) cur_node = cur_node->prev;
+        return cur_node;
+    }
 }
 
 }  // namespace kogan
