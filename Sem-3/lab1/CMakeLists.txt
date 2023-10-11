@@ -12,9 +12,9 @@ add_executable(
     smart_pointers/SharedPtr.hpp
     data_structures/SmartPtrDynamicArray.hpp
     data_structures/SmartPtrLinkedList.hpp
-    # sequences/SmartPtrSequence.hpp
-    # sequences/SmartPtrArraySequence.hpp
-    # sequences/SmartPtrLinkedListSequence.hpp
+    sequences/SmartPtrSequence.hpp
+    sequences/SmartPtrArraySequence.hpp
+    sequences/SmartPtrLinkedListSequence.hpp
     tests/UniquePtr_tests/UniquePtr_tests.hpp
     tests/UniquePtr_tests/UniquePtr_tests.cpp
     tests/SharedPtr_tests/SharedPtr_tests.hpp
@@ -23,10 +23,10 @@ add_executable(
     tests/SmartPtrDynamicArray_tests/SmartPtrDynamicArray_tests.cpp
     tests/SmartPtrLinkedList_tests/SmartPtrLinkedList_tests.hpp
     tests/SmartPtrLinkedList_tests/SmartPtrLinkedList_tests.cpp
-    # tests/SmartPtrArraySequence_tests/SmartPtrArraySequence_tests.hpp
-    # tests/SmartPtrArraySequence_tests/SmartPtrArraySequence_tests.cpp
-    # tests/SmartPtrLinkedListSequence_tests/SmartPtrLinkedListSequence_tests.hpp
-    # tests/SmartPtrLinkedListSequence_tests/SmartPtrLinkedListSequence_tests.cpp
+    tests/SmartPtrArraySequence_tests/SmartPtrArraySequence_tests.hpp
+    tests/SmartPtrArraySequence_tests/SmartPtrArraySequence_tests.cpp
+    tests/SmartPtrLinkedListSequence_tests/SmartPtrLinkedListSequence_tests.hpp
+    tests/SmartPtrLinkedListSequence_tests/SmartPtrLinkedListSequence_tests.cpp
 )
 
 add_executable(

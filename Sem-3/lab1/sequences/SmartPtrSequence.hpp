@@ -1,5 +1,5 @@
-#ifndef LAB1_SEQUENCE_HPP
-#define LAB1_SEQUENCE_HPP
+#ifndef LAB1_SMART_PTR_SEQUENCE_HPP
+#define LAB1_SMART_PTR_SEQUENCE_HPP
 
 #include <sstream>
 #include <string>

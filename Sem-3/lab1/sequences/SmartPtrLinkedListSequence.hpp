@@ -1,14 +1,14 @@
 #ifndef LAB1_LINKED_LIST_SEQUENCE_HPP
 #define LAB1_LINKED_LIST_SEQUENCE_HPP
 
+#include "../data_structures/SmartPtrLinkedList.hpp"
 #include "SmartPtrSequence.hpp"
-#include "sequence_lib.hpp"
 
 namespace kogan {
 
 template <class T>
 class SmartPtrLinkedListSequence : public SmartPtrSequence<T> {
-    UniquePtr<LinkedList<T>> list;
+    UniquePtr<SmartPtrLinkedList<T>> list;
 
    public:
     SmartPtrLinkedListSequence(SharedPtr<T[]> items, int count);
@@ -34,17 +34,17 @@ class SmartPtrLinkedListSequence : public SmartPtrSequence<T> {
 
 template <class T>
 inline SmartPtrLinkedListSequence<T>::SmartPtrLinkedListSequence(SharedPtr<T[]> items, int count) {
-    list = make_unique<LinkedList<T>>(items.get(), count);
+    list = make_unique<SmartPtrLinkedList<T>>(items, count);
 }
 
 template <class T>
 SmartPtrLinkedListSequence<T>::SmartPtrLinkedListSequence() {
-    list = make_unique<LinkedList<T>>();
+    list = make_unique<SmartPtrLinkedList<T>>();
 }
 
 template <class T>
 SmartPtrLinkedListSequence<T>::SmartPtrLinkedListSequence(const SmartPtrLinkedListSequence<T> &linkedListSequence) {
-    list = make_unique<LinkedList<T>>(*linkedListSequence.list);
+    list = make_unique<SmartPtrLinkedList<T>>(*linkedListSequence.list);
 }
 
 template <class T>
@@ -64,7 +64,7 @@ T SmartPtrLinkedListSequence<T>::get(int index) const {
 
 template <class T>
 UniquePtr<SmartPtrSequence<T>> SmartPtrLinkedListSequence<T>::get_subsequence(int start_index, int end_index) const {
-    LinkedList<T> sub_list = list->get_sublist(start_index, end_index);
+    SmartPtrLinkedList<T> sub_list = list->get_sublist(start_index, end_index);
 
     auto sub_seq = UniquePtr<SmartPtrSequence<T>>(new SmartPtrLinkedListSequence<T>());
     for (int i = 0; i < sub_list.get_length(); ++i) sub_seq->append(sub_list.get(i));

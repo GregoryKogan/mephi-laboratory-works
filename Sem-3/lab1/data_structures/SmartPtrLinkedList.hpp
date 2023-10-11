@@ -43,7 +43,7 @@ class SmartPtrLinkedList {
     void clear() noexcept;
 
     SmartPtrLinkedList<T> get_sublist(int start_index, int end_index) const;
-    SmartPtrLinkedList<T> concat(const SmartPtrLinkedList<T>& other) const;
+    SmartPtrLinkedList<T> concat(const SmartPtrLinkedList<T>& other) const noexcept;
 
     T& operator[](int index);
 
@@ -218,7 +218,7 @@ inline SmartPtrLinkedList<T> SmartPtrLinkedList<T>::get_sublist(int start_index,
 }
 
 template <class T>
-inline SmartPtrLinkedList<T> SmartPtrLinkedList<T>::concat(const SmartPtrLinkedList<T>& other) const {
+inline SmartPtrLinkedList<T> SmartPtrLinkedList<T>::concat(const SmartPtrLinkedList<T>& other) const noexcept {
     auto new_list = SmartPtrLinkedList<T>(*this);
     for (std::size_t i = 0; i < other.length_; ++i) new_list.append(other.get(i));
     return new_list;

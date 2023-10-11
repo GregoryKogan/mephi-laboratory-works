@@ -1,14 +1,14 @@
 #ifndef LAB1_ARRAY_SEQUENCE_HPP
 #define LAB1_ARRAY_SEQUENCE_HPP
 
+#include "../data_structures/SmartPtrDynamicArray.hpp"
 #include "SmartPtrSequence.hpp"
-#include "sequence_lib.hpp"
 
 namespace kogan {
 
 template <class T>
 class SmartPtrArraySequence : public SmartPtrSequence<T> {
-    UniquePtr<DynamicArray<T>> array;
+    UniquePtr<SmartPtrDynamicArray<T>> array;
 
    public:
     SmartPtrArraySequence(SharedPtr<T[]> items, int count);
@@ -34,17 +34,17 @@ class SmartPtrArraySequence : public SmartPtrSequence<T> {
 
 template <class T>
 inline SmartPtrArraySequence<T>::SmartPtrArraySequence(SharedPtr<T[]> items, int count) {
-    array = make_unique<DynamicArray<T>>(items.get(), count);
+    array = make_unique<SmartPtrDynamicArray<T>>(items, count);
 }
 
 template <class T>
 SmartPtrArraySequence<T>::SmartPtrArraySequence() {
-    array = make_unique<DynamicArray<T>>(0);
+    array = make_unique<SmartPtrDynamicArray<T>>();
 }
 
 template <class T>
 SmartPtrArraySequence<T>::SmartPtrArraySequence(const SmartPtrArraySequence<T> &arraySequence) {
-    array = make_unique<DynamicArray<T>>(*arraySequence.array);
+    array = make_unique<SmartPtrDynamicArray<T>>(*arraySequence.array);
 }
 
 template <class T>
@@ -66,10 +66,8 @@ template <class T>
 UniquePtr<SmartPtrSequence<T>> SmartPtrArraySequence<T>::get_subsequence(int start_index, int end_index) const {
     if (start_index < 0 || start_index >= get_length())
         throw IndexOutOfRangeException(start_index, 0, get_length() - 1);
-
     if (end_index < 0 || end_index >= get_length()) throw IndexOutOfRangeException(end_index, 0, get_length() - 1);
-
-    if (end_index < start_index) throw InvalidArgumentException("end_index");
+    if (end_index < start_index) throw InvalidArgumentException("end_index must be greater than start_index");
 
     auto sub_seq = UniquePtr<SmartPtrSequence<T>>(new SmartPtrArraySequence<T>());
     for (int i = start_index; i <= end_index; ++i) sub_seq->append(get(i));
