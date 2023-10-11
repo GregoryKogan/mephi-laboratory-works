@@ -35,3 +35,7 @@ include(FindPkgConfig)
 find_package(TestLib REQUIRED)
 include_directories(${TEST-LIB_INCLUDE_DIR})
 target_link_libraries(test ${TEST-LIB_LIBRARY})
+
+find_package(ExceptionLib REQUIRED)
+include_directories(${EXCEPTION-LIB_INCLUDE_DIR})
+target_link_libraries(test ${EXCEPTION-LIB_LIBRARY})
