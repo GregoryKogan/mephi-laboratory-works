@@ -212,14 +212,14 @@ inline SmartPtrLinkedList<T> SmartPtrLinkedList<T>::get_sublist(int start_index,
     if (start_index > end_index) throw InvalidArgumentException("start_index must be less than or equal to end_index");
 
     auto new_list = SmartPtrLinkedList<T>();
-    for (std::size_t i = start_index; i <= end_index; ++i) new_list.append(get_node_(i)->data);
+    for (std::size_t i = start_index; i <= end_index; ++i) new_list.append(get(i));
     return new_list;
 }
 
 template <class T>
 inline SmartPtrLinkedList<T> SmartPtrLinkedList<T>::concat(const SmartPtrLinkedList<T>& other) const {
     auto new_list = SmartPtrLinkedList<T>(*this);
-    for (std::size_t i = 0; i < other.length_; ++i) new_list.append(other.get_node_(i)->data);
+    for (std::size_t i = 0; i < other.length_; ++i) new_list.append(other.get(i));
     return new_list;
 }
 
