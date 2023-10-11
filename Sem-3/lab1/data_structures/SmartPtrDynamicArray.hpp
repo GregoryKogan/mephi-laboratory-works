@@ -27,6 +27,15 @@ class SmartPtrDynamicArray {
     void resize(int new_length);
 
     T& operator[](int index);
+
+    SmartPtrDynamicArray& operator=(const SmartPtrDynamicArray& other) noexcept {
+        if (this != &other) {
+            length_ = other.length_;
+            data_ = make_shared<T[]>(length_);
+            for (std::size_t i = 0; i < length_; ++i) set(i, other.get(i));
+        }
+        return *this;
+    }
 };
 
 template <class T>

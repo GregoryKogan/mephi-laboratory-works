@@ -195,4 +195,24 @@ TEST(operator_brackets, smart_ptr_dynamic_array_test_suite) {
     ASSERT(arr[4] == 5);
 }
 
+TEST(copy_assignment, smart_ptr_dynamic_array_test_suite) {
+    auto data = kogan::make_shared<int[]>(5);
+    for (int i = 0; i < 5; ++i) data[i] = i + 1;
+    kogan::SmartPtrDynamicArray<int> arr1(data, 5);
+
+    auto arr2 = arr1;
+    ASSERT(arr1.get_length() == arr2.get_length());
+    ASSERT(arr1.get_length() == 5);
+    ASSERT(arr1[0] == arr2[0]);
+    ASSERT(arr1[0] == 1);
+    ASSERT(arr1[4] == arr2[4]);
+    ASSERT(arr1[4] == 5);
+
+    kogan::SmartPtrDynamicArray<int> arr3;
+    arr2 = arr3;
+    ASSERT(arr2.get_length() == arr3.get_length());
+    ASSERT(arr2.get_length() == 0);
+    ASSERT(arr1.get_length() == 5);
+}
+
 kogan::TestSuite get_smart_ptr_dynamic_array_test_suite() { return smart_ptr_dynamic_array_test_suite; }

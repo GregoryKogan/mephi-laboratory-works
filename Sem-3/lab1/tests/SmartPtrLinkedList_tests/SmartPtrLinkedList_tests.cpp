@@ -557,6 +557,10 @@ TEST(concat_single, smart_ptr_linked_list_test_suite) {
     ASSERT(list3.get_length() == 2);
     ASSERT(list3.get(0) == 42);
     ASSERT(list3.get(1) == 43);
+    ASSERT(list1.get_length() == 1);
+    ASSERT(list2.get_length() == 1);
+    ASSERT(list1.get(0) == 42);
+    ASSERT(list2.get(0) == 43);
 }
 
 TEST(operator_square_brackets, smart_ptr_linked_list_test_suite) {
@@ -574,6 +578,26 @@ TEST(operator_square_brackets, smart_ptr_linked_list_test_suite) {
     ASSERT(list[2] == 3);
     ASSERT(list[3] == 4);
     ASSERT(list[4] == 5);
+}
+
+TEST(copy_assignment, smart_ptr_linked_list_test_suite) {
+    auto data = kogan::make_shared<int[]>(5);
+    for (int i = 0; i < 5; ++i) data[i] = i + 1;
+    kogan::SmartPtrLinkedList<int> list1(data, 5);
+
+    auto list2 = list1;
+    ASSERT(list1.get_length() == list2.get_length());
+    ASSERT(list1.get_length() == 5);
+    ASSERT(list1[0] == list2[0]);
+    ASSERT(list1[0] == 1);
+    ASSERT(list1[4] == list2[4]);
+    ASSERT(list1[4] == 5);
+
+    kogan::SmartPtrLinkedList<int> list3;
+    list2 = list3;
+    ASSERT(list2.get_length() == list3.get_length());
+    ASSERT(list2.get_length() == 0);
+    ASSERT(list1.get_length() == 5);
 }
 
 kogan::TestSuite get_smart_ptr_linked_list_test_suite() { return smart_ptr_linked_list_test_suite; }
