@@ -8,8 +8,10 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 add_executable(
     test
     test.cpp
-    smart_pointers/UniquePtr.hpp
-    smart_pointers/SharedPtr.hpp
+    smart_pointers/UniquePtr/UniquePtr.hpp
+    smart_pointers/UniquePtr/UniquePtr.inc
+    smart_pointers/SharedPtr/SharedPtr.hpp
+    smart_pointers/SharedPtr/SharedPtr.inc
     data_structures/SmartPtrDynamicArray.hpp
     data_structures/SmartPtrLinkedList.hpp
     sequences/SmartPtrSequence.hpp
@@ -32,8 +34,10 @@ add_executable(
 add_executable(
     load_test
     load_test.cpp
-    smart_pointers/UniquePtr.hpp
-    smart_pointers/SharedPtr.hpp
+    smart_pointers/UniquePtr/UniquePtr.hpp
+    smart_pointers/UniquePtr/UniquePtr.inc
+    smart_pointers/SharedPtr/SharedPtr.hpp
+    smart_pointers/SharedPtr/SharedPtr.inc
 )
 
 include(FindPkgConfig)

@@ -4,8 +4,8 @@
 #include <memory>
 #include <utility>
 
-#include "smart_pointers/SharedPtr.hpp"
-#include "smart_pointers/UniquePtr.hpp"
+#include "smart_pointers/SharedPtr/SharedPtr.hpp"
+#include "smart_pointers/UniquePtr/UniquePtr.hpp"
 
 struct TestObject {
     int value;

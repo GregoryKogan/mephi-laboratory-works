@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-#include "../smart_pointers/SharedPtr.hpp"
+#include "../smart_pointers/SharedPtr/SharedPtr.hpp"
 #include "exception_lib.hpp"
 
 namespace kogan {

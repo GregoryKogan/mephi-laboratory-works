@@ -1,82 +1,9 @@
-#ifndef LAB1_UNIQUE_PTR_HPP
-#define LAB1_UNIQUE_PTR_HPP
+#ifndef LAB1_UNIQUE_PTR_INC
+#define LAB1_UNIQUE_PTR_INC
 
-#include <utility>
+#include "UniquePtr.hpp"
 
 namespace kogan {
-
-template <class T>
-class UniquePtr {
-   private:
-    T* ptr_;
-
-   public:
-    UniquePtr() noexcept;                   // default constructor
-    explicit UniquePtr(T* ptr) noexcept;    // constructor from pointer
-    UniquePtr(const UniquePtr&) = delete;   // copy constructor is deleted
-    UniquePtr(UniquePtr&& other) noexcept;  // move constructor
-
-    ~UniquePtr();
-
-    UniquePtr<T>& operator=(const UniquePtr<T>&) = delete;   // copy assignment is deleted
-    UniquePtr<T>& operator=(UniquePtr<T>&& other) noexcept;  // move assignment
-    UniquePtr<T>& operator=(std::nullptr_t) noexcept;        // assignment from nullptr
-
-    T* release() noexcept;                    // release ownership
-    void reset(T* ptr = nullptr) noexcept;    // delete old and set new pointer
-    void swap(UniquePtr<T>& other) noexcept;  // swaps the managed objects
-
-    T* get() const noexcept;                  // get pointer
-    explicit operator bool() const noexcept;  // checks if there is an associated managed object
-
-    T* operator->() const noexcept;  // get pointer and use operator ->
-    T& operator*() const noexcept;   // get reference
-
-    friend bool operator==(const UniquePtr<T>& x, const UniquePtr<T>& y) { return x.get() == y.get(); }
-    friend bool operator!=(const UniquePtr<T>& x, const UniquePtr<T>& y) { return !(x == y); }
-    friend bool operator==(const UniquePtr<T>& x, std::nullptr_t) noexcept { return !x; }
-    friend bool operator==(std::nullptr_t, const UniquePtr<T>& x) noexcept { return !x; }
-    friend bool operator!=(const UniquePtr<T>& x, std::nullptr_t) noexcept { return (bool)x; }
-    friend bool operator!=(std::nullptr_t, const UniquePtr<T>& x) noexcept { return (bool)x; }
-
-    friend void swap(UniquePtr<T>& lhs, UniquePtr<T>& rhs) noexcept { lhs.swap(rhs); }
-};
-
-template <class T>
-class UniquePtr<T[]> {  // specialization for arrays
-   private:
-    T* ptr_;
-
-   public:
-    UniquePtr() noexcept;
-    explicit UniquePtr(T* ptr) noexcept;
-    UniquePtr(const UniquePtr&) = delete;
-    UniquePtr(UniquePtr&& other) noexcept;
-
-    ~UniquePtr();
-
-    UniquePtr<T[]>& operator=(const UniquePtr<T[]>&) = delete;
-    UniquePtr<T[]>& operator=(UniquePtr<T[]>&& other) noexcept;
-    UniquePtr<T[]>& operator=(std::nullptr_t) noexcept;
-
-    T* release() noexcept;
-    void reset(T* ptr = nullptr) noexcept;
-    void swap(UniquePtr<T[]>& other) noexcept;
-
-    T* get() const noexcept;
-    explicit operator bool() const noexcept;
-
-    T& operator[](std::size_t index) const;  // array subscript operator
-
-    friend bool operator==(const UniquePtr<T[]>& x, const UniquePtr<T[]>& y) { return x.get() == y.get(); }
-    friend bool operator!=(const UniquePtr<T[]>& x, const UniquePtr<T[]>& y) { return !(x == y); }
-    friend bool operator==(const UniquePtr<T[]>& x, std::nullptr_t) noexcept { return !x; }
-    friend bool operator==(std::nullptr_t, const UniquePtr<T[]>& x) noexcept { return !x; }
-    friend bool operator!=(const UniquePtr<T[]>& x, std::nullptr_t) noexcept { return (bool)x; }
-    friend bool operator!=(std::nullptr_t, const UniquePtr<T[]>& x) noexcept { return (bool)x; }
-
-    friend void swap(UniquePtr<T[]>& lhs, UniquePtr<T[]>& rhs) noexcept { lhs.swap(rhs); }
-};
 
 /* std::enable_if is a type trait used to enable or disable function templates based on the properties of their template
  * arguments. std::is_array is a type trait used to determine if a type is an array. std::remove_extent is a type trait

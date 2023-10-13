@@ -1,7 +1,7 @@
 #ifndef LAB1_SMART_PTR_LINKED_LIST_HPP
 #define LAB1_SMART_PTR_LINKED_LIST_HPP
 
-#include "../smart_pointers/SharedPtr.hpp"
+#include "../smart_pointers/SharedPtr/SharedPtr.hpp"
 #include "exception_lib.hpp"
 
 namespace kogan {
