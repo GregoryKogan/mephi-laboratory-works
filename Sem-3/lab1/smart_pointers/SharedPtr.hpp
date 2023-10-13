@@ -48,23 +48,23 @@ class SharedPtr<T[]> {  // specialization for arrays
     void decrement_counter_and_delete_ptr_if_zero();
 
    public:
-    SharedPtr() noexcept;                        // default constructor
-    explicit SharedPtr(T* ptr) noexcept;         // constructor from pointer
-    SharedPtr(const SharedPtr& other) noexcept;  // copy constructor
-    SharedPtr(SharedPtr&& other) noexcept;       // move constructor
+    SharedPtr() noexcept;
+    explicit SharedPtr(T* ptr) noexcept;
+    SharedPtr(const SharedPtr& other) noexcept;
+    SharedPtr(SharedPtr&& other) noexcept;
 
     ~SharedPtr();
 
-    SharedPtr<T[]>& operator=(const SharedPtr<T[]>& other) noexcept;  // copy assignment
-    SharedPtr<T[]>& operator=(SharedPtr<T[]>&& other) noexcept;       // move assignment
-    SharedPtr<T[]>& operator=(T* ptr) noexcept;                       // assignment from pointer
+    SharedPtr<T[]>& operator=(const SharedPtr<T[]>& other) noexcept;
+    SharedPtr<T[]>& operator=(SharedPtr<T[]>&& other) noexcept;
+    SharedPtr<T[]>& operator=(T* ptr) noexcept;
 
-    explicit operator bool() const noexcept;  // check if pointer is not null
-    T* get() const noexcept;                  // get pointer
-    T* operator->() const noexcept;           // get pointer and use operator ->
-    T& operator*() const noexcept;            // get reference
-    T& operator[](std::size_t index) const;   // array subscript operator
-    unsigned int use_count() const noexcept;  // get reference counter
+    explicit operator bool() const noexcept;
+    T* get() const noexcept;
+    T* operator->() const noexcept;
+    T& operator*() const noexcept;
+    T& operator[](std::size_t index) const;  // array subscript operator
+    unsigned int use_count() const noexcept;
 
     friend bool operator==(const SharedPtr& lhs, const SharedPtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
     friend bool operator!=(const SharedPtr& lhs, const SharedPtr& rhs) noexcept { return !(lhs == rhs); }
