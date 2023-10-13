@@ -8,10 +8,18 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 add_executable(
     test
     test.cpp
+    exceptions/EmptyPointerException/EmptyPointerException.hpp
+    exceptions/EmptyPointerException/EmptyPointerException.cpp
+    exceptions/ZeroReferenceDecrementException/ZeroReferenceDecrementException.hpp
+    exceptions/ZeroReferenceDecrementException/ZeroReferenceDecrementException.cpp
     smart_pointers/UniquePtr/UniquePtr.hpp
     smart_pointers/UniquePtr/UniquePtr.hh
+    smart_pointers/ControlBlock/ControlBlock.hpp
+    smart_pointers/ControlBlock/ControlBlock.hh
     smart_pointers/SharedPtr/SharedPtr.hpp
     smart_pointers/SharedPtr/SharedPtr.hh
+    smart_pointers/WeakPtr/WeakPtr.hpp
+    smart_pointers/WeakPtr/WeakPtr.hh
     data_structures/SmartPtrDynamicArray.hpp
     data_structures/SmartPtrLinkedList.hpp
     sequences/SmartPtrSequence.hpp
@@ -34,6 +42,8 @@ add_executable(
 add_executable(
     load_test
     load_test.cpp
+    exceptions/ZeroReferenceDecrementException/ZeroReferenceDecrementException.hpp
+    exceptions/ZeroReferenceDecrementException/ZeroReferenceDecrementException.cpp
     smart_pointers/UniquePtr/UniquePtr.hpp
     smart_pointers/UniquePtr/UniquePtr.hh
     smart_pointers/SharedPtr/SharedPtr.hpp
@@ -49,3 +59,4 @@ target_link_libraries(test ${TEST-LIB_LIBRARY})
 find_package(ExceptionLib REQUIRED)
 include_directories(${EXCEPTION-LIB_INCLUDE_DIR})
 target_link_libraries(test ${EXCEPTION-LIB_LIBRARY})
+target_link_libraries(load_test ${EXCEPTION-LIB_LIBRARY})

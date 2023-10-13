@@ -4,24 +4,25 @@
 #include <utility>
 
 #include "../../exceptions/EmptyPointerException/EmptyPointerException.hpp"
-#include "../WeakPtr/WeakPtr.hpp"
+#include "../ControlBlock/ControlBlock.hpp"
+// #include "../WeakPtr/WeakPtr.hpp"
 
 namespace kogan {
 
 template <class T>
 class SharedPtr {
    private:
-    T* ptr_;
-    unsigned int* reference_counter_;
+    ControlBlock<T>* control_block_;
 
-    void decrement_counter_and_delete_ptr_if_zero();
+    // TODO: figure this out
+    // friend class WeakPtr<T>;  // to access ptr_ and reference_counter_
 
    public:
-    SharedPtr() noexcept;                         // default constructor
-    explicit SharedPtr(T* ptr) noexcept;          // constructor from pointer
-    SharedPtr(const SharedPtr& other) noexcept;   // copy constructor
-    SharedPtr(const WeakPtr<T>& other) noexcept;  // constructor from WeakPtr
-    SharedPtr(SharedPtr&& other) noexcept;        // move constructor
+    SharedPtr() noexcept;                        // default constructor
+    explicit SharedPtr(T* ptr) noexcept;         // constructor from pointer
+    SharedPtr(const SharedPtr& other) noexcept;  // copy constructor
+    // SharedPtr(const WeakPtr<T>& other);          // constructor from WeakPtr
+    SharedPtr(SharedPtr&& other) noexcept;  // move constructor
 
     ~SharedPtr();
 
@@ -52,10 +53,7 @@ class SharedPtr {
 template <class T>
 class SharedPtr<T[]> {  // specialization for arrays
    private:
-    T* ptr_;
-    unsigned int* reference_counter_;
-
-    void decrement_counter_and_delete_ptr_if_zero();
+    ControlBlock<T[]>* control_block_;
 
    public:
     SharedPtr() noexcept;

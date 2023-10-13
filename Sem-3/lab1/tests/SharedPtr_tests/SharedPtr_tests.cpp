@@ -54,6 +54,24 @@ TEST(copy_constructor_array, shared_ptr_test_suite) {
     ASSERT(ptr2.use_count() == 2);
 }
 
+// TEST(constructor_from_weak_ptr, shared_ptr_test_suite) {
+//     kogan::WeakPtr<TestObject> weak_ptr;
+//     ASSERT(weak_ptr.use_count() == 0);
+//     ASSERT(weak_ptr.expired());
+//     {
+//         auto ptr1 = kogan::make_shared<TestObject>(42);
+//         weak_ptr = ptr1;
+//         kogan::SharedPtr<TestObject> ptr2(weak_ptr);
+//         ASSERT(ptr1.get() == ptr2.get());
+//         ASSERT(ptr1.use_count() == 2);
+//         ASSERT(ptr2.use_count() == 2);
+//         ASSERT(weak_ptr.use_count() == 2);
+//         ASSERT(!weak_ptr.expired());
+//     }
+//     std::cout << weak_ptr.use_count() << std::endl;
+//     ASSERT(weak_ptr.expired());
+// }
+
 TEST(move_constructor, shared_ptr_test_suite) {
     kogan::SharedPtr<TestObject> ptr1(new TestObject(42));
     kogan::SharedPtr<TestObject> ptr2(std::move(ptr1));
