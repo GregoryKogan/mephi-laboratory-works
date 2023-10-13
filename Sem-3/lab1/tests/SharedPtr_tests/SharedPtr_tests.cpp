@@ -200,6 +200,48 @@ TEST(reset_nullptr_array, shared_ptr_test_suite) {
     ASSERT(ptr1);
 }
 
+TEST(reset_empty, shared_ptr_test_suite) {
+    kogan::SharedPtr<int> ptr1(new int(42));
+    kogan::SharedPtr<int> ptr2(ptr1);
+    ASSERT(ptr1.get() == ptr2.get());
+    ASSERT(ptr1.use_count() == 2);
+    ASSERT(ptr2.use_count() == 2);
+    ASSERT(*ptr1 == 42);
+    ASSERT(*ptr2 == 42);
+
+    ptr2.reset();
+    ASSERT(ptr1.use_count() == 1);
+    ASSERT(ptr2.use_count() == 0);
+    ASSERT(*ptr1 == 42);
+    ASSERT(ptr2.get() == nullptr);
+    ASSERT(!ptr2);
+    ASSERT(ptr1);
+}
+
+TEST(reset_empty_array, shared_ptr_test_suite) {
+    kogan::SharedPtr<int[]> ptr1(new int[3]{1, 2, 3});
+    kogan::SharedPtr<int[]> ptr2(ptr1);
+    ASSERT(ptr1.get() == ptr2.get());
+    ASSERT(ptr1.use_count() == 2);
+    ASSERT(ptr2.use_count() == 2);
+    ASSERT(ptr1[0] == 1);
+    ASSERT(ptr1[1] == 2);
+    ASSERT(ptr1[2] == 3);
+    ASSERT(ptr2[0] == 1);
+    ASSERT(ptr2[1] == 2);
+    ASSERT(ptr2[2] == 3);
+
+    ptr2.reset();
+    ASSERT(ptr1.use_count() == 1);
+    ASSERT(ptr2.use_count() == 0);
+    ASSERT(ptr1[0] == 1);
+    ASSERT(ptr1[1] == 2);
+    ASSERT(ptr1[2] == 3);
+    ASSERT(ptr2.get() == nullptr);
+    ASSERT(!ptr2);
+    ASSERT(ptr1);
+}
+
 TEST(assignment_from_nullptr, shared_ptr_test_suite) {
     kogan::SharedPtr<int> ptr1(new int(42));
     kogan::SharedPtr<int> ptr2(ptr1);
