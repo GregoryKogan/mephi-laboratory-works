@@ -20,7 +20,7 @@ class UniquePtr {
 
     UniquePtr<T>& operator=(const UniquePtr<T>&) = delete;   // copy assignment is deleted
     UniquePtr<T>& operator=(UniquePtr<T>&& other) noexcept;  // move assignment
-    UniquePtr<T>& operator=(T* ptr) noexcept;                // assignment from pointer
+    UniquePtr<T>& operator=(std::nullptr_t) noexcept;        // assignment from nullptr
 
     T* release() noexcept;                    // release ownership
     void reset(T* ptr = nullptr) noexcept;    // delete old and set new pointer
@@ -52,7 +52,7 @@ class UniquePtr<T[]> {  // specialization for arrays
 
     UniquePtr<T[]>& operator=(const UniquePtr<T[]>&) = delete;   // copy assignment is deleted
     UniquePtr<T[]>& operator=(UniquePtr<T[]>&& other) noexcept;  // move assignment
-    UniquePtr<T[]>& operator=(T* ptr) noexcept;                  // assignment from pointer
+    UniquePtr<T[]>& operator=(std::nullptr_t) noexcept;          // assignment from nullptr
 
     T* release() noexcept;                    // release ownership
     void reset(T* ptr = nullptr) noexcept;    // delete old and set new pointer
@@ -113,6 +113,13 @@ inline UniquePtr<T>::~UniquePtr() {
 }
 
 template <class T>
+inline UniquePtr<T[]>::~UniquePtr() {
+    if (ptr_ != nullptr) {
+        delete[] ptr_;
+    }
+}
+
+template <class T>
 inline UniquePtr<T>& UniquePtr<T>::operator=(UniquePtr<T>&& other) noexcept {  // move assignment
     if (this != &other) reset(other.release());
     return *this;
@@ -125,22 +132,15 @@ inline UniquePtr<T[]>& UniquePtr<T[]>::operator=(UniquePtr<T[]>&& other) noexcep
 }
 
 template <class T>
-inline UniquePtr<T>& UniquePtr<T>::operator=(T* ptr) noexcept {  // assignment from pointer
-    reset(ptr);
+inline UniquePtr<T>& UniquePtr<T>::operator=(std::nullptr_t) noexcept {  // assignment from nullptr
+    reset(nullptr);
     return *this;
 }
 
 template <class T>
-inline UniquePtr<T[]>& UniquePtr<T[]>::operator=(T* ptr) noexcept {  // assignment from pointer for arrays
-    reset(ptr);
+inline UniquePtr<T[]>& UniquePtr<T[]>::operator=(std::nullptr_t) noexcept {  // assignment from nullptr for arrays
+    reset(nullptr);
     return *this;
-}
-
-template <class T>
-inline UniquePtr<T[]>::~UniquePtr() {
-    if (ptr_ != nullptr) {
-        delete[] ptr_;
-    }
 }
 
 template <class T>

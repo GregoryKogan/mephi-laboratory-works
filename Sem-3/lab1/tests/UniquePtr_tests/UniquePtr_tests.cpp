@@ -89,33 +89,6 @@ TEST(copy_assignment_array, unique_ptr_test_suite) {
     // ptr2 = ptr1;  // should not compile
 }
 
-TEST(assignment_from_pointer, unique_ptr_test_suite) {
-    TestObject* obj = new TestObject(42);
-    kogan::UniquePtr<TestObject> ptr;
-    ptr = obj;
-    ASSERT(ptr.get() == obj);
-
-    TestObject* new_obj = new TestObject(43);
-    ptr = new_obj;
-    ASSERT(ptr.get() == new_obj);
-}
-
-TEST(assignment_from_pointer_array, unique_ptr_test_suite) {
-    TestObject* obj_arr = new TestObject[3]{1, 2, 3};
-    kogan::UniquePtr<TestObject[]> ptr;
-    ptr = obj_arr;
-    ASSERT(ptr.get() == obj_arr);
-    ASSERT(ptr[0].value == 1);
-    ASSERT(ptr[1].value == 2);
-    ASSERT(ptr[2].value == 3);
-
-    TestObject* new_obj_arr = new TestObject[2]{4, 5};
-    ptr = new_obj_arr;
-    ASSERT(ptr.get() == new_obj_arr);
-    ASSERT(ptr[0].value == 4);
-    ASSERT(ptr[1].value == 5);
-}
-
 TEST(assignment_from_nullptr, unique_ptr_test_suite) {
     TestObject* obj = new TestObject(42);
     kogan::UniquePtr<TestObject> ptr(obj);
@@ -141,7 +114,7 @@ TEST(equality_operator, unique_ptr_test_suite) {
     ASSERT(nullptr == ptr2);
 
     TestObject* obj = new TestObject(42);
-    ptr1 = obj;
+    ptr1.reset(obj);
     ASSERT(ptr1 == ptr1);
     ASSERT(ptr1 != ptr2);
     ASSERT(ptr2 != ptr1);
@@ -151,7 +124,7 @@ TEST(equality_operator, unique_ptr_test_suite) {
     ASSERT(nullptr == ptr2);
 
     TestObject* new_obj = new TestObject(43);
-    ptr2 = new_obj;
+    ptr2.reset(new_obj);
     ASSERT(ptr1 != ptr2);
     ASSERT(ptr2 != ptr1);
     ASSERT(ptr1 != nullptr);
@@ -187,7 +160,7 @@ TEST(equality_operator_array, unique_ptr_test_suite) {
     ASSERT(nullptr == ptr2);
 
     TestObject* obj_arr = new TestObject[3]{1, 2, 3};
-    ptr1 = obj_arr;
+    ptr1.reset(obj_arr);
     ASSERT(ptr1 == ptr1);
     ASSERT(ptr1 != ptr2);
     ASSERT(ptr2 != ptr1);
@@ -197,7 +170,7 @@ TEST(equality_operator_array, unique_ptr_test_suite) {
     ASSERT(nullptr == ptr2);
 
     TestObject* new_obj_arr = new TestObject[2]{4, 5};
-    ptr2 = new_obj_arr;
+    ptr2.reset(new_obj_arr);
     ASSERT(ptr1 != ptr2);
     ASSERT(ptr2 != ptr1);
     ASSERT(ptr1 != nullptr);
