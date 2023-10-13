@@ -32,12 +32,12 @@ class UniquePtr {
     T* operator->() const noexcept;  // get pointer and use operator ->
     T& operator*() const noexcept;   // get reference
 
-    friend bool operator==(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
-    friend bool operator!=(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return !(lhs == rhs); }
-    friend bool operator==(const UniquePtr& lhs, std::nullptr_t) noexcept { return lhs.ptr_ == nullptr; }
-    friend bool operator==(std::nullptr_t, const UniquePtr& rhs) noexcept { return rhs.ptr_ == nullptr; }
-    friend bool operator!=(const UniquePtr& lhs, std::nullptr_t) noexcept { return !(lhs == nullptr); }
-    friend bool operator!=(std::nullptr_t, const UniquePtr& rhs) noexcept { return !(nullptr == rhs); }
+    friend bool operator==(const UniquePtr<T>& x, const UniquePtr<T>& y) { return x.get() == y.get(); }
+    friend bool operator!=(const UniquePtr<T>& x, const UniquePtr<T>& y) { return !(x == y); }
+    friend bool operator==(const UniquePtr<T>& x, std::nullptr_t) noexcept { return !x; }
+    friend bool operator==(std::nullptr_t, const UniquePtr<T>& x) noexcept { return !x; }
+    friend bool operator!=(const UniquePtr<T>& x, std::nullptr_t) noexcept { return (bool)x; }
+    friend bool operator!=(std::nullptr_t, const UniquePtr<T>& x) noexcept { return (bool)x; }
 };
 
 template <class T>
@@ -66,12 +66,12 @@ class UniquePtr<T[]> {  // specialization for arrays
 
     T& operator[](std::size_t index) const;  // array subscript operator
 
-    friend bool operator==(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
-    friend bool operator!=(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return !(lhs == rhs); }
-    friend bool operator==(const UniquePtr& lhs, std::nullptr_t) noexcept { return lhs.ptr_ == nullptr; }
-    friend bool operator==(std::nullptr_t, const UniquePtr& rhs) noexcept { return rhs.ptr_ == nullptr; }
-    friend bool operator!=(const UniquePtr& lhs, std::nullptr_t) noexcept { return !(lhs == nullptr); }
-    friend bool operator!=(std::nullptr_t, const UniquePtr& rhs) noexcept { return !(nullptr == rhs); }
+    friend bool operator==(const UniquePtr<T[]>& x, const UniquePtr<T[]>& y) { return x.get() == y.get(); }
+    friend bool operator!=(const UniquePtr<T[]>& x, const UniquePtr<T[]>& y) { return !(x == y); }
+    friend bool operator==(const UniquePtr<T[]>& x, std::nullptr_t) noexcept { return !x; }
+    friend bool operator==(std::nullptr_t, const UniquePtr<T[]>& x) noexcept { return !x; }
+    friend bool operator!=(const UniquePtr<T[]>& x, std::nullptr_t) noexcept { return (bool)x; }
+    friend bool operator!=(std::nullptr_t, const UniquePtr<T[]>& x) noexcept { return (bool)x; }
 };
 
 /* std::enable_if is a type trait used to enable or disable function templates based on the properties of their template
