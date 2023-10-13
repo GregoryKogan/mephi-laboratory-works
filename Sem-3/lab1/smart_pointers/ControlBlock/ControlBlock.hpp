@@ -20,8 +20,6 @@ class ControlBlock {
     void increment_weak_ptr_reference_counter() noexcept;
     void decrement_weak_ptr_reference_counter_and_delete_ptr_if_zero();
 
-    void swap(ControlBlock<T>& other) noexcept;
-
     T* get() const noexcept;
     unsigned int get_reference_counter() const noexcept;
     unsigned int get_weak_ptr_reference_counter() const noexcept;
@@ -41,8 +39,6 @@ class ControlBlock<T[]> {  // specialization for arrays
     void decrement_reference_counter_and_delete_ptr_if_zero();
     void increment_weak_ptr_reference_counter() noexcept;
     void decrement_weak_ptr_reference_counter_and_delete_ptr_if_zero();
-
-    void swap(ControlBlock<T[]>& other) noexcept;
 
     T* get() const noexcept;
     unsigned int get_reference_counter() const noexcept;

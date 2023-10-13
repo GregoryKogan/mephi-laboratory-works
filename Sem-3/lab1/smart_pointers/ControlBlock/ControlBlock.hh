@@ -57,7 +57,7 @@ inline void ControlBlock<T[]>::decrement_reference_counter_and_delete_ptr_if_zer
     --reference_counter_;
     if (reference_counter_ + weak_ptr_reference_counter_ == 0) {
         if (ptr_ != nullptr) {
-            delete ptr_;
+            delete[] ptr_;
             ptr_ = nullptr;
         }
         delete this;
@@ -88,20 +88,6 @@ inline void ControlBlock<T[]>::decrement_weak_ptr_reference_counter_and_delete_p
 
     --weak_ptr_reference_counter_;
     if (reference_counter_ + weak_ptr_reference_counter_ == 0) delete this;
-}
-
-template <class T>
-inline void ControlBlock<T>::swap(ControlBlock<T>& other) noexcept {
-    std::swap(ptr_, other.ptr_);
-    std::swap(reference_counter_, other.reference_counter_);
-    std::swap(weak_ptr_reference_counter_, other.weak_ptr_reference_counter_);
-}
-
-template <class T>
-inline void ControlBlock<T[]>::swap(ControlBlock<T[]>& other) noexcept {
-    std::swap(ptr_, other.ptr_);
-    std::swap(reference_counter_, other.reference_counter_);
-    std::swap(weak_ptr_reference_counter_, other.weak_ptr_reference_counter_);
 }
 
 template <class T>
