@@ -25,7 +25,8 @@ class SharedPtr {
     SharedPtr<T>& operator=(SharedPtr<T>&& other) noexcept;       // move assignment
     SharedPtr<T>& operator=(std::nullptr_t) noexcept;             // assignment from nullptr
 
-    void reset(T* ptr = nullptr) noexcept;  // replace the managed object
+    void reset(T* ptr = nullptr) noexcept;    // replace the managed object
+    void swap(SharedPtr<T>& other) noexcept;  // swaps the managed objects
 
     explicit operator bool() const noexcept;  // check if pointer is not null
     T* get() const noexcept;                  // get pointer
@@ -62,6 +63,7 @@ class SharedPtr<T[]> {  // specialization for arrays
     SharedPtr<T[]>& operator=(std::nullptr_t) noexcept;
 
     void reset(T* ptr = nullptr) noexcept;
+    void swap(SharedPtr<T[]>& other) noexcept;
 
     explicit operator bool() const noexcept;
     T* get() const noexcept;
@@ -254,6 +256,18 @@ inline void SharedPtr<T[]>::reset(T* ptr) noexcept {
         reference_counter_ = nullptr;
     else
         reference_counter_ = new unsigned int(1);
+}
+
+template <class T>
+inline void SharedPtr<T>::swap(SharedPtr<T>& other) noexcept {
+    std::swap(ptr_, other.ptr_);
+    std::swap(reference_counter_, other.reference_counter_);
+}
+
+template <class T>
+inline void SharedPtr<T[]>::swap(SharedPtr<T[]>& other) noexcept {
+    std::swap(ptr_, other.ptr_);
+    std::swap(reference_counter_, other.reference_counter_);
 }
 
 template <class T>
