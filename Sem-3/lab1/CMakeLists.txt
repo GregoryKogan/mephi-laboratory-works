@@ -9,9 +9,9 @@ add_executable(
     test
     test.cpp
     smart_pointers/UniquePtr/UniquePtr.hpp
-    smart_pointers/UniquePtr/UniquePtr.inc
+    smart_pointers/UniquePtr/UniquePtr.hh
     smart_pointers/SharedPtr/SharedPtr.hpp
-    smart_pointers/SharedPtr/SharedPtr.inc
+    smart_pointers/SharedPtr/SharedPtr.hh
     data_structures/SmartPtrDynamicArray.hpp
     data_structures/SmartPtrLinkedList.hpp
     sequences/SmartPtrSequence.hpp
@@ -35,9 +35,9 @@ add_executable(
     load_test
     load_test.cpp
     smart_pointers/UniquePtr/UniquePtr.hpp
-    smart_pointers/UniquePtr/UniquePtr.inc
+    smart_pointers/UniquePtr/UniquePtr.hh
     smart_pointers/SharedPtr/SharedPtr.hpp
-    smart_pointers/SharedPtr/SharedPtr.inc
+    smart_pointers/SharedPtr/SharedPtr.hh
 )
 
 include(FindPkgConfig)
