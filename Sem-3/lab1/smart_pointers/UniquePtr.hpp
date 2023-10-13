@@ -13,9 +13,14 @@ class UniquePtr {
    public:
     UniquePtr() noexcept;                   // default constructor
     explicit UniquePtr(T* ptr) noexcept;    // constructor from pointer
+    UniquePtr(const UniquePtr&) = delete;   // copy constructor is deleted
     UniquePtr(UniquePtr&& other) noexcept;  // move constructor
 
     ~UniquePtr();
+
+    UniquePtr<T>& operator=(const UniquePtr<T>&) = delete;   // copy assignment is deleted
+    UniquePtr<T>& operator=(UniquePtr<T>&& other) noexcept;  // move assignment
+    UniquePtr<T>& operator=(T* ptr) noexcept;                // assignment from pointer
 
     T* release() noexcept;                    // release ownership
     void reset(T* ptr = nullptr) noexcept;    // delete old and set new pointer
@@ -23,19 +28,6 @@ class UniquePtr {
     T* get() const noexcept;                  // get pointer
     T* operator->() const noexcept;           // get pointer and use operator ->
     T& operator*() const noexcept;            // get reference
-
-    UniquePtr(const UniquePtr&) = delete;             // copy constructor is deleted
-    UniquePtr& operator=(const UniquePtr&) = delete;  // copy assignment is deleted
-
-    UniquePtr& operator=(UniquePtr&& other) noexcept {  // move assignment
-        if (this != &other) reset(other.release());
-        return *this;
-    }
-
-    UniquePtr& operator=(T* ptr) noexcept {  // assignment from pointer
-        reset(ptr);
-        return *this;
-    }
 
     friend bool operator==(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
     friend bool operator!=(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return !(lhs == rhs); }
@@ -53,9 +45,14 @@ class UniquePtr<T[]> {  // specialization for arrays
    public:
     UniquePtr() noexcept;                   // default constructor
     explicit UniquePtr(T* ptr) noexcept;    // constructor from pointer
+    UniquePtr(const UniquePtr&) = delete;   // copy constructor is deleted
     UniquePtr(UniquePtr&& other) noexcept;  // move constructor
 
     ~UniquePtr();
+
+    UniquePtr<T[]>& operator=(const UniquePtr<T[]>&) = delete;   // copy assignment is deleted
+    UniquePtr<T[]>& operator=(UniquePtr<T[]>&& other) noexcept;  // move assignment
+    UniquePtr<T[]>& operator=(T* ptr) noexcept;                  // assignment from pointer
 
     T* release() noexcept;                    // release ownership
     void reset(T* ptr = nullptr) noexcept;    // delete old and set new pointer
@@ -64,19 +61,6 @@ class UniquePtr<T[]> {  // specialization for arrays
     T* operator->() const noexcept;           // get pointer and use operator ->
     T& operator*() const noexcept;            // get reference
     T& operator[](std::size_t index) const;   // array subscript operator
-
-    UniquePtr(const UniquePtr&) = delete;             // copy constructor is deleted
-    UniquePtr& operator=(const UniquePtr&) = delete;  // copy assignment is deleted
-
-    UniquePtr& operator=(UniquePtr&& other) noexcept {  // move assignment
-        if (this != &other) reset(other.release());
-        return *this;
-    }
-
-    UniquePtr& operator=(T* ptr) noexcept {  // assignment from pointer
-        reset(ptr);
-        return *this;
-    }
 
     friend bool operator==(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
     friend bool operator!=(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return !(lhs == rhs); }
@@ -126,6 +110,30 @@ inline UniquePtr<T>::~UniquePtr() {
     if (ptr_ != nullptr) {
         delete ptr_;
     }
+}
+
+template <class T>
+inline UniquePtr<T>& UniquePtr<T>::operator=(UniquePtr<T>&& other) noexcept {  // move assignment
+    if (this != &other) reset(other.release());
+    return *this;
+}
+
+template <class T>
+inline UniquePtr<T[]>& UniquePtr<T[]>::operator=(UniquePtr<T[]>&& other) noexcept {  // move assignment for arrays
+    if (this != &other) reset(other.release());
+    return *this;
+}
+
+template <class T>
+inline UniquePtr<T>& UniquePtr<T>::operator=(T* ptr) noexcept {  // assignment from pointer
+    reset(ptr);
+    return *this;
+}
+
+template <class T>
+inline UniquePtr<T[]>& UniquePtr<T[]>::operator=(T* ptr) noexcept {  // assignment from pointer for arrays
+    reset(ptr);
+    return *this;
 }
 
 template <class T>
