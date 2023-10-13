@@ -23,7 +23,7 @@ class SharedPtr {
 
     SharedPtr<T>& operator=(const SharedPtr<T>& other) noexcept;  // copy assignment
     SharedPtr<T>& operator=(SharedPtr<T>&& other) noexcept;       // move assignment
-    SharedPtr<T>& operator=(T* ptr) noexcept;                     // assignment from pointer
+    SharedPtr<T>& operator=(std::nullptr_t) noexcept;             // assignment from nullptr
 
     explicit operator bool() const noexcept;  // check if pointer is not null
     T* get() const noexcept;                  // get pointer
@@ -57,7 +57,7 @@ class SharedPtr<T[]> {  // specialization for arrays
 
     SharedPtr<T[]>& operator=(const SharedPtr<T[]>& other) noexcept;
     SharedPtr<T[]>& operator=(SharedPtr<T[]>&& other) noexcept;
-    SharedPtr<T[]>& operator=(T* ptr) noexcept;
+    SharedPtr<T[]>& operator=(std::nullptr_t) noexcept;
 
     explicit operator bool() const noexcept;
     T* get() const noexcept;
@@ -217,24 +217,18 @@ inline SharedPtr<T[]>& SharedPtr<T[]>::operator=(SharedPtr<T[]>&& other) noexcep
 }
 
 template <class T>
-inline SharedPtr<T>& SharedPtr<T>::operator=(T* ptr) noexcept {  // assignment from pointer
+inline SharedPtr<T>& SharedPtr<T>::operator=(std::nullptr_t) noexcept {  // assignment from nullptr
     decrement_counter_and_delete_ptr_if_zero();
-    ptr_ = ptr;
-    if (ptr_ == nullptr)
-        reference_counter_ = nullptr;
-    else
-        reference_counter_ = new unsigned int(1);
+    ptr_ = nullptr;
+    reference_counter_ = nullptr;
     return *this;
 }
 
 template <class T>
-inline SharedPtr<T[]>& SharedPtr<T[]>::operator=(T* ptr) noexcept {  // assignment from pointer for arrays
+inline SharedPtr<T[]>& SharedPtr<T[]>::operator=(std::nullptr_t) noexcept {  // assignment from nullptr for arrays
     decrement_counter_and_delete_ptr_if_zero();
-    ptr_ = ptr;
-    if (ptr_ == nullptr)
-        reference_counter_ = nullptr;
-    else
-        reference_counter_ = new unsigned int(1);
+    ptr_ = nullptr;
+    reference_counter_ = nullptr;
     return *this;
 }
 
