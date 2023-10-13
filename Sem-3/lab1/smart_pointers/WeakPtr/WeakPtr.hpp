@@ -25,14 +25,41 @@ class WeakPtr {
     WeakPtr<T>& operator=(const SharedPtr<T>& other) noexcept;  // assignment from SharedPtr
     WeakPtr<T>& operator=(WeakPtr<T>&& other) noexcept;         // move assignment
 
-    void reset() noexcept;               // release the reference to the managed object
-    void swap(WeakPtr& other) noexcept;  // swaps the managed objects
+    void reset() noexcept;                  // release the reference to the managed object
+    void swap(WeakPtr<T>& other) noexcept;  // swaps the managed objects
 
     unsigned int use_count() const noexcept;  // returns the number of SharedPtr objects that manage the object
     bool expired() const noexcept;            // checks whether the referenced object was already deleted
     SharedPtr<T> lock() const noexcept;       // returns a SharedPtr of the managed object
 
-    friend void swap(WeakPtr& lhs, WeakPtr& rhs) noexcept { lhs.swap(rhs); }
+    friend void swap(WeakPtr<T>& lhs, WeakPtr<T>& rhs) noexcept { lhs.swap(rhs); }
+};
+
+template <class T>
+class WeakPtr<T[]> {  // specialization for arrays
+   private:
+    ControlBlock<T[]>* control_block_;
+
+    friend class SharedPtr<T[]>;
+
+   public:
+    WeakPtr() noexcept;
+    WeakPtr(const WeakPtr& other) noexcept;
+    WeakPtr(const SharedPtr<T[]>& other) noexcept;
+    WeakPtr(WeakPtr&& other) noexcept;
+
+    WeakPtr<T[]>& operator=(const WeakPtr<T[]>& other) noexcept;
+    WeakPtr<T[]>& operator=(const SharedPtr<T[]>& other) noexcept;
+    WeakPtr<T[]>& operator=(WeakPtr<T[]>&& other) noexcept;
+
+    void reset() noexcept;
+    void swap(WeakPtr<T[]>& other) noexcept;
+
+    unsigned int use_count() const noexcept;
+    bool expired() const noexcept;
+    SharedPtr<T[]> lock() const noexcept;
+
+    friend void swap(WeakPtr<T[]>& lhs, WeakPtr<T[]>& rhs) noexcept { lhs.swap(rhs); }
 };
 
 }  // namespace kogan
