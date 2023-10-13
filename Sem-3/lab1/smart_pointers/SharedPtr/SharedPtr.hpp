@@ -3,6 +3,7 @@
 
 #include <utility>
 
+#include "../../exceptions/EmptyPointerException/EmptyPointerException.hpp"
 #include "../WeakPtr/WeakPtr.hpp"
 
 namespace kogan {

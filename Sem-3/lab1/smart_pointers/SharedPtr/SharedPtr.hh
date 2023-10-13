@@ -79,9 +79,7 @@ inline SharedPtr<T[]>::SharedPtr(const SharedPtr& other) noexcept
 
 template <class T>
 inline SharedPtr<T>::SharedPtr(const WeakPtr<T>& other) noexcept {  // constructor from WeakPtr
-    // TODO: throw exception if other.expired()
-    // if (other.expired()) throw EmptyPointerException();
-    if (other.expired()) return;
+    if (other.expired()) throw EmptyPointerException();
     ptr_ = other.ptr_;
     reference_counter_ = other.reference_counter_;
     if (ptr_ != nullptr) ++(*reference_counter_);
