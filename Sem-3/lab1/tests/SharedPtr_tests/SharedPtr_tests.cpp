@@ -479,21 +479,9 @@ TEST(operator_arrow, shared_ptr_test_suite) {
     ASSERT(ptr->value == 42);
 }
 
-TEST(operator_arrow_array, shared_ptr_test_suite) {
-    kogan::SharedPtr<TestObject[]> ptr(new TestObject[3]{1, 2, 3});
-    ASSERT(ptr->value == 1);
-    ASSERT(ptr[0].value == 1);
-}
-
 TEST(operator_star, shared_ptr_test_suite) {
     kogan::SharedPtr<TestObject> ptr(new TestObject(42));
     ASSERT((*ptr).value == 42);
-}
-
-TEST(operator_star_array, shared_ptr_test_suite) {
-    kogan::SharedPtr<TestObject[]> ptr(new TestObject[3]{1, 2, 3});
-    ASSERT((*ptr).value == 1);
-    ASSERT(ptr[0].value == 1);
 }
 
 TEST(use_count, shared_ptr_test_suite) {

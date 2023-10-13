@@ -28,11 +28,11 @@ class SharedPtr {
     void reset(T* ptr = nullptr) noexcept;    // replace the managed object
     void swap(SharedPtr<T>& other) noexcept;  // swaps the managed objects
 
-    explicit operator bool() const noexcept;  // check if pointer is not null
     T* get() const noexcept;                  // get pointer
     T* operator->() const noexcept;           // get pointer and use operator ->
     T& operator*() const noexcept;            // get reference
     unsigned int use_count() const noexcept;  // get reference counter
+    explicit operator bool() const noexcept;  // check if pointer is not null
 
     friend bool operator==(const SharedPtr& lhs, const SharedPtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
     friend bool operator!=(const SharedPtr& lhs, const SharedPtr& rhs) noexcept { return !(lhs == rhs); }
@@ -65,12 +65,10 @@ class SharedPtr<T[]> {  // specialization for arrays
     void reset(T* ptr = nullptr) noexcept;
     void swap(SharedPtr<T[]>& other) noexcept;
 
-    explicit operator bool() const noexcept;
     T* get() const noexcept;
-    T* operator->() const noexcept;
-    T& operator*() const noexcept;
     T& operator[](std::size_t index) const;  // array subscript operator
     unsigned int use_count() const noexcept;
+    explicit operator bool() const noexcept;
 
     friend bool operator==(const SharedPtr& lhs, const SharedPtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
     friend bool operator!=(const SharedPtr& lhs, const SharedPtr& rhs) noexcept { return !(lhs == rhs); }
@@ -296,17 +294,7 @@ inline T* SharedPtr<T>::operator->() const noexcept {
 }
 
 template <class T>
-inline T* SharedPtr<T[]>::operator->() const noexcept {
-    return ptr_;
-}
-
-template <class T>
 inline T& SharedPtr<T>::operator*() const noexcept {
-    return *ptr_;
-}
-
-template <class T>
-inline T& SharedPtr<T[]>::operator*() const noexcept {
     return *ptr_;
 }
 
