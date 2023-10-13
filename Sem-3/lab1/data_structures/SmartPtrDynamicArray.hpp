@@ -2,9 +2,9 @@
 #define LAB_1_SMART_PTR_DYNAMIC_ARRAY_HPP
 
 #include <algorithm>
+#include <exception_lib.hpp>
 
 #include "../smart_pointers/SharedPtr/SharedPtr.hpp"
-#include "exception_lib.hpp"
 
 namespace kogan {
 
