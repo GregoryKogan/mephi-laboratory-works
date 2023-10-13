@@ -37,7 +37,7 @@ inline void ControlBlock<T[]>::increment_reference_counter() noexcept {
 }
 
 template <class T>
-inline void ControlBlock<T>::decrement_reference_counter_and_delete_ptr_if_zero() {
+inline void ControlBlock<T>::decrement_reference_counter_and_delete_if_zero() {
     if (reference_counter_ == 0) throw ZeroReferenceDecrementException();
 
     --reference_counter_;
@@ -51,7 +51,7 @@ inline void ControlBlock<T>::decrement_reference_counter_and_delete_ptr_if_zero(
 }
 
 template <class T>
-inline void ControlBlock<T[]>::decrement_reference_counter_and_delete_ptr_if_zero() {
+inline void ControlBlock<T[]>::decrement_reference_counter_and_delete_if_zero() {
     if (reference_counter_ == 0) throw ZeroReferenceDecrementException();
 
     --reference_counter_;
@@ -75,7 +75,7 @@ inline void ControlBlock<T[]>::increment_weak_ptr_reference_counter() noexcept {
 }
 
 template <class T>
-inline void ControlBlock<T>::decrement_weak_ptr_reference_counter_and_delete_ptr_if_zero() {
+inline void ControlBlock<T>::decrement_weak_ptr_reference_counter_and_delete_if_zero() {
     if (weak_ptr_reference_counter_ == 0) throw ZeroReferenceDecrementException();
 
     --weak_ptr_reference_counter_;
@@ -83,7 +83,7 @@ inline void ControlBlock<T>::decrement_weak_ptr_reference_counter_and_delete_ptr
 }
 
 template <class T>
-inline void ControlBlock<T[]>::decrement_weak_ptr_reference_counter_and_delete_ptr_if_zero() {
+inline void ControlBlock<T[]>::decrement_weak_ptr_reference_counter_and_delete_if_zero() {
     if (weak_ptr_reference_counter_ == 0) throw ZeroReferenceDecrementException();
 
     --weak_ptr_reference_counter_;

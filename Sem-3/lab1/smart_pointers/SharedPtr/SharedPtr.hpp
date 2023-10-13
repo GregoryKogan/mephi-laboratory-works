@@ -5,7 +5,7 @@
 
 #include "../../exceptions/EmptyPointerException/EmptyPointerException.hpp"
 #include "../ControlBlock/ControlBlock.hpp"
-// #include "../WeakPtr/WeakPtr.hpp"
+#include "../WeakPtr/WeakPtr.hpp"
 
 namespace kogan {
 
@@ -14,15 +14,14 @@ class SharedPtr {
    private:
     ControlBlock<T>* control_block_;
 
-    // TODO: figure this out
-    // friend class WeakPtr<T>;  // to access ptr_ and reference_counter_
+    friend class WeakPtr<T>;  // to access control_block_
 
    public:
     SharedPtr() noexcept;                        // default constructor
     explicit SharedPtr(T* ptr) noexcept;         // constructor from pointer
     SharedPtr(const SharedPtr& other) noexcept;  // copy constructor
-    // SharedPtr(const WeakPtr<T>& other);          // constructor from WeakPtr
-    SharedPtr(SharedPtr&& other) noexcept;  // move constructor
+    SharedPtr(const WeakPtr<T>& other);          // constructor from WeakPtr
+    SharedPtr(SharedPtr&& other) noexcept;       // move constructor
 
     ~SharedPtr();
 

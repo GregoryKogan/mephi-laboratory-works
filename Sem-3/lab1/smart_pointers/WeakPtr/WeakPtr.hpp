@@ -1,6 +1,8 @@
 #ifndef LAB1_WEAK_PTR_DECLARATION_HPP
 #define LAB1_WEAK_PTR_DECLARATION_HPP
 
+#include "../ControlBlock/ControlBlock.hpp"
+
 namespace kogan {
 
 template <class T>
@@ -9,8 +11,9 @@ class SharedPtr;
 template <class T>
 class WeakPtr {
    private:
-    T* ptr_;
-    unsigned int* reference_counter_;
+    ControlBlock<T>* control_block_;
+
+    friend class SharedPtr<T>;  // to access control_block_
 
    public:
     WeakPtr() noexcept;                           // default constructor

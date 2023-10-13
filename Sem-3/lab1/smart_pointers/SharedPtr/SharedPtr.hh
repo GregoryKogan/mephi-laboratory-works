@@ -54,13 +54,12 @@ inline SharedPtr<T[]>::SharedPtr(const SharedPtr& other) noexcept
     if (control_block_ && control_block_->get() != nullptr) control_block_->increment_reference_counter();
 }
 
-// template <class T>
-// inline SharedPtr<T>::SharedPtr(const WeakPtr<T>& other) {  // constructor from WeakPtr
-//     if (other.expired()) throw EmptyPointerException();
-//     ptr_ = other.ptr_;
-//     reference_counter_ = other.reference_counter_;
-//     if (ptr_ != nullptr) ++(*reference_counter_);
-// }
+template <class T>
+inline SharedPtr<T>::SharedPtr(const WeakPtr<T>& other) {  // constructor from WeakPtr
+    if (other.expired()) throw EmptyPointerException();
+    control_block_ = other.control_block_;
+    if (control_block_ && control_block_->get() != nullptr) control_block_->increment_reference_counter();
+}
 
 template <class T>
 inline SharedPtr<T>::SharedPtr(SharedPtr&& other) noexcept : control_block_(other.control_block_) {  // move constructor
@@ -75,18 +74,18 @@ inline SharedPtr<T[]>::SharedPtr(SharedPtr&& other) noexcept
 
 template <class T>
 inline SharedPtr<T>::~SharedPtr() {
-    if (control_block_) control_block_->decrement_reference_counter_and_delete_ptr_if_zero();
+    if (control_block_) control_block_->decrement_reference_counter_and_delete_if_zero();
 }
 
 template <class T>
 inline SharedPtr<T[]>::~SharedPtr() {
-    if (control_block_) control_block_->decrement_reference_counter_and_delete_ptr_if_zero();
+    if (control_block_) control_block_->decrement_reference_counter_and_delete_if_zero();
 }
 
 template <class T>
 inline SharedPtr<T>& SharedPtr<T>::operator=(const SharedPtr<T>& other) noexcept {  // copy assignment
     if (this != &other) {
-        if (control_block_) control_block_->decrement_reference_counter_and_delete_ptr_if_zero();
+        if (control_block_) control_block_->decrement_reference_counter_and_delete_if_zero();
         control_block_ = other.control_block_;
         if (control_block_ && control_block_->get() != nullptr) control_block_->increment_reference_counter();
     }
@@ -96,7 +95,7 @@ inline SharedPtr<T>& SharedPtr<T>::operator=(const SharedPtr<T>& other) noexcept
 template <class T>
 inline SharedPtr<T[]>& SharedPtr<T[]>::operator=(const SharedPtr<T[]>& other) noexcept {  // copy assignment for arrays
     if (this != &other) {
-        if (control_block_) control_block_->decrement_reference_counter_and_delete_ptr_if_zero();
+        if (control_block_) control_block_->decrement_reference_counter_and_delete_if_zero();
         control_block_ = other.control_block_;
         if (control_block_ && control_block_->get() != nullptr) control_block_->increment_reference_counter();
     }
@@ -106,7 +105,7 @@ inline SharedPtr<T[]>& SharedPtr<T[]>::operator=(const SharedPtr<T[]>& other) no
 template <class T>
 inline SharedPtr<T>& SharedPtr<T>::operator=(SharedPtr<T>&& other) noexcept {  // move assignment
     if (this != &other) {
-        if (control_block_) control_block_->decrement_reference_counter_and_delete_ptr_if_zero();
+        if (control_block_) control_block_->decrement_reference_counter_and_delete_if_zero();
         control_block_ = other.control_block_;
         other.control_block_ = nullptr;
     }
@@ -116,7 +115,7 @@ inline SharedPtr<T>& SharedPtr<T>::operator=(SharedPtr<T>&& other) noexcept {  /
 template <class T>
 inline SharedPtr<T[]>& SharedPtr<T[]>::operator=(SharedPtr<T[]>&& other) noexcept {  // move assignment for arrays
     if (this != &other) {
-        if (control_block_) control_block_->decrement_reference_counter_and_delete_ptr_if_zero();
+        if (control_block_) control_block_->decrement_reference_counter_and_delete_if_zero();
         control_block_ = other.control_block_;
         other.control_block_ = nullptr;
     }
@@ -125,21 +124,21 @@ inline SharedPtr<T[]>& SharedPtr<T[]>::operator=(SharedPtr<T[]>&& other) noexcep
 
 template <class T>
 inline SharedPtr<T>& SharedPtr<T>::operator=(std::nullptr_t) noexcept {  // assignment from nullptr
-    if (control_block_) control_block_->decrement_reference_counter_and_delete_ptr_if_zero();
+    if (control_block_) control_block_->decrement_reference_counter_and_delete_if_zero();
     control_block_ = nullptr;
     return *this;
 }
 
 template <class T>
 inline SharedPtr<T[]>& SharedPtr<T[]>::operator=(std::nullptr_t) noexcept {  // assignment from nullptr for arrays
-    if (control_block_) control_block_->decrement_reference_counter_and_delete_ptr_if_zero();
+    if (control_block_) control_block_->decrement_reference_counter_and_delete_if_zero();
     control_block_ = nullptr;
     return *this;
 }
 
 template <class T>
 inline void SharedPtr<T>::reset(T* ptr) noexcept {
-    if (control_block_) control_block_->decrement_reference_counter_and_delete_ptr_if_zero();
+    if (control_block_) control_block_->decrement_reference_counter_and_delete_if_zero();
     if (ptr != nullptr)
         control_block_ = new ControlBlock<T>(ptr);
     else
@@ -148,7 +147,7 @@ inline void SharedPtr<T>::reset(T* ptr) noexcept {
 
 template <class T>
 inline void SharedPtr<T[]>::reset(T* ptr) noexcept {
-    if (control_block_) control_block_->decrement_reference_counter_and_delete_ptr_if_zero();
+    if (control_block_) control_block_->decrement_reference_counter_and_delete_if_zero();
     if (ptr != nullptr)
         control_block_ = new ControlBlock<T[]>(ptr);
     else

@@ -16,9 +16,9 @@ class ControlBlock {
     explicit ControlBlock(T* ptr) noexcept;  // constructor from pointer
 
     void increment_reference_counter() noexcept;
-    void decrement_reference_counter_and_delete_ptr_if_zero();
+    void decrement_reference_counter_and_delete_if_zero();
     void increment_weak_ptr_reference_counter() noexcept;
-    void decrement_weak_ptr_reference_counter_and_delete_ptr_if_zero();
+    void decrement_weak_ptr_reference_counter_and_delete_if_zero();
 
     T* get() const noexcept;
     unsigned int get_reference_counter() const noexcept;
@@ -36,9 +36,9 @@ class ControlBlock<T[]> {  // specialization for arrays
     explicit ControlBlock(T* ptr) noexcept;
 
     void increment_reference_counter() noexcept;
-    void decrement_reference_counter_and_delete_ptr_if_zero();
+    void decrement_reference_counter_and_delete_if_zero();
     void increment_weak_ptr_reference_counter() noexcept;
-    void decrement_weak_ptr_reference_counter_and_delete_ptr_if_zero();
+    void decrement_weak_ptr_reference_counter_and_delete_if_zero();
 
     T* get() const noexcept;
     unsigned int get_reference_counter() const noexcept;

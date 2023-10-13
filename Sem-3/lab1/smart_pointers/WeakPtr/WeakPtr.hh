@@ -6,68 +6,68 @@
 namespace kogan {
 
 template <class T>
-inline WeakPtr<T>::WeakPtr() noexcept : ptr_(nullptr), reference_counter_(nullptr) {}  // default constructor
+inline WeakPtr<T>::WeakPtr() noexcept : control_block_(nullptr) {}  // default constructor
 
 template <class T>
 inline WeakPtr<T>::WeakPtr(const WeakPtr& other) noexcept  // copy constructor
-    : ptr_(other.ptr_), reference_counter_(other.reference_counter_) {}
+    : control_block_(other.control_block_) {
+    if (control_block_ && control_block_->get() != nullptr) control_block_->increment_weak_ptr_reference_counter();
+}
 
 template <class T>
 inline WeakPtr<T>::WeakPtr(const SharedPtr<T>& other) noexcept  // constructor from SharedPtr
-    : ptr_(other.ptr_), reference_counter_(other.reference_counter_) {}
+    : control_block_(other.control_block_) {
+    if (control_block_ && control_block_->get() != nullptr) control_block_->increment_weak_ptr_reference_counter();
+}
 
 template <class T>
 inline WeakPtr<T>::WeakPtr(WeakPtr&& other) noexcept  // move constructor
-    : ptr_(other.ptr_), reference_counter_(other.reference_counter_) {
-    other.ptr_ = nullptr;
-    other.reference_counter_ = nullptr;
+    : control_block_(other.control_block_) {
+    other.control_block_ = nullptr;
 }
 
 template <class T>
 inline WeakPtr<T>& WeakPtr<T>::operator=(const WeakPtr<T>& other) noexcept {
     if (this != &other) {
-        ptr_ = other.ptr_;
-        reference_counter_ = other.reference_counter_;
+        if (control_block_) control_block_->decrement_weak_ptr_reference_counter_and_delete_if_zero();
+        control_block_ = other.control_block_;
+        if (control_block_ && control_block_->get() != nullptr) control_block_->increment_weak_ptr_reference_counter();
     }
     return *this;
 }
 
 template <class T>
 inline WeakPtr<T>& WeakPtr<T>::operator=(const SharedPtr<T>& other) noexcept {
-    if (this != &other) {
-        ptr_ = other.ptr_;
-        reference_counter_ = other.reference_counter_;
-    }
+    if (control_block_) control_block_->decrement_weak_ptr_reference_counter_and_delete_if_zero();
+    control_block_ = other.control_block_;
+    if (control_block_ && control_block_->get() != nullptr) control_block_->increment_weak_ptr_reference_counter();
     return *this;
 }
 
 template <class T>
 inline WeakPtr<T>& WeakPtr<T>::operator=(WeakPtr<T>&& other) noexcept {
     if (this != &other) {
-        ptr_ = other.ptr_;
-        reference_counter_ = other.reference_counter_;
-        other.ptr_ = nullptr;
-        other.reference_counter_ = nullptr;
+        if (control_block_) control_block_->decrement_weak_ptr_reference_counter_and_delete_if_zero();
+        control_block_ = other.control_block_;
+        other.control_block_ = nullptr;
     }
     return *this;
 }
 
 template <class T>
 inline void WeakPtr<T>::reset() noexcept {
-    ptr_ = nullptr;
-    reference_counter_ = nullptr;
+    if (control_block_) control_block_->decrement_weak_ptr_reference_counter_and_delete_if_zero();
+    control_block_ = nullptr;
 }
 
 template <class T>
 inline void WeakPtr<T>::swap(WeakPtr& other) noexcept {
-    std::swap(ptr_, other.ptr_);
-    std::swap(reference_counter_, other.reference_counter_);
+    std::swap(control_block_, other.control_block_);
 }
 
 template <class T>
 inline unsigned int WeakPtr<T>::use_count() const noexcept {
-    if (reference_counter_ == nullptr) return 0;
-    return *reference_counter_;
+    return control_block_ ? control_block_->get_reference_counter() : 0;
 }
 
 template <class T>
