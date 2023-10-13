@@ -282,12 +282,12 @@ inline bool SharedPtr<T[]>::unique() const noexcept {
 
 template <class T>
 inline SharedPtr<T>::operator bool() const noexcept {
-    return static_cast<bool>(ptr_);
+    return get() != nullptr;
 }
 
 template <class T>
 inline SharedPtr<T[]>::operator bool() const noexcept {
-    return static_cast<bool>(ptr_);
+    return get() != nullptr;
 }
 
 template <class T>
