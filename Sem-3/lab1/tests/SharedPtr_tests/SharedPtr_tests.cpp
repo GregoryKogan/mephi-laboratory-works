@@ -328,6 +328,22 @@ TEST(swap_array, shared_ptr_test_suite) {
     ASSERT(ptr1.use_count() == 1);
 }
 
+TEST(unique, shared_ptr_test_suite) {
+    auto ptr1 = kogan::make_shared<TestObject>(42);
+    ASSERT(ptr1.unique());
+    kogan::SharedPtr<TestObject> ptr2(ptr1);
+    ASSERT(!ptr1.unique());
+    ASSERT(!ptr2.unique());
+}
+
+TEST(unique_array, shared_ptr_test_suite) {
+    auto ptr1 = kogan::make_shared<TestObject[]>(3);
+    ASSERT(ptr1.unique());
+    kogan::SharedPtr<TestObject[]> ptr2(ptr1);
+    ASSERT(!ptr1.unique());
+    ASSERT(!ptr2.unique());
+}
+
 TEST(equality_operator, shared_ptr_test_suite) {
     kogan::SharedPtr<TestObject> ptr1(new TestObject(42));
     kogan::SharedPtr<TestObject> ptr2(ptr1);

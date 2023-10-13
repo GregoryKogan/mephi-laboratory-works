@@ -32,6 +32,7 @@ class SharedPtr {
     T* operator->() const noexcept;           // get pointer and use operator ->
     T& operator*() const noexcept;            // get reference
     unsigned int use_count() const noexcept;  // get reference counter
+    bool unique() const noexcept;             // check if unique
     explicit operator bool() const noexcept;  // check if pointer is not null
 
     friend bool operator==(const SharedPtr& lhs, const SharedPtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
@@ -68,6 +69,7 @@ class SharedPtr<T[]> {  // specialization for arrays
     T* get() const noexcept;
     T& operator[](std::size_t index) const;  // array subscript operator
     unsigned int use_count() const noexcept;
+    bool unique() const noexcept;
     explicit operator bool() const noexcept;
 
     friend bool operator==(const SharedPtr& lhs, const SharedPtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
@@ -266,6 +268,16 @@ template <class T>
 inline void SharedPtr<T[]>::swap(SharedPtr<T[]>& other) noexcept {
     std::swap(ptr_, other.ptr_);
     std::swap(reference_counter_, other.reference_counter_);
+}
+
+template <class T>
+inline bool SharedPtr<T>::unique() const noexcept {
+    return use_count() == 1;
+}
+
+template <class T>
+inline bool SharedPtr<T[]>::unique() const noexcept {
+    return use_count() == 1;
 }
 
 template <class T>
