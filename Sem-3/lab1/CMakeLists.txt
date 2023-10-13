@@ -29,6 +29,8 @@ add_executable(
     tests/UniquePtr_tests/UniquePtr_tests.cpp
     tests/SharedPtr_tests/SharedPtr_tests.hpp
     tests/SharedPtr_tests/SharedPtr_tests.cpp
+    tests/WeakPtr_tests/WeakPtr_tests.hpp
+    tests/WeakPtr_tests/WeakPtr_tests.cpp
     tests/SmartPtrDynamicArray_tests/SmartPtrDynamicArray_tests.hpp
     tests/SmartPtrDynamicArray_tests/SmartPtrDynamicArray_tests.cpp
     tests/SmartPtrLinkedList_tests/SmartPtrLinkedList_tests.hpp

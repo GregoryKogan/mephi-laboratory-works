@@ -54,6 +54,8 @@ class SharedPtr<T[]> {  // specialization for arrays
    private:
     ControlBlock<T[]>* control_block_;
 
+    friend class WeakPtr<T[]>;
+
    public:
     SharedPtr() noexcept;
     explicit SharedPtr(T* ptr) noexcept;
@@ -64,6 +66,7 @@ class SharedPtr<T[]> {  // specialization for arrays
 
     SharedPtr<T[]>& operator=(const SharedPtr<T[]>& other) noexcept;
     SharedPtr<T[]>& operator=(SharedPtr<T[]>&& other) noexcept;
+    SharedPtr(const WeakPtr<T[]>& other);
     SharedPtr<T[]>& operator=(std::nullptr_t) noexcept;
 
     void reset(T* ptr = nullptr) noexcept;

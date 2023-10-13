@@ -68,7 +68,6 @@ TEST(constructor_from_weak_ptr, shared_ptr_test_suite) {
         ASSERT(weak_ptr.use_count() == 2);
         ASSERT(!weak_ptr.expired());
     }
-    std::cout << weak_ptr.use_count() << std::endl;
     ASSERT(weak_ptr.expired());
 }
 

@@ -62,6 +62,13 @@ inline SharedPtr<T>::SharedPtr(const WeakPtr<T>& other) {  // constructor from W
 }
 
 template <class T>
+inline SharedPtr<T[]>::SharedPtr(const WeakPtr<T[]>& other) {  // constructor from WeakPtr for arrays
+    if (other.expired()) throw EmptyPointerException();
+    control_block_ = other.control_block_;
+    if (control_block_ && control_block_->get() != nullptr) control_block_->increment_reference_counter();
+}
+
+template <class T>
 inline SharedPtr<T>::SharedPtr(SharedPtr&& other) noexcept : control_block_(other.control_block_) {  // move constructor
     other.control_block_ = nullptr;
 }
