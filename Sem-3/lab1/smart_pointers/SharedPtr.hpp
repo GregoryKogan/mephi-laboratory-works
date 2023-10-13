@@ -41,6 +41,8 @@ class SharedPtr {
     friend bool operator==(std::nullptr_t, const SharedPtr<T>& x) noexcept { return !x; }
     friend bool operator!=(const SharedPtr<T>& x, std::nullptr_t) noexcept { return (bool)x; }
     friend bool operator!=(std::nullptr_t, const SharedPtr<T>& x) noexcept { return (bool)x; }
+
+    friend void swap(SharedPtr<T>& lhs, SharedPtr<T>& rhs) noexcept { lhs.swap(rhs); }
 };
 
 template <class T>
@@ -78,6 +80,8 @@ class SharedPtr<T[]> {  // specialization for arrays
     friend bool operator==(std::nullptr_t, const SharedPtr<T[]>& x) noexcept { return !x; }
     friend bool operator!=(const SharedPtr<T[]>& x, std::nullptr_t) noexcept { return (bool)x; }
     friend bool operator!=(std::nullptr_t, const SharedPtr<T[]>& x) noexcept { return (bool)x; }
+
+    friend void swap(SharedPtr<T[]>& lhs, SharedPtr<T[]>& rhs) noexcept { lhs.swap(rhs); }
 };
 
 /* std::enable_if is a type trait used to enable or disable function templates based on the properties of their template
