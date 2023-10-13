@@ -26,10 +26,11 @@ class UniquePtr {
     void reset(T* ptr = nullptr) noexcept;    // delete old and set new pointer
     void swap(UniquePtr<T>& other) noexcept;  // swaps the managed objects
 
-    explicit operator bool() const noexcept;  // check if pointer is not null
     T* get() const noexcept;                  // get pointer
-    T* operator->() const noexcept;           // get pointer and use operator ->
-    T& operator*() const noexcept;            // get reference
+    explicit operator bool() const noexcept;  // checks if there is an associated managed object
+
+    T* operator->() const noexcept;  // get pointer and use operator ->
+    T& operator*() const noexcept;   // get reference
 
     friend bool operator==(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
     friend bool operator!=(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return !(lhs == rhs); }
@@ -45,26 +46,27 @@ class UniquePtr<T[]> {  // specialization for arrays
     T* ptr_;
 
    public:
-    UniquePtr() noexcept;                   // default constructor
-    explicit UniquePtr(T* ptr) noexcept;    // constructor from pointer
-    UniquePtr(const UniquePtr&) = delete;   // copy constructor is deleted
-    UniquePtr(UniquePtr&& other) noexcept;  // move constructor
+    UniquePtr() noexcept;
+    explicit UniquePtr(T* ptr) noexcept;
+    UniquePtr(const UniquePtr&) = delete;
+    UniquePtr(UniquePtr&& other) noexcept;
 
     ~UniquePtr();
 
-    UniquePtr<T[]>& operator=(const UniquePtr<T[]>&) = delete;   // copy assignment is deleted
-    UniquePtr<T[]>& operator=(UniquePtr<T[]>&& other) noexcept;  // move assignment
-    UniquePtr<T[]>& operator=(std::nullptr_t) noexcept;          // assignment from nullptr
+    UniquePtr<T[]>& operator=(const UniquePtr<T[]>&) = delete;
+    UniquePtr<T[]>& operator=(UniquePtr<T[]>&& other) noexcept;
+    UniquePtr<T[]>& operator=(std::nullptr_t) noexcept;
 
-    T* release() noexcept;                      // release ownership
-    void reset(T* ptr = nullptr) noexcept;      // delete old and set new pointer
-    void swap(UniquePtr<T[]>& other) noexcept;  // swaps the managed objects
+    T* release() noexcept;
+    void reset(T* ptr = nullptr) noexcept;
+    void swap(UniquePtr<T[]>& other) noexcept;
 
-    explicit operator bool() const noexcept;  // check if pointer is not null
-    T* get() const noexcept;                  // get pointer
-    T* operator->() const noexcept;           // get pointer and use operator ->
-    T& operator*() const noexcept;            // get reference
-    T& operator[](std::size_t index) const;   // array subscript operator
+    T* get() const noexcept;
+    explicit operator bool() const noexcept;
+
+    T* operator->() const noexcept;
+    T& operator*() const noexcept;
+    T& operator[](std::size_t index) const;  // array subscript operator
 
     friend bool operator==(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
     friend bool operator!=(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return !(lhs == rhs); }
@@ -189,12 +191,12 @@ inline void UniquePtr<T[]>::reset(T* ptr) noexcept {
 
 template <class T>
 inline UniquePtr<T>::operator bool() const noexcept {
-    return static_cast<bool>(ptr_);
+    return get() != nullptr;
 }
 
 template <class T>
 inline UniquePtr<T[]>::operator bool() const noexcept {
-    return static_cast<bool>(ptr_);
+    return get() != nullptr;
 }
 
 template <class T>
