@@ -3,6 +3,8 @@
 
 #include <utility>
 
+#include "../WeakPtr/WeakPtr.hpp"
+
 namespace kogan {
 
 template <class T>
@@ -14,10 +16,11 @@ class SharedPtr {
     void decrement_counter_and_delete_ptr_if_zero();
 
    public:
-    SharedPtr() noexcept;                        // default constructor
-    explicit SharedPtr(T* ptr) noexcept;         // constructor from pointer
-    SharedPtr(const SharedPtr& other) noexcept;  // copy constructor
-    SharedPtr(SharedPtr&& other) noexcept;       // move constructor
+    SharedPtr() noexcept;                         // default constructor
+    explicit SharedPtr(T* ptr) noexcept;          // constructor from pointer
+    SharedPtr(const SharedPtr& other) noexcept;   // copy constructor
+    SharedPtr(const WeakPtr<T>& other) noexcept;  // constructor from WeakPtr
+    SharedPtr(SharedPtr&& other) noexcept;        // move constructor
 
     ~SharedPtr();
 
