@@ -64,8 +64,6 @@ class UniquePtr<T[]> {  // specialization for arrays
     T* get() const noexcept;
     explicit operator bool() const noexcept;
 
-    T* operator->() const noexcept;
-    T& operator*() const noexcept;
     T& operator[](std::size_t index) const;  // array subscript operator
 
     friend bool operator==(const UniquePtr& lhs, const UniquePtr& rhs) noexcept { return lhs.ptr_ == rhs.ptr_; }
@@ -215,17 +213,7 @@ inline T* UniquePtr<T>::operator->() const noexcept {
 }
 
 template <class T>
-inline T* UniquePtr<T[]>::operator->() const noexcept {
-    return ptr_;
-}
-
-template <class T>
 inline T& UniquePtr<T>::operator*() const noexcept {
-    return *ptr_;
-}
-
-template <class T>
-inline T& UniquePtr<T[]>::operator*() const noexcept {
     return *ptr_;
 }
 
