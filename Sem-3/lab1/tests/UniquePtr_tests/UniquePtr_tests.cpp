@@ -257,6 +257,43 @@ TEST(reset_array, unique_ptr_test_suite) {
     ASSERT(ptr[1].value == 5);
 }
 
+TEST(reset_with_nullptr, unique_ptr_test_suite) {
+    auto ptr = kogan::make_unique<TestObject>(42);
+    ptr.reset(nullptr);
+    ASSERT(ptr.get() == nullptr);
+}
+
+TEST(reset_with_nullptr_array, unique_ptr_test_suite) {
+    auto ptr = kogan::make_unique<TestObject[]>(3);
+    ptr.reset(nullptr);
+    ASSERT(ptr.get() == nullptr);
+}
+
+TEST(swap, unique_ptr_test_suite) {
+    TestObject* obj1 = new TestObject(42);
+    TestObject* obj2 = new TestObject(43);
+    kogan::UniquePtr<TestObject> ptr1(obj1);
+    kogan::UniquePtr<TestObject> ptr2(obj2);
+    ptr1.swap(ptr2);
+    ASSERT(ptr1.get() == obj2);
+    ASSERT(ptr2.get() == obj1);
+}
+
+TEST(swap_array, unique_ptr_test_suite) {
+    TestObject* obj_arr1 = new TestObject[3]{1, 2, 3};
+    TestObject* obj_arr2 = new TestObject[2]{4, 5};
+    kogan::UniquePtr<TestObject[]> ptr1(obj_arr1);
+    kogan::UniquePtr<TestObject[]> ptr2(obj_arr2);
+    ptr1.swap(ptr2);
+    ASSERT(ptr1.get() == obj_arr2);
+    ASSERT(ptr2.get() == obj_arr1);
+    ASSERT(ptr1[0].value == 4);
+    ASSERT(ptr1[1].value == 5);
+    ASSERT(ptr2[0].value == 1);
+    ASSERT(ptr2[1].value == 2);
+    ASSERT(ptr2[2].value == 3);
+}
+
 TEST(operator_bool, unique_ptr_test_suite) {
     kogan::UniquePtr<TestObject> ptr1;
     kogan::UniquePtr<TestObject> ptr2(new TestObject(42));

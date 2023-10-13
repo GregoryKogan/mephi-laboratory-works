@@ -24,6 +24,8 @@ class UniquePtr {
 
     T* release() noexcept;                    // release ownership
     void reset(T* ptr = nullptr) noexcept;    // delete old and set new pointer
+    void swap(UniquePtr<T>& other) noexcept;  // swaps the managed objects
+
     explicit operator bool() const noexcept;  // check if pointer is not null
     T* get() const noexcept;                  // get pointer
     T* operator->() const noexcept;           // get pointer and use operator ->
@@ -54,8 +56,10 @@ class UniquePtr<T[]> {  // specialization for arrays
     UniquePtr<T[]>& operator=(UniquePtr<T[]>&& other) noexcept;  // move assignment
     UniquePtr<T[]>& operator=(std::nullptr_t) noexcept;          // assignment from nullptr
 
-    T* release() noexcept;                    // release ownership
-    void reset(T* ptr = nullptr) noexcept;    // delete old and set new pointer
+    T* release() noexcept;                      // release ownership
+    void reset(T* ptr = nullptr) noexcept;      // delete old and set new pointer
+    void swap(UniquePtr<T[]>& other) noexcept;  // swaps the managed objects
+
     explicit operator bool() const noexcept;  // check if pointer is not null
     T* get() const noexcept;                  // get pointer
     T* operator->() const noexcept;           // get pointer and use operator ->
@@ -163,6 +167,16 @@ inline void UniquePtr<T>::reset(T* ptr) noexcept {
         delete ptr_;
     }
     ptr_ = ptr;
+}
+
+template <class T>
+inline void UniquePtr<T>::swap(UniquePtr<T>& other) noexcept {
+    std::swap(ptr_, other.ptr_);
+}
+
+template <class T>
+inline void UniquePtr<T[]>::swap(UniquePtr<T[]>& other) noexcept {
+    std::swap(ptr_, other.ptr_);
 }
 
 template <class T>
