@@ -48,6 +48,16 @@ inline WeakPtr<T[]>::WeakPtr(WeakPtr<T[]>&& other) noexcept  // move constructor
 }
 
 template <class T>
+inline WeakPtr<T>::~WeakPtr() {
+    if (control_block_) control_block_->decrement_weak_ptr_reference_counter_and_delete_if_zero();
+}
+
+template <class T>
+inline WeakPtr<T[]>::~WeakPtr() {
+    if (control_block_) control_block_->decrement_weak_ptr_reference_counter_and_delete_if_zero();
+}
+
+template <class T>
 inline WeakPtr<T>& WeakPtr<T>::operator=(const WeakPtr<T>& other) noexcept {
     if (this != &other) {
         if (control_block_) control_block_->decrement_weak_ptr_reference_counter_and_delete_if_zero();

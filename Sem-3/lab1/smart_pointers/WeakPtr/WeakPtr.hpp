@@ -21,6 +21,8 @@ class WeakPtr {
     WeakPtr(const SharedPtr<T>& other) noexcept;  // constructor from SharedPtr
     WeakPtr(WeakPtr&& other) noexcept;            // move constructor
 
+    ~WeakPtr();
+
     WeakPtr<T>& operator=(const WeakPtr<T>& other) noexcept;    // copy assignment
     WeakPtr<T>& operator=(const SharedPtr<T>& other) noexcept;  // assignment from SharedPtr
     WeakPtr<T>& operator=(WeakPtr<T>&& other) noexcept;         // move assignment
@@ -47,6 +49,8 @@ class WeakPtr<T[]> {  // specialization for arrays
     WeakPtr(const WeakPtr& other) noexcept;
     WeakPtr(const SharedPtr<T[]>& other) noexcept;
     WeakPtr(WeakPtr&& other) noexcept;
+
+    ~WeakPtr();
 
     WeakPtr<T[]>& operator=(const WeakPtr<T[]>& other) noexcept;
     WeakPtr<T[]>& operator=(const SharedPtr<T[]>& other) noexcept;

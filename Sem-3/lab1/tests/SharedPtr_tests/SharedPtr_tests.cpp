@@ -61,14 +61,51 @@ TEST(constructor_from_weak_ptr, shared_ptr_test_suite) {
     {
         auto ptr1 = kogan::make_shared<TestObject>(42);
         weak_ptr = ptr1;
+        ASSERT(weak_ptr.use_count() == 1);
+        ASSERT(weak_ptr.lock().get() == ptr1.get());
         kogan::SharedPtr<TestObject> ptr2(weak_ptr);
         ASSERT(ptr1.get() == ptr2.get());
+        ASSERT(weak_ptr.lock().get() == ptr1.get());
         ASSERT(ptr1.use_count() == 2);
         ASSERT(ptr2.use_count() == 2);
         ASSERT(weak_ptr.use_count() == 2);
         ASSERT(!weak_ptr.expired());
+        ASSERT(weak_ptr.lock()->value == 42);
+        ASSERT(ptr1->value == 42);
+        ASSERT(ptr2->value == 42);
     }
     ASSERT(weak_ptr.expired());
+    ASSERT(weak_ptr.lock().get() == nullptr);
+}
+
+TEST(constructor_from_weak_ptr_array, shared_ptr_test_suite) {
+    kogan::WeakPtr<TestObject[]> weak_ptr;
+    ASSERT(weak_ptr.use_count() == 0);
+    ASSERT(weak_ptr.expired());
+    {
+        kogan::SharedPtr<TestObject[]> ptr1(new TestObject[3]{1, 2, 3});
+        weak_ptr = ptr1;
+        ASSERT(weak_ptr.use_count() == 1);
+        ASSERT(weak_ptr.lock().get() == ptr1.get());
+        kogan::SharedPtr<TestObject[]> ptr2(weak_ptr);
+        ASSERT(ptr1.get() == ptr2.get());
+        ASSERT(weak_ptr.lock().get() == ptr1.get());
+        ASSERT(ptr1.use_count() == 2);
+        ASSERT(ptr2.use_count() == 2);
+        ASSERT(weak_ptr.use_count() == 2);
+        ASSERT(!weak_ptr.expired());
+        ASSERT(weak_ptr.lock()[0].value == 1);
+        ASSERT(weak_ptr.lock()[1].value == 2);
+        ASSERT(weak_ptr.lock()[2].value == 3);
+        ASSERT(ptr1[0].value == 1);
+        ASSERT(ptr1[1].value == 2);
+        ASSERT(ptr1[2].value == 3);
+        ASSERT(ptr2[0].value == 1);
+        ASSERT(ptr2[1].value == 2);
+        ASSERT(ptr2[2].value == 3);
+    }
+    ASSERT(weak_ptr.expired());
+    ASSERT(weak_ptr.lock().get() == nullptr);
 }
 
 TEST(move_constructor, shared_ptr_test_suite) {

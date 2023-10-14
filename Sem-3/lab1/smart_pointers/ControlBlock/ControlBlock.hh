@@ -55,12 +55,12 @@ inline void ControlBlock<T[]>::decrement_reference_counter_and_delete_if_zero() 
     if (reference_counter_ == 0) throw ZeroReferenceDecrementException();
 
     --reference_counter_;
-    if (reference_counter_ + weak_ptr_reference_counter_ == 0) {
+    if (reference_counter_ == 0) {
         if (ptr_ != nullptr) {
             delete[] ptr_;
             ptr_ = nullptr;
-        }
-        delete this;
+        };
+        if (weak_ptr_reference_counter_ == 0) delete this;
     }
 }
 
