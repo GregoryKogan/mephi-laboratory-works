@@ -219,6 +219,23 @@ TEST(move_assignment_array, weak_ptr_test_suite) {
     ASSERT(ptr2.lock()[2].value == 3);
 }
 
+TEST(assignment_from_nullptr, weak_ptr_test_suite) {
+    auto shared = kogan::make_shared<TestObject>(42);
+    kogan::WeakPtr<TestObject> ptr(shared);
+    ptr = nullptr;
+    ASSERT(ptr.use_count() == 0);
+    ASSERT(ptr.lock().get() == nullptr);
+}
+
+TEST(assignment_from_nullptr_array, weak_ptr_test_suite) {
+    TestObject* obj = new TestObject[3]{1, 2, 3};
+    kogan::SharedPtr<TestObject[]> shared(obj);
+    kogan::WeakPtr<TestObject[]> ptr(shared);
+    ptr = nullptr;
+    ASSERT(ptr.use_count() == 0);
+    ASSERT(ptr.lock().get() == nullptr);
+}
+
 TEST(reset, weak_ptr_test_suite) {
     auto shared = kogan::make_shared<TestObject>(42);
     kogan::WeakPtr<TestObject> ptr(shared);

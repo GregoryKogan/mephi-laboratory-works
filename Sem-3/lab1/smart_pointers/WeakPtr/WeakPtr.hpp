@@ -26,6 +26,7 @@ class WeakPtr {
     WeakPtr<T>& operator=(const WeakPtr<T>& other) noexcept;    // copy assignment
     WeakPtr<T>& operator=(const SharedPtr<T>& other) noexcept;  // assignment from SharedPtr
     WeakPtr<T>& operator=(WeakPtr<T>&& other) noexcept;         // move assignment
+    WeakPtr<T>& operator=(std::nullptr_t) noexcept;             // assignment from nullptr
 
     void reset() noexcept;                  // release the reference to the managed object
     void swap(WeakPtr<T>& other) noexcept;  // swaps the managed objects
@@ -55,6 +56,7 @@ class WeakPtr<T[]> {  // specialization for arrays
     WeakPtr<T[]>& operator=(const WeakPtr<T[]>& other) noexcept;
     WeakPtr<T[]>& operator=(const SharedPtr<T[]>& other) noexcept;
     WeakPtr<T[]>& operator=(WeakPtr<T[]>&& other) noexcept;
+    WeakPtr<T[]>& operator=(std::nullptr_t) noexcept;
 
     void reset() noexcept;
     void swap(WeakPtr<T[]>& other) noexcept;

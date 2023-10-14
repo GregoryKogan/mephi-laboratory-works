@@ -4,6 +4,7 @@
 #include <exception_lib.hpp>
 
 #include "../smart_pointers/SharedPtr/SharedPtr.hpp"
+#include "../smart_pointers/WeakPtr/WeakPtr.hpp"
 
 namespace kogan {
 
@@ -13,7 +14,7 @@ class SmartPtrLinkedList {
     typedef struct Node {
         T data;
         SharedPtr<Node> next;
-        SharedPtr<Node> prev;
+        WeakPtr<Node> prev;
     } Node;
 
     typedef struct Root {
@@ -165,7 +166,7 @@ inline void SmartPtrLinkedList<T>::insert(int index, T value) {
     new_node->data = value;
     new_node->prev = cur_node->prev;
     new_node->next = cur_node;
-    cur_node->prev->next = new_node;
+    cur_node->prev.lock()->next = new_node;
     cur_node->prev = new_node;
     ++length_;
 }
@@ -188,7 +189,7 @@ inline void SmartPtrLinkedList<T>::remove(int index) {
     }
 
     auto cur_node = get_node_(index);
-    cur_node->prev->next = cur_node->next;
+    cur_node->prev.lock()->next = cur_node->next;
     cur_node->next->prev = cur_node->prev;
     --length_;
 }

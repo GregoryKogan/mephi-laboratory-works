@@ -114,6 +114,18 @@ inline WeakPtr<T[]>& WeakPtr<T[]>::operator=(WeakPtr<T[]>&& other) noexcept {
 }
 
 template <class T>
+inline WeakPtr<T>& WeakPtr<T>::operator=(std::nullptr_t) noexcept {
+    reset();
+    return *this;
+}
+
+template <class T>
+inline WeakPtr<T[]>& WeakPtr<T[]>::operator=(std::nullptr_t) noexcept {
+    reset();
+    return *this;
+}
+
+template <class T>
 inline void WeakPtr<T>::reset() noexcept {
     if (control_block_) control_block_->decrement_weak_ptr_reference_counter_and_delete_if_zero();
     control_block_ = nullptr;
