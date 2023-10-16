@@ -1,0 +1,32 @@
+size: 10^1
+raw pointers:           0μs
+kogan's smart pointers: 0μs
+std smart pointers:     0μs
+size: 10^2
+raw pointers:           5μs
+kogan's smart pointers: 6μs
+std smart pointers:     7μs
+size: 10^3
+raw pointers:           80μs
+kogan's smart pointers: 89μs
+std smart pointers:     112μs
+size: 10^4
+raw pointers:           993μs
+kogan's smart pointers: 1252μs
+std smart pointers:     1516μs
+size: 10^5
+raw pointers:           12596μs
+kogan's smart pointers: 15582μs
+std smart pointers:     19680μs
+size: 10^6
+raw pointers:           162038μs
+kogan's smart pointers: 199379μs
+std smart pointers:     254150μs
+size: 10^7
+raw pointers:           2302036μs
+kogan's smart pointers: 3070649μs
+std smart pointers:     4041950μs
+size: 10^8
+raw pointers:           31592781μs
+kogan's smart pointers: 43441582μs
+std smart pointers:     59107903μs

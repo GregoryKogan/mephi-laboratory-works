@@ -32,15 +32,18 @@ unsigned long long int test_smart_ptr_array(std::size_t size);
 unsigned long long int test_raw_ptr_array(std::size_t size);
 unsigned long long int test_std_smart_ptr_array(std::size_t size);
 
+unsigned long long average(unsigned long long (*test)(std::size_t), std::size_t size, std::size_t iterations);
+
 int main() {
     srand(time(NULL));
     int max_power = 8;
+    std::size_t iterations = 5;
     for (int i = 1; i <= max_power; ++i) {
         std::size_t size = pow(10, i);
         std::cout << "size: 10^" << i << std::endl;
-        std::cout << "raw pointers:           " << test_raw_ptr_array(size) << " microseconds" << std::endl;
-        std::cout << "kogan's smart pointers: " << test_smart_ptr_array(size) << " microseconds" << std::endl;
-        std::cout << "std smart pointers:     " << test_std_smart_ptr_array(size) << " microseconds" << std::endl;
+        std::cout << "raw pointers:           " << average(test_raw_ptr_array, size, iterations) << "μs\n";
+        std::cout << "kogan's smart pointers: " << average(test_smart_ptr_array, size, iterations) << "μs\n";
+        std::cout << "std smart pointers:     " << average(test_std_smart_ptr_array, size, iterations) << "μs\n";
     }
     return 0;
 }
@@ -135,4 +138,12 @@ unsigned long long int test_std_smart_ptr_array(std::size_t size) {
     auto arr = create_std_smart_ptr_array(size);
     shuffle_std_smart_ptr_array(arr, size);
     return time_it([&]() { sort_std_smart_ptr_array(arr, size); });
+}
+
+unsigned long long average(unsigned long long (*test)(std::size_t), std::size_t size, std::size_t iterations) {
+    unsigned long long total = 0;
+    for (std::size_t i = 0; i < iterations; ++i) {
+        total += test(size);
+    }
+    return total / iterations;
 }
