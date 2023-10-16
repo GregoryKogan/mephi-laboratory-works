@@ -3,7 +3,7 @@
 
 #include <test_lib.hpp>
 
-#include "../../data_structures/SmartPtrDynamicArray.hpp"
+#include "../../data_structures/SmartPtrDynamicArray/SmartPtrDynamicArray.hpp"
 
 kogan::TestSuite get_smart_ptr_dynamic_array_test_suite();
 

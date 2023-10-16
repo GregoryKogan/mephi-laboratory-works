@@ -1,6 +1,7 @@
-#include "ControlBlock.hpp"
 #ifndef LAB1_CONTROL_BLOCK_HH
 #define LAB1_CONTROL_BLOCK_HH
+
+#include "ControlBlock.hpp"
 
 namespace kogan {
 

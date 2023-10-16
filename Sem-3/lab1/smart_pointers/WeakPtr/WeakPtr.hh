@@ -1,5 +1,5 @@
-#ifndef LAB1_WEAK_PTR_INC
-#define LAB1_WEAK_PTR_INC
+#ifndef LAB1_WEAK_PTR_HH
+#define LAB1_WEAK_PTR_HH
 
 #include "WeakPtr.hpp"
 

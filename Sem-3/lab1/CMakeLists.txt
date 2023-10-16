@@ -20,11 +20,15 @@ add_executable(
     smart_pointers/SharedPtr/SharedPtr.hh
     smart_pointers/WeakPtr/WeakPtr.hpp
     smart_pointers/WeakPtr/WeakPtr.hh
-    data_structures/SmartPtrDynamicArray.hpp
-    data_structures/SmartPtrLinkedList.hpp
+    data_structures/SmartPtrDynamicArray/SmartPtrDynamicArray.hpp
+    data_structures/SmartPtrDynamicArray/SmartPtrDynamicArray.hh
+    data_structures/SmartPtrLinkedList/SmartPtrLinkedList.hpp
+    data_structures/SmartPtrLinkedList/SmartPtrLinkedList.hh
     sequences/SmartPtrSequence.hpp
-    sequences/SmartPtrArraySequence.hpp
-    sequences/SmartPtrLinkedListSequence.hpp
+    sequences/SmartPtrArraySequence/SmartPtrArraySequence.hpp
+    sequences/SmartPtrArraySequence/SmartPtrArraySequence.hh
+    sequences/SmartPtrLinkedListSequence/SmartPtrLinkedListSequence.hpp
+    sequences/SmartPtrLinkedListSequence/SmartPtrLinkedListSequence.hh
     tests/UniquePtr_tests/UniquePtr_tests.hpp
     tests/UniquePtr_tests/UniquePtr_tests.cpp
     tests/SharedPtr_tests/SharedPtr_tests.hpp

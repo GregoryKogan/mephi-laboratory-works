@@ -1,5 +1,5 @@
-#ifndef LAB1_SHARED_PTR_INC
-#define LAB1_SHARED_PTR_INC
+#ifndef LAB1_SHARED_PTR_HH
+#define LAB1_SHARED_PTR_HH
 
 #include "SharedPtr.hpp"
 

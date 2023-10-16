@@ -3,7 +3,7 @@
 
 #include <test_lib.hpp>
 
-#include "../../sequences/SmartPtrArraySequence.hpp"
+#include "../../sequences/SmartPtrArraySequence/SmartPtrArraySequence.hpp"
 
 kogan::TestSuite get_smart_ptr_array_sequence_test_suite();
 

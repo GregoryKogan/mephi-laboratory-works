@@ -3,7 +3,7 @@
 
 #include <test_lib.hpp>
 
-#include "../../data_structures/SmartPtrLinkedList.hpp"
+#include "../../data_structures/SmartPtrLinkedList/SmartPtrLinkedList.hpp"
 
 kogan::TestSuite get_smart_ptr_linked_list_test_suite();
 
