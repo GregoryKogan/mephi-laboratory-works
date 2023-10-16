@@ -1,0 +1,28 @@
+size: 10^1
+raw pointers:           75.01KiB
+kogan's smart pointers: 74.93KiB
+std smart pointers:     75.80KiB
+size: 10^2
+raw pointers:           78.33KiB
+kogan's smart pointers: 78.77KiB
+std smart pointers:     78.72KiB
+size: 10^3
+raw pointers:           114.1KiB
+kogan's smart pointers: 114.3KiB
+std smart pointers:     114.5KiB
+size: 10^4
+raw pointers:           466.0KiB
+kogan's smart pointers: 466.1KiB
+std smart pointers:     466.3KiB
+size: 10^5
+raw pointers:           3982.34KiB
+kogan's smart pointers: 3982.34KiB
+std smart pointers:     3982.34KiB
+size: 10^6
+raw pointers:           39147.52KiB
+kogan's smart pointers: 39147.52KiB
+std smart pointers:     39147.52KiB
+size: 10^7
+raw pointers:           390758.4KiB
+kogan's smart pointers: 390758.4KiB
+std smart pointers:     390758.4KiB
