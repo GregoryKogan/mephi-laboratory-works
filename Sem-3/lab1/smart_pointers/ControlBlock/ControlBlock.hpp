@@ -13,7 +13,7 @@ class ControlBlock {
     unsigned int weak_ptr_reference_counter_;
 
    public:
-    explicit ControlBlock(T* ptr) noexcept;  // constructor from pointer
+    explicit ControlBlock(T* ptr);  // constructor from pointer
 
     void increment_reference_counter() noexcept;
     void decrement_reference_counter_and_delete_if_zero();
@@ -33,7 +33,7 @@ class ControlBlock<T[]> {  // specialization for arrays
     unsigned int weak_ptr_reference_counter_;
 
    public:
-    explicit ControlBlock(T* ptr) noexcept;
+    explicit ControlBlock(T* ptr);
 
     void increment_reference_counter() noexcept;
     void decrement_reference_counter_and_delete_if_zero();

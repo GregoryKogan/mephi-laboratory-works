@@ -12,6 +12,7 @@ template <class T>
 class WeakPtr {
    private:
     ControlBlock<T>* control_block_;
+    void update_reference(ControlBlock<T>* new_control_block);
 
     friend class SharedPtr<T>;  // to access control_block_
 
@@ -42,6 +43,7 @@ template <class T>
 class WeakPtr<T[]> {  // specialization for arrays
    private:
     ControlBlock<T[]>* control_block_;
+    void update_reference(ControlBlock<T[]>* new_control_block);
 
     friend class SharedPtr<T[]>;
 

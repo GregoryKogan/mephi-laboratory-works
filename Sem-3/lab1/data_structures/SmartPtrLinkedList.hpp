@@ -30,8 +30,6 @@ class SmartPtrLinkedList {
     SmartPtrLinkedList(SharedPtr<T[]> data, int length);
     SmartPtrLinkedList(const SmartPtrLinkedList<T>& other);
 
-    ~SmartPtrLinkedList();
-
     T get(int index) const;
     T get_first() const;
     T get_last() const;
@@ -80,11 +78,6 @@ template <class T>
 inline SmartPtrLinkedList<T>::SmartPtrLinkedList(const SmartPtrLinkedList<T>& other) {
     init_();
     for (std::size_t i = 0; i < other.length_; ++i) append(other.get(i));
-}
-
-template <class T>
-inline SmartPtrLinkedList<T>::~SmartPtrLinkedList() {
-    clear();
 }
 
 template <class T>
@@ -176,13 +169,14 @@ inline void SmartPtrLinkedList<T>::remove(int index) {
     if (index < 0 || index >= length_) throw IndexOutOfRangeException(index, 0, length_ - 1);
 
     if (index == 0) {
-        root_->head = root_->head->next;
+        auto new_head = root_->head->next;
+        root_->head = new_head;
         if (root_->head != nullptr) root_->head->prev = nullptr;
         --length_;
         return;
     }
     if (index == length_ - 1) {
-        root_->tail = root_->tail->prev;
+        root_->tail = root_->tail->prev.lock();
         if (root_->tail != nullptr) root_->tail->next = nullptr;
         --length_;
         return;
@@ -196,13 +190,6 @@ inline void SmartPtrLinkedList<T>::remove(int index) {
 
 template <class T>
 inline void SmartPtrLinkedList<T>::clear() noexcept {
-    auto next = root_->head;
-    while (next) {
-        auto current = next;
-        next = next->next;
-        current->prev = nullptr;
-        current->next = nullptr;
-    }
     root_->head = nullptr;
     root_->tail = nullptr;
     length_ = 0;

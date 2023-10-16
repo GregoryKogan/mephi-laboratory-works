@@ -5,24 +5,20 @@
 namespace kogan {
 
 template <class T>
-inline ControlBlock<T>::ControlBlock(T* ptr) noexcept {  // constructor from pointer
+inline ControlBlock<T>::ControlBlock(T* ptr) {  // constructor from pointer
+    if (!ptr) throw InvalidArgumentException("nullptr is not allowed");
+
     ptr_ = ptr;
-    if (ptr_ != nullptr) {
-        reference_counter_ = 1;
-    } else {
-        reference_counter_ = 0;
-    }
+    reference_counter_ = 1;
     weak_ptr_reference_counter_ = 0;
 }
 
 template <class T>
-inline ControlBlock<T[]>::ControlBlock(T* ptr) noexcept {  // constructor from pointer for arrays
+inline ControlBlock<T[]>::ControlBlock(T* ptr) {  // constructor from pointer for arrays
+    if (!ptr) throw InvalidArgumentException("nullptr is not allowed");
+
     ptr_ = ptr;
-    if (ptr_ != nullptr) {
-        reference_counter_ = 1;
-    } else {
-        reference_counter_ = 0;
-    }
+    reference_counter_ = 1;
     weak_ptr_reference_counter_ = 0;
 }
 
@@ -40,28 +36,24 @@ template <class T>
 inline void ControlBlock<T>::decrement_reference_counter_and_delete_if_zero() {
     if (reference_counter_ == 0) throw ZeroReferenceDecrementException();
 
-    --reference_counter_;
-    if (reference_counter_ == 0) {
-        if (ptr_ != nullptr) {
-            delete ptr_;
-            ptr_ = nullptr;
-        };
-        if (weak_ptr_reference_counter_ == 0) delete this;
+    if (reference_counter_ == 1 && ptr_ != nullptr) {
+        delete ptr_;
+        ptr_ = nullptr;
     }
+    --reference_counter_;
+    if (reference_counter_ + weak_ptr_reference_counter_ == 0) delete this;
 }
 
 template <class T>
 inline void ControlBlock<T[]>::decrement_reference_counter_and_delete_if_zero() {
     if (reference_counter_ == 0) throw ZeroReferenceDecrementException();
 
-    --reference_counter_;
-    if (reference_counter_ == 0) {
-        if (ptr_ != nullptr) {
-            delete[] ptr_;
-            ptr_ = nullptr;
-        };
-        if (weak_ptr_reference_counter_ == 0) delete this;
+    if (reference_counter_ == 1 && ptr_ != nullptr) {
+        delete[] ptr_;
+        ptr_ = nullptr;
     }
+    --reference_counter_;
+    if (reference_counter_ + weak_ptr_reference_counter_ == 0) delete this;
 }
 
 template <class T>
