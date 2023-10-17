@@ -58,8 +58,20 @@ add_executable(
 
 add_executable(
     run
-    run.cpp
+    interface/run.cpp
     dependencies/cpp-httplib/httplib.h
+    interface/state/state.hpp
+    interface/state/state.cpp
+    interface/endpoints/endpoints.hpp
+    interface/endpoints/endpoints.cpp
+    exceptions/EmptyPointerException/EmptyPointerException.hpp
+    exceptions/EmptyPointerException/EmptyPointerException.cpp
+    exceptions/ZeroReferenceDecrementException/ZeroReferenceDecrementException.hpp
+    exceptions/ZeroReferenceDecrementException/ZeroReferenceDecrementException.cpp
+    sequences/SmartPtrArraySequence/SmartPtrArraySequence.hpp
+    sequences/SmartPtrArraySequence/SmartPtrArraySequence.hh
+    sequences/SmartPtrLinkedListSequence/SmartPtrLinkedListSequence.hpp
+    sequences/SmartPtrLinkedListSequence/SmartPtrLinkedListSequence.hh
 )
 
 include(FindPkgConfig)
@@ -72,3 +84,4 @@ find_package(ExceptionLib REQUIRED)
 include_directories(${EXCEPTION-LIB_INCLUDE_DIR})
 target_link_libraries(test ${EXCEPTION-LIB_LIBRARY})
 target_link_libraries(benchmark ${EXCEPTION-LIB_LIBRARY})
+target_link_libraries(run ${EXCEPTION-LIB_LIBRARY})
