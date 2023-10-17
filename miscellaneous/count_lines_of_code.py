@@ -53,11 +53,11 @@ def main():
 
     for directory in dirs:
         depth = directory["depth"]
-        print(f"{depth * '|--'}{directory['path'].relative_to(base_path)}")
+        print(f"{depth * '|__'}{directory['path'].relative_to(base_path)}")
         for suffix, lines in sorted(directory["lines"].items()):
-            print(f"{depth * '|--'}{suffix}: {lines}")
-        print(f"{depth * '|--'}Total: {sum(directory['lines'].values())}")
-        print()
+            print(f"|{depth * '  '}{suffix}: {lines}")
+        print(f"|{depth * '  '}Total: {sum(directory['lines'].values())}")
+        print("|")
 
 
 if __name__ == "__main__":
