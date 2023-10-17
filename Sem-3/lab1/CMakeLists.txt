@@ -46,14 +46,20 @@ add_executable(
 )
 
 add_executable(
-    load_test
-    load_test.cpp
+    benchmark
+    benchmark.cpp
     exceptions/ZeroReferenceDecrementException/ZeroReferenceDecrementException.hpp
     exceptions/ZeroReferenceDecrementException/ZeroReferenceDecrementException.cpp
     smart_pointers/UniquePtr/UniquePtr.hpp
     smart_pointers/UniquePtr/UniquePtr.hh
     smart_pointers/SharedPtr/SharedPtr.hpp
     smart_pointers/SharedPtr/SharedPtr.hh
+)
+
+add_executable(
+    run
+    run.cpp
+    dependencies/cpp-httplib/httplib.h
 )
 
 include(FindPkgConfig)
@@ -65,4 +71,4 @@ target_link_libraries(test ${TEST-LIB_LIBRARY})
 find_package(ExceptionLib REQUIRED)
 include_directories(${EXCEPTION-LIB_INCLUDE_DIR})
 target_link_libraries(test ${EXCEPTION-LIB_LIBRARY})
-target_link_libraries(load_test ${EXCEPTION-LIB_LIBRARY})
+target_link_libraries(benchmark ${EXCEPTION-LIB_LIBRARY})

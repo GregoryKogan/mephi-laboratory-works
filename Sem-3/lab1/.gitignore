@@ -4,5 +4,8 @@ CMakeCache.txt
 CMakeFiles
 Makefile
 
+dependencies
+
 test
 load_test
+run
