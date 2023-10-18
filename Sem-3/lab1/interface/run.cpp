@@ -7,11 +7,14 @@
 int main(void) {
     httplib::Server svr;
 
-    init_state();
-
-    svr.Get("/state", get_state);
     svr.Get("/ping", ping);
     svr.Get("/stop", [&](const httplib::Request& req, httplib::Response& res) { svr.stop(); });
+
+    // observers
+    svr.Get("/state", get_state);
+
+    // modifiers
+    svr.Post("/state", add_sequence_record);
 
     svr.listen("localhost", 8080);
 }

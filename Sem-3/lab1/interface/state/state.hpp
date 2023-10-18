@@ -1,16 +1,37 @@
 #ifndef LAB1_INTERFACE_STATE_HPP
 #define LAB1_INTERFACE_STATE_HPP
 
-#include "../../sequences/SmartPtrArraySequence/SmartPtrArraySequence.hpp"
 #include "../../sequences/SmartPtrLinkedListSequence/SmartPtrLinkedListSequence.hpp"
+#include "../../sequences/SmartPtrSequence.hpp"
 
-struct state_vault {
-    kogan::SharedPtr<kogan::SmartPtrArraySequence<int>> array_seq;
-    kogan::SharedPtr<kogan::SmartPtrLinkedListSequence<int>> list_seq;
+namespace kogan {
+
+class State {
+   public:
+    enum class sequence_type { array, list };
+    class SequenceRecord {
+        sequence_type type;
+        kogan::SharedPtr<kogan::SmartPtrSequence<int>> seq;
+
+       public:
+        SequenceRecord() = default;
+        SequenceRecord(sequence_type type, kogan::SharedPtr<kogan::SmartPtrSequence<int>> seq);
+
+        [[nodiscard]] std::string to_string() const;
+        friend std::ostream &operator<<(std::ostream &os, const State::SequenceRecord &record);
+    };
+
+   private:
+    kogan::SharedPtr<kogan::SmartPtrSequence<SequenceRecord>> records_;
+
+   public:
+    State();
+
+    kogan::SharedPtr<kogan::SmartPtrSequence<SequenceRecord>> get_records() const;
 };
 
-void init_state();
-kogan::SharedPtr<kogan::SmartPtrArraySequence<int>> get_array_seq();
-kogan::SharedPtr<kogan::SmartPtrLinkedListSequence<int>> get_list_seq();
+static kogan::State global_state;
+
+}  // namespace kogan
 
 #endif

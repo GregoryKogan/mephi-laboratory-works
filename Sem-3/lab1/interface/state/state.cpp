@@ -1,12 +1,27 @@
 #include "state.hpp"
 
-static state_vault global_state;
+kogan::State::SequenceRecord::SequenceRecord(sequence_type type, kogan::SharedPtr<kogan::SmartPtrSequence<int>> seq)
+    : type(type), seq(seq) {}
 
-void init_state() {
-    global_state.array_seq = kogan::make_shared<kogan::SmartPtrArraySequence<int>>();
-    global_state.list_seq = kogan::make_shared<kogan::SmartPtrLinkedListSequence<int>>();
+std::string kogan::State::SequenceRecord::to_string() const {
+    std::ostringstream oss;
+    oss << "{\n"
+        << "    \"type\": " << (type == sequence_type::array ? "\"array\"" : "\"list\"") << ",\n"
+        << "    \"seq\": " << seq->to_string() << "\n"
+        << "}";
+    return oss.str();
 }
 
-kogan::SharedPtr<kogan::SmartPtrArraySequence<int>> get_array_seq() { return global_state.array_seq; }
+std::ostream& kogan::operator<<(std::ostream& os, const kogan::State::SequenceRecord& record) {
+    os << record.to_string();
+    return os;
+}
 
-kogan::SharedPtr<kogan::SmartPtrLinkedListSequence<int>> get_list_seq() { return global_state.list_seq; }
+kogan::State::State() {
+    records_ = kogan::SharedPtr<kogan::SmartPtrSequence<SequenceRecord>>(
+        new kogan::SmartPtrLinkedListSequence<SequenceRecord>());
+}
+
+kogan::SharedPtr<kogan::SmartPtrSequence<kogan::State::SequenceRecord>> kogan::State::get_records() const {
+    return records_;
+}
