@@ -1,8 +1,7 @@
-#include "../../sequences/SmartPtrArraySequence/SmartPtrArraySequence.hpp"
-#include "../../sequences/SmartPtrLinkedListSequence/SmartPtrLinkedListSequence.hpp"
 #include "Logger/Logger.hpp"
 #include "dependencies/cpp-httplib/httplib.h"
-#include "endpoints/endpoints.hpp"
+#include "routes/ping/set_ping_routes.hpp"
+#include "routes/records/set_records_routes.hpp"
 #include "state/state.hpp"
 
 int main(void) {
@@ -17,15 +16,9 @@ int main(void) {
     svr.set_post_routing_handler(
         [](const auto& req, auto& res) { res.set_header("Access-Control-Allow-Origin", "*"); });
 
-    svr.Get("/ping", ping);
-    svr.Get("/stop", [&](const httplib::Request& req, httplib::Response& res) { svr.stop(); });
-
-    // observers
-    svr.Get("/records", get_records);
-
-    // modifiers
-    svr.Post("/records", add_record);
-    svr.Delete("/records/:index", remove_record);
+    // routes
+    kogan::set_ping_routes(svr);
+    kogan::set_records_routes(svr);
 
     // start server
     logger.log_start();
