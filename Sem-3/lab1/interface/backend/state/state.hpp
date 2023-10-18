@@ -1,8 +1,8 @@
 #ifndef LAB1_INTERFACE_STATE_HPP
 #define LAB1_INTERFACE_STATE_HPP
 
-#include "../../sequences/SmartPtrLinkedListSequence/SmartPtrLinkedListSequence.hpp"
-#include "../../sequences/SmartPtrSequence.hpp"
+#include "../../../sequences/SmartPtrLinkedListSequence/SmartPtrLinkedListSequence.hpp"
+#include "../../../sequences/SmartPtrSequence.hpp"
 
 namespace kogan {
 

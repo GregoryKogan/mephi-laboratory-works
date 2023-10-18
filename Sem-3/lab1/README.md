@@ -4,9 +4,9 @@
 This project contains implementation of smart pointers and benchmark of them.
 
 ## Dependencies
-To install dependencies run the install script:
+To install web interface dependencies run the following command:
 ```bash
-./install_dependencies.sh
+./interface/backend/install_dependencies.sh
 ```
 Make sure you have compiled static libraries in `mephi-laboratory-works/libraries` directory by running the compile script from repository root:
 ```bash

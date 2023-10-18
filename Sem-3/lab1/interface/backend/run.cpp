@@ -1,6 +1,6 @@
-#include "../dependencies/cpp-httplib/httplib.h"
-#include "../sequences/SmartPtrArraySequence/SmartPtrArraySequence.hpp"
-#include "../sequences/SmartPtrLinkedListSequence/SmartPtrLinkedListSequence.hpp"
+#include "../../sequences/SmartPtrArraySequence/SmartPtrArraySequence.hpp"
+#include "../../sequences/SmartPtrLinkedListSequence/SmartPtrLinkedListSequence.hpp"
+#include "dependencies/cpp-httplib/httplib.h"
 #include "endpoints/endpoints.hpp"
 #include "state/state.hpp"
 

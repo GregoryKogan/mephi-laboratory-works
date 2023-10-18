@@ -58,12 +58,12 @@ add_executable(
 
 add_executable(
     run
-    interface/run.cpp
-    dependencies/cpp-httplib/httplib.h
-    interface/state/state.hpp
-    interface/state/state.cpp
-    interface/endpoints/endpoints.hpp
-    interface/endpoints/endpoints.cpp
+    interface/backend/run.cpp
+    interface/backend/dependencies/cpp-httplib/httplib.h
+    interface/backend/state/state.hpp
+    interface/backend/state/state.cpp
+    interface/backend/endpoints/endpoints.hpp
+    interface/backend/endpoints/endpoints.cpp
     exceptions/EmptyPointerException/EmptyPointerException.hpp
     exceptions/EmptyPointerException/EmptyPointerException.cpp
     exceptions/ZeroReferenceDecrementException/ZeroReferenceDecrementException.hpp
