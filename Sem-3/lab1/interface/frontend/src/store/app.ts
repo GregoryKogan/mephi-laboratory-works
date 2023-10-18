@@ -22,10 +22,10 @@ export const useAppStore = defineStore('app', {
     },
 
     async fetchRecords() {
-      const data = await fetch(config.backendUrl + "/records");
-      const parsed_data = await data.json();
+      const response = await fetch(config.backendUrl + "/records");
+      const data = await response.json();
       const records: SequenceRecord[] = [];
-      for (const record_data of parsed_data.records) {
+      for (const record_data of data.records) {
         records.push({
           type:
             record_data.type == "array"
