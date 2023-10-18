@@ -4,7 +4,21 @@ import os
 import subprocess
 
 
-ALLOWED_SUFFIXES = [".c", ".h", ".cpp", ".hpp", ".hh", ".py", ".sh"]
+ALLOWED_SUFFIXES = [
+    ".c",
+    ".h",
+    ".cpp",
+    ".hpp",
+    ".hh",
+    ".py",
+    ".sh",
+    ".js",
+    ".ts",
+    ".html",
+    ".css",
+    ".md",
+    ".vue",
+]
 MAX_DEPTH = 2
 
 
