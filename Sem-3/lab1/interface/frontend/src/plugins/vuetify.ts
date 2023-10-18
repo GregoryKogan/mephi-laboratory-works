@@ -5,22 +5,31 @@
  */
 
 // Styles
-import '@mdi/font/css/materialdesignicons.css'
-import 'vuetify/styles'
+import '@mdi/font/css/materialdesignicons.css';
+import 'vuetify/styles';
 
 // Composables
-import { createVuetify } from 'vuetify'
+import { createVuetify } from 'vuetify';
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   theme: {
+    defaultTheme: "dark",
     themes: {
-      light: {
+      dark: { // tokyo night storm theme
         colors: {
-          primary: '#1867C0',
-          secondary: '#5CBBF6',
+          background: "#24283b",
+          primary: "#7aa2f7",
+          secondary: "#bb9af7",
+          surface: "#414868",
+          error: "#f7768e",
+          info: "#7dcfff",
+          success: "#9ece6a",
+          warning: "#e0af68",
+          "on-background": "#c0caf5",
+          "on-surface": "#c0caf5",
         },
       },
     },
   },
-})
+});
