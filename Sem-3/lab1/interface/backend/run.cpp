@@ -25,6 +25,7 @@ int main(void) {
 
     // modifiers
     svr.Post("/records", add_record);
+    svr.Delete("/records/:index", remove_record);
 
     svr.listen("localhost", 8080);
 }

@@ -5,8 +5,8 @@ void ping(const httplib::Request& req, httplib::Response& res) {
     oss << "{\n"
         << "    \"message\": \"pong\"\n"
         << "}";
-    res.set_content(oss.str(), "application/json");
     res.status = 200;
+    res.set_content(oss.str(), "application/json");
 }
 
 void get_records(const httplib::Request& req, httplib::Response& res) {
@@ -14,8 +14,8 @@ void get_records(const httplib::Request& req, httplib::Response& res) {
     oss << "{\n"
         << "    \"records\": " << *kogan::global_state.get_records() << "\n"
         << "}";
-    res.set_content(oss.str(), "application/json");
     res.status = 200;
+    res.set_content(oss.str(), "application/json");
 }
 
 void add_record(const httplib::Request& req, httplib::Response& res) {
@@ -55,4 +55,38 @@ void add_record(const httplib::Request& req, httplib::Response& res) {
         "}",
         "application/json");
     res.status = 200;
+}
+
+void remove_record(const httplib::Request& req, httplib::Response& res) {
+    auto index_param = req.path_params.at("index");
+    if (index_param.empty()) {
+        res.status = 400;
+        res.set_content(
+            "{\n"
+            "    \"message\": \"index is not specified\"\n"
+            "}",
+            "application/json");
+        return;
+    }
+
+    int index = stoi(index_param);
+
+    try {
+        kogan::global_state.get_records()->remove(index);
+    } catch (std::exception& e) {
+        res.status = 400;
+        res.set_content(
+            "{\n"
+            "    \"message\": \"index is out of range\"\n"
+            "}",
+            "application/json");
+        return;
+    }
+
+    res.status = 200;
+    res.set_content(
+        "{\n"
+        "    \"message\": \"record removed\"\n"
+        "}",
+        "application/json");
 }

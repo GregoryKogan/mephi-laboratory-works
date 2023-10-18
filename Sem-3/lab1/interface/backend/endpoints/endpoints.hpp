@@ -12,5 +12,6 @@ void get_records(const httplib::Request& req, httplib::Response& res);
 
 // modifiers
 void add_record(const httplib::Request& req, httplib::Response& res);
+void remove_record(const httplib::Request& req, httplib::Response& res);
 
 #endif
