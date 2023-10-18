@@ -1,5 +1,9 @@
 #include "Logger.hpp"
 
+void kogan::Logger::Logger::log_start() const noexcept {
+    log_stream << get_timestamp() << " SERVER STARTED" << std::endl;
+}
+
 void kogan::Logger::Logger::log(const httplib::Request& req, const httplib::Response& res) const noexcept {
     log_stream << get_timestamp() << " " << req.method << " " << req.path << " " << res.status << std::endl;
 }

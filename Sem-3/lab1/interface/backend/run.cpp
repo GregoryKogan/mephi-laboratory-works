@@ -27,5 +27,7 @@ int main(void) {
     svr.Post("/records", add_record);
     svr.Delete("/records/:index", remove_record);
 
+    // start server
+    logger.log_start();
     svr.listen("localhost", 8080);
 }

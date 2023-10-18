@@ -16,6 +16,7 @@ class Logger {
    public:
     Logger(std::ostream& log_stream) : log_stream(log_stream) {}
 
+    void log_start() const noexcept;
     void log(const httplib::Request& req, const httplib::Response& res) const noexcept;
 
    private:
