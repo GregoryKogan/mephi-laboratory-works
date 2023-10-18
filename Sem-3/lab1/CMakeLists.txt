@@ -60,6 +60,8 @@ add_executable(
     run
     interface/backend/run.cpp
     interface/backend/dependencies/cpp-httplib/httplib.h
+    interface/backend/Logger/Logger.hpp
+    interface/backend/Logger/Logger.cpp
     interface/backend/state/state.hpp
     interface/backend/state/state.cpp
     interface/backend/endpoints/endpoints.hpp

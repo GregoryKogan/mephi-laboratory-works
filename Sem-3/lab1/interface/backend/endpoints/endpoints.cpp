@@ -9,7 +9,7 @@ void ping(const httplib::Request& req, httplib::Response& res) {
     res.status = 200;
 }
 
-void get_state(const httplib::Request& req, httplib::Response& res) {
+void get_records(const httplib::Request& req, httplib::Response& res) {
     std::ostringstream oss;
     oss << "{\n"
         << "    \"records\": " << *kogan::global_state.get_records() << "\n"
@@ -18,7 +18,7 @@ void get_state(const httplib::Request& req, httplib::Response& res) {
     res.status = 200;
 }
 
-void add_sequence_record(const httplib::Request& req, httplib::Response& res) {
+void add_record(const httplib::Request& req, httplib::Response& res) {
     std::string type = req.get_param_value("type");
 
     if (type.empty()) {

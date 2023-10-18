@@ -8,9 +8,9 @@
 void ping(const httplib::Request& req, httplib::Response& res);
 
 // observers
-void get_state(const httplib::Request& req, httplib::Response& res);
+void get_records(const httplib::Request& req, httplib::Response& res);
 
 // modifiers
-void add_sequence_record(const httplib::Request& req, httplib::Response& res);
+void add_record(const httplib::Request& req, httplib::Response& res);
 
 #endif
