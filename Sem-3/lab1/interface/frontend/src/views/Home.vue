@@ -1,6 +1,12 @@
 <template>
-  <AddSequence />
-  <SequenceCard v-for="index in reversedIndexes" :key="index" :index="index" />
+  <v-container>
+    <AddSequence />
+    <SequenceCard
+      v-for="index in reversedIndexes"
+      :key="index"
+      :index="index"
+    />
+  </v-container>
 </template>
 
 <script lang="ts">

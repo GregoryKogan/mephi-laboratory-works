@@ -53,7 +53,7 @@ void append(const httplib::Request& req, httplib::Response& res) {
     if (!index_pair.second) return;
     int index = index_pair.first;
 
-    std::pair<int, bool> value_pair = get_value(req, res);
+    std::pair<int, bool> value_pair = get_parameter_value(req, res);
     if (!value_pair.second) return;
     int value = value_pair.first;
 
@@ -72,7 +72,7 @@ void prepend(const httplib::Request& req, httplib::Response& res) {
     if (!index_pair.second) return;
     int index = index_pair.first;
 
-    std::pair<int, bool> value_pair = get_value(req, res);
+    std::pair<int, bool> value_pair = get_parameter_value(req, res);
     if (!value_pair.second) return;
     int value = value_pair.first;
 
@@ -84,6 +84,29 @@ void prepend(const httplib::Request& req, httplib::Response& res) {
     }
 
     set_message_and_status(res, "value prepended", 200);
+}
+
+void set(const httplib::Request& req, httplib::Response& res) {
+    std::pair<int, bool> index_pair = get_seq_index(req, res);
+    if (!index_pair.second) return;
+    int index = index_pair.first;
+
+    std::pair<int, bool> value_pair = get_parameter_value(req, res);
+    if (!value_pair.second) return;
+    int value = value_pair.first;
+
+    std::pair<int, bool> index_to_set_pair = get_parameter_value(req, res, "index");
+    if (!index_to_set_pair.second) return;
+    int index_to_set = index_to_set_pair.first;
+
+    try {
+        kogan::global_state.get_records()->get(index).get_seq()->set(index_to_set, value);
+    } catch (std::exception& e) {
+        handle_exception_with_status(e, res, 400);
+        return;
+    }
+
+    set_message_and_status(res, "value set", 200);
 }
 
 void set_message_and_status(httplib::Response& res, const std::string& message, int status) {
@@ -124,14 +147,17 @@ std::pair<int, bool> get_seq_index(const httplib::Request& req, httplib::Respons
     return std::make_pair(index, true);
 }
 
-std::pair<int, bool> get_value(const httplib::Request& req, httplib::Response& res) {
-    std::string value_param = req.get_param_value("value");
+std::pair<int, bool> get_parameter_value(const httplib::Request& req, httplib::Response& res,
+                                         const std::string& parameter_name) {
+    std::string value_param = req.get_param_value(parameter_name);
     if (value_param.empty()) {
         res.status = 400;
         res.set_content(
             "{\n"
-            "    \"message\": \"value is not specified\"\n"
-            "}",
+            "    \"message\": \"" +
+                parameter_name +
+                " is not specified\"\n"
+                "}",
             "application/json");
         return std::make_pair(0, false);
     }

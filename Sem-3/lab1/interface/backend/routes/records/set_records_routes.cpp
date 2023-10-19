@@ -7,14 +7,11 @@ void set_methods(httplib::Response& res, const std::string& methods) {
 
 void kogan::set_records_routes(httplib::Server& server) {
     // CORS
-    server.Options("/records",
-                   [](const httplib::Request& req, httplib::Response& res) { set_methods(res, "GET, POST, OPTIONS"); });
-    server.Options("/records/:index",
-                   [](const httplib::Request& req, httplib::Response& res) { set_methods(res, "DELETE, OPTIONS"); });
-    server.Options("/records/:index/append",
-                   [](const httplib::Request& req, httplib::Response& res) { set_methods(res, "POST, OPTIONS"); });
-    server.Options("/records/:index/prepend",
-                   [](const httplib::Request& req, httplib::Response& res) { set_methods(res, "POST, OPTIONS"); });
+    server.Options("/records", [](auto& req, auto& res) { set_methods(res, "GET, POST, OPTIONS"); });
+    server.Options("/records/:index", [](auto& req, auto& res) { set_methods(res, "DELETE, OPTIONS"); });
+    server.Options("/records/:index/append", [](auto& req, auto& res) { set_methods(res, "POST, OPTIONS"); });
+    server.Options("/records/:index/prepend", [](auto& req, auto& res) { set_methods(res, "POST, OPTIONS"); });
+    server.Options("/records/:index/set", [](auto& req, auto& res) { set_methods(res, "POST, OPTIONS"); });
 
     // observers
     server.Get("/records", get_records);
@@ -24,4 +21,5 @@ void kogan::set_records_routes(httplib::Server& server) {
     server.Delete("/records/:index", remove_record);
     server.Post("/records/:index/append", append);
     server.Post("/records/:index/prepend", prepend);
+    server.Post("/records/:index/set", set);
 }

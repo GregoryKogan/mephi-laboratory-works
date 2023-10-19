@@ -1,7 +1,12 @@
 <template>
   <v-container v-if="store.records.length > index">
     <h1>{{ name }}</h1>
-    <v-btn @click="goToHome" prepend-icon="mdi-arrow-left-circle"
+    <h3>length: {{ values.length }}</h3>
+
+    <v-btn
+      @click="goToHome"
+      prepend-icon="mdi-arrow-left-circle"
+      style="margin-top: 1em"
       >Go back</v-btn
     >
 
@@ -11,6 +16,7 @@
 
     <AppendCard :index="index" />
     <PrependCard :index="index" />
+    <SetCard v-if="values.length > 0" :index="index" />
   </v-container>
   <v-container v-else class="fill-height">
     <v-responsive class="align-center text-center fill-height">
@@ -33,12 +39,14 @@ import { SequenceType, useAppStore } from "@/store/app";
 import { defineComponent } from "vue";
 import AppendCard from "@/components/AppendCard.vue";
 import PrependCard from "@/components/PrependCard.vue";
+import SetCard from "@/components/SetCard.vue";
 
 export default defineComponent({
   name: "Sequence",
   components: {
     AppendCard,
     PrependCard,
+    SetCard,
   },
   setup() {
     const store = useAppStore();
