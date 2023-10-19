@@ -16,7 +16,7 @@
 
     <AppendCard :index="index" />
     <PrependCard :index="index" />
-    <SetCard v-if="values.length > 0" :index="index" />
+    <SetCard :index="index" />
   </v-container>
   <v-container v-else class="fill-height">
     <v-responsive class="align-center text-center fill-height">

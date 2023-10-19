@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card>
+    <v-card :disabled="!(store.records[index].seq.length > 0)">
       <v-card-title>
         set
         <v-icon>mdi-cursor-pointer</v-icon>
