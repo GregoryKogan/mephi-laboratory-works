@@ -1,7 +1,11 @@
 <template>
   <v-card @click="goToSequence" style="margin: 1em">
     <v-card-item>
-      <v-card-title>{{ name }}</v-card-title>
+      <v-card-title>
+        <v-icon v-if="name == 'Array'">mdi-code-array</v-icon>
+        <v-icon v-else>mdi-link-variant</v-icon>
+        {{ name }}
+      </v-card-title>
       <v-card-subtitle>length: {{ values.length }}</v-card-subtitle>
     </v-card-item>
     <v-card-text
@@ -18,7 +22,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
-        @click="removeSequence"
+        @click.stop.prevent="removeSequence"
         icon="mdi-delete"
         color="error"
         variant="tonal"
