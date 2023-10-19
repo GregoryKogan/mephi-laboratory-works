@@ -11,7 +11,7 @@
     >
 
     <v-container>
-      <h3 style="font-family: monospace">{{ values }}</h3>
+      <h3 style="font-family: monospace" class="text-warning">{{ values }}</h3>
     </v-container>
 
     <AppendCard :index="index" />

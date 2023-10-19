@@ -17,6 +17,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
       "
+      class="text-warning"
       >{{ values }}</v-card-text
     >
     <v-card-actions>
