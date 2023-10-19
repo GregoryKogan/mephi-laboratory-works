@@ -17,6 +17,8 @@ class State {
         SequenceRecord() = default;
         SequenceRecord(sequence_type type, kogan::SharedPtr<kogan::SmartPtrSequence<int>> seq);
 
+        kogan::SharedPtr<kogan::SmartPtrSequence<int>> get_seq() const;
+
         [[nodiscard]] std::string to_string() const;
         friend std::ostream &operator<<(std::ostream &os, const State::SequenceRecord &record);
     };

@@ -81,3 +81,52 @@ void remove_record(const httplib::Request& req, httplib::Response& res) {
         "}",
         "application/json");
 }
+
+void append(const httplib::Request& req, httplib::Response& res) {
+    auto index_param = req.path_params.at("index");
+    if (index_param.empty()) {
+        res.status = 400;
+        res.set_content(
+            "{\n"
+            "    \"message\": \"index is not specified\"\n"
+            "}",
+            "application/json");
+        return;
+    }
+
+    int index = stoi(index_param);
+
+    std::string value_param = req.get_param_value("value");
+    if (value_param.empty()) {
+        res.status = 400;
+        res.set_content(
+            "{\n"
+            "    \"message\": \"value is not specified\"\n"
+            "}",
+            "application/json");
+        return;
+    }
+
+    int value = stoi(value_param);
+
+    try {
+        kogan::global_state.get_records()->get(index).get_seq()->append(value);
+    } catch (std::exception& e) {
+        res.status = 400;
+        std::string error_msg =
+            "{\n"
+            "    \"message\": \"" +
+            std::string(e.what()) +
+            "\"\n"
+            "}";
+        res.set_content(error_msg, "application/json");
+        return;
+    }
+
+    res.status = 200;
+    res.set_content(
+        "{\n"
+        "    \"message\": \"value appended\"\n"
+        "}",
+        "application/json");
+}
