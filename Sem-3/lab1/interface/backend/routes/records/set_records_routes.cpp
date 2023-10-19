@@ -26,4 +26,5 @@ void kogan::set_records_routes(httplib::Server& server) {
     server.Post("/records/:index/set", set);
     server.Post("/records/:index/insert", insert);
     server.Post("/records/:index/remove", remove_item);
+    server.Post("/records/:index/clear", clear);
 }

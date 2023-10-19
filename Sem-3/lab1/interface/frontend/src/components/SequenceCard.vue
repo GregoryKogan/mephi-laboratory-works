@@ -22,11 +22,27 @@
     >
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn
-        @click.stop.prevent="removeSequence"
-        icon="mdi-delete"
-        color="error"
-      ></v-btn>
+      <v-tooltip text="clear" location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-btn
+            v-bind="props"
+            @click.stop.prevent="clearSequence"
+            icon="mdi-backspace"
+            color="secondary"
+          ></v-btn>
+        </template>
+      </v-tooltip>
+
+      <v-tooltip text="remove" location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-btn
+            v-bind="props"
+            @click.stop.prevent="removeSequence"
+            icon="mdi-delete"
+            color="error"
+          ></v-btn>
+        </template>
+      </v-tooltip>
     </v-card-actions>
   </v-card>
 </template>
@@ -69,6 +85,21 @@ export default defineComponent({
       if (response.status != 200) {
         const msg = await response.text();
         console.error("Error removing sequence: " + msg);
+        return;
+      } else {
+        this.store.fetchRecords();
+      }
+    },
+    async clearSequence() {
+      const response = await fetch(
+        config.backendUrl + "/records/" + this.index + "/clear",
+        {
+          method: "POST",
+        }
+      );
+      if (response.status != 200) {
+        const msg = await response.text();
+        console.error("Error clearing sequence: " + msg);
         return;
       } else {
         this.store.fetchRecords();
