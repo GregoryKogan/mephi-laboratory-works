@@ -16,8 +16,8 @@
 
     <AppendCard :index="index" />
     <PrependCard :index="index" />
-    <SetCard :index="index" />
     <InsertCard :index="index" />
+    <SetCard :index="index" />
     <RemoveCard :index="index" />
   </v-container>
   <v-container v-else class="fill-height">
