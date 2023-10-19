@@ -166,6 +166,33 @@ void clear(const httplib::Request& req, httplib::Response& res) {
     set_message_and_status(res, "sequence cleared", 200);
 }
 
+void subsequence(const httplib::Request& req, httplib::Response& res) {
+    std::pair<int, bool> index_pair = get_seq_index(req, res);
+    if (!index_pair.second) return;
+    int index = index_pair.first;
+
+    std::pair<int, bool> start_pair = get_parameter_value(req, res, "start");
+    if (!start_pair.second) return;
+    int start = start_pair.first;
+
+    std::pair<int, bool> end_pair = get_parameter_value(req, res, "end");
+    if (!end_pair.second) return;
+    int end = end_pair.first;
+
+    try {
+        auto sub_seq = kogan::global_state.get_records()->get(index).get_seq()->get_subsequence(start, end);
+        std::ostringstream oss;
+        oss << "{\n"
+            << "    \"subsequence\": " << *sub_seq << "\n"
+            << "}";
+        res.status = 200;
+        res.set_content(oss.str(), "application/json");
+    } catch (std::exception& e) {
+        handle_exception_with_status(e, res, 400);
+        return;
+    }
+}
+
 void set_message_and_status(httplib::Response& res, const std::string& message, int status) {
     res.status = status;
     res.set_content(
