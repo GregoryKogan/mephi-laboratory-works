@@ -1,10 +1,20 @@
 <template>
-  <v-card style="margin: 1em">
+  <v-card @click="goToSequence" style="margin: 1em">
     <v-card-item>
       <v-card-title>{{ name }}</v-card-title>
       <v-card-subtitle>length: {{ values.length }}</v-card-subtitle>
     </v-card-item>
-    <v-card-text style="font-size: larger">{{ values }}</v-card-text>
+    <v-card-text
+      style="
+        font-family: monospace;
+        font-size: large;
+        white-space: nowrap;
+        word-break: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      "
+      >{{ values }}</v-card-text
+    >
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
@@ -23,7 +33,7 @@ import { useAppStore, SequenceType } from "@/store/app";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Sequence",
+  name: "SequenceCard",
   setup() {
     const store = useAppStore();
     return { store };
@@ -59,6 +69,9 @@ export default defineComponent({
       } else {
         this.store.fetchRecords();
       }
+    },
+    goToSequence() {
+      this.$router.push({ name: "Sequence", params: { index: this.index } });
     },
   },
 });

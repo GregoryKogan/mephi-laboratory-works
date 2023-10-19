@@ -11,6 +11,11 @@ const routes = [
         name: 'Home',
         component: () => import('@/views/Home.vue'),
       },
+      {
+        'path': '/sequences/:index',
+        'name': 'Sequence',
+        'component': () => import('@/views/Sequence.vue'),
+      },
     ],
   },
 ];
