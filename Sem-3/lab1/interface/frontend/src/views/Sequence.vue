@@ -17,6 +17,7 @@
     <AppendCard :index="index" />
     <PrependCard :index="index" />
     <SetCard :index="index" />
+    <InsertCard :index="index" />
   </v-container>
   <v-container v-else class="fill-height">
     <v-responsive class="align-center text-center fill-height">
@@ -40,6 +41,7 @@ import { defineComponent } from "vue";
 import AppendCard from "@/components/AppendCard.vue";
 import PrependCard from "@/components/PrependCard.vue";
 import SetCard from "@/components/SetCard.vue";
+import InsertCard from "@/components/InsertCard.vue";
 
 export default defineComponent({
   name: "Sequence",
@@ -47,6 +49,7 @@ export default defineComponent({
     AppendCard,
     PrependCard,
     SetCard,
+    InsertCard,
   },
   setup() {
     const store = useAppStore();
@@ -73,6 +76,7 @@ export default defineComponent({
   },
   methods: {
     goToHome() {
+      this.store.fetchRecords();
       this.$router.push({ name: "Home" });
     },
   },

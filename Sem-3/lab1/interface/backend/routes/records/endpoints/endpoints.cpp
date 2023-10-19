@@ -109,6 +109,29 @@ void set(const httplib::Request& req, httplib::Response& res) {
     set_message_and_status(res, "value set", 200);
 }
 
+void insert(const httplib::Request& req, httplib::Response& res) {
+    std::pair<int, bool> index_pair = get_seq_index(req, res);
+    if (!index_pair.second) return;
+    int index = index_pair.first;
+
+    std::pair<int, bool> value_pair = get_parameter_value(req, res);
+    if (!value_pair.second) return;
+    int value = value_pair.first;
+
+    std::pair<int, bool> index_to_insert_pair = get_parameter_value(req, res, "index");
+    if (!index_to_insert_pair.second) return;
+    int index_to_insert = index_to_insert_pair.first;
+
+    try {
+        kogan::global_state.get_records()->get(index).get_seq()->insert(index_to_insert, value);
+    } catch (std::exception& e) {
+        handle_exception_with_status(e, res, 400);
+        return;
+    }
+
+    set_message_and_status(res, "value inserted", 200);
+}
+
 void set_message_and_status(httplib::Response& res, const std::string& message, int status) {
     res.status = status;
     res.set_content(

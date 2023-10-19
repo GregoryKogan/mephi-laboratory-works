@@ -75,6 +75,7 @@ export default defineComponent({
       }
     },
     goToSequence() {
+      this.store.fetchRecords();
       this.$router.push({ name: "Sequence", params: { index: this.index } });
     },
   },

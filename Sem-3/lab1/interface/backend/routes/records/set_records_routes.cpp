@@ -12,6 +12,7 @@ void kogan::set_records_routes(httplib::Server& server) {
     server.Options("/records/:index/append", [](auto& req, auto& res) { set_methods(res, "POST, OPTIONS"); });
     server.Options("/records/:index/prepend", [](auto& req, auto& res) { set_methods(res, "POST, OPTIONS"); });
     server.Options("/records/:index/set", [](auto& req, auto& res) { set_methods(res, "POST, OPTIONS"); });
+    server.Options("/records/:index/insert", [](auto& req, auto& res) { set_methods(res, "POST, OPTIONS"); });
 
     // observers
     server.Get("/records", get_records);
@@ -22,4 +23,5 @@ void kogan::set_records_routes(httplib::Server& server) {
     server.Post("/records/:index/append", append);
     server.Post("/records/:index/prepend", prepend);
     server.Post("/records/:index/set", set);
+    server.Post("/records/:index/insert", insert);
 }
