@@ -13,6 +13,8 @@ void kogan::set_records_routes(httplib::Server& server) {
                    [](const httplib::Request& req, httplib::Response& res) { set_methods(res, "DELETE, OPTIONS"); });
     server.Options("/records/:index/append",
                    [](const httplib::Request& req, httplib::Response& res) { set_methods(res, "POST, OPTIONS"); });
+    server.Options("/records/:index/prepend",
+                   [](const httplib::Request& req, httplib::Response& res) { set_methods(res, "POST, OPTIONS"); });
 
     // observers
     server.Get("/records", get_records);
@@ -21,4 +23,5 @@ void kogan::set_records_routes(httplib::Server& server) {
     server.Post("/records", add_record);
     server.Delete("/records/:index", remove_record);
     server.Post("/records/:index/append", append);
+    server.Post("/records/:index/prepend", prepend);
 }

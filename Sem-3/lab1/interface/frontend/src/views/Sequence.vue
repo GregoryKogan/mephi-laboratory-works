@@ -10,6 +10,7 @@
     </v-container>
 
     <AppendCard :index="index" />
+    <PrependCard :index="index" />
   </v-container>
   <v-container v-else class="fill-height">
     <v-responsive class="align-center text-center fill-height">
@@ -31,11 +32,13 @@
 import { SequenceType, useAppStore } from "@/store/app";
 import { defineComponent } from "vue";
 import AppendCard from "@/components/AppendCard.vue";
+import PrependCard from "@/components/PrependCard.vue";
 
 export default defineComponent({
   name: "Sequence",
   components: {
     AppendCard,
+    PrependCard,
   },
   setup() {
     const store = useAppStore();
