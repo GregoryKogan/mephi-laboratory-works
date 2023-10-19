@@ -26,7 +26,6 @@
         @click.stop.prevent="removeSequence"
         icon="mdi-delete"
         color="error"
-        variant="tonal"
       ></v-btn>
     </v-card-actions>
   </v-card>
