@@ -1,9 +1,5 @@
 <template>
-  <v-card
-    flat
-    max-width="700px"
-    style="margin: 1em; margin-bottom: 3em; background: transparent"
-  >
+  <v-card flat style="background: transparent">
     <v-card-actions>
       <v-btn
         @click="addSequence"

@@ -13,12 +13,14 @@
         >
           <v-slider
             v-model="insertIndex"
+            :disabled="!(store.records[index].seq.length > 0)"
             min="0"
             :max="store.records[index].seq.length"
             step="1"
             :thumb-size="15"
             show-ticks
             color="primary"
+            hide-details
           >
             <template v-slot:prepend
               >index: {{ insertIndex }}</template
