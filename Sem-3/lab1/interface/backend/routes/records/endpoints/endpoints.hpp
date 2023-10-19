@@ -14,4 +14,10 @@ void remove_record(const httplib::Request& req, httplib::Response& res);
 void append(const httplib::Request& req, httplib::Response& res);
 void prepend(const httplib::Request& req, httplib::Response& res);
 
+// reusable
+void set_message_and_status(httplib::Response& res, const std::string& message, int status);
+void handle_exception_with_status(std::exception& e, httplib::Response& res, int status);
+std::pair<int, bool> get_seq_index(const httplib::Request& req, httplib::Response& res);
+std::pair<int, bool> get_value(const httplib::Request& req, httplib::Response& res);
+
 #endif

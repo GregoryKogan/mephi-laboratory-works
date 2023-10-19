@@ -13,12 +13,7 @@ void add_record(const httplib::Request& req, httplib::Response& res) {
     std::string type = req.get_param_value("type");
 
     if (type.empty()) {
-        res.status = 400;
-        res.set_content(
-            "{\n"
-            "    \"message\": \"type is not specified\"\n"
-            "}",
-            "application/json");
+        set_message_and_status(res, "type is not specified", 400);
         return;
     }
 
@@ -31,107 +26,89 @@ void add_record(const httplib::Request& req, httplib::Response& res) {
             kogan::State::sequence_type::list,
             kogan::SharedPtr<kogan::SmartPtrSequence<int>>(new kogan::SmartPtrLinkedListSequence<int>())));
     } else {
-        res.status = 400;
-        res.set_content(
-            "{\n"
-            "    \"message\": \"type is not valid\"\n"
-            "}",
-            "application/json");
+        set_message_and_status(res, "type is not valid", 400);
         return;
     }
 
-    res.set_content(
-        "{\n"
-        "    \"message\": \"record added\"\n"
-        "}",
-        "application/json");
-    res.status = 200;
+    set_message_and_status(res, "record added", 200);
 }
 
 void remove_record(const httplib::Request& req, httplib::Response& res) {
-    auto index_param = req.path_params.at("index");
-    if (index_param.empty()) {
-        res.status = 400;
-        res.set_content(
-            "{\n"
-            "    \"message\": \"index is not specified\"\n"
-            "}",
-            "application/json");
-        return;
-    }
-
-    int index = stoi(index_param);
+    std::pair<int, bool> index_pair = get_seq_index(req, res);
+    if (!index_pair.second) return;
+    int index = index_pair.first;
 
     try {
         kogan::global_state.get_records()->remove(index);
     } catch (std::exception& e) {
-        res.status = 400;
-        res.set_content(
-            "{\n"
-            "    \"message\": \"index is out of range\"\n"
-            "}",
-            "application/json");
+        handle_exception_with_status(e, res, 400);
         return;
     }
 
-    res.status = 200;
-    res.set_content(
-        "{\n"
-        "    \"message\": \"record removed\"\n"
-        "}",
-        "application/json");
+    set_message_and_status(res, "record removed", 200);
 }
 
 void append(const httplib::Request& req, httplib::Response& res) {
-    auto index_param = req.path_params.at("index");
-    if (index_param.empty()) {
-        res.status = 400;
-        res.set_content(
-            "{\n"
-            "    \"message\": \"index is not specified\"\n"
-            "}",
-            "application/json");
-        return;
-    }
+    std::pair<int, bool> index_pair = get_seq_index(req, res);
+    if (!index_pair.second) return;
+    int index = index_pair.first;
 
-    int index = stoi(index_param);
-
-    std::string value_param = req.get_param_value("value");
-    if (value_param.empty()) {
-        res.status = 400;
-        res.set_content(
-            "{\n"
-            "    \"message\": \"value is not specified\"\n"
-            "}",
-            "application/json");
-        return;
-    }
-
-    int value = stoi(value_param);
+    std::pair<int, bool> value_pair = get_value(req, res);
+    if (!value_pair.second) return;
+    int value = value_pair.first;
 
     try {
         kogan::global_state.get_records()->get(index).get_seq()->append(value);
     } catch (std::exception& e) {
-        res.status = 400;
-        std::string error_msg =
-            "{\n"
-            "    \"message\": \"" +
-            std::string(e.what()) +
-            "\"\n"
-            "}";
-        res.set_content(error_msg, "application/json");
+        handle_exception_with_status(e, res, 400);
         return;
     }
 
-    res.status = 200;
-    res.set_content(
-        "{\n"
-        "    \"message\": \"value appended\"\n"
-        "}",
-        "application/json");
+    set_message_and_status(res, "value appended", 200);
 }
 
 void prepend(const httplib::Request& req, httplib::Response& res) {
+    std::pair<int, bool> index_pair = get_seq_index(req, res);
+    if (!index_pair.second) return;
+    int index = index_pair.first;
+
+    std::pair<int, bool> value_pair = get_value(req, res);
+    if (!value_pair.second) return;
+    int value = value_pair.first;
+
+    try {
+        kogan::global_state.get_records()->get(index).get_seq()->prepend(value);
+    } catch (std::exception& e) {
+        handle_exception_with_status(e, res, 400);
+        return;
+    }
+
+    set_message_and_status(res, "value prepended", 200);
+}
+
+void set_message_and_status(httplib::Response& res, const std::string& message, int status) {
+    res.status = status;
+    res.set_content(
+        "{\n"
+        "    \"message\": \"" +
+            message +
+            "\"\n"
+            "}",
+        "application/json");
+}
+
+void handle_exception_with_status(std::exception& e, httplib::Response& res, int status) {
+    res.status = status;
+    std::string error_msg =
+        "{\n"
+        "    \"message\": \"" +
+        std::string(e.what()) +
+        "\"\n"
+        "}";
+    res.set_content(error_msg, "application/json");
+}
+
+std::pair<int, bool> get_seq_index(const httplib::Request& req, httplib::Response& res) {
     auto index_param = req.path_params.at("index");
     if (index_param.empty()) {
         res.status = 400;
@@ -140,11 +117,14 @@ void prepend(const httplib::Request& req, httplib::Response& res) {
             "    \"message\": \"index is not specified\"\n"
             "}",
             "application/json");
-        return;
+        return std::make_pair(-1, false);
     }
 
     int index = stoi(index_param);
+    return std::make_pair(index, true);
+}
 
+std::pair<int, bool> get_value(const httplib::Request& req, httplib::Response& res) {
     std::string value_param = req.get_param_value("value");
     if (value_param.empty()) {
         res.status = 400;
@@ -153,29 +133,9 @@ void prepend(const httplib::Request& req, httplib::Response& res) {
             "    \"message\": \"value is not specified\"\n"
             "}",
             "application/json");
-        return;
+        return std::make_pair(0, false);
     }
 
     int value = stoi(value_param);
-
-    try {
-        kogan::global_state.get_records()->get(index).get_seq()->prepend(value);
-    } catch (std::exception& e) {
-        res.status = 400;
-        std::string error_msg =
-            "{\n"
-            "    \"message\": \"" +
-            std::string(e.what()) +
-            "\"\n"
-            "}";
-        res.set_content(error_msg, "application/json");
-        return;
-    }
-
-    res.status = 200;
-    res.set_content(
-        "{\n"
-        "    \"message\": \"value prepended\"\n"
-        "}",
-        "application/json");
+    return std::make_pair(value, true);
 }
