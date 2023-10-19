@@ -18,6 +18,7 @@
     <PrependCard :index="index" />
     <SetCard :index="index" />
     <InsertCard :index="index" />
+    <RemoveCard :index="index" />
   </v-container>
   <v-container v-else class="fill-height">
     <v-responsive class="align-center text-center fill-height">
@@ -42,6 +43,7 @@ import AppendCard from "@/components/AppendCard.vue";
 import PrependCard from "@/components/PrependCard.vue";
 import SetCard from "@/components/SetCard.vue";
 import InsertCard from "@/components/InsertCard.vue";
+import RemoveCard from "@/components/RemoveCard.vue";
 
 export default defineComponent({
   name: "Sequence",
@@ -50,6 +52,7 @@ export default defineComponent({
     PrependCard,
     SetCard,
     InsertCard,
+    RemoveCard,
   },
   setup() {
     const store = useAppStore();

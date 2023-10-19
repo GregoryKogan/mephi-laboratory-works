@@ -15,6 +15,7 @@ void append(const httplib::Request& req, httplib::Response& res);
 void prepend(const httplib::Request& req, httplib::Response& res);
 void set(const httplib::Request& req, httplib::Response& res);
 void insert(const httplib::Request& req, httplib::Response& res);
+void remove_item(const httplib::Request& req, httplib::Response& res);
 
 // reusable
 void set_message_and_status(httplib::Response& res, const std::string& message, int status);
