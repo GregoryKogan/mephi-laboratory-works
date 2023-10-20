@@ -42,16 +42,12 @@ inline UniquePtr<T[]>::UniquePtr(UniquePtr&& other) noexcept : ptr_(other.releas
 
 template <class T>
 inline UniquePtr<T>::~UniquePtr() {
-    if (ptr_ != nullptr) {
-        delete ptr_;
-    }
+    delete ptr_;
 }
 
 template <class T>
 inline UniquePtr<T[]>::~UniquePtr() {
-    if (ptr_ != nullptr) {
-        delete[] ptr_;
-    }
+    delete[] ptr_;
 }
 
 template <class T>
@@ -94,9 +90,13 @@ inline T* UniquePtr<T[]>::release() noexcept {
 
 template <class T>
 inline void UniquePtr<T>::reset(T* ptr) noexcept {
-    if (ptr_ != nullptr) {
-        delete ptr_;
-    }
+    delete ptr_;
+    ptr_ = ptr;
+}
+
+template <class T>
+inline void UniquePtr<T[]>::reset(T* ptr) noexcept {
+    delete[] ptr_;
     ptr_ = ptr;
 }
 
@@ -108,14 +108,6 @@ inline void UniquePtr<T>::swap(UniquePtr<T>& other) noexcept {
 template <class T>
 inline void UniquePtr<T[]>::swap(UniquePtr<T[]>& other) noexcept {
     std::swap(ptr_, other.ptr_);
-}
-
-template <class T>
-inline void UniquePtr<T[]>::reset(T* ptr) noexcept {
-    if (ptr_ != nullptr) {
-        delete[] ptr_;
-    }
-    ptr_ = ptr;
 }
 
 template <class T>

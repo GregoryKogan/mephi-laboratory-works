@@ -1,7 +1,7 @@
 #include "set_records_routes.hpp"
 
 void set_methods(httplib::Response& res, const std::string& methods) {
-    res.set_header("Access-Control-Allow-Methods", methods.c_str());
+    res.set_header("Access-Control-Allow-Methods", methods);
     res.set_header("Access-Control-Allow-Headers", "Content-Type");
 }
 

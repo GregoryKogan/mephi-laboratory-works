@@ -19,7 +19,7 @@ class WeakPtr {
    public:
     WeakPtr() noexcept;                           // default constructor
     WeakPtr(const WeakPtr& other) noexcept;       // copy constructor
-    WeakPtr(const SharedPtr<T>& other) noexcept;  // constructor from SharedPtr
+    explicit WeakPtr(const SharedPtr<T>& other) noexcept;  // constructor from SharedPtr
     WeakPtr(WeakPtr&& other) noexcept;            // move constructor
 
     ~WeakPtr();
@@ -32,8 +32,8 @@ class WeakPtr {
     void reset() noexcept;                  // release the reference to the managed object
     void swap(WeakPtr<T>& other) noexcept;  // swaps the managed objects
 
-    unsigned int use_count() const noexcept;  // returns the number of SharedPtr objects that manage the object
-    bool expired() const noexcept;            // checks whether the referenced object was already deleted
+    [[nodiscard]] unsigned int use_count() const noexcept;  // returns the number of SharedPtr objects that manage the object
+    [[nodiscard]] bool expired() const noexcept;            // checks whether the referenced object was already deleted
     SharedPtr<T> lock() const noexcept;       // returns a SharedPtr of the managed object
 
     friend void swap(WeakPtr<T>& lhs, WeakPtr<T>& rhs) noexcept { lhs.swap(rhs); }
@@ -50,7 +50,7 @@ class WeakPtr<T[]> {  // specialization for arrays
    public:
     WeakPtr() noexcept;
     WeakPtr(const WeakPtr& other) noexcept;
-    WeakPtr(const SharedPtr<T[]>& other) noexcept;
+    explicit WeakPtr(const SharedPtr<T[]>& other) noexcept;
     WeakPtr(WeakPtr&& other) noexcept;
 
     ~WeakPtr();
@@ -63,8 +63,8 @@ class WeakPtr<T[]> {  // specialization for arrays
     void reset() noexcept;
     void swap(WeakPtr<T[]>& other) noexcept;
 
-    unsigned int use_count() const noexcept;
-    bool expired() const noexcept;
+    [[nodiscard]] unsigned int use_count() const noexcept;
+    [[nodiscard]] bool expired() const noexcept;
     SharedPtr<T[]> lock() const noexcept;
 
     friend void swap(WeakPtr<T[]>& lhs, WeakPtr<T[]>& rhs) noexcept { lhs.swap(rhs); }

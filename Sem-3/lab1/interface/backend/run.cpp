@@ -1,10 +1,9 @@
 #include "Logger/Logger.hpp"
-#include "State/State.hpp"
 #include "dependencies/cpp-httplib/httplib.h"
 #include "routes/ping/set_ping_routes.hpp"
 #include "routes/records/set_records_routes.hpp"
 
-int main(void) {
+int main() {
     httplib::Server svr;
 
     // logging

@@ -211,7 +211,7 @@ void concat(const httplib::Request& req, httplib::Response& res) {
         for (int i = 0; i < concat_seq->get_length(); ++i) items[i] = concat_seq->get(i);
 
         auto new_seq = kogan::SharedPtr<kogan::SmartPtrSequence<int>>(
-            new kogan::SmartPtrArraySequence<int>(items, concat_seq->get_length()));
+            new kogan::SmartPtrArraySequence<int>(items, (int)concat_seq->get_length()));
         kogan::global_state.get_records()->append(
             kogan::State::SequenceRecord(kogan::global_state.get_records()->get(first_index).get_type(), new_seq));
         set_message_and_status(res, "sequences concatenated", 200);

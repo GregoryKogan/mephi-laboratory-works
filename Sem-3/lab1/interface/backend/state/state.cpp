@@ -1,7 +1,9 @@
 #include "State.hpp"
 
+#include <utility>
+
 kogan::State::SequenceRecord::SequenceRecord(sequence_type type, kogan::SharedPtr<kogan::SmartPtrSequence<int>> seq)
-    : type(type), seq(seq) {}
+    : type(type), seq(std::move(seq)) {}
 
 kogan::State::sequence_type kogan::State::SequenceRecord::get_type() const { return type; }
 

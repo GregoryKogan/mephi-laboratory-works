@@ -16,7 +16,7 @@ class SmartPtrDynamicArray {
 
    public:
     SmartPtrDynamicArray();
-    SmartPtrDynamicArray(int length);
+    explicit SmartPtrDynamicArray(int length);
     SmartPtrDynamicArray(SharedPtr<T[]> data, int length);
     SmartPtrDynamicArray(const SmartPtrDynamicArray<T>& other);
 
