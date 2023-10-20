@@ -4,7 +4,7 @@
 This project contains implementation of smart pointers and benchmark of them.
 
 ## Dependencies
-To install web interface dependencies run the following command:
+To install web interface backend dependencies run the following command:
 ```bash
 ./interface/backend/install_dependencies.sh
 ```
@@ -12,21 +12,25 @@ Make sure you have compiled static libraries in `mephi-laboratory-works/librarie
 ```bash
 ./libraries/compile_all.sh
 ```
+To install web interface frontend dependencies follow the instructions in `interface/frontend/README.md`.
 
 ## Build
-To build this project you need to have `cmake` installed. Then you need to run the following commands:
+To build this project and web interface backend you need to have `cmake` installed. Then you need to run the following commands:
 ```bash
 mkdir build
 cd build
 cmake ..
 make
 ```
+To build web interface frontend follow the instructions in `interface/frontend/README.md`.
 
 ## Run
 Inside `build` there will be 3 executables:
 - `test` - runs tests
 - `benchmark` - runs benchmark
-- `run` - runs web interface
+- `run` - runs web interface backend
+
+To run web interface frontend follow the instructions in `interface/frontend/README.md`.
 
 ## Benchmark results
 <p align="center">
