@@ -1,5 +1,6 @@
 <template>
   <v-card @click="goToSequence" style="margin: 1em">
+    <h3 style="float: right; padding: 1em">#{{ index + 1 }}</h3>
     <v-card-item>
       <v-card-title>
         <v-icon v-if="name == 'Array'">mdi-code-array</v-icon>
@@ -21,6 +22,29 @@
       >{{ values }}</v-card-text
     >
     <v-card-actions>
+      <v-select
+        @click.stop.prevent
+        v-model="concatSelection"
+        :items="concatChoices"
+        label="concat with"
+        variant="outlined"
+        density="compact"
+        hide-details="auto"
+        clearable
+      ></v-select>
+      <v-tooltip text="concat" location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-btn
+            :disabled="
+              !concatSelection || !concatChoices.includes(concatSelection)
+            "
+            v-bind="props"
+            @click.stop.prevent="concatSequence"
+            icon="mdi-link-plus"
+            color="info"
+          ></v-btn>
+        </template>
+      </v-tooltip>
       <v-spacer></v-spacer>
       <v-tooltip text="clear" location="bottom">
         <template v-slot:activator="{ props }">
@@ -32,7 +56,6 @@
           ></v-btn>
         </template>
       </v-tooltip>
-
       <v-tooltip text="remove" location="bottom">
         <template v-slot:activator="{ props }">
           <v-btn
@@ -64,6 +87,9 @@ export default defineComponent({
       required: true,
     },
   },
+  data: () => ({
+    concatSelection: null,
+  }),
   computed: {
     values() {
       return this.store.records[this.index].seq;
@@ -72,6 +98,15 @@ export default defineComponent({
       return this.store.records[this.index].type == SequenceType.Array
         ? "Array"
         : "Linked list";
+    },
+    concatChoices() {
+      const allSeqNames = this.store.records.map((r, index) => {
+        return r.type == SequenceType.Array
+          ? "Array #" + (index + 1)
+          : "Linked list #" + (index + 1);
+      });
+      const selfChoice = this.name + " #" + (this.index + 1);
+      return allSeqNames.filter((name) => name != selfChoice);
     },
   },
   methods: {
@@ -100,6 +135,29 @@ export default defineComponent({
       if (response.status != 200) {
         const msg = await response.text();
         console.error("Error clearing sequence: " + msg);
+        return;
+      } else {
+        this.store.fetchRecords();
+      }
+    },
+    async concatSequence() {
+      if (!this.concatSelection) return;
+      let otherIndex = this.concatChoices.indexOf(this.concatSelection);
+      if (otherIndex >= this.index) otherIndex += 1;
+
+      const response = await fetch(
+        config.backendUrl +
+          "/records/" +
+          this.index +
+          "/concat?index=" +
+          otherIndex,
+        {
+          method: "POST",
+        }
+      );
+      if (response.status != 200) {
+        const msg = await response.text();
+        console.error("Error concatenating sequence: " + msg);
         return;
       } else {
         this.store.fetchRecords();

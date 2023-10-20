@@ -16,6 +16,7 @@ void kogan::set_records_routes(httplib::Server& server) {
     server.Options("/records/:index/remove", [](auto& req, auto& res) { set_methods(res, "POST, OPTIONS"); });
     server.Options("/records/:index/clear", [](auto& req, auto& res) { set_methods(res, "POST, OPTIONS"); });
     server.Options("/records/:index/subsequence", [](auto& req, auto& res) { set_methods(res, "GET, OPTIONS"); });
+    server.Options("/records/:index/concat", [](auto& req, auto& res) { set_methods(res, "POST, OPTIONS"); });
 
     // observers
     server.Get("/records", get_records);
@@ -30,4 +31,5 @@ void kogan::set_records_routes(httplib::Server& server) {
     server.Post("/records/:index/remove", remove_item);
     server.Post("/records/:index/clear", clear);
     server.Get("/records/:index/subsequence", subsequence);
+    server.Post("/records/:index/concat", concat);
 }

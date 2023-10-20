@@ -3,6 +3,8 @@
 kogan::State::SequenceRecord::SequenceRecord(sequence_type type, kogan::SharedPtr<kogan::SmartPtrSequence<int>> seq)
     : type(type), seq(seq) {}
 
+kogan::State::sequence_type kogan::State::SequenceRecord::get_type() const { return type; }
+
 kogan::SharedPtr<kogan::SmartPtrSequence<int>> kogan::State::SequenceRecord::get_seq() const { return seq; }
 
 std::string kogan::State::SequenceRecord::to_string() const {

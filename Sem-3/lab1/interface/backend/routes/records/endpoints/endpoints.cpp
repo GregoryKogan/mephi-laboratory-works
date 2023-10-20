@@ -193,6 +193,34 @@ void subsequence(const httplib::Request& req, httplib::Response& res) {
     }
 }
 
+void concat(const httplib::Request& req, httplib::Response& res) {
+    std::pair<int, bool> first_index_pair = get_seq_index(req, res);
+    if (!first_index_pair.second) return;
+    int first_index = first_index_pair.first;
+
+    std::pair<int, bool> second_index_pair = get_parameter_value(req, res, "index");
+    if (!second_index_pair.second) return;
+    int second_index = second_index_pair.first;
+
+    try {
+        auto first_seq = kogan::global_state.get_records()->get(first_index).get_seq();
+        auto second_seq = kogan::global_state.get_records()->get(second_index).get_seq();
+        auto concat_seq = first_seq->concat(second_seq);
+
+        auto items = kogan::make_shared<int[]>(concat_seq->get_length());
+        for (int i = 0; i < concat_seq->get_length(); ++i) items[i] = concat_seq->get(i);
+
+        auto new_seq = kogan::SharedPtr<kogan::SmartPtrSequence<int>>(
+            new kogan::SmartPtrArraySequence<int>(items, concat_seq->get_length()));
+        kogan::global_state.get_records()->append(
+            kogan::State::SequenceRecord(kogan::global_state.get_records()->get(first_index).get_type(), new_seq));
+        set_message_and_status(res, "sequences concatenated", 200);
+    } catch (std::exception& e) {
+        handle_exception_with_status(e, res, 400);
+        return;
+    }
+}
+
 void set_message_and_status(httplib::Response& res, const std::string& message, int status) {
     res.status = status;
     res.set_content(

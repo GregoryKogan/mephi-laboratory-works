@@ -17,6 +17,7 @@ class State {
         SequenceRecord() = default;
         SequenceRecord(sequence_type type, kogan::SharedPtr<kogan::SmartPtrSequence<int>> seq);
 
+        [[nodiscard]] sequence_type get_type() const;
         kogan::SharedPtr<kogan::SmartPtrSequence<int>> get_seq() const;
 
         [[nodiscard]] std::string to_string() const;
