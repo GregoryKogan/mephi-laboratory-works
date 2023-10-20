@@ -21,7 +21,6 @@ class State {
         [[nodiscard]] kogan::SharedPtr<kogan::SmartPtrSequence<int>> get_seq() const;
 
         [[nodiscard]] std::string to_string() const;
-        friend std::ostream &operator<<(std::ostream &os, const State::SequenceRecord &record);
     };
 
    private:
@@ -32,6 +31,8 @@ class State {
 
     [[nodiscard]] kogan::SharedPtr<kogan::SmartPtrSequence<SequenceRecord>> get_records() const;
 };
+
+std::ostream &operator<<(std::ostream &os, const State::SequenceRecord &record);
 
 static kogan::State global_state;
 
