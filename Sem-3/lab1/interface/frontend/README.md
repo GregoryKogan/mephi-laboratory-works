@@ -64,6 +64,22 @@ pnpm lint
 bun run lint
 ```
 
+### Preview production build
+
+```
+# yarn
+yarn preview
+
+# npm
+npm run preview
+
+# pnpm
+pnpm preview
+
+# bun
+bun run preview
+```
+
 ### Customize configuration
 
 See [Configuration Reference](https://vitejs.dev/config/).
