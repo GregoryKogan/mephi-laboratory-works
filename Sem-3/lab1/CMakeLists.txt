@@ -74,8 +74,8 @@ add_executable(
     interface/backend/Logger/Logger.hpp
     interface/backend/Logger/Logger.cpp
 
-    interface/backend/state/state.hpp
-    interface/backend/state/state.cpp
+    interface/backend/State/State.hpp
+    interface/backend/State/State.cpp
 
     interface/backend/routes/ping/set_ping_routes.hpp
     interface/backend/routes/ping/set_ping_routes.cpp

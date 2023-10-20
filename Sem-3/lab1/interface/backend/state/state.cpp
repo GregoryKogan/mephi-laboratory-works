@@ -1,4 +1,4 @@
-#include "state.hpp"
+#include "State.hpp"
 
 kogan::State::SequenceRecord::SequenceRecord(sequence_type type, kogan::SharedPtr<kogan::SmartPtrSequence<int>> seq)
     : type(type), seq(seq) {}
