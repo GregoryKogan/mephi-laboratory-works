@@ -34,7 +34,7 @@ To run web interface frontend follow the instructions in `interface/frontend/REA
 
 ## Benchmark results
 
-All benchmark results are located in `load_testing_results` directory.
+All benchmark results are located in `benchmark_results` directory.
 
 In all benchmarks `std::qsort` was used to sort array of pointers to test objects. Array's size was increased by 10 times in each iteration.
 
