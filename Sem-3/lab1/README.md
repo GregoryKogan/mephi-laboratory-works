@@ -4,6 +4,8 @@
 This project contains implementation of unique, shared and weak smart pointers along with tests, benchmark and web interface for them.
 
 ## Dependencies
+
+### Backend
 Backend is built with [cpp-httplib](https://github.com/yhirose/cpp-httplib).
 To install web interface backend dependencies run the following command:
 ```bash
@@ -13,9 +15,14 @@ Make sure you have compiled static libraries in `mephi-laboratory-works/librarie
 ```bash
 ./libraries/compile_all.sh
 ```
+
+### Frontend
 Web interface frontend is build with [Vue.js](https://vuejs.org/), [Vite](https://vitejs.dev/) and [Vuetify](https://vuetifyjs.com/).
 Vite requires Node.js version 14.18+, 16+. However, some templates require a higher Node.js version to work, please upgrade if your package manager warns about it.
-You can use any Node.js package manager: `yarn`/`npm`/`pnpm`/`bun`, but only compatibility with `yarn` was tested. `npm` was failing to build the project on Node.js version 21 or higher. Therefore, it is recommended to use `yarn`.
+
+**WARNING**: Vite does not support Node.js 21 yet. If you are using Node.js 21, please downgrade to Node.js 20.
+
+You can use any Node.js package manager: `yarn`/`npm`/`pnpm`/`bun`, but only compatibility with `yarn` and `npm` was tested. The project was developed using `yarn`. Therefore, it is recommended to use `yarn`.
 To install frontend dependencies `cd` into `interface/frontend` directory and run:
 ```bash
 # yarn
@@ -33,6 +40,8 @@ bun install
 Don't forget to return to the **project root** directory after installing frontend dependencies.
 
 ## Build
+
+### Backend
 To build this project and web interface backend you need to have `cmake` installed. Then you need to run the following commands:
 ```bash
 mkdir build
@@ -40,7 +49,8 @@ cd build
 cmake ..
 make
 ```
-To build web interface frontend follow the instructions in `interface/frontend/README.md`.
+
+### Frontend
 To build frontend `cd` into `interface/frontend` directory and run:
 ```bash
 # yarn
@@ -58,12 +68,30 @@ bun run build
 Don't forget to return to the **project root** directory after building frontend.
 
 ## Run
+
+### Backend
 Inside `build` directory there will be 3 executables:
 - `test` - runs tests
 - `benchmark` - runs benchmark
 - `run` - runs web interface backend
 
-To run web interface frontend follow the instructions in `interface/frontend/README.md`.
+### Frontend
+To run web interface frontend `cd` into `interface/frontend` directory and run:
+```bash
+# yarn
+yarn preview
+
+# npm
+npm run preview
+
+# pnpm
+pnpm preview
+
+# bun
+bun run preview
+```
+
+Notice that for web interface to work you need to run web interface backend and frontend simultaneously.
 
 ## Benchmark results
 
