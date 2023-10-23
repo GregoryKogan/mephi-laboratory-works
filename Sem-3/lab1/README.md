@@ -12,7 +12,23 @@ Make sure you have compiled static libraries in `mephi-laboratory-works/librarie
 ```bash
 ./libraries/compile_all.sh
 ```
-To install web interface frontend dependencies follow the instructions in `interface/frontend/README.md`.
+Web interface frontend is build with Vue.js and Vite. 
+Vite requires Node.js version 14.18+, 16+. However, some templates require a higher Node.js version to work, please upgrade if your package manager warns about it.
+You can use any Node.js package manager: `yarn`/`npm`/`pnpm`/`bun`, but only compatibility with `yarn` and `npm` was tested.
+To install frontend dependencies cd into `interface/frontend` directory and run:
+```
+# yarn
+yarn
+
+# npm
+npm install
+
+# pnpm
+pnpm install
+
+# bun 
+bun install
+```
 
 ## Build
 To build this project and web interface backend you need to have `cmake` installed. Then you need to run the following commands:
