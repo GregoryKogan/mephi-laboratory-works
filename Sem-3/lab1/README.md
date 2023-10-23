@@ -1,4 +1,4 @@
-# Smart pointers implementation
+# Smart pointers
 
 ## Description
 This project contains implementation of unique, shared and weak smart pointers along with tests, benchmark and web interface for them.
@@ -92,6 +92,10 @@ bun run preview
 ```
 
 Notice that for web interface to work you need to run web interface backend and frontend simultaneously.
+
+## Web interface screenshots
+<img width="395" alt="image" src="https://github.com/GregoryKogan/mephi-laboratory-works/assets/60318411/0f56f3b5-db0a-4a5a-bd1e-a33cdd308ba3">
+<img width="395" alt="image" src="https://github.com/GregoryKogan/mephi-laboratory-works/assets/60318411/408f963f-7646-487a-9333-839ae22bdf35">
 
 ## Benchmark results
 
