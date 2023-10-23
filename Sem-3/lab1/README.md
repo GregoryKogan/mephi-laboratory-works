@@ -1,7 +1,7 @@
 # Smart pointers
 
 ## Description
-This project contains implementation of unique, shared and weak smart pointers along with tests, benchmark and web interface for them.
+This project contains implementation of unique, shared and weak smart pointers, implementation of dynamic array and linked list data strcutures built with them and abstract sequence system built upon these data strcutures. There are also tests for everything, benchmark for smart pointers and web interface for sequences.
 
 ## Dependencies
 
