@@ -7,8 +7,11 @@ For the libraries to work correctly, you need to compile them with this command:
 ./libraries/compile_all.sh
 ```
 
-I moved some of my laboratory works to separate repositories:
-- Sem-3/lab2: ![GregoryKogan/sorts](https://github.com/GregoryKogan/sorts)
+I've created some of my laboratory works in separate repositories:
+|      lab     |                             repo                            |
+|:------------:|:-----------------------------------------------------------:|
+|   Sem-3/lab2 | ![sorts](https://github.com/GregoryKogan/sorts)             |
+| Sem-3/lab3-4 | ![file-system](https://github.com/GregoryKogan/file-system) |
 
 https://github.com/GregoryKogan/mephi-laboratory-works
 
