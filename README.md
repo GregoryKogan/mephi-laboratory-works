@@ -1,6 +1,6 @@
 # mephi-laboratory-works
 
-![Lines of code](https://tokei.rs/b1/github/GregoryKogan/mephi-laboratory-works?style=for-the-badge)
+![Lines of code](https://tokei.ekzhang.com/b1/github/GregoryKogan/mephi-laboratory-works?style=for-the-badge)
 
 For the libraries to work correctly, you need to compile them with this command:
 ```shell
