@@ -13,6 +13,5 @@ I've created some of my laboratory works in separate repositories:
 |   Sem-3/lab2 | ![sorts](https://github.com/GregoryKogan/sorts)             |
 | Sem-3/lab3-4 | ![file-system](https://github.com/GregoryKogan/file-system) |
 
-https://github.com/GregoryKogan/mephi-laboratory-works
-
+<br/>
 Когановский Григорий Б22-534
